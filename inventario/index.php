@@ -7,8 +7,8 @@ if (!tienePermiso('ver_inventario')) {
     die('⛔ Acceso denegado');
 }
 
-require '../includes/header.php';
-require '../includes/menu.php';
+require HEAD;
+require MENU;
 ?>
 
 <div class="main-content">
@@ -81,4 +81,4 @@ require '../includes/menu.php';
     </div>
 </div>
 
-<?php require '../includes/footer.php'; ?>
+<?php require FOOT; ?>

@@ -30,8 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nuevo_nombre'])) {
 // Obtener lista de fabricantes
 $fabricantes = $pdo->query("SELECT * FROM fabricantes ORDER BY nombre")->fetchAll(PDO::FETCH_ASSOC);
 
-require '../includes/header.php';
-require '../includes/menu.php';
+require HEAD;
+require MENU;
 ?>
 
 <div class="main-content">
@@ -78,4 +78,4 @@ require '../includes/menu.php';
     </div>
 </div>
 
-<?php require '../includes/footer.php'; ?>
+<?php require FOOT; ?>

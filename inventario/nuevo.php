@@ -32,8 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-require '../includes/header.php';
-require '../includes/menu.php';
+require HEAD;
+require MENU;
 ?>
 
 <div class="main-content">
@@ -114,4 +114,4 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
-<?php require '../includes/footer.php'; ?>
+<?php require FOOT; ?>
