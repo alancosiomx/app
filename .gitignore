@@ -1,6 +1,5 @@
 # Ignorar archivos sensibles y configuraciones locales
-config.php
-.env
+
 
 # Ignorar dependencias
 vendor/
