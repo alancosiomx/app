@@ -11,6 +11,7 @@ require MENU;
     <div class="alert alert-success">
         👋 Bienvenido, <strong><?= htmlspecialchars($usuario) ?></strong>. Este es tu panel de administración.
     </div>
+<?php echo "🚀 Cambios desde GitHub a las " . date("H:i:s"); ?>
 
     <div class="row">
         <div class="col-md-4 mb-3">
