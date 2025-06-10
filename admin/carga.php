@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Carga de Servicios - OMNIPOS</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
+<?php
+require_once __DIR__ . '/init.php';
+require HEAD;
+require MENU;
+?>
+
+<div class="main-content">
 
 <div class="container py-5">
   <h2 class="text-center mb-5">Carga de Servicios</h2>
@@ -48,6 +47,4 @@
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<?php require FOOT; ?>

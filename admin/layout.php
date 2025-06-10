@@ -1,19 +1,9 @@
 <?php
 $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
-?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Panel Admin - OMNIPOS</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Tailwind o Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
 
-<!-- Menu lateral -->
-<?php include __DIR__ . '/includes/menu.php'; ?>
+require HEAD;
+require MENU;
+?>
 
 <!-- Header -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" style="margin-left: 250px;"> <!-- 250px porque el sidebar mide eso -->
@@ -35,5 +25,5 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+
+<?php require FOOT; ?>

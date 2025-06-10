@@ -2,14 +2,13 @@
 require_once __DIR__ . '/../init.php';
 
 $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
+
+require HEAD;
+require MENU;
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Ajustes del Sistema</title>
-    <style>
+<div class="main-content">
+<style>
         body {
             font-family: 'Segoe UI', sans-serif;
             background: #f4f4f4;
@@ -46,9 +45,7 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
         a:hover {
             text-decoration: underline;
         }
-    </style>
-</head>
-<body>
+</style>
 <div class="container">
     <h2>⚙️ Ajustes del Sistema</h2>
     <ul>
@@ -59,5 +56,6 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
         <li><a href="servicios.php">📋 Tipos de Servicios</a></li>
     </ul>
 </div>
-</body>
-</html>
+
+</div>
+<?php require FOOT; ?>

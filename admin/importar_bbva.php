@@ -151,15 +151,12 @@ function procesarFila($data, $pdo, &$insertados, &$errores) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Resultado de la Carga BBVA - OMNIPOS</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
+<?php
+require HEAD;
+require MENU;
+?>
 
+<div class="main-content">
 <div class="container py-5">
 
   <div class="row justify-content-center">
@@ -193,10 +190,9 @@ function procesarFila($data, $pdo, &$insertados, &$errores) {
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <form method="POST" action="migrar_a_omnipos.php">
   <button type="submit" class="btn btn-success btn-lg mt-3">🚀 Copiar a Servicios OMNIPOS</button>
 </form>
 
-</body>
-</html>
+</div>
+<?php require FOOT; ?>

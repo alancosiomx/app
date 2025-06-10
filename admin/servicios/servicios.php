@@ -4,6 +4,7 @@ header_remove('X-Powered-By');
 ini_set('expose_php', 'Off');
 
 require_once __DIR__ . '/../../config.php';
+
 session_start();
 
 // Validar sesión
@@ -15,20 +16,15 @@ if (!isset($_SESSION['usuario_id'])) {
 // ¿Qué tab estamos cargando?
 $tab = $_GET['tab'] ?? 'por_asignar';
 
+require HEAD;
+require MENU;
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Gestión de Servicios</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            padding: 20px;
-        }
-    </style>
-</head>
-<body>
+
+<div class="main-content">
+    <h1>Gestión de Servicios</h1>
+
+    <!-- Tabs de navegación -->
+    <ul class="nav nav-tabs mb-4">
 
 <h1>Gestión de Servicios</h1>
 
@@ -69,5 +65,4 @@ switch ($tab) {
 ?>
 </div>
 
-</body>
-</html>
+<?php require FOOT; ?>

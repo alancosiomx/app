@@ -55,14 +55,14 @@ foreach ($roles_stmt as $rol) {
 ?>
 
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Gestión de Técnicos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-<div class="container py-5">
+require HEAD;
+require MENU;
+?>
+
+<div class="main-content">
+    <h2>👨‍🔧 Gestión de Técnicos / Usuarios</h2>
+
+    <div class="card mt-4">
     <h2>👨‍🔧 Gestión de Técnicos / Usuarios</h2>
 
     <div class="card mt-4">
@@ -142,5 +142,6 @@ foreach ($roles_stmt as $rol) {
         </tbody>
     </table>
 </div>
-</body>
-</html>
+
+</div>
+<?php require FOOT; ?>

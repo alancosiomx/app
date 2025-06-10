@@ -1,34 +1,13 @@
 <?php
 require_once __DIR__ . '/init.php';
 
-
-
 $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
+
+require HEAD;
+require MENU;
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Panel Admin - OMNIPOS</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-    <div class="container-fluid">
-        <span class="navbar-brand">OMNIPOS - Admin</span>
-        <div class="collapse navbar-collapse justify-content-end">
-            <ul class="navbar-nav mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout.php">Cerrar sesión</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<div class="container" style="margin-top: 80px;">
+<div class="main-content" style="margin-top: 80px;">
     <div class="alert alert-success">
         👋 Bienvenido, <strong><?= htmlspecialchars($usuario) ?></strong>. Este es tu panel de administración.
     </div>
@@ -53,7 +32,4 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 </div>
 <!-- Deploy automático funcionando: <?php echo date("Y-m-d H:i:s"); ?> -->
 
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<?php require FOOT; ?>
