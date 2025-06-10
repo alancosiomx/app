@@ -10,6 +10,11 @@ define('DB_USER', 'enodhcdl_omn');
 define('DB_PASS', 'Z00Q_8F^r0');
 define('DB_CHARSET', 'utf8mb4');
 
+// Template paths
+define('HEAD', __DIR__ . '/includes/header.php');
+define('MENU', __DIR__ . '/includes/menu.php');
+define('FOOT', __DIR__ . '/includes/footer.php');
+
 // =============================================
 // CONEXI0ˆ7N SEGURA CON PDO
 // =============================================
@@ -29,10 +34,6 @@ try {
     
 } catch (PDOException $e) {
 
-// Template paths
-define('HEAD', __DIR__ . '/includes/header.php');
-define('MENU', __DIR__ . '/includes/menu.php');
-define('FOOT', __DIR__ . '/includes/footer.php');
     error_log("Error de conexi¨®n DB [" . date('Y-m-d H:i:s') . "]: " . $e->getMessage());
     die("<h2>Error en el sistema. Por favor intente m¨¢s tarde.</h2>");
 }

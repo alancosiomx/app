@@ -12,21 +12,16 @@ $validTabs = ['por_asignar', 'en_ruta', 'concluido', 'agendar_cita'];
 if (!in_array($tab, $validTabs)) {
     $tab = 'por_asignar';
 }
+require HEAD;
+require MENU;
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Gestión de Servicios - OMNIPOS</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="main-content">
+    <h3 class="mb-4">Gestión de Servicios</h3>
     <style>
         .nav-link.active { font-weight: bold; }
     </style>
-</head>
-<body class="bg-light">
-<div class="container mt-4">
-    <h3 class="mb-4">Gestión de Servicios</h3>
+    <div class="container mt-4">
 
     <ul class="nav nav-tabs mb-3">
         <li class="nav-item">
@@ -47,5 +42,4 @@ if (!in_array($tab, $validTabs)) {
         <?php include "servicios/{$tab}.php"; ?>
     </div>
 </div>
-</body>
-</html>
+<?php require FOOT; ?>

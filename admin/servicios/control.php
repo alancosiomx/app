@@ -1,8 +1,9 @@
 <?php
 require '../auth.php';
 require '../config.php';
-require '../includes/header.php';
-require '../includes/menu.php';
+
+require HEAD;
+require MENU;
 ?>
 
 <div class="main-content">
@@ -45,4 +46,4 @@ require '../includes/menu.php';
     </div>
 </div>
 
-<?php require '../includes/footer.php'; ?>
+<?php require FOOT; ?>
