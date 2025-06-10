@@ -1,3 +1,1 @@
-<?php
-header("Location: login.php");
-exit;
+<?php echo "🚀 Cambios desde GitHub a las " . date("H:i:s"); ?>
