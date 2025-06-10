@@ -24,5 +24,11 @@ jobs:
             **/.git*
             **/.git*/**
             **/.github/**
+            **/vendor/**
+            **/node_modules/**
+            **/storage/**
             config.php
+            .env
             error_log
+            README.md
+            deploy.yml
