@@ -1,1 +1,1 @@
-<?php echo "🚀 Cambios desde GitHub a las " . date("H:i:s"); ?>
+<?php echo "🚀 Cambios desde Git1Hub a las " . date("H:i:s"); ?>
