@@ -18,10 +18,13 @@ if (empty($_SESSION['csrf_token'])) {
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $user_or_email = trim(strtolower($_POST['user_or_email'] ?? ''));
-    $pass = $_POST['password'] ?? '';
+    if (empty($_POST['csrf_token']) || $_POST['csrf_token'] !== ($_SESSION['csrf_token'] ?? '')) {
+        $error = 'Token CSRF inválido.';
+    } else {
+        $user_or_email = trim(strtolower($_POST['user_or_email'] ?? ''));
+        $pass = $_POST['password'] ?? '';
 
-    if (!empty($user_or_email) && !empty($pass)) {
+        if (!empty($user_or_email) && !empty($pass)) {
         // Buscar por username O email
         $stmt = $pdo->prepare("
             SELECT * FROM usuarios 
@@ -50,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $rol_stmt = $pdo->prepare("SELECT rol FROM usuarios_roles WHERE usuario_id = ?");
             $rol_stmt->execute([$user['id']]);
             $roles = $rol_stmt->fetchAll(PDO::FETCH_COLUMN);
-            $_SESSION['roles'] = $roles;
+            $_SESSION['usuario_roles'] = $roles;
 
             // Redirección según rol
             if (in_array('admin', $roles)) {
@@ -72,6 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "Todos los campos son obligatorios.";
     }
 }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
