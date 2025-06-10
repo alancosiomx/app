@@ -1,10 +1,10 @@
 <?php
-// Aseg¨²rate de tener la sesi¨®n activa para saber el rol
-session_start();
-$rol = $_SESSION['rol'] ?? 'guest'; // 'admin', 'idc', 'coordinador', 'finanzas'
-?>
+$roles = $_SESSION['usuario_roles'] ?? []; // 'admin', 'idc', 'coordinador', 'finanzas'
+            <?php if(in_array('admin', $roles) || in_array('finanzas', $roles)): ?>
+            <?php if(in_array('admin', $roles) || in_array('coordinador', $roles)): ?>
+            <?php if(in_array('admin', $roles)): ?>
 
-<aside class="h-screen bg-white border-r fixed top-0 left-0 w-64 flex flex-col shadow-lg">
+            <?php if(in_array('admin', $roles)): ?>
     <div class="flex items-center justify-center h-16 border-b">
         <h1 class="text-2xl font-bold">OMNIPOS</h1>
     </div>
@@ -28,7 +28,7 @@ $rol = $_SESSION['rol'] ?? 'guest'; // 'admin', 'idc', 'coordinador', 'finanzas'
             <!-- Inventario -->
             <li class="mt-4 text-xs text-gray-500 uppercase">Inventario</li>
             <li><a href="registrar.php" class="flex items-center p-2 rounded hover:bg-gray-100">Registro de Equipos</a></li>
-            <li><a href="asignar.php" class="flex items-center p-2 rounded hover:bg-gray-100">Asignar a T¨¦cnicos</a></li>
+            <li><a href="asignar.php" class="flex items-center p-2 rounded hover:bg-gray-100">Asignar a TÂ¨Â¦cnicos</a></li>
             <li><a href="movimientos.php" class="flex items-center p-2 rounded hover:bg-gray-100">Movimientos</a></li>
             <li><a href="log_inventario.php" class="flex items-center p-2 rounded hover:bg-gray-100">Log de Inventario</a></li>
 
@@ -36,8 +36,8 @@ $rol = $_SESSION['rol'] ?? 'guest'; // 'admin', 'idc', 'coordinador', 'finanzas'
             <?php if($rol == 'admin' || $rol == 'finanzas'): ?>
             <li class="mt-4 text-xs text-gray-500 uppercase">Finanzas</li>
             <li><a href="reporte_cobros.php" class="flex items-center p-2 rounded hover:bg-gray-100">Reporte de Cobros</a></li>
-            <li><a href="pagos_tecnico.php" class="flex items-center p-2 rounded hover:bg-gray-100">Pagos por T¨¦cnico</a></li>
-            <li><a href="viaticos.php" class="flex items-center p-2 rounded hover:bg-gray-100">Vi¨¢ticos</a></li>
+            <li><a href="pagos_tecnico.php" class="flex items-center p-2 rounded hover:bg-gray-100">Pagos por TÂ¨Â¦cnico</a></li>
+            <li><a href="viaticos.php" class="flex items-center p-2 rounded hover:bg-gray-100">ViÂ¨Â¢ticos</a></li>
             <li><a href="historial_pagos.php" class="flex items-center p-2 rounded hover:bg-gray-100">Historial de Pagos</a></li>
             <?php endif; ?>
 
@@ -50,9 +50,9 @@ $rol = $_SESSION['rol'] ?? 'guest'; // 'admin', 'idc', 'coordinador', 'finanzas'
             <li><a href="historial_cargas.php" class="flex items-center p-2 rounded hover:bg-gray-100">Historial de Cargas</a></li>
             <?php endif; ?>
 
-            <!-- Configuraci¨®n -->
+            <!-- ConfiguraciÂ¨Â®n -->
             <?php if($rol == 'admin'): ?>
-            <li class="mt-4 text-xs text-gray-500 uppercase">Configuraci¨®n</li>
+            <li class="mt-4 text-xs text-gray-500 uppercase">ConfiguraciÂ¨Â®n</li>
             <li><a href="campos_mapeo.php" class="flex items-center p-2 rounded hover:bg-gray-100">Campos de Mapeo</a></li>
             <li><a href="opciones_globales.php" class="flex items-center p-2 rounded hover:bg-gray-100">Opciones Globales</a></li>
             <li><a href="roles_permisos.php" class="flex items-center p-2 rounded hover:bg-gray-100">Roles y Permisos</a></li>
@@ -64,7 +64,7 @@ $rol = $_SESSION['rol'] ?? 'guest'; // 'admin', 'idc', 'coordinador', 'finanzas'
             <!-- Usuarios -->
             <?php if($rol == 'admin'): ?>
             <li class="mt-4 text-xs text-gray-500 uppercase">Usuarios</li>
-            <li><a href="usuarios.php" class="flex items-center p-2 rounded hover:bg-gray-100">Gesti¨®n de Usuarios</a></li>
+            <li><a href="usuarios.php" class="flex items-center p-2 rounded hover:bg-gray-100">GestiÂ¨Â®n de Usuarios</a></li>
             <?php endif; ?>
         </ul>
     </nav>
@@ -72,5 +72,5 @@ $rol = $_SESSION['rol'] ?? 'guest'; // 'admin', 'idc', 'coordinador', 'finanzas'
 
 <!-- Main content debe tener margen izquierdo -->
 <div class="ml-64">
-    <!-- Aqu¨ª tu contenido principal -->
+    <!-- AquÂ¨Âª tu contenido principal -->
 </div>

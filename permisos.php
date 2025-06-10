@@ -10,7 +10,7 @@
  * @return bool Verdadero si tiene permiso, falso si no
  */
 function tienePermiso(string $accion): bool {
-    if (empty($_SESSION['roles'])) return false;
+    if (empty($_SESSION['usuario_roles'])) return false;
 
     $matriz = [
         // Dashboard
@@ -41,7 +41,7 @@ function tienePermiso(string $accion): bool {
         'ver_matriz_permisos' => ['admin'],
     ];
 
-    foreach ($_SESSION['roles'] as $rol) {
+    foreach ($_SESSION['usuario_roles'] as $rol) {
         if (in_array($rol, $matriz[$accion] ?? [])) {
             return true;
         }
