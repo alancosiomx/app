@@ -1,0 +1,63 @@
+<?php
+require_once __DIR__ . '/../init.php';
+
+$usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajustes del Sistema</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f4f4;
+            padding: 30px;
+        }
+        .container {
+            background: #fff;
+            border-radius: 8px;
+            padding: 25px;
+            max-width: 700px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+            background: #f9f9f9;
+            padding: 12px;
+            border-left: 4px solid #007bff;
+            border-radius: 5px;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>⚙️ Ajustes del Sistema</h2>
+    <ul>
+        <li><a href="bancos.php">🏦 Gestión de Bancos</a></li>
+        <li><a href="tecnicos.php">👨‍🔧 Gestión de Técnicos</a></li>
+        <li><a href="tpvs.php">📟 Modelos y Fabricantes TPV</a></li>
+        <li><a href="roles.php">🛡️ Roles y Permisos</a></li>
+        <li><a href="servicios.php">📋 Tipos de Servicios</a></li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+.cbi-services-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.cbi-services-table th, .cbi-services-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.cbi-services-table th {
+    background-color: #f4f4f4;
+    cursor: pointer;
+}
+
+.cbi-services-table td {
+    white-space: nowrap; /* Evita el salto de línea */
+}
+
+.dataTables_wrapper {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}

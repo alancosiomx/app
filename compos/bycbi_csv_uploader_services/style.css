@@ -1,0 +1,8 @@
+/* Estilos personalizados para el plugin */
+.wrap h1 {
+    color: #0073aa;
+}
+
+.form-table th {
+    font-weight: bold;
+}

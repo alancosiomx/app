@@ -1,0 +1,974 @@
+[15-May-2025 13:29:29 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[15-May-2025 13:29:29 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[15-May-2025 13:29:29 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[15-May-2025 13:29:29 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[15-May-2025 13:29:29 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[15-May-2025 13:29:29 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[15-May-2025 13:29:34 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 13:29:34 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 13:29:34 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 13:29:36 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[15-May-2025 13:29:36 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[15-May-2025 13:29:36 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[15-May-2025 13:29:36 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[15-May-2025 13:29:36 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[15-May-2025 13:29:36 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[15-May-2025 13:29:50 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 13:29:50 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 13:29:50 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 13:29:50 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[15-May-2025 13:29:50 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[15-May-2025 13:29:50 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[15-May-2025 13:29:50 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[15-May-2025 13:29:50 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[15-May-2025 13:29:50 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[15-May-2025 13:30:35 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 13:30:35 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 13:30:35 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 13:30:37 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[15-May-2025 13:30:37 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[15-May-2025 13:30:37 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[15-May-2025 13:30:37 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[15-May-2025 13:30:37 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[15-May-2025 13:30:37 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[15-May-2025 13:32:16 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 13:32:16 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 13:32:16 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 13:32:17 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[15-May-2025 13:32:17 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[15-May-2025 13:32:17 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[15-May-2025 13:32:17 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[15-May-2025 13:32:17 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[15-May-2025 13:32:17 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[15-May-2025 13:32:18 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 13:32:18 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 13:32:18 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 13:32:19 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[15-May-2025 13:32:19 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[15-May-2025 13:32:19 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[15-May-2025 13:32:19 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[15-May-2025 13:32:19 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[15-May-2025 13:32:19 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[15-May-2025 13:32:19 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 13:32:19 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 13:32:19 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 13:32:20 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[15-May-2025 13:32:20 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[15-May-2025 13:32:20 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[15-May-2025 13:32:20 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[15-May-2025 13:32:20 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[15-May-2025 13:32:20 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[15-May-2025 13:32:26 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[15-May-2025 13:32:26 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[15-May-2025 13:32:26 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[15-May-2025 13:32:26 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[15-May-2025 13:32:26 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[15-May-2025 13:32:26 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[15-May-2025 13:35:01 America/New_York] PHP Warning:  Undefined variable $usuario in /home/enodhcdl/app/admin/dashboard.php on line 48
+[15-May-2025 13:35:01 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/dashboard.php on line 48
+[15-May-2025 13:35:07 America/New_York] PHP Warning:  Undefined variable $usuario in /home/enodhcdl/app/admin/dashboard.php on line 48
+[15-May-2025 13:35:07 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/dashboard.php on line 48
+[15-May-2025 13:35:07 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[15-May-2025 13:35:07 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[15-May-2025 13:35:07 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[15-May-2025 13:35:07 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[15-May-2025 13:35:07 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[15-May-2025 13:35:07 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[15-May-2025 13:43:52 America/New_York] PHP Warning:  Undefined variable $usuario in /home/enodhcdl/app/admin/dashboard.php on line 48
+[15-May-2025 13:43:52 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/dashboard.php on line 48
+[15-May-2025 14:03:16 America/New_York] Intento no autorizado desde IP: 189.174.150.12
+[15-May-2025 14:03:34 America/New_York] PHP Warning:  Undefined variable $usuario in /home/enodhcdl/app/admin/dashboard.php on line 48
+[15-May-2025 14:03:34 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/dashboard.php on line 48
+[15-May-2025 14:04:13 America/New_York] PHP Warning:  Undefined variable $usuario in /home/enodhcdl/app/admin/dashboard.php on line 48
+[15-May-2025 14:04:13 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/dashboard.php on line 48
+[15-May-2025 14:04:25 America/New_York] Intento no autorizado desde IP: 189.174.150.12
+[15-May-2025 14:04:26 America/New_York] Intento no autorizado desde IP: 189.174.150.12
+[15-May-2025 14:05:50 America/New_York] PHP Warning:  Undefined variable $usuario in /home/enodhcdl/app/admin/dashboard.php on line 48
+[15-May-2025 14:05:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/dashboard.php on line 48
+[15-May-2025 14:05:54 America/New_York] PHP Warning:  Undefined variable $usuario in /home/enodhcdl/app/admin/dashboard.php on line 48
+[15-May-2025 14:05:54 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/dashboard.php on line 48
+[15-May-2025 14:05:56 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[15-May-2025 14:05:56 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[15-May-2025 14:05:56 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[15-May-2025 14:05:56 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[15-May-2025 14:05:56 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[15-May-2025 14:05:56 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[15-May-2025 14:06:00 America/New_York] PHP Warning:  Undefined variable $usuario in /home/enodhcdl/app/admin/dashboard.php on line 48
+[15-May-2025 14:06:00 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/dashboard.php on line 48
+[15-May-2025 14:06:44 America/New_York] Intento no autorizado desde IP: 104.28.92.101
+[15-May-2025 14:07:04 America/New_York] PHP Warning:  Undefined variable $usuario in /home/enodhcdl/app/admin/dashboard.php on line 48
+[15-May-2025 14:07:04 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/dashboard.php on line 48
+[15-May-2025 14:07:17 America/New_York] PHP Warning:  Undefined variable $usuario in /home/enodhcdl/app/admin/dashboard.php on line 48
+[15-May-2025 14:07:17 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/dashboard.php on line 48
+[15-May-2025 14:10:24 America/New_York] PHP Parse error:  syntax error, unexpected token "<", expecting end of file in /home/enodhcdl/app/admin/dashboard.php on line 4
+[15-May-2025 14:10:49 America/New_York] PHP Parse error:  syntax error, unexpected token "<", expecting end of file in /home/enodhcdl/app/admin/dashboard.php on line 4
+[15-May-2025 14:15:52 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[15-May-2025 14:15:52 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[15-May-2025 14:15:52 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[15-May-2025 14:15:52 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[15-May-2025 14:15:52 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[15-May-2025 14:15:52 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[15-May-2025 14:15:56 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[15-May-2025 14:15:56 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[15-May-2025 14:15:56 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[15-May-2025 14:15:56 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[15-May-2025 14:15:56 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[15-May-2025 14:15:56 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[15-May-2025 14:15:56 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:15:56 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:15:56 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:15:58 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:15:58 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:15:58 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:15:59 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[15-May-2025 14:15:59 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[15-May-2025 14:15:59 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[15-May-2025 14:15:59 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[15-May-2025 14:15:59 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[15-May-2025 14:15:59 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[15-May-2025 14:16:52 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:16:52 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:16:52 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:17:06 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:17:06 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:17:07 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:17:07 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:17:09 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:17:09 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:17:09 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:17:09 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:17:09 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:18:10 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:18:10 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:18:11 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:18:11 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:18:11 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:18:11 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:18:11 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:19:15 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:19:15 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:19:15 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:19:15 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:19:15 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:20:43 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:20:43 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:20:43 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:20:44 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:20:44 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:20:46 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:20:46 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:20:46 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:20:48 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:20:48 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:21:16 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:21:16 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:21:17 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:21:17 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:21:17 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:21:18 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:21:18 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:21:18 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[15-May-2025 14:21:18 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[15-May-2025 14:21:18 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[15-May-2025 14:21:18 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[15-May-2025 14:21:18 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[15-May-2025 14:21:18 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[15-May-2025 14:21:19 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:21:19 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:21:19 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:21:19 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:21:19 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:21:20 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:21:20 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:21:20 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:21:20 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:21:20 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:21:20 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:21:21 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:21:21 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:21:21 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:21:21 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:21:21 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:21:21 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:21:21 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:21:21 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:21:21 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:21:21 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:21:21 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:21:21 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:22:08 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:22:08 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:22:10 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:22:10 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:22:10 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:22:10 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:22:10 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:22:10 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[15-May-2025 14:22:10 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[15-May-2025 14:22:10 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[15-May-2025 14:22:11 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[15-May-2025 14:22:11 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[15-May-2025 14:22:11 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[15-May-2025 14:22:12 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:22:12 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:22:28 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:22:28 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:22:28 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:22:55 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[15-May-2025 14:22:55 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[15-May-2025 14:22:55 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[15-May-2025 14:22:55 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[15-May-2025 14:22:55 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[15-May-2025 14:22:55 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[15-May-2025 14:22:56 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:22:56 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:22:57 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:22:57 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:22:57 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:24:21 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[15-May-2025 14:24:21 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[15-May-2025 14:24:21 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[15-May-2025 14:24:21 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[15-May-2025 14:24:21 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[15-May-2025 14:24:21 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[15-May-2025 14:24:21 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:24:21 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:24:22 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:24:22 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:24:22 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:24:23 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:24:23 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:24:24 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[15-May-2025 14:24:24 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[15-May-2025 14:24:24 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[15-May-2025 14:24:24 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[15-May-2025 14:24:24 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[15-May-2025 14:24:24 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[15-May-2025 14:25:46 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:25:46 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:25:47 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:25:47 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:25:47 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[15-May-2025 14:25:47 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:25:47 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:25:48 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[15-May-2025 14:25:48 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[15-May-2025 14:25:48 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[15-May-2025 14:25:48 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[15-May-2025 14:25:48 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[15-May-2025 14:25:48 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[15-May-2025 14:25:48 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:25:48 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:32:59 America/New_York] Intento no autorizado desde IP: 104.28.92.102
+[28-May-2025 11:17:31 America/New_York] Intento no autorizado desde IP: 200.68.161.97
+[28-May-2025 11:17:57 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[28-May-2025 11:17:57 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[28-May-2025 11:17:57 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[28-May-2025 11:17:57 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[28-May-2025 11:17:57 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[28-May-2025 11:17:57 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[28-May-2025 11:17:57 America/New_York] Intento no autorizado desde IP: 200.68.161.97
+[28-May-2025 11:17:59 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[28-May-2025 11:17:59 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[28-May-2025 11:17:59 America/New_York] Intento no autorizado desde IP: 200.68.161.97
+[28-May-2025 11:18:00 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[28-May-2025 11:18:00 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[28-May-2025 11:18:00 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[28-May-2025 11:18:00 America/New_York] Intento no autorizado desde IP: 200.68.161.97
+[28-May-2025 11:18:01 America/New_York] Intento no autorizado desde IP: 200.68.161.97
+[28-May-2025 11:18:01 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[28-May-2025 11:18:01 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[28-May-2025 11:18:01 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[28-May-2025 11:18:01 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[28-May-2025 11:18:01 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[28-May-2025 11:18:01 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[28-May-2025 11:18:01 America/New_York] Intento no autorizado desde IP: 200.68.161.97
+[28-May-2025 11:18:02 America/New_York] Intento no autorizado desde IP: 200.68.161.97
+[28-May-2025 11:18:02 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[28-May-2025 11:18:02 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[28-May-2025 11:18:02 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[28-May-2025 11:18:03 America/New_York] Intento no autorizado desde IP: 200.68.161.97
+[28-May-2025 11:18:03 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[28-May-2025 11:18:03 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[28-May-2025 11:18:03 America/New_York] Intento no autorizado desde IP: 200.68.161.97
+[28-May-2025 11:18:03 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[28-May-2025 11:18:03 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[28-May-2025 11:18:03 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[28-May-2025 11:18:03 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[28-May-2025 11:18:03 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[28-May-2025 11:18:03 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[28-May-2025 11:18:04 America/New_York] Intento no autorizado desde IP: 200.68.161.97
+[28-May-2025 11:18:04 America/New_York] Intento no autorizado desde IP: 200.68.161.97
+[28-May-2025 11:18:09 America/New_York] Intento no autorizado desde IP: 200.68.161.97
+[29-May-2025 21:44:57 America/New_York] Intento no autorizado desde IP: 189.174.150.12
+[30-May-2025 13:43:53 America/New_York] Intento no autorizado desde IP: 200.68.161.52
+[31-May-2025 07:58:09 America/New_York] Intento no autorizado desde IP: 189.174.145.60
+[31-May-2025 19:28:48 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[31-May-2025 19:43:47 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[31-May-2025 19:47:02 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[31-May-2025 19:47:02 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[31-May-2025 19:47:02 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[31-May-2025 19:47:02 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[31-May-2025 19:47:02 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[31-May-2025 19:47:02 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[31-May-2025 20:39:11 America/New_York] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/importar_bbva.php on line 76
+[31-May-2025 20:39:11 America/New_York] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/importar_bbva.php on line 77
+[31-May-2025 20:39:11 America/New_York] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/importar_bbva.php on line 81
+[31-May-2025 20:39:11 America/New_York] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/importar_bbva.php on line 82
+[31-May-2025 20:39:11 America/New_York] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/importar_bbva.php on line 76
+[31-May-2025 20:39:11 America/New_York] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/importar_bbva.php on line 77
+[31-May-2025 20:39:11 America/New_York] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/importar_bbva.php on line 81
+[31-May-2025 20:39:11 America/New_York] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/importar_bbva.php on line 82
+[31-May-2025 20:39:11 America/New_York] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/importar_bbva.php on line 73
+[31-May-2025 20:39:11 America/New_York] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/importar_bbva.php on line 78
+[31-May-2025 20:39:11 America/New_York] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/importar_bbva.php on line 81
+[31-May-2025 20:39:11 America/New_York] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/importar_bbva.php on line 82
+[31-May-2025 20:39:11 America/New_York] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/importar_bbva.php on line 83
+[31-May-2025 20:39:11 America/New_York] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/importar_bbva.php on line 73
+[31-May-2025 20:39:11 America/New_York] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/importar_bbva.php on line 78
+[31-May-2025 20:39:11 America/New_York] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/importar_bbva.php on line 81
+[31-May-2025 20:39:11 America/New_York] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/importar_bbva.php on line 82
+[31-May-2025 20:39:11 America/New_York] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/importar_bbva.php on line 83
+[31-May-2025 20:42:31 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[31-May-2025 20:53:32 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[31-May-2025 20:53:32 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[31-May-2025 20:53:32 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[31-May-2025 20:53:32 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[31-May-2025 20:53:32 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[31-May-2025 20:53:32 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[31-May-2025 20:53:35 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[31-May-2025 20:53:35 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[31-May-2025 20:53:36 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[31-May-2025 20:53:36 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[31-May-2025 20:53:36 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[31-May-2025 20:53:38 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[31-May-2025 20:53:38 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[31-May-2025 20:53:38 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[31-May-2025 20:53:38 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[31-May-2025 20:53:38 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[31-May-2025 20:53:38 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[31-May-2025 20:58:27 America/New_York] Intento no autorizado desde IP: 172.226.10.230
+[31-May-2025 21:13:33 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[31-May-2025 21:13:33 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[31-May-2025 21:13:33 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[31-May-2025 21:13:33 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[31-May-2025 21:13:33 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[31-May-2025 21:13:33 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[31-May-2025 21:13:34 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[31-May-2025 21:13:34 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[31-May-2025 21:13:35 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[31-May-2025 21:13:35 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[31-May-2025 21:13:35 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[31-May-2025 21:13:35 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[31-May-2025 21:13:35 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[31-May-2025 21:13:35 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[31-May-2025 21:17:40 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[31-May-2025 21:17:40 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[31-May-2025 21:17:40 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[31-May-2025 21:17:40 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[31-May-2025 21:17:40 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[31-May-2025 21:17:40 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[31-May-2025 21:19:30 America/New_York] PHP Parse error:  syntax error, unexpected token "<", expecting end of file in /home/enodhcdl/app/admin/dashboard.php on line 3
+[31-May-2025 21:19:45 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/menu.php on line 3
+[31-May-2025 21:20:19 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/menu.php on line 3
+[31-May-2025 21:28:21 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/includes/menu.php on line 3
+[31-May-2025 21:28:21 America/New_York] PHP Warning:  include(content/dashboard_content.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/layout.php on line 18
+[31-May-2025 21:28:21 America/New_York] PHP Warning:  include(content/dashboard_content.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/layout.php on line 18
+[31-May-2025 21:28:21 America/New_York] PHP Warning:  include(): Failed opening 'content/dashboard_content.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/layout.php on line 18
+[31-May-2025 21:28:39 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/includes/menu.php on line 3
+[31-May-2025 21:28:39 America/New_York] PHP Warning:  Undefined variable $contenido in /home/enodhcdl/app/admin/layout.php on line 18
+[31-May-2025 21:28:39 America/New_York] PHP Fatal error:  Uncaught ValueError: Path cannot be empty in /home/enodhcdl/app/admin/layout.php:18
+Stack trace:
+#0 {main}
+
+Next ValueError: Path cannot be empty in /home/enodhcdl/app/admin/layout.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/enodhcdl/app/admin/layout.php on line 18
+[31-May-2025 21:28:42 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/includes/menu.php on line 3
+[31-May-2025 21:28:42 America/New_York] PHP Warning:  include(content/dashboard_content.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/layout.php on line 18
+[31-May-2025 21:28:42 America/New_York] PHP Warning:  include(content/dashboard_content.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/layout.php on line 18
+[31-May-2025 21:28:42 America/New_York] PHP Warning:  include(): Failed opening 'content/dashboard_content.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/layout.php on line 18
+[31-May-2025 21:29:32 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/includes/menu.php on line 3
+[31-May-2025 21:29:32 America/New_York] PHP Warning:  include(content/dashboard_content.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/layout.php on line 18
+[31-May-2025 21:29:32 America/New_York] PHP Warning:  include(content/dashboard_content.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/layout.php on line 18
+[31-May-2025 21:29:32 America/New_York] PHP Warning:  include(): Failed opening 'content/dashboard_content.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/layout.php on line 18
+[31-May-2025 21:31:26 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/includes/menu.php on line 3
+[31-May-2025 21:32:00 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/includes/menu.php on line 3
+[31-May-2025 21:32:00 America/New_York] PHP Warning:  Undefined variable $usuario in /home/enodhcdl/app/admin/dashboard.php on line 35
+[31-May-2025 21:32:00 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/dashboard.php on line 35
+[31-May-2025 21:33:03 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/includes/menu.php on line 3
+[31-May-2025 21:33:03 America/New_York] PHP Warning:  Undefined variable $usuario in /home/enodhcdl/app/admin/dashboard.php on line 35
+[31-May-2025 21:33:03 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/dashboard.php on line 35
+[31-May-2025 21:33:37 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/includes/menu.php on line 3
+[31-May-2025 21:36:35 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/includes/menu.php on line 3
+[31-May-2025 21:37:11 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/includes/menu.php on line 3
+[31-May-2025 21:37:13 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/includes/menu.php on line 3
+[31-May-2025 21:41:11 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../app/config.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 2
+[31-May-2025 21:41:11 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../app/config.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/por_asignar.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 2
+[31-May-2025 21:41:13 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../app/config.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 2
+[31-May-2025 21:41:13 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../app/config.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/por_asignar.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 2
+[31-May-2025 21:41:14 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../app/config.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 2
+[31-May-2025 21:41:14 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../app/config.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/por_asignar.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 2
+[31-May-2025 21:43:04 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[31-May-2025 21:43:04 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[31-May-2025 21:43:04 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[31-May-2025 21:43:04 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[31-May-2025 21:43:04 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[31-May-2025 21:43:04 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[31-May-2025 21:44:21 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[31-May-2025 21:44:21 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 4
+[31-May-2025 21:44:21 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[31-May-2025 21:44:21 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[31-May-2025 21:44:23 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[31-May-2025 21:44:23 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 4
+[31-May-2025 21:44:23 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[31-May-2025 21:44:23 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[31-May-2025 21:44:25 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[31-May-2025 21:44:25 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[31-May-2025 21:44:26 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[31-May-2025 21:44:26 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 4
+[31-May-2025 21:44:26 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[31-May-2025 21:44:26 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[31-May-2025 21:52:51 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[31-May-2025 21:52:51 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 4
+[31-May-2025 21:52:51 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[31-May-2025 21:52:51 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[31-May-2025 22:28:23 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[31-May-2025 22:28:23 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 4
+[31-May-2025 22:28:23 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[31-May-2025 22:28:23 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[31-May-2025 22:31:45 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[31-May-2025 22:31:45 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 4
+[31-May-2025 22:31:45 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[31-May-2025 22:31:45 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[31-May-2025 22:33:52 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[31-May-2025 22:33:52 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 4
+[31-May-2025 22:33:52 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[31-May-2025 22:33:52 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[31-May-2025 22:35:10 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[31-May-2025 22:35:10 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 4
+[31-May-2025 22:35:10 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[31-May-2025 22:35:10 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[31-May-2025 22:35:13 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[31-May-2025 22:35:13 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 4
+[31-May-2025 22:35:13 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[31-May-2025 22:35:13 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[31-May-2025 22:35:15 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[31-May-2025 22:35:15 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[31-May-2025 22:35:16 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[31-May-2025 22:35:16 America/New_York] PHP Warning:  include(servicios/concluido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios.php on line 47
+[31-May-2025 22:35:16 America/New_York] PHP Warning:  include(): Failed opening 'servicios/concluido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios.php on line 47
+[31-May-2025 22:35:17 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[31-May-2025 22:35:17 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 4
+[31-May-2025 22:35:17 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 5
+[31-May-2025 22:35:17 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 6
+[31-May-2025 22:36:29 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[31-May-2025 22:36:29 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/servicios/concluido.php on line 3
+[31-May-2025 22:36:29 America/New_York] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fecha_cierre' in 'ORDER BY' in /home/enodhcdl/app/admin/servicios/concluido.php:13
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios/concluido.php(13): PDO->query('SELECT * FROM s...')
+#1 /home/enodhcdl/app/admin/servicios.php(47): include('/home/enodhcdl/...')
+#2 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/concluido.php on line 13
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[31-May-2025 22:37:50 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 3
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:37:50 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[31-May-2025 22:38:30 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 3
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:38:30 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 60
+[31-May-2025 22:40:28 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios.php:16) in /home/enodhcdl/app/config.php on line 58
+[31-May-2025 22:40:28 America/New_York] PHP Warning:  Undefined variable $tecnicos in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 32
+[31-May-2025 22:40:28 America/New_York] PHP Warning:  foreach() argument must be of type array|object, null given in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 32
+[31-May-2025 22:40:28 America/New_York] PHP Warning:  Undefined variable $servicios in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 53
+[31-May-2025 22:40:28 America/New_York] PHP Warning:  foreach() argument must be of type array|object, null given in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 53
+[31-May-2025 22:42:56 America/New_York] PHP Warning:  Undefined variable $tecnicos in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 32
+[31-May-2025 22:42:56 America/New_York] PHP Warning:  foreach() argument must be of type array|object, null given in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 32
+[31-May-2025 22:42:56 America/New_York] PHP Warning:  Undefined variable $servicios in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 53
+[31-May-2025 22:42:56 America/New_York] PHP Warning:  foreach() argument must be of type array|object, null given in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 53
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Warning:  Undefined array key "comentarios" in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 22:44:25 America/New_York] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 56
+[31-May-2025 23:08:15 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../../config.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 4
+[31-May-2025 23:08:15 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../../config.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/por_asignar.php:4
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 4
+[31-May-2025 23:08:20 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[31-May-2025 23:08:20 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[31-May-2025 23:08:20 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../../config.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 4
+[31-May-2025 23:08:20 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../../config.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/por_asignar.php:4
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 4
+[31-May-2025 23:08:24 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[31-May-2025 23:08:24 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[31-May-2025 23:08:25 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/servicios/concluido.php on line 3
+[31-May-2025 23:08:25 America/New_York] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fecha_cierre' in 'ORDER BY' in /home/enodhcdl/app/admin/servicios/concluido.php:13
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios/concluido.php(13): PDO->query('SELECT * FROM s...')
+#1 /home/enodhcdl/app/admin/servicios.php(47): include('/home/enodhcdl/...')
+#2 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/concluido.php on line 13
+[31-May-2025 23:08:26 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../../config.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 4
+[31-May-2025 23:08:26 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../../config.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/por_asignar.php:4
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 4
+[31-May-2025 23:09:14 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[31-May-2025 23:09:14 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[31-May-2025 23:09:14 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../../config.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 4
+[31-May-2025 23:09:14 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../../config.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/por_asignar.php:4
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 4
+[31-May-2025 23:09:15 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[31-May-2025 23:09:15 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[31-May-2025 23:09:15 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../../config.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 4
+[31-May-2025 23:09:15 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../../config.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/por_asignar.php:4
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 4
+[31-May-2025 23:15:00 America/New_York] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'comentarios' in 'SELECT' in /home/enodhcdl/app/admin/servicios/por_asignar.php:49
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios/por_asignar.php(49): PDO->query('SELECT ticket, ...')
+#1 /home/enodhcdl/app/admin/servicios.php(47): include('/home/enodhcdl/...')
+#2 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 49
+[31-May-2025 23:17:51 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/servicios/concluido.php on line 3
+[31-May-2025 23:17:51 America/New_York] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fecha_cierre' in 'ORDER BY' in /home/enodhcdl/app/admin/servicios/concluido.php:13
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios/concluido.php(13): PDO->query('SELECT * FROM s...')
+#1 /home/enodhcdl/app/admin/servicios.php(47): include('/home/enodhcdl/...')
+#2 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/concluido.php on line 13
+[31-May-2025 23:17:52 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[31-May-2025 23:17:52 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[31-May-2025 23:17:53 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[31-May-2025 23:17:53 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[31-May-2025 23:27:36 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 3
+[31-May-2025 23:28:10 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 3
+[31-May-2025 23:28:23 America/New_York] ⚠️ Posible ataque CSRF - Usuario ID: 1
+[31-May-2025 23:28:39 America/New_York] ⚠️ Posible ataque CSRF - Usuario ID: 1
+[31-May-2025 23:30:20 America/New_York] ⚠️ Posible ataque CSRF - Usuario ID: 1
+[31-May-2025 23:30:28 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 3
+[31-May-2025 23:31:04 America/New_York] ⚠️ Posible ataque CSRF - Usuario ID: 1
+[01-Jun-2025 08:06:57 America/New_York] Intento no autorizado desde IP: 104.28.92.101
+[01-Jun-2025 19:59:29 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[01-Jun-2025 21:34:17 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[03-Jun-2025 07:58:34 America/New_York] Intento no autorizado desde IP: 54.175.74.27
+[03-Jun-2025 08:13:58 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[03-Jun-2025 08:16:21 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[03-Jun-2025 08:16:23 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[03-Jun-2025 08:19:52 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[03-Jun-2025 08:19:52 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[03-Jun-2025 08:19:52 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[03-Jun-2025 08:19:55 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[03-Jun-2025 08:19:55 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/servicios/concluido.php on line 3
+[03-Jun-2025 08:19:55 America/New_York] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fecha_cierre' in 'ORDER BY' in /home/enodhcdl/app/admin/servicios/concluido.php:13
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios/concluido.php(13): PDO->query('SELECT * FROM s...')
+#1 /home/enodhcdl/app/admin/servicios.php(47): include('/home/enodhcdl/...')
+#2 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/concluido.php on line 13
+[03-Jun-2025 08:19:56 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[03-Jun-2025 08:19:56 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[03-Jun-2025 08:19:56 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[03-Jun-2025 08:19:56 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[03-Jun-2025 08:19:57 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[03-Jun-2025 08:19:57 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[03-Jun-2025 08:20:18 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[03-Jun-2025 08:20:18 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[03-Jun-2025 08:20:18 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[03-Jun-2025 08:20:19 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[03-Jun-2025 08:20:20 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/servicios/concluido.php on line 3
+[03-Jun-2025 08:20:20 America/New_York] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fecha_cierre' in 'ORDER BY' in /home/enodhcdl/app/admin/servicios/concluido.php:13
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios/concluido.php(13): PDO->query('SELECT * FROM s...')
+#1 /home/enodhcdl/app/admin/servicios.php(47): include('/home/enodhcdl/...')
+#2 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/concluido.php on line 13
+[03-Jun-2025 08:20:20 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[03-Jun-2025 08:20:20 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[03-Jun-2025 08:20:21 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[03-Jun-2025 08:20:21 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[03-Jun-2025 08:20:21 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[03-Jun-2025 08:20:22 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[03-Jun-2025 08:20:22 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[03-Jun-2025 08:20:27 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[03-Jun-2025 08:20:28 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[03-Jun-2025 08:20:30 America/New_York] Intento no autorizado desde IP: 189.174.82.18
+[04-Jun-2025 02:12:23 America/New_York] Intento no autorizado desde IP: 54.209.60.63
+[04-Jun-2025 07:08:26 America/New_York] Intento no autorizado desde IP: 184.72.115.35
+[04-Jun-2025 08:15:44 America/New_York] Intento no autorizado desde IP: 184.72.115.35
+[04-Jun-2025 08:55:58 America/New_York] Intento no autorizado desde IP: 184.72.121.156
+[04-Jun-2025 09:04:30 America/New_York] Intento no autorizado desde IP: 184.72.115.35
+[05-Jun-2025 08:23:39 America/New_York] Intento no autorizado desde IP: 54.175.74.27
+[10-Jun-2025 00:15:17 America/New_York] PHP Parse error:  syntax error, unexpected identifier " " in /home/enodhcdl/app/auth.php on line 11
+[10-Jun-2025 00:16:27 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[10-Jun-2025 00:16:27 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios.php(47): include()
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[10-Jun-2025 00:16:29 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/servicios/concluido.php on line 3
+[10-Jun-2025 00:16:29 America/New_York] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fecha_cierre' in 'ORDER BY' in /home/enodhcdl/app/admin/servicios/concluido.php:13
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios/concluido.php(13): PDO->query('SELECT * FROM s...')
+#1 /home/enodhcdl/app/admin/servicios.php(47): include('/home/enodhcdl/...')
+#2 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/concluido.php on line 13
+[10-Jun-2025 00:16:31 America/New_York] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/enodhcdl/app/admin/servicios/concluido.php on line 3
+[10-Jun-2025 00:16:31 America/New_York] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fecha_cierre' in 'ORDER BY' in /home/enodhcdl/app/admin/servicios/concluido.php:13
+Stack trace:
+#0 /home/enodhcdl/app/admin/servicios/concluido.php(13): PDO->query('SELECT * FROM s...')
+#1 /home/enodhcdl/app/admin/servicios.php(47): include('/home/enodhcdl/...')
+#2 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/concluido.php on line 13
+[10-Jun-2025 00:17:43 America/New_York] PHP Parse error:  syntax error, unexpected identifier " " in /home/enodhcdl/app/auth.php on line 16
+[10-Jun-2025 00:17:47 America/New_York] PHP Parse error:  syntax error, unexpected identifier " " in /home/enodhcdl/app/auth.php on line 16
+[10-Jun-2025 00:18:03 America/New_York] PHP Parse error:  syntax error, unexpected identifier " " in /home/enodhcdl/app/auth.php on line 16
+[10-Jun-2025 00:18:59 America/New_York] Intento no autorizado desde IP: 104.28.92.101
+[10-Jun-2025 00:23:45 America/New_York] PHP Parse error:  syntax error, unexpected identifier " " in /home/enodhcdl/app/auth.php on line 16
+[10-Jun-2025 04:05:52 America/New_York] Intento no autorizado desde IP: 54.209.60.63
+[10-Jun-2025 04:14:43 America/New_York] Intento no autorizado desde IP: 54.209.60.63
+[10-Jun-2025 05:13:50 America/New_York] Intento no autorizado desde IP: 54.86.66.252
+[10-Jun-2025 05:37:36 America/New_York] Intento no autorizado desde IP: 54.86.66.252
+[10-Jun-2025 05:54:53 America/New_York] Intento no autorizado desde IP: 184.72.121.156
+[10-Jun-2025 06:30:16 America/New_York] Intento no autorizado desde IP: 54.209.60.63

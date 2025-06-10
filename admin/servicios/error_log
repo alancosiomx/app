@@ -1,0 +1,207 @@
+[04-May-2025 22:43:33 America/New_York] PHP Warning:  Undefined array key "usuario_roles" in /home/enodhcdl/app/servicios/por_asignar.php on line 5
+[04-May-2025 22:46:27 America/New_York] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, string given in /home/enodhcdl/app/includes/menu.php:11
+Stack trace:
+#0 /home/enodhcdl/app/includes/menu.php(11): in_array('admin', 'admin')
+#1 /home/enodhcdl/app/servicios/admin.php(11): require('/home/enodhcdl/...')
+#2 {main}
+  thrown in /home/enodhcdl/app/includes/menu.php on line 11
+[04-May-2025 22:46:29 America/New_York] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, string given in /home/enodhcdl/app/includes/menu.php:11
+Stack trace:
+#0 /home/enodhcdl/app/includes/menu.php(11): in_array('admin', 'admin')
+#1 /home/enodhcdl/app/servicios/admin.php(11): require('/home/enodhcdl/...')
+#2 {main}
+  thrown in /home/enodhcdl/app/includes/menu.php on line 11
+[04-May-2025 22:46:35 America/New_York] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, string given in /home/enodhcdl/app/includes/menu.php:11
+Stack trace:
+#0 /home/enodhcdl/app/includes/menu.php(11): in_array('admin', 'admin')
+#1 /home/enodhcdl/app/servicios/admin.php(11): require('/home/enodhcdl/...')
+#2 {main}
+  thrown in /home/enodhcdl/app/includes/menu.php on line 11
+[04-May-2025 22:46:59 America/New_York] PHP Warning:  Undefined array key "usuario_roles" in /home/enodhcdl/app/servicios/admin.php on line 5
+[04-May-2025 23:25:47 America/New_York] PHP Parse error:  syntax error, unexpected token "use" in /home/enodhcdl/app/servicios/carga.php on line 18
+[04-May-2025 23:25:50 America/New_York] PHP Parse error:  syntax error, unexpected token "use" in /home/enodhcdl/app/servicios/carga.php on line 18
+[04-May-2025 23:27:10 America/New_York] PHP Parse error:  syntax error, unexpected token "use" in /home/enodhcdl/app/servicios/carga.php on line 18
+[04-May-2025 23:30:41 America/New_York] PHP Parse error:  syntax error, unexpected token "use" in /home/enodhcdl/app/servicios/carga.php on line 18
+[04-May-2025 23:31:07 America/New_York] PHP Warning:  require_once(../vendor/autoload.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/carga.php on line 6
+[04-May-2025 23:31:07 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/servicios/carga.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/enodhcdl/app/servicios/carga.php on line 6
+[04-May-2025 23:31:33 America/New_York] PHP Warning:  require_once(../vendor/autoload.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/carga.php on line 6
+[04-May-2025 23:31:33 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/servicios/carga.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/enodhcdl/app/servicios/carga.php on line 6
+[04-May-2025 23:32:52 America/New_York] PHP Warning:  include(tabs/por_asignar.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/control.php on line 28
+[04-May-2025 23:32:52 America/New_York] PHP Warning:  include(tabs/por_asignar.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/control.php on line 28
+[04-May-2025 23:32:52 America/New_York] PHP Warning:  include(): Failed opening 'tabs/por_asignar.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/servicios/control.php on line 28
+[04-May-2025 23:32:52 America/New_York] PHP Warning:  include(tabs/en_ruta.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/control.php on line 33
+[04-May-2025 23:32:52 America/New_York] PHP Warning:  include(tabs/en_ruta.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/control.php on line 33
+[04-May-2025 23:32:52 America/New_York] PHP Warning:  include(): Failed opening 'tabs/en_ruta.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/servicios/control.php on line 33
+[04-May-2025 23:32:52 America/New_York] PHP Warning:  include(tabs/programar_cita.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/control.php on line 38
+[04-May-2025 23:32:52 America/New_York] PHP Warning:  include(tabs/programar_cita.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/control.php on line 38
+[04-May-2025 23:32:52 America/New_York] PHP Warning:  include(): Failed opening 'tabs/programar_cita.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/servicios/control.php on line 38
+[04-May-2025 23:32:52 America/New_York] PHP Warning:  include(tabs/atendido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/control.php on line 43
+[04-May-2025 23:32:52 America/New_York] PHP Warning:  include(tabs/atendido.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/control.php on line 43
+[04-May-2025 23:32:52 America/New_York] PHP Warning:  include(): Failed opening 'tabs/atendido.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/servicios/control.php on line 43
+[04-May-2025 23:34:03 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 5
+[04-May-2025 23:34:03 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/includes/header.php:6) in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 6
+[04-May-2025 23:39:08 America/New_York] PHP Warning:  require_once(../vendor/autoload.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/carga.php on line 6
+[04-May-2025 23:39:08 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/servicios/carga.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 07:30:56 America/New_York] PHP Warning:  require_once(../vendor/autoload.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 07:30:56 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/servicios/carga.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 07:36:17 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 5
+[05-May-2025 07:36:17 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/includes/header.php:6) in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 6
+[05-May-2025 12:29:51 America/New_York] PHP Warning:  require_once(../vendor/autoload.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 12:29:51 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/servicios/carga.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 12:31:52 America/New_York] PHP Warning:  require_once(../vendor/autoload.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 12:31:52 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/servicios/carga.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 12:32:25 America/New_York] PHP Warning:  require_once(../vendor/autoload.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 12:32:25 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/servicios/carga.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 12:33:41 America/New_York] PHP Warning:  require_once(../vendor/autoload.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 12:33:41 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/servicios/carga.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 12:33:43 America/New_York] PHP Warning:  require_once(../vendor/autoload.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 12:33:43 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/servicios/carga.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 12:35:07 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 5
+[05-May-2025 12:35:07 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/includes/header.php:6) in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 6
+[05-May-2025 12:36:55 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 5
+[05-May-2025 12:36:55 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/includes/header.php:6) in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 6
+[05-May-2025 12:37:04 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 5
+[05-May-2025 12:37:04 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/includes/header.php:6) in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 6
+[05-May-2025 12:37:21 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 5
+[05-May-2025 12:37:21 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/includes/header.php:6) in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 6
+[05-May-2025 12:37:27 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 5
+[05-May-2025 12:37:27 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/includes/header.php:6) in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 6
+[05-May-2025 12:37:28 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 5
+[05-May-2025 12:37:28 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/includes/header.php:6) in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 6
+[05-May-2025 12:37:28 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 5
+[05-May-2025 12:37:28 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/includes/header.php:6) in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 6
+[05-May-2025 12:37:28 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 5
+[05-May-2025 12:37:28 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/includes/header.php:6) in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 6
+[05-May-2025 12:40:57 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 5
+[05-May-2025 12:40:57 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/includes/header.php:6) in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 6
+[05-May-2025 15:33:30 America/New_York] PHP Warning:  require_once(../vendor/autoload.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 15:33:30 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/servicios/carga.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 15:33:47 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 5
+[05-May-2025 15:33:47 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/includes/header.php:6) in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 6
+[05-May-2025 15:33:57 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 5
+[05-May-2025 15:33:57 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/includes/header.php:6) in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 6
+[05-May-2025 15:36:52 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 5
+[05-May-2025 15:36:52 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/includes/header.php:6) in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 6
+[05-May-2025 15:40:21 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 5
+[05-May-2025 15:40:21 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/includes/header.php:6) in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 6
+[05-May-2025 15:40:42 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 5
+[05-May-2025 15:40:42 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/includes/header.php:6) in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 6
+[05-May-2025 15:42:17 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 5
+[05-May-2025 15:42:17 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/includes/header.php:6) in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 6
+[05-May-2025 15:42:20 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 5
+[05-May-2025 15:42:20 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/includes/header.php:6) in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 6
+[05-May-2025 15:43:01 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 5
+[05-May-2025 15:43:01 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/includes/header.php:6) in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 6
+[05-May-2025 15:43:04 America/New_York] PHP Warning:  require_once(../vendor/autoload.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 15:43:04 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/servicios/carga.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 15:43:35 America/New_York] PHP Warning:  require_once(../vendor/autoload.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 15:43:35 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/servicios/carga.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 15:43:35 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 5
+[05-May-2025 15:43:35 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/includes/header.php:6) in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 6
+[05-May-2025 15:43:40 America/New_York] PHP Warning:  require_once(../vendor/autoload.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 15:43:40 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/servicios/carga.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 15:44:47 America/New_York] PHP Warning:  require_once(../vendor/autoload.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 15:44:47 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/servicios/carga.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 15:44:48 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 5
+[05-May-2025 15:44:48 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/includes/header.php:6) in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 6
+[05-May-2025 15:46:55 America/New_York] PHP Warning:  Undefined variable $contenido_principal in /home/enodhcdl/app/includes/menu.php on line 54
+[05-May-2025 15:46:55 America/New_York] PHP Fatal error:  Uncaught ValueError: Path cannot be empty in /home/enodhcdl/app/includes/menu.php:54
+Stack trace:
+#0 /home/enodhcdl/app/servicios/carga.php(5): require()
+#1 {main}
+
+Next ValueError: Path cannot be empty in /home/enodhcdl/app/includes/menu.php:54
+Stack trace:
+#0 /home/enodhcdl/app/servicios/carga.php(5): require()
+#1 {main}
+  thrown in /home/enodhcdl/app/includes/menu.php on line 54
+[05-May-2025 15:46:56 America/New_York] PHP Warning:  Undefined variable $contenido_principal in /home/enodhcdl/app/includes/menu.php on line 54
+[05-May-2025 15:46:56 America/New_York] PHP Fatal error:  Uncaught ValueError: Path cannot be empty in /home/enodhcdl/app/includes/menu.php:54
+Stack trace:
+#0 /home/enodhcdl/app/servicios/control.php(5): require()
+#1 {main}
+
+Next ValueError: Path cannot be empty in /home/enodhcdl/app/includes/menu.php:54
+Stack trace:
+#0 /home/enodhcdl/app/servicios/control.php(5): require()
+#1 {main}
+  thrown in /home/enodhcdl/app/includes/menu.php on line 54
+[05-May-2025 15:49:51 America/New_York] PHP Warning:  require_once(../vendor/autoload.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/carga.php on line 6
+[05-May-2025 15:49:51 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/servicios/carga.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/enodhcdl/app/servicios/carga.php on line 6
+[12-May-2025 10:48:31 America/New_York] PHP Warning:  require_once(../vendor/autoload.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/servicios/carga.php on line 6
+[12-May-2025 10:48:31 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/servicios/carga.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/enodhcdl/app/servicios/carga.php on line 6
+[12-May-2025 10:48:36 America/New_York] PHP Warning:  Undefined array key "usuario_rol" in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 5
+[12-May-2025 10:48:36 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/includes/header.php:6) in /home/enodhcdl/app/servicios/tabs/por_asignar.php on line 6
+[15-May-2025 13:24:37 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 7
+[15-May-2025 13:24:37 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 8
+[15-May-2025 13:24:37 America/New_York] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/enodhcdl/app/auth.php on line 12
+[15-May-2025 13:24:37 America/New_York] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/enodhcdl/app/auth.php on line 18
+[15-May-2025 13:24:37 America/New_York] PHP Warning:  session_regenerate_id(): Session ID cannot be regenerated when there is no active session in /home/enodhcdl/app/auth.php on line 25
+[15-May-2025 13:24:37 America/New_York] Intento no autorizado desde IP: 189.174.150.12
+[15-May-2025 13:24:37 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios/por_asignar.php:1) in /home/enodhcdl/app/auth.php on line 46
+[15-May-2025 13:24:37 America/New_York] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/enodhcdl/app/auth.php on line 49
+[15-May-2025 13:24:37 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/servicios/por_asignar.php:1) in /home/enodhcdl/app/auth.php on line 50
+[15-May-2025 13:27:57 America/New_York] PHP Warning:  require(../auth.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 2
+[15-May-2025 13:27:57 America/New_York] PHP Warning:  require(../auth.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 2
+[15-May-2025 13:27:57 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '../auth.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/por_asignar.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 2
+[15-May-2025 14:17:44 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../../init.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[15-May-2025 14:17:44 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../../init.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/en_ruta.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/en_ruta.php on line 2
+[31-May-2025 21:41:48 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/servicios/../app/config.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 2
+[31-May-2025 21:41:48 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/servicios/../app/config.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/servicios/por_asignar.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/enodhcdl/app/admin/servicios/por_asignar.php on line 2

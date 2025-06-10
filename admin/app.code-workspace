@@ -1,0 +1,38 @@
+{
+	"folders": [
+		{
+			"path": "../app"
+		},
+		{
+			"path": "../.git"
+		},
+		{
+			"path": "../.well-known"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../cgi-bin"
+		},
+		{
+			"path": "../compos"
+		},
+		{
+			"path": "../crud"
+		},
+		{
+			"path": "../includes"
+		},
+		{
+			"path": "../lib"
+		},
+		{
+			"path": "../tecnico"
+		},
+		{
+			"path": "../vendor"
+		}
+	],
+	"settings": {}
+}

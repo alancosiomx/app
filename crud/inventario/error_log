@@ -1,0 +1,44 @@
+[05-May-2025 15:47:03 America/New_York] PHP Warning:  Undefined variable $contenido_principal in /home/enodhcdl/app/includes/menu.php on line 54
+[05-May-2025 15:47:03 America/New_York] PHP Fatal error:  Uncaught ValueError: Path cannot be empty in /home/enodhcdl/app/includes/menu.php:54
+Stack trace:
+#0 /home/enodhcdl/app/crud/inventario/index.php(11): require()
+#1 {main}
+
+Next ValueError: Path cannot be empty in /home/enodhcdl/app/includes/menu.php:54
+Stack trace:
+#0 /home/enodhcdl/app/crud/inventario/index.php(11): require()
+#1 {main}
+  thrown in /home/enodhcdl/app/includes/menu.php on line 54
+[05-May-2025 15:47:06 America/New_York] PHP Warning:  Undefined variable $contenido_principal in /home/enodhcdl/app/includes/menu.php on line 54
+[05-May-2025 15:47:06 America/New_York] PHP Fatal error:  Uncaught ValueError: Path cannot be empty in /home/enodhcdl/app/includes/menu.php:54
+Stack trace:
+#0 /home/enodhcdl/app/crud/inventario/index.php(11): require()
+#1 {main}
+
+Next ValueError: Path cannot be empty in /home/enodhcdl/app/includes/menu.php:54
+Stack trace:
+#0 /home/enodhcdl/app/crud/inventario/index.php(11): require()
+#1 {main}
+  thrown in /home/enodhcdl/app/includes/menu.php on line 54
+[05-May-2025 15:47:17 America/New_York] PHP Warning:  Undefined variable $contenido_principal in /home/enodhcdl/app/includes/menu.php on line 54
+[05-May-2025 15:47:17 America/New_York] PHP Fatal error:  Uncaught ValueError: Path cannot be empty in /home/enodhcdl/app/includes/menu.php:54
+Stack trace:
+#0 /home/enodhcdl/app/crud/inventario/index.php(11): require()
+#1 {main}
+
+Next ValueError: Path cannot be empty in /home/enodhcdl/app/includes/menu.php:54
+Stack trace:
+#0 /home/enodhcdl/app/crud/inventario/index.php(11): require()
+#1 {main}
+  thrown in /home/enodhcdl/app/includes/menu.php on line 54
+[05-May-2025 15:47:21 America/New_York] PHP Warning:  Undefined variable $contenido_principal in /home/enodhcdl/app/includes/menu.php on line 54
+[05-May-2025 15:47:21 America/New_York] PHP Fatal error:  Uncaught ValueError: Path cannot be empty in /home/enodhcdl/app/includes/menu.php:54
+Stack trace:
+#0 /home/enodhcdl/app/crud/inventario/index.php(11): require()
+#1 {main}
+
+Next ValueError: Path cannot be empty in /home/enodhcdl/app/includes/menu.php:54
+Stack trace:
+#0 /home/enodhcdl/app/crud/inventario/index.php(11): require()
+#1 {main}
+  thrown in /home/enodhcdl/app/includes/menu.php on line 54

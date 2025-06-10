@@ -1,0 +1,23 @@
+[29-May-2025 12:24:55 America/New_York] PHP Warning:  require_once(/home/enodhcdl/app/admin/ajustes/../../config/database.php): Failed to open stream: No such file or directory in /home/enodhcdl/app/admin/ajustes/tecnicos.php on line 3
+[29-May-2025 12:24:55 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/enodhcdl/app/admin/ajustes/../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/enodhcdl/app/admin/ajustes/tecnicos.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/enodhcdl/app/admin/ajustes/tecnicos.php on line 3
+[29-May-2025 12:27:18 America/New_York] ⚠️ Posible ataque CSRF - Usuario ID: 1
+[29-May-2025 12:27:27 America/New_York] ⚠️ Posible ataque CSRF - Usuario ID: 1
+[29-May-2025 12:55:25 America/New_York] ⚠️ Posible ataque CSRF - Usuario ID: 1
+[29-May-2025 12:55:49 America/New_York] ⚠️ Posible ataque CSRF - Usuario ID: 1
+[29-May-2025 12:58:49 America/New_York] PHP Warning:  Undefined array key "roles" in /home/enodhcdl/app/admin/ajustes/tecnicos.php on line 20
+[29-May-2025 12:58:49 America/New_York] PHP Warning:  foreach() argument must be of type array|object, null given in /home/enodhcdl/app/admin/ajustes/tecnicos.php on line 20
+[29-May-2025 12:58:49 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/enodhcdl/app/admin/ajustes/tecnicos.php:20) in /home/enodhcdl/app/admin/ajustes/tecnicos.php on line 23
+[29-May-2025 12:59:19 America/New_York] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'EMPM@omniposmx.com' for key 'email' in /home/enodhcdl/app/admin/ajustes/tecnicos.php:16
+Stack trace:
+#0 /home/enodhcdl/app/admin/ajustes/tecnicos.php(16): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/enodhcdl/app/admin/ajustes/tecnicos.php on line 16
+[29-May-2025 21:45:09 America/New_York] Intento no autorizado desde IP: 189.174.150.12
+[29-May-2025 21:45:11 America/New_York] Intento no autorizado desde IP: 189.174.150.12
+[29-May-2025 21:45:39 America/New_York] Intento no autorizado desde IP: 189.174.150.12
+[29-May-2025 21:46:08 America/New_York] Intento no autorizado desde IP: 189.174.150.12
+[29-May-2025 21:52:41 America/New_York] Intento no autorizado desde IP: 189.174.150.12
+[06-Jun-2025 20:50:59 America/New_York] Intento no autorizado desde IP: 184.72.121.156
