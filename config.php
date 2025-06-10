@@ -1,6 +1,6 @@
 <?php
 // =============================================
-// CONFIGURACIÓN DE LA BASE DE DATOS
+// CONFIGURACI聛0藛7N DE LA BASE DE DATOS
 // =============================================
 
 // Credenciales de la base de datos
@@ -11,7 +11,7 @@ define('DB_PASS', 'Z00Q_8F^r0');
 define('DB_CHARSET', 'utf8mb4');
 
 // =============================================
-// CONEXIÓN SEGURA CON PDO
+// CONEXI聛0藛7N SEGURA CON PDO
 // =============================================
 try {
     $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
@@ -28,8 +28,13 @@ try {
     $pdo->exec("SET time_zone = '-06:00';");
     
 } catch (PDOException $e) {
-    error_log("Error de conexión DB [" . date('Y-m-d H:i:s') . "]: " . $e->getMessage());
-    die("<h2>Error en el sistema. Por favor intente más tarde.</h2>");
+
+// Template paths
+define('HEAD', __DIR__ . '/includes/header.php');
+define('MENU', __DIR__ . '/includes/menu.php');
+define('FOOT', __DIR__ . '/includes/footer.php');
+    error_log("Error de conexi篓庐n DB [" . date('Y-m-d H:i:s') . "]: " . $e->getMessage());
+    die("<h2>Error en el sistema. Por favor intente m篓垄s tarde.</h2>");
 }
 
 // =============================================
