@@ -1,7 +1,0 @@
-{
-  "name": "wp-control-servicios/plugin",
-  "description": "Plugin para cargar servicios en tablas BBVA y BanRegio desde Excel.",
-  "require": {
-    "phpoffice/phpspreadsheet": "^1.23"
-  }
-}
