@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . '/../../../config.php';
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -35,7 +34,7 @@ function cargar_a_staging($archivoTmp, $extension, $banco, $pdo)
             fclose($handle);
         }
     } elseif ($extension === 'xlsx') {
-        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($archivoTmp);
+        $spreadsheet = IOFactory::load($archivoTmp);
         $sheet = $spreadsheet->getActiveSheet();
         $rows = $sheet->toArray();
 
@@ -61,10 +60,23 @@ function cargar_a_staging($archivoTmp, $extension, $banco, $pdo)
     return "✅ Se cargaron correctamente $insertados registros. ⚠️ Duplicados ignorados: $errores.";
 }
 
+function ticket_duplicado($ticket, $pdo, $tabla)
+{
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM $tabla WHERE ticket = ?");
+    $stmt->execute([$ticket]);
+    return $stmt->fetchColumn() > 0;
+}
+
 function insertar_fila_directa($pdo, $tabla, $fila)
 {
     $campos = array_keys($fila);
     $sql = "INSERT INTO $tabla (" . implode(',', $campos) . ") VALUES (:" . implode(', :', $campos) . ")";
     $stmt = $pdo->prepare($sql);
     $stmt->execute($fila);
+}
+
+function obtener_columnas($pdo, $tabla)
+{
+    $stmt = $pdo->query("DESCRIBE $tabla");
+    return $stmt->fetchAll(PDO::FETCH_COLUMN);
 }
