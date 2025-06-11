@@ -7,7 +7,13 @@ $stmt->execute();
 $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Obtener técnicos activos
-$tecnicos = $pdo->query("SELECT id, nombre FROM usuarios WHERE activo = 1 AND roles LIKE '%idc%'")->fetchAll(PDO::FETCH_ASSOC);
+// Obtener técnicos activos con rol "idc"
+$tecnicos = $pdo->query("
+    SELECT u.id, u.nombre
+    FROM usuarios u
+    JOIN usuarios_roles ur ON ur.usuario_id = u.id
+    WHERE ur.rol = 'idc' AND u.activo = 1
+")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <?php include __DIR__ . '/../includes/tabs_servicios.php'; ?>
 
