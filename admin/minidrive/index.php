@@ -3,7 +3,7 @@ $dir = __DIR__;
 $archivos = array_diff(scandir($dir), ['.', '..', 'index.php']);
 
 if (!defined('HEAD') || !defined('MENU') || !defined('FOOT')) {
-    require_once dirname(__DIR__) . '/config.php';
+    require_once dirname(__DIR__, 2) . '/config.php';
 }
 require HEAD;
 require MENU;

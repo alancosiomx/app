@@ -4,7 +4,7 @@ require_once __DIR__ . '/../init.php';
 $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
 if (!defined('HEAD') || !defined('MENU') || !defined('FOOT')) {
-    require_once dirname(__DIR__) . '/config.php';
+    require_once dirname(__DIR__, 2) . '/config.php';
 }
 require HEAD;
 require MENU;
