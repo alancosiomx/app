@@ -61,3 +61,10 @@
   </style>
 </head>
 <body>
+<?php
+$usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
+?>
+
+<div class="top-bar text-dark bg-light px-4 py-2" style="margin-left: 220px; border-bottom: 1px solid #dee2e6;">
+    👋 Bienvenido, <strong><?= htmlspecialchars($usuario) ?></strong>. Este es tu panel de administración.
+</div>
