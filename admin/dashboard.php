@@ -7,16 +7,17 @@ require_once __DIR__ . '/init.php';
 
 $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
+// Cargar partes del layout
 require_once __DIR__ . '/includes/head.php';
 require_once __DIR__ . '/includes/menu.php';
 ?>
 
-<div class="main-content" style="margin-top: 80px;">
+<div class="main-content container mt-5">
     <div class="alert alert-success">
         👋 Bienvenido, <strong><?= htmlspecialchars($usuario) ?></strong>. Este es tu panel de administración.
     </div>
 
-    <?php echo "🚀 Cambios desde GitHub a las " . date("H:i:s"); ?>
+    <p><?php echo "🚀 Cambios desde GitHub a las " . date("H:i:s"); ?></p>
 
     <div class="row">
         <div class="col-md-4 mb-3">
