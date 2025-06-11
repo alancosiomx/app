@@ -13,20 +13,7 @@ $tecnicos = $pdo->query("SELECT id, nombre FROM usuarios WHERE activo = 1 AND ro
 <h1 class="mb-4">Gestión de Servicios - OMNIPOS</h1>
 <p>Bienvenido, <strong><?= htmlspecialchars($_SESSION['usuario_nombre'] ?? 'Administrador') ?></strong></p>
 
-<ul class="nav nav-tabs mb-3">
-    <li class="nav-item">
-        <a class="nav-link <?= $_GET['tab'] === 'por_asignar' ? 'active' : '' ?>" href="?tab=por_asignar">Por Asignar</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link <?= $_GET['tab'] === 'en_ruta' ? 'active' : '' ?>" href="?tab=en_ruta">En Ruta</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link <?= $_GET['tab'] === 'concluido' ? 'active' : '' ?>" href="?tab=concluido">Histórico</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link <?= $_GET['tab'] === 'citas' ? 'active' : '' ?>" href="?tab=citas">Citas</a>
-    </li>
-</ul>
+<?php include __DIR__ . '/../includes/tabs_servicios.php'; ?>
 
 <h3 class="mt-3">Servicios Por Asignar</h3>
 
@@ -77,12 +64,9 @@ $tecnicos = $pdo->query("SELECT id, nombre FROM usuarios WHERE activo = 1 AND ro
   <button type="submit" class="btn btn-primary mt-3">Asignar Servicios</button>
 </form>
 
-<!-- Script para seleccionar todos -->
 <script>
 document.getElementById('checkAll').addEventListener('click', function () {
   const checkboxes = document.querySelectorAll('input[name="tickets[]"]');
-  for (const cb of checkboxes) {
-    cb.checked = this.checked;
-  }
+  checkboxes.forEach(cb => cb.checked = this.checked);
 });
 </script>
