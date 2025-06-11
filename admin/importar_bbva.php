@@ -152,6 +152,9 @@ function procesarFila($data, $pdo, &$insertados, &$errores) {
 ?>
 
 <?php
+if (!defined('HEAD') || !defined('MENU') || !defined('FOOT')) {
+    require_once dirname(__DIR__) . '/config.php';
+}
 require HEAD;
 require MENU;
 ?>

@@ -14,6 +14,8 @@ define('DB_CHARSET', 'utf8mb4');
 define('HEAD', __DIR__ . '/includes/header.php');
 define('MENU', __DIR__ . '/includes/menu.php');
 define('FOOT', __DIR__ . '/includes/footer.php');
+// Nuevo archivo para cargar header, menu y footer de una vez
+define('INIT', __DIR__ . '/includes/init.php');
 
 // =============================================
 // CONEXI0ˆ7N SEGURA CON PDO
