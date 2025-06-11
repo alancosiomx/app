@@ -1,5 +1,5 @@
 <?php
-require_once '../../config.php';
+require_once __DIR__ . '/../../config.php';
 
 // Obtener servicios por asignar
 $stmt = $pdo->prepare("SELECT * FROM servicios_omnipos WHERE estatus = 'Por Asignar' ORDER BY fecha_inicio DESC");
@@ -10,7 +10,25 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $tecnicos = $pdo->query("SELECT id, nombre FROM usuarios WHERE activo = 1 AND roles LIKE '%idc%'")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<h3>Servicios Por Asignar</h3>
+<h1 class="mb-4">Gestión de Servicios - OMNIPOS</h1>
+<p>Bienvenido, <strong><?= htmlspecialchars($_SESSION['usuario_nombre'] ?? 'Administrador') ?></strong></p>
+
+<ul class="nav nav-tabs mb-3">
+    <li class="nav-item">
+        <a class="nav-link <?= $_GET['tab'] === 'por_asignar' ? 'active' : '' ?>" href="?tab=por_asignar">Por Asignar</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link <?= $_GET['tab'] === 'en_ruta' ? 'active' : '' ?>" href="?tab=en_ruta">En Ruta</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link <?= $_GET['tab'] === 'concluido' ? 'active' : '' ?>" href="?tab=concluido">Histórico</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link <?= $_GET['tab'] === 'citas' ? 'active' : '' ?>" href="?tab=citas">Citas</a>
+    </li>
+</ul>
+
+<h3 class="mt-3">Servicios Por Asignar</h3>
 
 <form method="post" action="asignar_tecnico.php">
   <div class="mb-3">
@@ -23,40 +41,43 @@ $tecnicos = $pdo->query("SELECT id, nombre FROM usuarios WHERE activo = 1 AND ro
     </select>
   </div>
 
-  <table class="table table-bordered table-sm table-hover" id="tabla_por_asignar">
-    <thead class="table-light">
-      <tr>
-        <th><input type="checkbox" id="checkAll"></th>
-        <th>Ticket</th>
-        <th>Afiliación</th>
-        <th>Comercio</th>
-        <th>Ciudad</th>
-        <th>CP</th>
-        <th>Fecha Límite</th>
-        <th>Comentarios</th>
-        <th>🔍</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php foreach ($servicios as $s): ?>
+  <div class="table-responsive">
+    <table class="table table-bordered table-sm table-hover" id="tabla_por_asignar">
+      <thead class="table-light">
         <tr>
-          <td><input type="checkbox" name="tickets[]" value="<?= $s['ticket'] ?>"></td>
-          <td><?= htmlspecialchars($s['ticket']) ?></td>
-          <td><?= htmlspecialchars($s['afiliacion']) ?></td>
-          <td><?= htmlspecialchars($s['comercio']) ?></td>
-          <td><?= htmlspecialchars($s['ciudad']) ?></td>
-          <td><?= htmlspecialchars($s['cp']) ?></td>
-          <td><?= htmlspecialchars($s['fecha_limite']) ?></td>
-          <td><?= htmlspecialchars($s['comentarios']) ?></td>
-          <td><a href="#" class="ver-detalle" data-ticket="<?= $s['ticket'] ?>">🔍</a></td>
+          <th><input type="checkbox" id="checkAll"></th>
+          <th>Ticket</th>
+          <th>Afiliación</th>
+          <th>Comercio</th>
+          <th>Ciudad</th>
+          <th>CP</th>
+          <th>Fecha Límite</th>
+          <th>Comentarios</th>
+          <th>🔍</th>
         </tr>
-      <?php endforeach; ?>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <?php foreach ($servicios as $s): ?>
+          <tr>
+            <td><input type="checkbox" name="tickets[]" value="<?= $s['ticket'] ?>"></td>
+            <td><?= htmlspecialchars($s['ticket']) ?></td>
+            <td><?= htmlspecialchars($s['afiliacion']) ?></td>
+            <td><?= htmlspecialchars($s['comercio']) ?></td>
+            <td><?= htmlspecialchars($s['ciudad']) ?></td>
+            <td><?= htmlspecialchars($s['cp']) ?></td>
+            <td><?= htmlspecialchars($s['fecha_limite']) ?></td>
+            <td><?= htmlspecialchars($s['comentarios']) ?></td>
+            <td><a href="#" class="ver-detalle" data-ticket="<?= $s['ticket'] ?>">🔍</a></td>
+          </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+  </div>
 
   <button type="submit" class="btn btn-primary mt-3">Asignar Servicios</button>
 </form>
 
+<!-- Script para seleccionar todos -->
 <script>
 document.getElementById('checkAll').addEventListener('click', function () {
   const checkboxes = document.querySelectorAll('input[name="tickets[]"]');
