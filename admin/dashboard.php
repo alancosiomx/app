@@ -6,11 +6,9 @@ error_reporting(E_ALL);
 require_once __DIR__ . '/init.php';
 
 $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
+$contenido = __DIR__ . '/contenido_dashboard.php';
 
-// Cargar partes del layout
-require_once __DIR__ . '/includes/head.php';
-require_once __DIR__ . '/includes/menu.php';
-?>
+require_once __DIR__ . '/layout.php';
 
 <div class="main-content container mt-5">
     <div class="alert alert-success">
