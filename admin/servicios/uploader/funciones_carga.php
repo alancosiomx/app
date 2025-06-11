@@ -62,12 +62,14 @@ if (!empty($fila[$clave_primaria]) && !ticket_duplicado($fila[$clave_primaria], 
     return "✅ Se cargaron correctamente $insertados registros. ⚠️ Duplicados ignorados: $errores.";
 }
 
-function ticket_duplicado($ticket, $pdo, $tabla)
+function ticket_duplicado($valor, $pdo, $tabla)
 {
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM $tabla WHERE ticket = ?");
-    $stmt->execute([$ticket]);
+    $columna = ($tabla === 'servicios_banregio') ? 'folio_cliente' : 'ticket';
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM $tabla WHERE $columna = ?");
+    $stmt->execute([$valor]);
     return $stmt->fetchColumn() > 0;
 }
+
 
 function insertar_fila_directa($pdo, $tabla, $fila)
 {
