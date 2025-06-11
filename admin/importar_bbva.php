@@ -2,10 +2,13 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+session_start(); // NECESARIO para usar $_SESSION
+
 require_once __DIR__ . '/init.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
+
 
 $insertados = 0;
 $errores = 0;
