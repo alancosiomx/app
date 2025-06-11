@@ -10,6 +10,7 @@ function cargar_a_staging($archivoTmp, $extension, $banco, $pdo)
 
     $tabla = "servicios_" . strtolower($banco);
     $columnasDestino = obtener_columnas($pdo, $tabla);
+    $clave_index = ($tabla === 'servicios_banregio') ? 1 : 0;
 
     if ($extension === 'csv') {
         $handle = fopen($archivoTmp, "r");
@@ -17,16 +18,15 @@ function cargar_a_staging($archivoTmp, $extension, $banco, $pdo)
             fgetcsv($handle, 1000, ","); // ignorar encabezado
 
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                $fila = [];
-                foreach ($columnasDestino as $index => $columnaBD) {
-                    if (isset($data[$index])) {
-                        $fila[$columnaBD] = $data[$index];
+                $clave_valor = $data[$clave_index] ?? null;
+
+                if (!empty($clave_valor) && !ticket_duplicado($clave_valor, $pdo, $tabla)) {
+                    $fila = [];
+                    foreach ($columnasDestino as $index => $columnaBD) {
+                        if (isset($data[$index])) {
+                            $fila[$columnaBD] = $data[$index];
+                        }
                     }
-                }
-
-$clave_primaria = ($tabla === 'servicios_banregio') ? 'folio_cliente' : 'ticket';
-
-if (!empty($fila[$clave_primaria]) && !ticket_duplicado($fila[$clave_primaria], $pdo, $tabla)) {
                     insertar_fila_directa($pdo, $tabla, $fila);
                     $insertados++;
                 } else {
@@ -43,14 +43,15 @@ if (!empty($fila[$clave_primaria]) && !ticket_duplicado($fila[$clave_primaria], 
         array_shift($rows); // ignorar encabezado
 
         foreach ($rows as $data) {
-            $fila = [];
-            foreach ($columnasDestino as $index => $columnaBD) {
-                if (isset($data[$index])) {
-                    $fila[$columnaBD] = $data[$index];
-                }
-            }
+            $clave_valor = $data[$clave_index] ?? null;
 
-            if (!empty($fila['ticket']) && !ticket_duplicado($fila['ticket'], $pdo, $tabla)) {
+            if (!empty($clave_valor) && !ticket_duplicado($clave_valor, $pdo, $tabla)) {
+                $fila = [];
+                foreach ($columnasDestino as $index => $columnaBD) {
+                    if (isset($data[$index])) {
+                        $fila[$columnaBD] = $data[$index];
+                    }
+                }
                 insertar_fila_directa($pdo, $tabla, $fila);
                 $insertados++;
             } else {
@@ -69,7 +70,6 @@ function ticket_duplicado($valor, $pdo, $tabla)
     $stmt->execute([$valor]);
     return $stmt->fetchColumn() > 0;
 }
-
 
 function insertar_fila_directa($pdo, $tabla, $fila)
 {
