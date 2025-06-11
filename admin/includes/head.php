@@ -5,7 +5,7 @@
   <title>Panel OMNIPOS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <!-- Bootstrap CSS desde CDN confiable -->
+  <!-- Bootstrap -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
   
   <!-- Estilos personalizados -->
@@ -25,14 +25,12 @@
       background-color: #1e293b;
       padding-top: 60px;
       color: white;
+      transition: transform 0.3s ease-in-out;
       z-index: 1000;
     }
 
-    .sidebar h4 {
-      text-align: center;
-      margin-bottom: 1rem;
-      font-weight: bold;
-      color: #ffffff;
+    .sidebar.collapsed {
+      transform: translateX(-100%);
     }
 
     .sidebar a {
@@ -47,28 +45,6 @@
       background-color: #334155;
     }
 
-    /* Responsive: Sidebar encima del contenido en móvil */
-    @media (max-width: 768px) {
-      .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        padding-top: 10px;
-      }
-    }
-
-    .main-content {
-      margin-left: 220px;
-      padding: 100px 40px 40px 40px;
-    }
-
-    @media (max-width: 768px) {
-      .main-content {
-        margin-left: 0;
-        padding: 120px 20px 20px 20px;
-      }
-    }
-
     .top-bar {
       position: fixed;
       top: 0;
@@ -80,16 +56,63 @@
       border-bottom: 1px solid #e2e8f0;
       z-index: 1050;
       font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .top-bar .menu-toggle {
+      display: none;
+      font-size: 24px;
+      background: none;
+      border: none;
+    }
+
+    @media (max-width: 768px) {
+      .top-bar .menu-toggle {
+        display: block;
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 52px;
+        width: 100%;
+        height: calc(100vh - 52px);
+      }
+
+      .main-content {
+        padding: 100px 20px 20px 20px;
+        margin-left: 0;
+      }
+    }
+
+    .main-content {
+      margin-left: 220px;
+      padding: 100px 40px 40px 40px;
+      transition: margin-left 0.3s ease-in-out;
+    }
+
+    @media (max-width: 768px) {
+      .main-content.collapsed {
+        margin-left: 0;
+      }
     }
   </style>
 </head>
 <body>
 
-<?php
-$usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
-?>
+<?php $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador'; ?>
 
-<!-- Barra superior con saludo -->
+<!-- Barra superior -->
 <div class="top-bar">
-  👋 Bienvenido, <strong><?= htmlspecialchars($usuario) ?></strong>. Este es tu panel de administración.
+  <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+  <span>👋 Bienvenido, <strong><?= htmlspecialchars($usuario) ?></strong>. Este es tu panel de administración.</span>
 </div>
+
+<!-- Script para toggle del sidebar -->
+<script>
+  function toggleSidebar() {
+    document.querySelector('.sidebar').classList.toggle('collapsed');
+    document.querySelector('.main-content').classList.toggle('collapsed');
+  }
+</script>
