@@ -46,25 +46,13 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <h1 class="mb-4">Histórico de Servicios</h1>
 <p>Bienvenido, <strong><?= htmlspecialchars($_SESSION['usuario_nombre'] ?? 'Administrador') ?></strong></p>
 
-<ul class="nav nav-tabs mb-3">
-    <li class="nav-item">
-        <a class="nav-link <?= $_GET['tab'] === 'por_asignar' ? 'active' : '' ?>" href="?tab=por_asignar">Por Asignar</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link <?= $_GET['tab'] === 'en_ruta' ? 'active' : '' ?>" href="?tab=en_ruta">En Ruta</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link <?= $_GET['tab'] === 'concluido' ? 'active' : '' ?>" href="?tab=concluido">Histórico</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link <?= $_GET['tab'] === 'citas' ? 'active' : '' ?>" href="?tab=citas">Citas</a>
-    </li>
-</ul>
+<?php include __DIR__ . '/../includes/tabs_servicios.php'; ?>
 
 <?php if (isset($_SESSION['mensaje'])): ?>
     <div class='alert alert-success'><?= htmlspecialchars($_SESSION['mensaje']) ?></div>
     <?php unset($_SESSION['mensaje']); ?>
 <?php endif; ?>
+
 <?php if (isset($_SESSION['error'])): ?>
     <div class='alert alert-danger'><?= htmlspecialchars($_SESSION['error']) ?></div>
     <?php unset($_SESSION['error']); ?>
