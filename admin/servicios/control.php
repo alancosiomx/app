@@ -2,6 +2,9 @@
 require '../auth.php';
 require '../config.php';
 
+if (!defined('HEAD') || !defined('MENU') || !defined('FOOT')) {
+    require_once dirname(__DIR__, 2) . '/config.php';
+}
 require HEAD;
 require MENU;
 ?>

@@ -7,6 +7,9 @@ if (!tienePermiso('ver_inventario')) {
     die('⛔ Acceso denegado');
 }
 
+if (!defined('HEAD') || !defined('MENU') || !defined('FOOT')) {
+    require_once dirname(__DIR__) . '/config.php';
+}
 require HEAD;
 require MENU;
 ?>

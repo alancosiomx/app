@@ -30,6 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nuevo_nombre'])) {
 // Obtener lista de fabricantes
 $fabricantes = $pdo->query("SELECT * FROM fabricantes ORDER BY nombre")->fetchAll(PDO::FETCH_ASSOC);
 
+if (!defined('HEAD') || !defined('MENU') || !defined('FOOT')) {
+    require_once dirname(__DIR__) . '/config.php';
+}
 require HEAD;
 require MENU;
 ?>
