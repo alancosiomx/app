@@ -1,6 +1,10 @@
 <?php
-require_once __DIR__ . '/includes/head.php';
-require_once __DIR__ . '/includes/menu.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+ob_start(); // ← evita problemas con header()
+
+$usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +13,7 @@ require_once __DIR__ . '/includes/menu.php';
   <meta charset="UTF-8">
   <title>Panel OMNIPOS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <?php // Carga de estilos y recursos centralizados ?>
+  <?php require_once __DIR__ . '/includes/head.php'; ?>
 </head>
 <body>
 
@@ -17,7 +21,7 @@ require_once __DIR__ . '/includes/menu.php';
 <div class="top-bar">
   <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
   <span>
-    👋 Bienvenido, <strong><?= htmlspecialchars($_SESSION['usuario_nombre'] ?? 'Administrador') ?></strong>. Este es tu panel de administración.
+    👋 Bienvenido, <strong><?= htmlspecialchars($usuario) ?></strong>. Este es tu panel de administración.
   </span>
 </div>
 
@@ -42,6 +46,9 @@ require_once __DIR__ . '/includes/menu.php';
   }
 </script>
 
-<?php require_once __DIR__ . '/includes/foot.php'; ?>
+<?php
+require_once __DIR__ . '/includes/foot.php';
+ob_end_flush(); // ← cierra buffer de salida
+?>
 </body>
 </html>
