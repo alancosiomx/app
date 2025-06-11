@@ -4,67 +4,85 @@ function mapear_bbva($pdo)
     $insertados = 0;
     $duplicados = 0;
 
-    // Obtener columnas válidas de destino
-    $columnasDestino = obtener_columnas($pdo, 'servicios_omnipos');
+    $tabla_origen = 'servicios_bbva';
+    $tabla_destino = 'servicios_omnipos';
 
-    // Obtener registros desde staging
-    $bbva = $pdo->query("SELECT * FROM servicios_bbva")->fetchAll(PDO::FETCH_ASSOC);
+    $columnas_destino = obtener_columnas($pdo, $tabla_destino);
 
-    foreach ($bbva as $fila) {
+    $stmt = $pdo->query("SELECT * FROM $tabla_origen");
+    $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($registros as $fila) {
         $ticket = $fila['ticket'] ?? null;
         if (!$ticket) continue;
 
-        // Evitar duplicado en OMNIPOS
-        $stmt = $pdo->prepare("SELECT COUNT(*) FROM servicios_omnipos WHERE ticket = ?");
-        $stmt->execute([$ticket]);
-        if ($stmt->fetchColumn() > 0) {
+        // Validar duplicado en OMNIPOS
+        $check = $pdo->prepare("SELECT COUNT(*) FROM $tabla_destino WHERE ticket = ?");
+        $check->execute([$ticket]);
+        if ($check->fetchColumn() > 0) {
             $duplicados++;
             continue;
         }
 
-        // Preparar inserción
-        $campos = [];
-        $valores = [];
+        // Preparar el array de inserción mapeando los campos manualmente
+        $datos = [];
 
-        foreach ($fila as $col => $val) {
-            if (in_array($col, $columnasDestino)) {
-                $campos[] = $col;
-                $valores[$col] = $val;
+        $mapeo = [
+            'ticket' => 'ticket',
+            'fecha_inicio' => 'fecha_inicio',
+            'vim' => 'vim',
+            'afiliacion' => 'afiliacion',
+            'servicio' => 'servicio',
+            'comercio' => 'comercio',
+            'domicilio' => 'domicilio',
+            'colonia' => 'colonia',
+            'ciudad' => 'ciudad',
+            'cp' => 'cp',
+            'idc' => 'idc',
+            'solicito' => 'solicito',
+            'telefono_contacto_1' => 'telefono_contacto_1',
+            'tipo_tpv' => 'tipo_tpv',
+            'referencia' => 'referencia',
+            'horario' => 'horario',
+            'comentarios' => 'comentarios',
+            'fecha_limite' => 'fecha_limite',
+            'cantidad_insumos' => 'cantidad_insumos',
+            'fecha_atencion' => 'fecha_atencion'
+        ];
+
+        foreach ($mapeo as $origen => $destino) {
+            if (in_array($destino, $columnas_destino)) {
+                $datos[$destino] = $fila[$origen] ?? null;
             }
         }
 
-        $campos[] = 'banco';
-        $valores['banco'] = 'BBVA';
+        // Agregar campos adicionales
+        $datos['banco'] = 'BBVA';
+        $datos['estatus'] = 'Por Asignar';
+        $datos['fecha_carga'] = date('Y-m-d H:i:s');
 
-        $campos[] = 'estatus';
-        $valores['estatus'] = 'Por Asignar';
+        // Insertar
+        $campos = array_keys($datos);
+        $sql = "INSERT INTO $tabla_destino (" . implode(',', $campos) . ") VALUES (:" . implode(', :', $campos) . ")";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($datos);
 
-        $campos[] = 'fecha_carga';
-        $valores['fecha_carga'] = date('Y-m-d H:i:s');
-
-        if (count($campos)) {
-            $sql = "INSERT INTO servicios_omnipos (" . implode(',', $campos) . ") VALUES (:" . implode(', :', $campos) . ")";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute($valores);
-            $insertados++;
-        }
+        $insertados++;
     }
 
-    return "✅ Servicios insertados: $insertados\n⚠️ Tickets duplicados: $duplicados";
+    return "✅ Servicios migrados: $insertados\n⚠️ Tickets duplicados: $duplicados";
+}
+
+function mapear_banregio($pdo) {
+    return "🛠️ Aún no implementado.";
+}
+
+function mapear_azteca($pdo) {
+    return "🛠️ Aún no implementado.";
 }
 
 function obtener_columnas($pdo, $tabla)
 {
     $stmt = $pdo->query("DESCRIBE $tabla");
     return $stmt->fetchAll(PDO::FETCH_COLUMN);
-}
-
-function mapear_banregio($pdo)
-{
-    return "🛠️ Función mapear_banregio aún no implementada.";
-}
-
-function mapear_azteca($pdo)
-{
-    return "🛠️ Función mapear_azteca aún no implementada.";
 }
