@@ -1,3 +1,9 @@
+<?php
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+?>
+
 <div class="container py-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
@@ -8,6 +14,9 @@
           <h3 class="card-title text-center mb-4 text-primary">🔵 Cargar Servicios BBVA</h3>
           
           <form action="importar_bbva.php" method="post" enctype="multipart/form-data">
+            <!-- CSRF Token -->
+            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+
             <div class="mb-3">
               <label for="archivo_csv" class="form-label">Selecciona archivo CSV o Excel (.xlsx)</label>
               <input 
@@ -22,7 +31,7 @@
             </div>
 
             <div class="d-grid">
-              <button type="submit" class="btn btn-primary btn-lg">Subir y Cargar</button>
+              <button type="submit" class="btn btn-primary btn-lg">📤 Subir y Cargar</button>
             </div>
           </form>
 
