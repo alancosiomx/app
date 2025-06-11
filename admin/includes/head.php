@@ -5,7 +5,7 @@
   <title>Panel OMNIPOS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <!-- Bootstrap moderno y liviano -->
+  <!-- Bootstrap CSS desde CDN confiable -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
   
   <!-- Estilos personalizados -->
@@ -22,9 +22,10 @@
       position: fixed;
       top: 0;
       left: 0;
-      background-color: #1e293b; /* Gris oscuro corporativo */
+      background-color: #1e293b;
       padding-top: 60px;
       color: white;
+      z-index: 1000;
     }
 
     .sidebar h4 {
@@ -46,25 +47,49 @@
       background-color: #334155;
     }
 
+    /* Responsive: Sidebar encima del contenido en móvil */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding-top: 10px;
+      }
+    }
+
     .main-content {
       margin-left: 220px;
-      padding: 30px 40px;
+      padding: 100px 40px 40px 40px;
     }
 
-    .alert {
-      font-size: 16px;
+    @media (max-width: 768px) {
+      .main-content {
+        margin-left: 0;
+        padding: 120px 20px 20px 20px;
+      }
     }
 
-    .btn {
-      font-weight: 500;
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: #f1f5f9;
+      color: #0f172a;
+      padding: 12px 20px;
+      border-bottom: 1px solid #e2e8f0;
+      z-index: 1050;
+      font-size: 15px;
     }
   </style>
 </head>
 <body>
+
 <?php
 $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 ?>
 
-<div class="top-bar text-dark bg-light px-4 py-2" style="margin-left: 220px; border-bottom: 1px solid #dee2e6;">
-    👋 Bienvenido, <strong><?= htmlspecialchars($usuario) ?></strong>. Este es tu panel de administración.
+<!-- Barra superior con saludo -->
+<div class="top-bar">
+  👋 Bienvenido, <strong><?= htmlspecialchars($usuario) ?></strong>. Este es tu panel de administración.
 </div>
