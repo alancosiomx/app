@@ -7,10 +7,8 @@ require_once __DIR__ . '/init.php';
 
 $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
-// Cargar partes del layout
-require_once __DIR__ . '/includes/head.php';
-require_once __DIR__ . '/includes/menu.php';
-?>
+echo "<h1>Dashboard cargado</h1>";
+
 
 <div class="main-content container mt-5">
     <div class="alert alert-success">
