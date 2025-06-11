@@ -24,7 +24,9 @@ function cargar_a_staging($archivoTmp, $extension, $banco, $pdo)
                     }
                 }
 
-                if (!empty($fila['ticket']) && !ticket_duplicado($fila['ticket'], $pdo, $tabla)) {
+$clave_primaria = ($tabla === 'servicios_banregio') ? 'folio_cliente' : 'ticket';
+
+if (!empty($fila[$clave_primaria]) && !ticket_duplicado($fila[$clave_primaria], $pdo, $tabla)) {
                     insertar_fila_directa($pdo, $tabla, $fila);
                     $insertados++;
                 } else {
