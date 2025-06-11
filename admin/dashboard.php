@@ -1,17 +1,22 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once __DIR__ . '/init.php';
 
 $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
-require_once __DIR__ . '/../includes/header.php';
+// Carga manual de los componentes si no usas constantes
+require_once __DIR__ . '/../includes/head.php';
 require_once __DIR__ . '/../includes/menu.php';
-
+?>
 
 <div class="main-content" style="margin-top: 80px;">
     <div class="alert alert-success">
         👋 Bienvenido, <strong><?= htmlspecialchars($usuario) ?></strong>. Este es tu panel de administración.
     </div>
-<?php echo "🚀 Cambios desde GitHub a las " . date("H:i:s"); ?>
+    <?php echo "🚀 Cambios desde GitHub a las " . date("H:i:s"); ?>
 
     <div class="row">
         <div class="col-md-4 mb-3">
@@ -31,6 +36,5 @@ require_once __DIR__ . '/../includes/menu.php';
         </div>
     </div>
 </div>
-<!-- Deploy automático funcionando: <?php echo date("Y-m-d H:i:s"); ?> -->
 
-require_once __DIR__ . '/../includes/footer.php';
+<?php require_once __DIR__ . '/../includes/foot.php'; ?>
