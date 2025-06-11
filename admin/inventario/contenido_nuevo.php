@@ -1,57 +1,53 @@
 <?php
-// Cargar bancos
-$bancos = $pdo->query("SELECT nombre FROM bancos ORDER BY nombre")->fetchAll(PDO::FETCH_COLUMN);
+// Procesamiento
+$feedback = '';
+$errores = 0;
+$insertadas = 0;
 
-// Cargar modelos con fabricante
-$modelos = $pdo->query("
-    SELECT m.id, CONCAT(f.nombre, ' - ', m.nombre) AS nombre
-    FROM modelos m
-    JOIN fabricantes f ON m.fabricante_id = f.id
-    ORDER BY f.nombre, m.nombre
-")->fetchAll(PDO::FETCH_ASSOC);
+// Obtener modelos y bancos
+$modelos = $pdo->query("SELECT id, nombre FROM modelos ORDER BY nombre")->fetchAll(PDO::FETCH_ASSOC);
+$bancos = $pdo->query("SELECT DISTINCT banco FROM inventario_tpv ORDER BY banco")->fetchAll(PDO::FETCH_COLUMN);
 
-// Procesar formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $modelo_id = intval($_POST['modelo_id'] ?? 0);
+    $modelo_id = intval($_POST['modelo_id']);
     $banco = trim($_POST['banco'] ?? '');
-    $series = array_filter(array_map('trim', explode("\n", $_POST['series'] ?? '')));
+    $series = explode(PHP_EOL, trim($_POST['series'] ?? ''));
+    $series = array_map('trim', $series);
+    $series = array_filter($series); // Quitar vacíos
 
-    $insertadas = 0;
-    $duplicadas = 0;
-
-    $stmt_check = $pdo->prepare("SELECT COUNT(*) FROM inventario_tpv WHERE serie = ?");
-    $stmt_insert = $pdo->prepare("
-        INSERT INTO inventario_tpv (serie, modelo_id, banco, estado, fecha_entrada)
-        VALUES (?, ?, ?, 'Disponible', NOW())
-    ");
+    $stmtCheck = $pdo->prepare("SELECT COUNT(*) FROM inventario_tpv WHERE serie = ?");
+    $stmtInsert = $pdo->prepare("INSERT INTO inventario_tpv (serie, modelo_id, banco, estado, fecha_entrada) VALUES (?, ?, ?, 'Disponible', NOW())");
 
     foreach ($series as $serie) {
-        $stmt_check->execute([$serie]);
-        if ($stmt_check->fetchColumn() > 0) {
-            $duplicadas++;
-        } else {
-            $stmt_insert->execute([$serie, $modelo_id, $banco]);
-            $insertadas++;
+        $stmtCheck->execute([$serie]);
+        if ($stmtCheck->fetchColumn() > 0) {
+            $errores++;
+            continue;
         }
+        $stmtInsert->execute([$serie, $modelo_id, $banco]);
+        $insertadas++;
     }
 
-    $msg = "$insertadas terminales ingresadas. $duplicadas duplicadas.";
-    header("Location: nuevo.php?msg=" . urlencode($msg));
-    exit;
+    $feedback = "✅ Se ingresaron <strong>$insertadas</strong> TPV nuevas. ";
+    if ($errores > 0) {
+        $feedback .= "⚠️ $errores fueron rechazadas por duplicadas.";
+    }
 }
 ?>
 
-<h4>➕ Agregar Terminales</h4>
+<h3>+ Nueva Terminal</h3>
 
-<?php if (isset($_GET['msg'])): ?>
-    <div class="alert alert-info"><?= htmlspecialchars($_GET['msg']) ?></div>
+<?php if ($feedback): ?>
+  <div class="alert alert-info"><?= $feedback ?></div>
 <?php endif; ?>
 
 <form method="post">
+    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
+
     <div class="mb-3">
         <label for="modelo_id" class="form-label">Modelo</label>
         <select name="modelo_id" id="modelo_id" class="form-select" required>
-            <option value="">-- Selecciona un modelo --</option>
+            <option value="">-- Selecciona modelo --</option>
             <?php foreach ($modelos as $m): ?>
                 <option value="<?= $m['id'] ?>"><?= htmlspecialchars($m['nombre']) ?></option>
             <?php endforeach; ?>
@@ -61,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="mb-3">
         <label for="banco" class="form-label">Banco</label>
         <select name="banco" id="banco" class="form-select" required>
-            <option value="">-- Selecciona un banco --</option>
+            <option value="">-- Selecciona banco --</option>
             <?php foreach ($bancos as $b): ?>
                 <option value="<?= htmlspecialchars($b) ?>"><?= htmlspecialchars($b) ?></option>
             <?php endforeach; ?>
@@ -69,10 +65,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <div class="mb-3">
-        <label for="series" class="form-label">Series de TPV (una por línea)</label>
-        <textarea name="series" id="series" rows="6" class="form-control" required></textarea>
+        <label for="series" class="form-label">Series (una por línea)</label>
+        <textarea name="series" id="series" rows="6" class="form-control" placeholder="Ejemplo:
+123ABC
+456DEF
+789XYZ" required></textarea>
     </div>
 
-    <button type="submit" class="btn btn-primary">Guardar</button>
+    <button type="submit" class="btn btn-primary">Guardar terminales</button>
     <a href="index.php" class="btn btn-secondary">Cancelar</a>
 </form>
