@@ -1,4 +1,9 @@
 <?php
+// Generar token si no existe
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 // Crear fabricante
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['accion'] ?? '') === 'crear_fabricante') {
     $nombre = trim($_POST['nombre']);
@@ -72,6 +77,7 @@ $modelos = $pdo->query("
         <h5>📦 Fabricantes</h5>
         <form method="post" class="mb-3 d-flex gap-2">
             <input type="hidden" name="accion" value="crear_fabricante">
+            <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
             <input type="text" name="nombre" class="form-control" placeholder="Nuevo fabricante" required>
             <button type="submit" class="btn btn-primary">Agregar</button>
         </form>
@@ -85,13 +91,13 @@ $modelos = $pdo->query("
                         <td>
                             <form method="post" class="d-flex gap-2">
                                 <input type="hidden" name="accion" value="editar_fabricante">
+                                <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                                 <input type="hidden" name="id" value="<?= $fab['id'] ?>">
                                 <input type="text" name="nombre" class="form-control form-control-sm" value="<?= htmlspecialchars($fab['nombre']) ?>" required>
                                 <button class="btn btn-sm btn-success">💾</button>
                                 <a href="?eliminar_fabricante=<?= $fab['id'] ?>" onclick="return confirm('¿Eliminar fabricante?')" class="btn btn-sm btn-danger">🗑️</a>
                             </form>
                         </td>
-                        <td></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -102,6 +108,7 @@ $modelos = $pdo->query("
         <h5>📋 Modelos</h5>
         <form method="post" class="mb-3">
             <input type="hidden" name="accion" value="crear_modelo">
+            <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
             <div class="mb-2">
                 <input type="text" name="nombre" class="form-control" placeholder="Nuevo modelo" required>
             </div>
@@ -123,6 +130,7 @@ $modelos = $pdo->query("
                     <tr>
                         <form method="post" class="d-flex gap-2">
                             <input type="hidden" name="accion" value="editar_modelo">
+                            <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                             <input type="hidden" name="id" value="<?= $mod['id'] ?>">
                             <td><?= $mod['id'] ?></td>
                             <td><input type="text" name="nombre" class="form-control form-control-sm" value="<?= htmlspecialchars($mod['modelo']) ?>" required></td>
