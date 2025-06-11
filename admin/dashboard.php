@@ -8,8 +8,8 @@ require_once __DIR__ . '/init.php';
 $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
 // Carga manual de los componentes si no usas constantes
-require_once __DIR__ . '/../includes/head.php';
-require_once __DIR__ . '/../includes/menu.php';
+require_once __DIR__ . '/includes/head.php';
+require_once __DIR__ . '/includes/menu.php';
 ?>
 
 <div class="main-content" style="margin-top: 80px;">
@@ -37,4 +37,4 @@ require_once __DIR__ . '/../includes/menu.php';
     </div>
 </div>
 
-<?php require_once __DIR__ . '/../includes/foot.php'; ?>
+<?php require_once __DIR__ . '/includes/foot.php'; ?>
