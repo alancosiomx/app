@@ -35,5 +35,3 @@ require_once __DIR__ . '/layout.php';
         </div>
     </div>
 </div>
-
-<?php require_once __DIR__ . '/includes/foot.php'; ?>
