@@ -4,12 +4,11 @@ require_once __DIR__ . '/init.php';
 $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
 // Aseguramos que los templates estén disponibles
-if (!defined('HEAD') || !defined('MENU') || !defined('FOOT')) {
+if (!defined('INIT')) {
     require_once dirname(__DIR__) . '/config.php';
 }
 
-require HEAD;
-require MENU;
+require INIT;
 ?>
 
 <div class="main-content" style="margin-top: 80px;">
@@ -37,5 +36,3 @@ require MENU;
     </div>
 </div>
 <!-- Deploy automático funcionando: <?php echo date("Y-m-d H:i:s"); ?> -->
-
-<?php require FOOT; ?>

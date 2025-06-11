@@ -2,11 +2,10 @@
 require '../auth.php';
 require '../config.php';
 
-if (!defined('HEAD') || !defined('MENU') || !defined('FOOT')) {
+if (!defined('INIT')) {
     require_once dirname(__DIR__, 2) . '/config.php';
 }
-require HEAD;
-require MENU;
+require INIT;
 ?>
 
 <div class="main-content">
@@ -49,4 +48,4 @@ require MENU;
     </div>
 </div>
 
-<?php require FOOT; ?>
+

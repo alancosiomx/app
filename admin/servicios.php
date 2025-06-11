@@ -12,11 +12,10 @@ $validTabs = ['por_asignar', 'en_ruta', 'concluido', 'agendar_cita'];
 if (!in_array($tab, $validTabs)) {
     $tab = 'por_asignar';
 }
-if (!defined('HEAD') || !defined('MENU') || !defined('FOOT')) {
+if (!defined('INIT')) {
     require_once dirname(__DIR__) . '/config.php';
 }
-require HEAD;
-require MENU;
+require INIT;
 ?>
 
 <div class="main-content">
@@ -45,4 +44,4 @@ require MENU;
         <?php include "servicios/{$tab}.php"; ?>
     </div>
 </div>
-<?php require FOOT; ?>
+

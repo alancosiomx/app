@@ -32,11 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-if (!defined('HEAD') || !defined('MENU') || !defined('FOOT')) {
+if (!defined('INIT')) {
     require_once dirname(__DIR__) . '/config.php';
 }
-require HEAD;
-require MENU;
+require INIT;
 ?>
 
 <div class="main-content">
@@ -117,4 +116,4 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
-<?php require FOOT; ?>
+

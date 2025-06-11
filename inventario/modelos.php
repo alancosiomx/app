@@ -49,11 +49,10 @@ $stmt = $pdo->query("
 ");
 $modelos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-if (!defined('HEAD') || !defined('MENU') || !defined('FOOT')) {
+if (!defined('INIT')) {
     require_once dirname(__DIR__) . '/config.php';
 }
-require HEAD;
-require MENU;
+require INIT;
 ?>
 
 <div class="main-content">
@@ -111,4 +110,4 @@ require MENU;
     </div>
 </div>
 
-<?php require FOOT; ?>
+

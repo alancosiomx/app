@@ -1,3 +1,8 @@
+<?php
+if (!defined('FOOTER_INCLUDED')) {
+    define('FOOTER_INCLUDED', true);
+}
+?>
 </div> <!-- cierra content-wrapper -->
 
 <!-- Bootstrap JS -->

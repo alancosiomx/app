@@ -1,11 +1,10 @@
 <?php
 $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
-if (!defined('HEAD') || !defined('MENU') || !defined('FOOT')) {
+if (!defined('INIT')) {
     require_once dirname(__DIR__) . '/config.php';
 }
-require HEAD;
-require MENU;
+require INIT;
 ?>
 
 <!-- Header -->
@@ -29,4 +28,4 @@ require MENU;
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<?php require FOOT; ?>
+
