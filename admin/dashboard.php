@@ -36,4 +36,4 @@ echo "<h1>Dashboard cargado</h1>";
     </div>
 </div>
 
-<?php require_once __DIR__ . '/includes/foot.php'; ?>
+
