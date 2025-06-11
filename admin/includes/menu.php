@@ -3,7 +3,7 @@
   <a href="/admin/dashboard.php">🏠 Dashboard</a>
   <a href="/admin/carga.php">📂 Cargar Archivos</a>
   <a href="/admin/servicios.php">📋 Gestión de Servicios</a>
-  <a href="/admin/inventario/index.php">📦 Inventario</a>
+  <a href="/admin/inventario/">📦 Inventario</a>
   <a href="/admin/ajustes/">⚙️ Ajustes</a>
   <a href="/admin/minidrive/">📁 MiniDrive</a>
   <a href="/logout.php" class="mt-3">🚪 Cerrar sesión</a>
