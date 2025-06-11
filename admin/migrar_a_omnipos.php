@@ -1,6 +1,9 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+require_once __DIR__ . '/init.php'; // 🔐 Seguridad
+
+if (!isset($_SESSION['usuario_id'])) {
+    die('Error de seguridad. Por favor recarga la página.');
+}
 
 require_once __DIR__ . '/../config.php';
 
