@@ -16,6 +16,9 @@ if (!isset($_SESSION['usuario_id'])) {
 // ¿Qué tab estamos cargando?
 $tab = $_GET['tab'] ?? 'por_asignar';
 
+if (!defined('HEAD') || !defined('MENU') || !defined('FOOT')) {
+    require_once dirname(__DIR__, 2) . '/config.php';
+}
 require HEAD;
 require MENU;
 ?>

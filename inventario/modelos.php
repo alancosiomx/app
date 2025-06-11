@@ -49,6 +49,9 @@ $stmt = $pdo->query("
 ");
 $modelos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+if (!defined('HEAD') || !defined('MENU') || !defined('FOOT')) {
+    require_once dirname(__DIR__) . '/config.php';
+}
 require HEAD;
 require MENU;
 ?>
