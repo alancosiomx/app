@@ -9,8 +9,6 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // Obtener técnicos activos
 $tecnicos = $pdo->query("SELECT id, nombre FROM usuarios WHERE activo = 1 AND roles LIKE '%idc%'")->fetchAll(PDO::FETCH_ASSOC);
 ?>
-<p>Bienvenido, <strong><?= htmlspecialchars($_SESSION['usuario_nombre'] ?? 'Administrador') ?></strong></p>
-
 <?php include __DIR__ . '/../includes/tabs_servicios.php'; ?>
 
 <h3 class="mt-3">Servicios Por Asignar</h3>
