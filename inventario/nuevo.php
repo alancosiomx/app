@@ -32,12 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-if (!defined('HEAD') || !defined('MENU') || !defined('FOOT')) {
-    require_once dirname(__DIR__) . '/config.php';
-}
-require HEAD;
-require MENU;
-?>
+
 
 <div class="main-content">
     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -117,4 +112,4 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
-<?php require FOOT; ?>
+
