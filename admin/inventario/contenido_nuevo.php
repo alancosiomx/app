@@ -6,8 +6,7 @@ $insertadas = 0;
 
 // Obtener modelos y bancos
 $modelos = $pdo->query("SELECT id, nombre FROM modelos ORDER BY nombre")->fetchAll(PDO::FETCH_ASSOC);
-$bancos = $pdo->query("SELECT DISTINCT banco FROM inventario_tpv ORDER BY banco")->fetchAll(PDO::FETCH_COLUMN);
-
+$bancos = $pdo->query("SELECT nombre FROM bancos ORDER BY nombre")->fetchAll(PDO::FETCH_COLUMN);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $modelo_id = intval($_POST['modelo_id']);
     $banco = trim($_POST['banco'] ?? '');
