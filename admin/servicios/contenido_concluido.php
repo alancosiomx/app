@@ -1,15 +1,18 @@
 <?php
-require_once '../../config.php';
+require_once __DIR__ . '/../../config.php';
 require_once __DIR__ . '/service_functions.php';
 session_start();
 
+// Filtros
 $fecha_inicio = $_GET['fecha_inicio'] ?? '';
 $fecha_fin = $_GET['fecha_fin'] ?? '';
 $tecnico_id = $_GET['tecnico_id'] ?? '';
 $ticket_busqueda = $_GET['ticket'] ?? '';
 
+// Técnicos
 $tecnicos = $pdo->query("SELECT id, nombre FROM usuarios WHERE activo = 1 AND roles LIKE '%idc%'")->fetchAll(PDO::FETCH_ASSOC);
 
+// Query base
 $sql = "SELECT * FROM servicios_omnipos WHERE estatus = 'Histórico' ";
 $params = [];
 
@@ -35,22 +38,37 @@ if ($ticket_busqueda) {
 }
 
 $sql .= " ORDER BY fecha_atencion DESC LIMIT 200";
-
 $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
 $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-if (isset($_SESSION['mensaje'])) {
-    echo "<div class='alert alert-success'>" . htmlspecialchars($_SESSION['mensaje']) . "</div>";
-    unset($_SESSION['mensaje']);
-}
-if (isset($_SESSION['error'])) {
-    echo "<div class='alert alert-danger'>" . htmlspecialchars($_SESSION['error']) . "</div>";
-    unset($_SESSION['error']);
-}
 ?>
 
-<h3>Histórico de Servicios</h3>
+<h1 class="mb-4">Histórico de Servicios</h1>
+<p>Bienvenido, <strong><?= htmlspecialchars($_SESSION['usuario_nombre'] ?? 'Administrador') ?></strong></p>
+
+<ul class="nav nav-tabs mb-3">
+    <li class="nav-item">
+        <a class="nav-link <?= $_GET['tab'] === 'por_asignar' ? 'active' : '' ?>" href="?tab=por_asignar">Por Asignar</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link <?= $_GET['tab'] === 'en_ruta' ? 'active' : '' ?>" href="?tab=en_ruta">En Ruta</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link <?= $_GET['tab'] === 'concluido' ? 'active' : '' ?>" href="?tab=concluido">Histórico</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link <?= $_GET['tab'] === 'citas' ? 'active' : '' ?>" href="?tab=citas">Citas</a>
+    </li>
+</ul>
+
+<?php if (isset($_SESSION['mensaje'])): ?>
+    <div class='alert alert-success'><?= htmlspecialchars($_SESSION['mensaje']) ?></div>
+    <?php unset($_SESSION['mensaje']); ?>
+<?php endif; ?>
+<?php if (isset($_SESSION['error'])): ?>
+    <div class='alert alert-danger'><?= htmlspecialchars($_SESSION['error']) ?></div>
+    <?php unset($_SESSION['error']); ?>
+<?php endif; ?>
 
 <form method="get" class="row g-3 mb-3">
     <input type="hidden" name="tab" value="concluido">
@@ -83,33 +101,33 @@ if (isset($_SESSION['error'])) {
     </div>
 </form>
 
-<table class="table table-bordered table-striped table-sm" id="tabla_concluido">
-    <thead class="table-light">
-        <tr>
-            <th>Ticket</th>
-            <th>Afiliación</th>
-            <th>Comercio</th>
-            <th>Ciudad</th>
-            <th>Fecha Atención</th>
-            <th>Resultado</th>
-            <th>Comentarios</th>
-            <th>📃 HS</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($servicios as $s): ?>
-        <tr>
-            <td><?= htmlspecialchars($s['ticket']) ?></td>
-            <td><?= htmlspecialchars($s['afiliacion']) ?></td>
-            <td><?= htmlspecialchars($s['comercio']) ?></td>
-            <td><?= htmlspecialchars($s['ciudad']) ?></td>
-            <td><?= htmlspecialchars($s['fecha_atencion']) ?></td>
-            <td><?= htmlspecialchars($s['conclusion']) ?></td>
-            <td><?= htmlspecialchars($s['comentarios']) ?></td>
-            <td>
-                <a href="generar_hs.php?ticket=<?= urlencode($s['ticket']) ?>" target="_blank" title="Reimprimir Hoja de Servicio">📃</a>
-            </td>
-        </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-sm" id="tabla_concluido">
+        <thead class="table-light">
+            <tr>
+                <th>Ticket</th>
+                <th>Afiliación</th>
+                <th>Comercio</th>
+                <th>Ciudad</th>
+                <th>Fecha Atención</th>
+                <th>Resultado</th>
+                <th>Comentarios</th>
+                <th>📃 HS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($servicios as $s): ?>
+                <tr>
+                    <td><?= htmlspecialchars($s['ticket']) ?></td>
+                    <td><?= htmlspecialchars($s['afiliacion']) ?></td>
+                    <td><?= htmlspecialchars($s['comercio']) ?></td>
+                    <td><?= htmlspecialchars($s['ciudad']) ?></td>
+                    <td><?= htmlspecialchars($s['fecha_atencion']) ?></td>
+                    <td><?= htmlspecialchars($s['conclusion']) ?></td>
+                    <td><?= htmlspecialchars($s['comentarios']) ?></td>
+                    <td><a href="generar_hs.php?ticket=<?= urlencode($s['ticket']) ?>" target="_blank" title="Reimprimir Hoja de Servicio">📃</a></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
