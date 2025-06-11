@@ -1,7 +1,7 @@
 <?php
-// --- Crear fabricante ---
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nuevo_fabricante'])) {
-    $nombre = trim($_POST['nombre_fabricante']);
+// Crear fabricante
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['accion'] ?? '') === 'crear_fabricante') {
+    $nombre = trim($_POST['nombre']);
     if ($nombre !== '') {
         $stmt = $pdo->prepare("INSERT INTO fabricantes (nombre) VALUES (?)");
         $stmt->execute([$nombre]);
@@ -10,10 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nuevo_fabricante'])) 
     exit;
 }
 
-// --- Crear modelo ---
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nuevo_modelo'])) {
-    $nombre = trim($_POST['nombre_modelo']);
-    $fabricante_id = (int) $_POST['fabricante_id'];
+// Crear modelo
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['accion'] ?? '') === 'crear_modelo') {
+    $nombre = trim($_POST['nombre']);
+    $fabricante_id = intval($_POST['fabricante_id']);
     if ($nombre !== '' && $fabricante_id > 0) {
         $stmt = $pdo->prepare("INSERT INTO modelos (nombre, fabricante_id) VALUES (?, ?)");
         $stmt->execute([$nombre, $fabricante_id]);
@@ -22,44 +22,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nuevo_modelo'])) {
     exit;
 }
 
-// --- Eliminar fabricante ---
+// Eliminar fabricante
 if (isset($_GET['eliminar_fabricante'])) {
-    $id = (int) $_GET['eliminar_fabricante'];
+    $id = intval($_GET['eliminar_fabricante']);
     $pdo->prepare("DELETE FROM fabricantes WHERE id = ?")->execute([$id]);
     header("Location: tpvs.php");
     exit;
 }
 
-// --- Eliminar modelo ---
+// Eliminar modelo
 if (isset($_GET['eliminar_modelo'])) {
-    $id = (int) $_GET['eliminar_modelo'];
+    $id = intval($_GET['eliminar_modelo']);
     $pdo->prepare("DELETE FROM modelos WHERE id = ?")->execute([$id]);
     header("Location: tpvs.php");
     exit;
 }
 
-// --- Editar fabricante ---
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_fabricante'])) {
-    $id = (int) $_POST['fabricante_id'];
-    $nombre = trim($_POST['nombre_editado']);
+// Editar fabricante
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['accion'] ?? '') === 'editar_fabricante') {
+    $id = intval($_POST['id']);
+    $nombre = trim($_POST['nombre']);
     $pdo->prepare("UPDATE fabricantes SET nombre = ? WHERE id = ?")->execute([$nombre, $id]);
     header("Location: tpvs.php");
     exit;
 }
 
-// --- Editar modelo ---
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_modelo'])) {
-    $id = (int) $_POST['modelo_id'];
-    $nombre = trim($_POST['modelo_editado']);
-    $fabricante_id = (int) $_POST['nuevo_fabricante_id'];
+// Editar modelo
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['accion'] ?? '') === 'editar_modelo') {
+    $id = intval($_POST['id']);
+    $nombre = trim($_POST['nombre']);
+    $fabricante_id = intval($_POST['fabricante_id']);
     $pdo->prepare("UPDATE modelos SET nombre = ?, fabricante_id = ? WHERE id = ?")->execute([$nombre, $fabricante_id, $id]);
     header("Location: tpvs.php");
     exit;
 }
 
-// Obtener fabricantes y modelos actualizados
+// Cargar datos
 $fabricantes = $pdo->query("SELECT * FROM fabricantes ORDER BY nombre ASC")->fetchAll(PDO::FETCH_ASSOC);
-
 $modelos = $pdo->query("
     SELECT m.id, m.nombre AS modelo, f.nombre AS fabricante, m.fabricante_id
     FROM modelos m
@@ -71,14 +70,10 @@ $modelos = $pdo->query("
 <div class="row">
     <div class="col-md-6">
         <h5>📦 Fabricantes</h5>
-
-        <!-- Formulario nuevo -->
-        <form method="post" class="mb-3">
-            <input type="hidden" name="nuevo_fabricante" value="1">
-            <div class="input-group">
-                <input type="text" name="nombre_fabricante" class="form-control" placeholder="Nuevo fabricante" required>
-                <button type="submit" class="btn btn-primary">Agregar</button>
-            </div>
+        <form method="post" class="mb-3 d-flex gap-2">
+            <input type="hidden" name="accion" value="crear_fabricante">
+            <input type="text" name="nombre" class="form-control" placeholder="Nuevo fabricante" required>
+            <button type="submit" class="btn btn-primary">Agregar</button>
         </form>
 
         <table class="table table-sm table-bordered">
@@ -89,9 +84,10 @@ $modelos = $pdo->query("
                         <td><?= $fab['id'] ?></td>
                         <td>
                             <form method="post" class="d-flex gap-2">
-                                <input type="hidden" name="fabricante_id" value="<?= $fab['id'] ?>">
-                                <input type="text" name="nombre_editado" class="form-control form-control-sm" value="<?= htmlspecialchars($fab['nombre']) ?>" required>
-                                <button name="editar_fabricante" class="btn btn-sm btn-success">💾</button>
+                                <input type="hidden" name="accion" value="editar_fabricante">
+                                <input type="hidden" name="id" value="<?= $fab['id'] ?>">
+                                <input type="text" name="nombre" class="form-control form-control-sm" value="<?= htmlspecialchars($fab['nombre']) ?>" required>
+                                <button class="btn btn-sm btn-success">💾</button>
                                 <a href="?eliminar_fabricante=<?= $fab['id'] ?>" onclick="return confirm('¿Eliminar fabricante?')" class="btn btn-sm btn-danger">🗑️</a>
                             </form>
                         </td>
@@ -104,12 +100,10 @@ $modelos = $pdo->query("
 
     <div class="col-md-6">
         <h5>📋 Modelos</h5>
-
-        <!-- Formulario nuevo -->
         <form method="post" class="mb-3">
-            <input type="hidden" name="nuevo_modelo" value="1">
+            <input type="hidden" name="accion" value="crear_modelo">
             <div class="mb-2">
-                <input type="text" name="nombre_modelo" class="form-control" placeholder="Nuevo modelo" required>
+                <input type="text" name="nombre" class="form-control" placeholder="Nuevo modelo" required>
             </div>
             <div class="mb-2">
                 <select name="fabricante_id" class="form-select" required>
@@ -127,13 +121,13 @@ $modelos = $pdo->query("
             <tbody>
                 <?php foreach ($modelos as $mod): ?>
                     <tr>
-                        <form method="post">
+                        <form method="post" class="d-flex gap-2">
+                            <input type="hidden" name="accion" value="editar_modelo">
+                            <input type="hidden" name="id" value="<?= $mod['id'] ?>">
                             <td><?= $mod['id'] ?></td>
+                            <td><input type="text" name="nombre" class="form-control form-control-sm" value="<?= htmlspecialchars($mod['modelo']) ?>" required></td>
                             <td>
-                                <input type="text" name="modelo_editado" class="form-control form-control-sm" value="<?= htmlspecialchars($mod['modelo']) ?>" required>
-                            </td>
-                            <td>
-                                <select name="nuevo_fabricante_id" class="form-select form-select-sm">
+                                <select name="fabricante_id" class="form-select form-select-sm" required>
                                     <?php foreach ($fabricantes as $fab): ?>
                                         <option value="<?= $fab['id'] ?>" <?= $fab['id'] == $mod['fabricante_id'] ? 'selected' : '' ?>>
                                             <?= htmlspecialchars($fab['nombre']) ?>
@@ -142,8 +136,7 @@ $modelos = $pdo->query("
                                 </select>
                             </td>
                             <td>
-                                <input type="hidden" name="modelo_id" value="<?= $mod['id'] ?>">
-                                <button name="editar_modelo" class="btn btn-sm btn-success">💾</button>
+                                <button class="btn btn-sm btn-success">💾</button>
                                 <a href="?eliminar_modelo=<?= $mod['id'] ?>" onclick="return confirm('¿Eliminar modelo?')" class="btn btn-sm btn-danger">🗑️</a>
                             </td>
                         </form>
