@@ -24,16 +24,35 @@ if (isset($_GET['eliminar'])) {
 // Obtener registros activos
 $soluciones = $pdo->query("SELECT * FROM servicio_soluciones WHERE activo = 1 ORDER BY banco, servicio, solucion")->fetchAll(PDO::FETCH_ASSOC);
 
+// Cargar opciones únicas
+// Cargar bancos únicos desde servicios_omnipos
+$bancos = $pdo->query("SELECT DISTINCT banco FROM servicios_omnipos WHERE banco IS NOT NULL AND banco != '' ORDER BY banco")->fetchAll(PDO::FETCH_COLUMN);
+
+// Cargar servicios únicos desde servicios_omnipos
+$servicios = $pdo->query("SELECT DISTINCT servicio FROM servicios_omnipos WHERE servicio IS NOT NULL AND servicio != '' ORDER BY servicio")->fetchAll(PDO::FETCH_COLUMN);
+
+
 include __DIR__ . '/../layout.php';
 ?>
 
 <div class="container mx-auto p-4">
-
   <h2 class="mb-4 text-xl font-bold">🛠 Catálogo de Soluciones por Servicio</h2>
 
   <form method="POST" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 bg-white p-4 rounded shadow">
-    <input type="text" name="banco" placeholder="Banco" required class="border p-2 rounded w-full">
-    <input type="text" name="servicio" placeholder="Servicio" required class="border p-2 rounded w-full">
+    <select name="banco" required class="border p-2 rounded w-full">
+      <option value="">Selecciona banco</option>
+      <?php foreach ($bancos as $b): ?>
+        <option value="<?= htmlspecialchars($b) ?>"><?= htmlspecialchars($b) ?></option>
+      <?php endforeach; ?>
+    </select>
+
+    <select name="servicio" required class="border p-2 rounded w-full">
+      <option value="">Selecciona servicio</option>
+      <?php foreach ($servicios as $s): ?>
+        <option value="<?= htmlspecialchars($s) ?>"><?= htmlspecialchars($s) ?></option>
+      <?php endforeach; ?>
+    </select>
+
     <input type="text" name="solucion" placeholder="Solución General" required class="border p-2 rounded w-full">
     <input type="text" name="solucion_especifica" placeholder="Solución Específica" required class="border p-2 rounded w-full">
 
