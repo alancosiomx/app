@@ -2,11 +2,10 @@
 require_once __DIR__ . '/../../config.php';
 
 // Obtener servicios en ruta
-$stmt = $pdo->prepare("SELECT * FROM servicios_omnipos WHERE estatus = 'En Ruta' ORDER BY fecha_atencion DESC");
+$stmt = $pdo->prepare("SELECT * FROM servicios_omnipos WHERE estatus = 'En Ruta' ORDER BY fecha_inicio DESC");
 $stmt->execute();
 $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
 
 <p>Bienvenido, <strong><?= htmlspecialchars($_SESSION['usuario_nombre'] ?? 'Administrador') ?></strong></p>
 
@@ -22,8 +21,8 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <th>Afiliación</th>
         <th>Comercio</th>
         <th>Ciudad</th>
-        <th>Fecha Atención</th>
-        <th>Resultado</th>
+        <th>Tipo de Servicio</th>
+        <th>Comentarios</th>
         <th>🔍</th>
       </tr>
     </thead>
@@ -34,8 +33,8 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <td><?= htmlspecialchars($s['afiliacion']) ?></td>
           <td><?= htmlspecialchars($s['comercio']) ?></td>
           <td><?= htmlspecialchars($s['ciudad']) ?></td>
-          <td><?= htmlspecialchars($s['fecha_atencion']) ?></td>
-          <td><?= htmlspecialchars($s['resultado'] ?? '—') ?></td>
+          <td><?= htmlspecialchars($s['tipo_servicio']) ?></td>
+          <td><?= nl2br(htmlspecialchars($s['comentarios'])) ?></td>
           <td><a href="#" class="ver-detalle" data-ticket="<?= $s['ticket'] ?>">🔍</a></td>
         </tr>
       <?php endforeach; ?>
