@@ -7,6 +7,7 @@ $stmt->execute();
 $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
+<p>Bienvenido, <strong><?= htmlspecialchars($_SESSION['usuario_nombre'] ?? 'Administrador') ?></strong></p>
 
 <?php include __DIR__ . '/../includes/tabs_servicios.php'; ?>
 
@@ -20,7 +21,7 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <th>Afiliación</th>
         <th>Comercio</th>
         <th>Ciudad</th>
-        <th>Tipo de Servicio</th>
+        <th>Servicio</th>
         <th>Comentarios</th>
         <th>🔍</th>
       </tr>
@@ -32,7 +33,7 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <td><?= htmlspecialchars($s['afiliacion']) ?></td>
           <td><?= htmlspecialchars($s['comercio']) ?></td>
           <td><?= htmlspecialchars($s['ciudad']) ?></td>
-          <td><?= htmlspecialchars($s['tipo_servicio']) ?></td>
+          <td><?= htmlspecialchars($s['servicio']) ?></td>
           <td><?= nl2br(htmlspecialchars($s['comentarios'])) ?></td>
           <td><a href="#" class="ver-detalle" data-ticket="<?= $s['ticket'] ?>">🔍</a></td>
         </tr>
