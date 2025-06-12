@@ -7,7 +7,6 @@ $stmt->execute();
 $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<p>Bienvenido, <strong><?= htmlspecialchars($_SESSION['usuario_nombre'] ?? 'Administrador') ?></strong></p>
 
 <?php include __DIR__ . '/../includes/tabs_servicios.php'; ?>
 
