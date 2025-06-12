@@ -33,34 +33,44 @@ $tecnicos = $pdo->query("
   <div class="table-responsive">
     <table class="table table-bordered table-sm table-hover" id="tabla_por_asignar">
       <thead class="table-light">
-        <tr>
-          <th><input type="checkbox" id="checkAll"></th>
-          <th>Ticket</th>
-          <th>Afiliación</th>
-          <th>Comercio</th>
-          <th>Ciudad</th>
-          <th>CP</th>
-          <th>Fecha Límite</th>
-          <th>Comentarios</th>
-          <th>🔍</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php foreach ($servicios as $s): ?>
-          <tr>
-            <td><input type="checkbox" name="tickets[]" value="<?= $s['ticket'] ?>"></td>
-            <td><?= htmlspecialchars($s['ticket']) ?></td>
-            <td><?= htmlspecialchars($s['afiliacion']) ?></td>
-            <td><?= htmlspecialchars($s['comercio']) ?></td>
-            <td><?= htmlspecialchars($s['ciudad']) ?></td>
-            <td><?= htmlspecialchars($s['cp']) ?></td>
-            <td><?= htmlspecialchars($s['fecha_limite']) ?></td>
-            <td><?= htmlspecialchars($s['comentarios']) ?></td>
-            <td><a href="#" class="ver-detalle" data-ticket="<?= $s['ticket'] ?>">🔍</a></td>
-          </tr>
-        <?php endforeach; ?>
-      </tbody>
-    </table>
+  <tr>
+    <th><input type="checkbox" id="checkAll"></th>
+    <th>Ticket</th>
+    <th>Afiliación</th>
+    <th>Servicio</th>
+    <th>Comercio</th>
+    <th>Ciudad</th>
+    <th>CP</th>
+    <th>Tipo TPV</th>
+    <th>Modelo</th>
+    <th>Teléfono</th>
+    <th>Fecha Límite</th>
+    <th>IDC</th>
+    <th>Comentarios</th>
+    <th>🔍</th>
+  </tr>
+</thead>
+<tbody>
+  <?php foreach ($servicios as $s): ?>
+    <tr>
+      <td><input type="checkbox" name="tickets[]" value="<?= $s['ticket'] ?>"></td>
+      <td><?= htmlspecialchars($s['ticket']) ?></td>
+      <td><?= htmlspecialchars($s['afiliacion']) ?></td>
+      <td><?= htmlspecialchars($s['servicio']) ?></td>
+      <td><?= htmlspecialchars($s['comercio']) ?></td>
+      <td><?= htmlspecialchars($s['ciudad']) ?></td>
+      <td><?= htmlspecialchars($s['cp']) ?></td>
+      <td><?= htmlspecialchars($s['tipo_tpv']) ?></td>
+      <td><?= htmlspecialchars($s['modelo']) ?></td>
+      <td><?= htmlspecialchars($s['telefono_contacto_1']) ?></td>
+      <td><?= htmlspecialchars($s['fecha_limite']) ?></td>
+      <td><?= htmlspecialchars($s['idc']) ?></td>
+      <td><?= htmlspecialchars($s['comentarios']) ?></td>
+      <td><a href="#" class="ver-detalle" data-ticket="<?= $s['ticket'] ?>">🔍</a></td>
+    </tr>
+  <?php endforeach; ?>
+</tbody>
+
   </div>
 
   <button type="submit" class="btn btn-primary mt-3">Asignar Servicios</button>
