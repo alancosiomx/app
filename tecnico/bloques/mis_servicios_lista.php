@@ -13,17 +13,16 @@
       </tr>
     </thead>
     <tbody>
-      <?php foreach (\$servicios as \$servicio): ?>
+      <?php foreach ($servicios as $servicio): ?>
         <tr>
-          <td class="border px-2 py-1"><?= htmlspecialchars(\$servicio['ticket']) ?></td>
-          <td class="border px-2 py-1"><?= htmlspecialchars(\$servicio['afiliacion']) ?></td>
-          <td class="border px-2 py-1"><?= htmlspecialchars(\$servicio['comercio']) ?></td>
-          <td class="border px-2 py-1"><?= htmlspecialchars(\$servicio['ciudad']) ?></td>
-          <td class="border px-2 py-1"><?= htmlspecialchars(\$servicio['fecha_atencion']) ?></td>
+          <td class="border px-2 py-1"><?= htmlspecialchars($servicio['ticket']) ?></td>
+          <td class="border px-2 py-1"><?= htmlspecialchars($servicio['afiliacion']) ?></td>
+          <td class="border px-2 py-1"><?= htmlspecialchars($servicio['comercio']) ?></td>
+          <td class="border px-2 py-1"><?= htmlspecialchars($servicio['ciudad']) ?></td>
+          <td class="border px-2 py-1"><?= htmlspecialchars($servicio['fecha_atencion']) ?></td>
           <td class="border px-2 py-1">
-            <a href="generar_hs.php?ticket=<?= urlencode(\$servicio['ticket']) ?>" 
-               class="text-blue-600 underline text-xs" 
-               target="_blank">
+            <a href="generar_hs.php?ticket=<?= urlencode($servicio['ticket']) ?>" 
+               class="text-blue-600 underline text-xs" target="_blank">
               🧾 Generar HS
             </a>
           </td>
