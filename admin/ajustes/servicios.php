@@ -24,5 +24,48 @@ if (isset($_GET['eliminar'])) {
 // Obtener registros activos
 $soluciones = $pdo->query("SELECT * FROM servicio_soluciones WHERE activo = 1 ORDER BY banco, servicio, solucion")->fetchAll(PDO::FETCH_ASSOC);
 
-$contenido = __DIR__ . '/../../admin/bloques/crud_soluciones_servicios.php';
 include __DIR__ . '/../layout.php';
+?>
+
+<div class="container mx-auto p-4">
+
+  <h2 class="mb-4 text-xl font-bold">🛠 Catálogo de Soluciones por Servicio</h2>
+
+  <form method="POST" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 bg-white p-4 rounded shadow">
+    <input type="text" name="banco" placeholder="Banco" required class="border p-2 rounded w-full">
+    <input type="text" name="servicio" placeholder="Servicio" required class="border p-2 rounded w-full">
+    <input type="text" name="solucion" placeholder="Solución General" required class="border p-2 rounded w-full">
+    <input type="text" name="solucion_especifica" placeholder="Solución Específica" required class="border p-2 rounded w-full">
+
+    <div class="md:col-span-4 text-right">
+      <button type="submit" name="guardar" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        ➕ Agregar Solución
+      </button>
+    </div>
+  </form>
+
+  <table class="min-w-full bg-white text-sm rounded shadow overflow-hidden">
+    <thead class="bg-gray-200 text-gray-700">
+      <tr>
+        <th class="px-4 py-2 text-left">Banco</th>
+        <th class="px-4 py-2 text-left">Servicio</th>
+        <th class="px-4 py-2 text-left">Solución</th>
+        <th class="px-4 py-2 text-left">Solución Específica</th>
+        <th class="px-4 py-2 text-left">🗑️</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach ($soluciones as $s): ?>
+        <tr class="border-b hover:bg-gray-50">
+          <td class="px-4 py-2"><?= htmlspecialchars($s['banco']) ?></td>
+          <td class="px-4 py-2"><?= htmlspecialchars($s['servicio']) ?></td>
+          <td class="px-4 py-2"><?= htmlspecialchars($s['solucion']) ?></td>
+          <td class="px-4 py-2"><?= htmlspecialchars($s['solucion_especifica']) ?></td>
+          <td class="px-4 py-2">
+            <a href="?eliminar=<?= $s['id'] ?>" class="text-red-600 hover:underline" onclick="return confirm('¿Eliminar esta solución?')">Eliminar</a>
+          </td>
+        </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+</div>
