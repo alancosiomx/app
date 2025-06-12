@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (in_array('admin', $roles)) {
                 header('Location: ../admin/dashboard.php');
             } elseif (in_array('idc', $roles)) {
-                header('Location: ../tecnico/inicio.php');
+                header('Location: ../tecnico/index.php');
             } elseif (in_array('coordinador', $roles)) {
                 header('Location: ../coordinador/home.php');
             } elseif (in_array('finanzas', $roles)) {
