@@ -100,7 +100,7 @@ function mapear_banregio($pdo)
 
         $datos = [];
 
-        // Mapeo específico Banregio → OMNIPOS
+        // Mapeo específico Banregio → Omnipos
         $mapeo = [
             'folio_cliente' => 'ticket',
             'afiliacion' => 'afiliacion',
@@ -108,9 +108,18 @@ function mapear_banregio($pdo)
             'comercio' => 'comercio',
             'direccion' => 'domicilio',
             'colonia' => 'colonia',
+            'poblacion' => 'ciudad',
             'cp' => 'cp',
-            'fecha_limite' => 'fecha_limite',
+            'plaza' => 'plaza',
+            'estado' => 'estado',
+            'modelo' => 'modelo',
+            'tecnologia' => 'tipo_tpv',
             'telefono' => 'telefono_contacto_1',
+            'horario_comercio' => 'horario',
+            'rollos' => 'cantidad_insumos',
+            'fecha_limite' => 'fecha_limite',
+            'folio_telecarga_serie' => 'folio_telecarga',
+            'caja' => 'referencia',
             'tecnico' => 'idc'
         ];
 
@@ -120,12 +129,12 @@ function mapear_banregio($pdo)
             }
         }
 
-        // Campos adicionales
+        // Agregados fijos
         $datos['banco'] = 'BANREGIO';
         $datos['estatus'] = 'Por Asignar';
         $datos['fecha_carga'] = date('Y-m-d H:i:s');
 
-        // Insertar en servicios_omnipos
+        // Insertar
         $campos = array_keys($datos);
         $sql = "INSERT INTO $tabla_destino (" . implode(',', $campos) . ") VALUES (:" . implode(', :', $campos) . ")";
         $stmt = $pdo->prepare($sql);
