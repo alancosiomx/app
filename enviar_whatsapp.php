@@ -2,21 +2,21 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// ✅ SDK cargado manualmente desde composer/twilio-php-main
-require_once __DIR__ . '/composer/twilio-php-main/src/Twilio/autoload.php';
+// ✅ Cargar el SDK manualmente desde la ruta correcta
+require_once __DIR__ . '/vendor/twilio-php-main/src/Twilio/autoload.php';
 
 use Twilio\Rest\Client;
 
-// ✅ TUS DATOS TWILIO
+// ✅ Credenciales
 $sid    = 'AC607efa330bae90ab6be43bc12d58622e';
 $token  = 'b47e5e5365d06665301c0b7b222b81b2';
 $twilio = new Client($sid, $token);
 
-// ✅ NÚMEROS
+// ✅ WhatsApp
 $from = 'whatsapp:+14155238886';
-$to   = 'whatsapp:+5219982460606'; // Tu número verificado en sandbox
+$to   = 'whatsapp:+5219982460606';
 
-$mensaje = "👋 ¡Mensaje enviado desde OMNIPOS con SDK manual dentro de composer!";
+$mensaje = "📲 ¡Mensaje enviado con SDK manual en ruta vendor/twilio-php-main!";
 
 try {
     $message = $twilio->messages->create($to, [
