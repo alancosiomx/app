@@ -1,0 +1,34 @@
+name: 🚀 Deploy a Banahost por FTP
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ftp-deploy:
+    name: 📂 Subir por FTP
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🧾 Clonar repo
+        uses: actions/checkout@v3
+
+      - name: 🚀 Deploy con FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_REMOTE_DIR }}/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/vendor/**
+            **/node_modules/**
+            **/storage/**
+            config.php
+            .env
+            error_log
+            README.md
+            deploy.yml

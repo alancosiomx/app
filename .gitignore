@@ -1,0 +1,19 @@
+# Ignorar archivos sensibles y configuraciones locales
+
+
+# Ignorar dependencias
+/vendor/
+node_modules/
+
+# Ignorar logs y errores
+*.log
+error_log
+
+# Ignorar backups
+*.sql
+*.zip
+
+# Ignorar archivos de sistema/editor
+.DS_Store
+Thumbs.db
+.vscode/
