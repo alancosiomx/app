@@ -10,7 +10,7 @@ $twilio = new Client($sid, $token);
 
 // ✅ NÚMEROS
 $from = 'whatsapp:+14155238886';  // Twilio Sandbox
-$to   = 'whatsapp:+521XXXXXXXXXX'; // Reemplaza con tu número verificado (¡importante!)
+$to   = 'whatsapp:+5219982460606'; // Reemplaza con tu número verificado (¡importante!)
 
 $mensaje = "👋 Hola Alan, este es tu primer mensaje real enviado desde PHP vía Twilio. 🚀";
 
