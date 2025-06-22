@@ -1,3 +1,8 @@
+<?php
+require_once __DIR__ . '/../init.php';
+$usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
+?>
+
 <div class="mb-4 border-b border-gray-200">
   <nav class="flex flex-wrap gap-2 text-sm font-medium text-gray-500" aria-label="Tabs">
     <?php foreach (TABS_FINANZAS as $clave => $titulo): ?>
@@ -47,8 +52,95 @@
     </div>
   </form>
 
-  <!-- Aquí va la tabla (la armamos después) -->
-  <div class="bg-gray-50 text-gray-600 p-4 rounded-lg border border-gray-200">
-    <p class="italic">Aquí se mostrará el resultado del filtro: servicios con conclusión y visitas realizadas dentro del rango.</p>
-  </div>
+  <?php
+  if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
+    $desde = $_GET['desde'];
+    $hasta = $_GET['hasta'];
+    $tecnico = $_GET['tecnico'] ?? '';
+
+    $sql = "SELECT * FROM servicios_omnipos 
+            WHERE conclusion IN ('Exito', 'Rechazo') 
+            AND fecha_atencion BETWEEN ? AND ?";
+
+    $params = [$desde, $hasta];
+
+    if (!empty($tecnico)) {
+        $sql .= " AND idc = ?";
+        $params[] = $tecnico;
+    }
+
+    $sql .= " ORDER BY fecha_atencion DESC";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
+    $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if (count($servicios) > 0):
+  ?>
+
+  <table class="min-w-full divide-y divide-gray-200 mt-6 bg-white rounded-xl shadow overflow-hidden">
+    <thead class="bg-gray-50 text-xs font-semibold text-gray-600">
+      <tr>
+        <th class="px-4 py-2 text-left">Ticket</th>
+        <th class="px-4 py-2 text-left">Técnico</th>
+        <th class="px-4 py-2 text-left">Servicio</th>
+        <th class="px-4 py-2 text-left">Resultado</th>
+        <th class="px-4 py-2 text-left">SLA</th>
+        <th class="px-4 py-2 text-left">Fecha</th>
+        <th class="px-4 py-2 text-left">Pago</th>
+        <th class="px-4 py-2 text-left">Estado</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100 text-sm">
+      <?php foreach ($servicios as $serv): 
+          $sla = (strtotime($serv['fecha_atencion']) <= strtotime($serv['fecha_limite'])) ? 'DT' : 'FT';
+          $pagado = $serv['pago_generado'] ?? 0;
+          $ticket = $serv['ticket'];
+
+          $rechazo_previo = $pdo->prepare("SELECT fecha_visita FROM visitas_servicios WHERE ticket = ? AND resultado = 'Rechazo' LIMIT 1");
+          $rechazo_previo->execute([$ticket]);
+          $rechazo_info = $rechazo_previo->fetchColumn();
+      ?>
+      <tr>
+        <td class="px-4 py-2 font-mono text-blue-700"><?= htmlspecialchars($ticket) ?></td>
+        <td class="px-4 py-2"><?= htmlspecialchars($serv['idc']) ?></td>
+        <td class="px-4 py-2"><?= htmlspecialchars($serv['servicio']) ?></td>
+        <td class="px-4 py-2"><?= htmlspecialchars($serv['conclusion']) ?></td>
+        <td class="px-4 py-2"><?= $sla ?></td>
+        <td class="px-4 py-2"><?= htmlspecialchars($serv['fecha_atencion']) ?></td>
+        <td class="px-4 py-2">$
+          <?= number_format(calcular_pago($pdo, $serv), 2) ?>
+        </td>
+        <td class="px-4 py-2">
+          <?php if ($pagado): ?>
+            <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Pagado</span>
+          <?php else: ?>
+            <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Pendiente</span>
+          <?php endif; ?>
+
+          <?php if ($rechazo_info): ?>
+            <div class="text-[10px] text-gray-500 italic mt-1">Rechazo previo el <?= date('Y-m-d', strtotime($rechazo_info)) ?></div>
+          <?php endif; ?>
+        </td>
+      </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+
+  <?php else: ?>
+    <div class="bg-yellow-50 text-yellow-800 p-4 rounded mt-4">No se encontraron servicios para ese rango.</div>
+  <?php endif; } ?>
 </div>
+
+<?php
+function calcular_pago($pdo, $serv) {
+    $stmt = $pdo->prepare("SELECT monto_pago FROM precios_idc 
+        WHERE idc = ? AND tipo_servicio = ? AND resultado = ?");
+    $stmt->execute([
+        $serv['idc'],
+        $serv['servicio'],
+        $serv['conclusion']
+    ]);
+    return $stmt->fetchColumn() ?: 0;
+}
+?>
