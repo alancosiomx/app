@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../init.php';
+require_once __DIR__ . '/../init.php';
 $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
 // Determina qué vista cargar
