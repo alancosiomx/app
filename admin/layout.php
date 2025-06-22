@@ -26,7 +26,7 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
   </aside>
 
   <!-- Contenido -->
-  <div class="flex-1 flex flex-col md:ml-64">
+<div class="flex-1 flex flex-col pl-0 md:pl-64 transition-all duration-300">
 
     <!-- Top bar -->
     <header class="bg-white shadow sticky top-0 z-50">
