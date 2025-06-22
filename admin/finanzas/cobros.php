@@ -10,6 +10,45 @@
 </div>
 
 <div class="bg-white shadow p-6 rounded-2xl">
-  <h1 class="text-xl font-bold mb-2 text-blue-700"><?= TABS_FINANZAS['cobros'] ?></h1>
-  <p class="text-gray-500">Aquí irá el contenido del tab: <strong><?= TABS_FINANZAS['cobros'] ?></strong>.</p>
+  <h1 class="text-xl font-bold mb-4 text-blue-700">💳 Reporte de Cobros</h1>
+
+  <!-- Filtros -->
+  <form method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+    <input type="hidden" name="vista" value="cobros">
+
+    <div>
+      <label class="block text-sm font-medium text-gray-600">Desde</label>
+      <input type="date" name="desde" value="<?= $_GET['desde'] ?? '' ?>" class="mt-1 w-full border-gray-300 rounded-md shadow-sm">
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-600">Hasta</label>
+      <input type="date" name="hasta" value="<?= $_GET['hasta'] ?? '' ?>" class="mt-1 w-full border-gray-300 rounded-md shadow-sm">
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-600">Técnico</label>
+      <select name="tecnico" class="mt-1 w-full border-gray-300 rounded-md shadow-sm">
+        <option value="">Todos</option>
+        <?php
+        $tecnicos = $pdo->query("SELECT DISTINCT idc FROM servicios_omnipos WHERE idc IS NOT NULL")->fetchAll(PDO::FETCH_COLUMN);
+        foreach ($tecnicos as $t):
+          $selected = ($_GET['tecnico'] ?? '') === $t ? 'selected' : '';
+          echo "<option value='$t' $selected>$t</option>";
+        endforeach;
+        ?>
+      </select>
+    </div>
+
+    <div class="flex items-end">
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">
+        Generar Reporte
+      </button>
+    </div>
+  </form>
+
+  <!-- Aquí va la tabla (la armamos después) -->
+  <div class="bg-gray-50 text-gray-600 p-4 rounded-lg border border-gray-200">
+    <p class="italic">Aquí se mostrará el resultado del filtro: servicios con conclusión y visitas realizadas dentro del rango.</p>
+  </div>
 </div>
