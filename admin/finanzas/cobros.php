@@ -59,7 +59,7 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
     $tecnico = $_GET['tecnico'] ?? '';
 
     $sql = "SELECT * FROM servicios_omnipos 
-            WHERE conclusion IN ('Exito', 'Rechazo') 
+            WHERE resultado IN ('Exito', 'Rechazo') 
             AND fecha_atencion BETWEEN ? AND ?";
 
     $params = [$desde, $hasta];
@@ -105,7 +105,7 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
         <td class="px-4 py-2 font-mono text-blue-700"><?= htmlspecialchars($ticket) ?></td>
         <td class="px-4 py-2"><?= htmlspecialchars($serv['idc']) ?></td>
         <td class="px-4 py-2"><?= htmlspecialchars($serv['servicio']) ?></td>
-        <td class="px-4 py-2"><?= htmlspecialchars($serv['conclusion']) ?></td>
+        <td class="px-4 py-2"><?= htmlspecialchars($serv['resultado']) ?></td>
         <td class="px-4 py-2"><?= $sla ?></td>
         <td class="px-4 py-2"><?= htmlspecialchars($serv['fecha_atencion']) ?></td>
         <td class="px-4 py-2">$
@@ -139,7 +139,7 @@ function calcular_pago($pdo, $serv) {
     $stmt->execute([
         $serv['idc'],
         $serv['servicio'],
-        $serv['conclusion']
+        $serv['resultado']
     ]);
     return $stmt->fetchColumn() ?: 0;
 }
