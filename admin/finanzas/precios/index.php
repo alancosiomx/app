@@ -26,9 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Obtener registros
 $precios = $pdo->query("SELECT * FROM precios_idc ORDER BY creado_en DESC")->fetchAll(PDO::FETCH_ASSOC);
 $tecnicos = $pdo->query("SELECT DISTINCT nombre FROM usuarios WHERE roles LIKE '%idc%' ORDER BY nombre")->fetchAll(PDO::FETCH_COLUMN);
+$servicios = $pdo->query("SELECT DISTINCT servicio FROM servicios_omnipos ORDER BY servicio")->fetchAll(PDO::FETCH_COLUMN);
+$resultados = ['Exito', 'Rechazo', 'Visita'];
+$bancos = $pdo->query("SELECT DISTINCT banco FROM servicios_omnipos ORDER BY banco")->fetchAll(PDO::FETCH_COLUMN);
 
 $contenido = __FILE__;
-require_once __DIR__ . '/../../layout.php';
+require_once __DIR__ . '/../layout.php';
 ?>
 
 <h1 class="text-xl font-bold mb-4 text-blue-700">⚙️ Configurar Precios por Técnico</h1>
@@ -46,7 +49,7 @@ require_once __DIR__ . '/../../layout.php';
 <form method="POST" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 bg-white p-4 rounded-xl shadow">
   <div>
     <label class="block text-sm font-medium text-gray-600">Técnico</label>
-    <select name="idc" class="w-full border-gray-300 rounded-md">
+    <select name="idc" class="w-full border-gray-300 rounded-md" required>
       <option value="">Selecciona</option>
       <?php foreach ($tecnicos as $t): ?>
         <option value="<?= htmlspecialchars($t) ?>"><?= $t ?></option>
@@ -55,22 +58,29 @@ require_once __DIR__ . '/../../layout.php';
   </div>
   <div>
     <label class="block text-sm font-medium text-gray-600">Servicio</label>
-    <input name="servicio" class="w-full border-gray-300 rounded-md" required>
+    <select name="servicio" class="w-full border-gray-300 rounded-md" required>
+      <option value="">Selecciona</option>
+      <?php foreach ($servicios as $s): ?>
+        <option value="<?= htmlspecialchars($s) ?>"><?= $s ?></option>
+      <?php endforeach; ?>
+    </select>
   </div>
   <div>
     <label class="block text-sm font-medium text-gray-600">Resultado</label>
-    <select name="resultado" class="w-full border-gray-300 rounded-md">
-      <option>Exito</option>
-      <option>Rechazo</option>
-      <option>Visita</option>
+    <select name="resultado" class="w-full border-gray-300 rounded-md" required>
+      <option value="">Selecciona</option>
+      <?php foreach ($resultados as $r): ?>
+        <option value="<?= $r ?>"><?= $r ?></option>
+      <?php endforeach; ?>
     </select>
   </div>
   <div>
     <label class="block text-sm font-medium text-gray-600">Banco</label>
-    <select name="banco" class="w-full border-gray-300 rounded-md">
-      <option>BBVA</option>
-      <option>BANREGIO</option>
-      <option>AZTECA</option>
+    <select name="banco" class="w-full border-gray-300 rounded-md" required>
+      <option value="">Selecciona</option>
+      <?php foreach ($bancos as $b): ?>
+        <option value="<?= htmlspecialchars($b) ?>"><?= $b ?></option>
+      <?php endforeach; ?>
     </select>
   </div>
   <div>
