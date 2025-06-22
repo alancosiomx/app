@@ -1,11 +1,19 @@
 <?php
 require_once __DIR__ . '/../init.php';
-$usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 $current_tab = $_GET['vista'] ?? 'precios';
 
-// Guardar nuevo precio
+// Validación de seguridad para formularios POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!isset($_SESSION['csrf_token']) || ($_POST['csrf_token'] ?? '') !== $_SESSION['csrf_token']) {
+        die("Error de seguridad. Por favor recarga la página.");
+    }
+
     $idc = $_POST['idc'] ?? '';
     $servicio = $_POST['servicio'] ?? '';
     $resultado = $_POST['resultado'] ?? '';
@@ -23,12 +31,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+// Generar CSRF token si no existe
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 // Obtener registros
 $precios = $pdo->query("SELECT * FROM precios_idc ORDER BY creado_en DESC")->fetchAll(PDO::FETCH_ASSOC);
 $tecnicos = $pdo->query("SELECT DISTINCT idc FROM servicios_omnipos WHERE idc IS NOT NULL ORDER BY idc")->fetchAll(PDO::FETCH_COLUMN);
 $servicios = $pdo->query("SELECT DISTINCT servicio FROM servicios_omnipos ORDER BY servicio")->fetchAll(PDO::FETCH_COLUMN);
 $resultados = ['Exito', 'Rechazo', 'Visita'];
 $bancos = $pdo->query("SELECT DISTINCT banco FROM servicios_omnipos ORDER BY banco")->fetchAll(PDO::FETCH_COLUMN);
+
+$csrf_input = '<input type="hidden" name="csrf_token" value="' . $_SESSION['csrf_token'] . '">';
 
 $contenido = __DIR__ . '/precios.php';
 require_once __DIR__ . '/layout.php';
