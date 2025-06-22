@@ -45,5 +45,5 @@ $bancos = $pdo->query("SELECT DISTINCT banco FROM servicios_omnipos ORDER BY ban
 
 $csrf_input = '<input type="hidden" name="csrf_token" value="' . $_SESSION['csrf_token'] . '">';
 
-$contenido = __DIR__ . '/precios.php';
-require_once __DIR__ . '/layout.php';
+$contenido = __DIR__ . '/../finanzas/precios.php';
+require_once __DIR__ . '/../layout.php';
