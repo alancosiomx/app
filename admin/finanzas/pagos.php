@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../init.php';
+require_once __DIR__ . '/constants.php';
 $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
 // Guardar pago
@@ -17,6 +18,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idc'])) {
 
 $tecnicos = $pdo->query("SELECT DISTINCT idc FROM servicios_omnipos WHERE idc IS NOT NULL")->fetchAll(PDO::FETCH_COLUMN);
 ?>
+
+<div class="mb-4 border-b border-gray-200">
+  <nav class="flex flex-wrap gap-2 text-sm font-medium text-gray-500" aria-label="Tabs">
+    <?php foreach (TABS_FINANZAS as $clave => $titulo): ?>
+      <a href="?vista=<?= $clave ?>"
+         class="px-4 py-2 rounded-xl <?= ($_GET['vista'] ?? 'cobros') === $clave ? 'bg-blue-600 text-white' : 'hover:text-blue-700 bg-gray-100' ?>">
+        <?= $titulo ?>
+      </a>
+    <?php endforeach; ?>
+  </nav>
+</div>
 
 <h1 class="text-xl font-bold mb-4 text-blue-700">💼 Pagos por Técnico</h1>
 
