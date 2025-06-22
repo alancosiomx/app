@@ -1,9 +1,35 @@
 <?php
 require_once __DIR__ . '/../../config.php';
 
-// Obtener servicios POR ASIGNAR
-$stmt = $pdo->prepare("SELECT * FROM servicios_omnipos WHERE estatus = 'Por Asignar' ORDER BY fecha_inicio DESC");
-$stmt->execute();
+// Filtros
+$ciudad = $_GET['ciudad'] ?? '';
+$servicio = $_GET['servicio'] ?? '';
+$buscar = $_GET['buscar'] ?? '';
+
+// Construir la consulta base con filtros dinámicos
+$sql = "SELECT * FROM servicios_omnipos WHERE estatus = 'Por Asignar'";
+$params = [];
+
+if ($ciudad !== '') {
+    $sql .= " AND ciudad = ?";
+    $params[] = $ciudad;
+}
+
+if ($servicio !== '') {
+    $sql .= " AND servicio = ?";
+    $params[] = $servicio;
+}
+
+if ($buscar !== '') {
+    $sql .= " AND (ticket LIKE ? OR afiliacion LIKE ? OR comercio LIKE ?)";
+    $params[] = "%$buscar%";
+    $params[] = "%$buscar%";
+    $params[] = "%$buscar%";
+}
+
+$sql .= " ORDER BY fecha_inicio DESC";
+$stmt = $pdo->prepare($sql);
+$stmt->execute($params);
 $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Técnicos activos
@@ -14,29 +40,46 @@ $tecnicos = $pdo->query("
     WHERE r.rol = 'idc' AND u.activo = 1
 ")->fetchAll(PDO::FETCH_ASSOC);
 
-// Conteos
-$total = count($servicios);
-$citasHoy = array_filter($servicios, fn($s) => $s['fecha_cita'] === date('Y-m-d'));
-$citasManiana = array_filter($servicios, fn($s) => $s['fecha_cita'] === date('Y-m-d', strtotime('+1 day')));
+// Listas únicas para filtros
+$ciudades = $pdo->query("SELECT DISTINCT ciudad FROM servicios_omnipos WHERE estatus = 'Por Asignar' AND ciudad IS NOT NULL AND ciudad != '' ORDER BY ciudad")->fetchAll(PDO::FETCH_COLUMN);
+$serviciosUnicos = $pdo->query("SELECT DISTINCT servicio FROM servicios_omnipos WHERE estatus = 'Por Asignar' AND servicio IS NOT NULL AND servicio != '' ORDER BY servicio")->fetchAll(PDO::FETCH_COLUMN);
 ?>
 
 <?php include __DIR__ . '/../includes/tabs_servicios.php'; ?>
 
-<!-- Resumen -->
-<div class="grid grid-cols-3 gap-4 mb-6">
-  <div class="bg-white shadow p-4 rounded-lg text-center">
-    <div class="text-gray-500 text-sm">Total</div>
-    <div class="text-2xl font-bold text-blue-600"><?= $total ?></div>
+<!-- Filtros -->
+<form method="get" class="mb-6 grid grid-cols-1 md:grid-cols-4 gap-3">
+  <input type="hidden" name="tab" value="por_asignar">
+
+  <div>
+    <label class="text-sm font-medium">Ciudad</label>
+    <select name="ciudad" class="w-full border rounded px-3 py-1 text-sm">
+      <option value="">Todas</option>
+      <?php foreach ($ciudades as $c): ?>
+        <option value="<?= htmlspecialchars($c) ?>" <?= $ciudad === $c ? 'selected' : '' ?>><?= htmlspecialchars($c) ?></option>
+      <?php endforeach; ?>
+    </select>
   </div>
-  <div class="bg-white shadow p-4 rounded-lg text-center">
-    <div class="text-gray-500 text-sm">Citas Hoy</div>
-    <div class="text-2xl font-bold text-yellow-600"><?= count($citasHoy) ?></div>
+
+  <div>
+    <label class="text-sm font-medium">Servicio</label>
+    <select name="servicio" class="w-full border rounded px-3 py-1 text-sm">
+      <option value="">Todos</option>
+      <?php foreach ($serviciosUnicos as $s): ?>
+        <option value="<?= htmlspecialchars($s) ?>" <?= $servicio === $s ? 'selected' : '' ?>><?= htmlspecialchars($s) ?></option>
+      <?php endforeach; ?>
+    </select>
   </div>
-  <div class="bg-white shadow p-4 rounded-lg text-center">
-    <div class="text-gray-500 text-sm">Citas Mañana</div>
-    <div class="text-2xl font-bold text-orange-600"><?= count($citasManiana) ?></div>
+
+  <div>
+    <label class="text-sm font-medium">Buscar</label>
+    <input type="text" name="buscar" value="<?= htmlspecialchars($buscar) ?>" placeholder="Ticket, Afiliación, Comercio" class="w-full border rounded px-3 py-1 text-sm">
   </div>
-</div>
+
+  <div class="flex items-end">
+    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded text-sm w-full">Filtrar</button>
+  </div>
+</form>
 
 <!-- Formulario de asignación múltiple -->
 <form action="asignar_tecnico.php" method="post">
@@ -60,7 +103,7 @@ $citasManiana = array_filter($servicios, fn($s) => $s['fecha_cita'] === date('Y-
       <thead class="bg-gray-100 text-gray-700 text-sm">
         <tr>
           <th class="px-4 py-2"><input type="checkbox" id="checkAll" onclick="toggleAll(this)"></th>
-          <th class="px-4 py-2 text-left">Ticket</th>
+          <th class="px-4 py-2">Ticket</th>
           <th class="px-4 py-2">Afiliación</th>
           <th class="px-4 py-2">Comercio</th>
           <th class="px-4 py-2">Ciudad</th>
@@ -80,9 +123,7 @@ $citasManiana = array_filter($servicios, fn($s) => $s['fecha_cita'] === date('Y-
             <td class="px-4 py-2"><?= htmlspecialchars($s['comercio']) ?></td>
             <td class="px-4 py-2"><?= htmlspecialchars($s['ciudad']) ?></td>
             <td class="px-4 py-2"><?= htmlspecialchars($s['servicio']) ?></td>
-            <td class="px-4 py-2 text-gray-500 text-xs">
-              <?= nl2br(htmlspecialchars($s['comentarios'] ?? '—')) ?>
-            </td>
+            <td class="px-4 py-2 text-gray-500 text-xs whitespace-pre-line"><?= nl2br(htmlspecialchars($s['comentarios'] ?? '—')) ?></td>
             <td class="px-4 py-2 text-center">
               <a href="#" class="ver-detalle text-blue-500 hover:underline" data-ticket="<?= $s['ticket'] ?>">🔍</a>
             </td>
@@ -95,8 +136,6 @@ $citasManiana = array_filter($servicios, fn($s) => $s['fecha_cita'] === date('Y-
 
 <script>
 function toggleAll(source) {
-  document.querySelectorAll('input[name="tickets[]"]').forEach(checkbox => {
-    checkbox.checked = source.checked;
-  });
+  document.querySelectorAll('input[name="tickets[]"]').forEach(cb => cb.checked = source.checked);
 }
 </script>
