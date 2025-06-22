@@ -136,7 +136,7 @@ $rechazo_info = $rechazo_previo->fetchColumn();
 
 <?php
 function calcular_pago($pdo, $serv) {
-    $stmt = $pdo->prepare("SELECT monto_pago FROM precios_idc 
+    $stmt = $pdo->prepare("SELECT monto FROM precios_idc 
         WHERE idc = ? AND tipo_servicio = ? AND resultado = ?");
     $stmt->execute([
         $serv['idc'],
