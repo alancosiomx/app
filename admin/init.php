@@ -21,3 +21,9 @@ require_once BASE_PATH . '/permisos.php';    // Permisos por rol
 // require_once BASE_PATH . '/helpers.php';
 // require_once BASE_PATH . '/constantes.php';
 // require_once BASE_PATH . '/logger.php';
+
+// Cargar constantes del módulo de Finanzas
+$finanzas_constants = __DIR__ . '/finanzas/constants.php';
+if (file_exists($finanzas_constants)) {
+    require_once $finanzas_constants;
+}
