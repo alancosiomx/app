@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . '/../../config/constants.php'; ?>
+<?php require_once __DIR__ . '/constants.php'; ?>
 
 <div class="mb-4 border-b border-gray-200">
   <nav class="flex flex-wrap gap-2 text-sm font-medium text-gray-500" aria-label="Tabs">
