@@ -54,8 +54,8 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
   <?php
   if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
-    $desde = $_GET['desde'];
-    $hasta = $_GET['hasta'];
+    $desde = $_GET['desde'] . ' 00:00:00';
+    $hasta = $_GET['hasta'] . ' 23:59:59';
     $tecnico = $_GET['tecnico'] ?? '';
 
     $sql = "SELECT * FROM servicios_omnipos 
