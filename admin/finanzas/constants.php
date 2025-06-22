@@ -1,5 +1,5 @@
 <?php
-// config/constants.php
+// /constants.php
 
 define('TABS_FINANZAS', [
   'cobros'    => '💳 Reporte de Cobros',
