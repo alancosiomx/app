@@ -31,7 +31,7 @@ $resultados = ['Exito', 'Rechazo', 'Visita'];
 $bancos = $pdo->query("SELECT DISTINCT banco FROM servicios_omnipos ORDER BY banco")->fetchAll(PDO::FETCH_COLUMN);
 
 $contenido = __FILE__;
-require_once __DIR__ . '/../../layout.php';
+/admin/finanzas/index.php?vista=precios
 ?>
 
 <h1 class="text-xl font-bold mb-4 text-blue-700">⚙️ Configurar Precios por Técnico</h1>
