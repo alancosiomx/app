@@ -1,24 +1,97 @@
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+ob_start(); // ← evita problemas con header()
 
-<style>
-  body {
-    margin: 0;
-    background-color: #f9fafb;
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  }
+$usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
+?>
 
-  /* Mantenemos solo si realmente las usas y no están en Tailwind */
-  .top-bar {
-    /* ... tus estilos de top-bar si son personalizados ... */
-  }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel Administrador</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Solo Tailwind, sin Bootstrap -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 min-h-screen">
 
-  .top-bar .menu-toggle {
-    /* ... tus estilos de menu-toggle si son personalizados ... */
-  }
+<!-- Layout tipo dashboard -->
+<div class="min-h-screen">
 
-  @media (max-width: 768px) {
-    .top-bar .menu-toggle {
-      display: block;
-    }
+  <!-- Sidebar fijo en desktop -->
+  <div class="hidden md:block fixed inset-y-0 left-0 w-64 bg-white border-r z-40">
+    <?php require_once __DIR__ . '/includes/menu.php'; ?>
+  </div>
+
+  <!-- Contenido principal con padding a la izquierda para evitar solaparse -->
+  <div class="md:pl-64">
+
+    <!-- Top bar -->
+    <header class="bg-white shadow sticky top-0 z-30">
+      <div class="flex items-center justify-between px-4 py-3">
+        <button onclick="toggleSidebar()" class="text-xl md:hidden">☰</button>
+        <span class="text-sm text-gray-700">👋 Bienvenido, <strong><?= htmlspecialchars($usuario) ?></strong></span>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="p-4">
+      <?php
+      if (isset($contenido) && file_exists($contenido)) {
+          include $contenido;
+      } else {
+          echo '<div class="text-red-600 font-semibold">❌ Error: contenido no encontrado.</div>';
+      }
+      ?>
+    </main>
+
+  </div>
+</div>
+
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('-translate-x-full');
   }
-</style>
+</script>
+
+<?php require_once __DIR__ . '/includes/foot.php'; ?>
+<?php ob_end_flush(); ?>
+
+<?php if (str_contains($_SERVER['REQUEST_URI'], '/servicios/')): ?>
+  <!-- Modal dinámico -->
+  <div id="modal-container"></div>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.body.addEventListener('click', function(e) {
+      const btn = e.target.closest('.ver-detalle');
+      if (!btn) return;
+
+      e.preventDefault();
+      const ticket = btn.dataset.ticket;
+
+      fetch('servicios/detalle_servicio.php?ticket=' + encodeURIComponent(ticket))
+        .then(res => res.text())
+        .then(html => {
+          const anterior = document.getElementById('modalDetalleServicio');
+          if (anterior) anterior.remove();
+
+          document.getElementById('modal-container').innerHTML = html;
+
+          const modal = new bootstrap.Modal(document.getElementById('modalDetalleServicio'));
+          modal.show();
+        })
+        .catch(err => {
+          alert('Error al cargar el detalle del servicio.');
+          console.error(err);
+        });
+    });
+  });
+  </script>
+<?php endif; ?>
+
+</body>
+</html>
