@@ -97,9 +97,11 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
           $pagado = $serv['pago_generado'] ?? 0;
           $ticket = $serv['ticket'];
 
-          $rechazo_previo = $pdo->prepare("SELECT fecha_visita FROM visitas_servicios WHERE ticket = ? AND resultado = 'Rechazo' LIMIT 1");
-          $rechazo_previo->execute([$ticket]);
-          $rechazo_info = $rechazo_previo->fetchColumn();
+          // VISITAS desactivado porque aún no existe la tabla
+         $rechazo_previo = $pdo->prepare("SELECT fecha_visita FROM visitas_servicios WHERE ticket = ? AND resultado = 'Rechazo' LIMIT 1");
+$rechazo_previo->execute([$ticket]);
+$rechazo_info = $rechazo_previo->fetchColumn();
+
       ?>
       <tr>
         <td class="px-4 py-2 font-mono text-blue-700"><?= htmlspecialchars($ticket) ?></td>
@@ -107,7 +109,7 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
         <td class="px-4 py-2"><?= htmlspecialchars($serv['servicio']) ?></td>
         <td class="px-4 py-2"><?= htmlspecialchars($serv['resultado']) ?></td>
         <td class="px-4 py-2"><?= $sla ?></td>
-        <td class="px-4 py-2"><?= htmlspecialchars($serv['fecha_atencion']) ?></td>
+        <td class="px-4 py-2"><?= $serv['fecha_atencion'] ?></td>
         <td class="px-4 py-2">$
           <?= number_format(calcular_pago($pdo, $serv), 2) ?>
         </td>
