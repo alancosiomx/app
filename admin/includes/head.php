@@ -1,7 +1,5 @@
-<!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Estilos personalizados -->
 <style>
   body {
     margin: 0;
@@ -9,6 +7,8 @@
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
 
+  /* COMENTA O ELIMINA ESTAS REGLAS DEL SIDEBAR Y MAIN-CONTENT */
+  /*
   .sidebar {
     height: 100vh;
     width: 220px;
@@ -37,9 +37,11 @@
   .sidebar a:hover {
     background-color: #334155;
   }
+  */
 
+  /* Mantén estas reglas si las usas para tu barra superior móvil, pero revisa si Tailwind ya lo maneja */
   .top-bar {
-    position: fixed;
+    position: fixed; /* <-- Este también puede entrar en conflicto */
     top: 0;
     left: 0;
     right: 0;
@@ -66,28 +68,40 @@
       display: block;
     }
 
+    /* COMENTA O ELIMINA ESTAS REGLAS SI USAS TAILWIND PARA EL SIDEBAR MÓVIL */
+    /*
     .sidebar {
       position: fixed;
       top: 52px;
       width: 100%;
       height: calc(100vh - 52px);
     }
+    */
 
+    /* COMENTA O ELIMINA ESTAS REGLAS SI USAS TAILWIND PARA EL CONTENIDO MÓVIL */
+    /*
     .main-content {
       padding: 100px 20px 20px 20px;
       margin-left: 0;
     }
+    */
   }
 
+  /* COMENTA O ELIMINA ESTAS REGLAS DEL MAIN-CONTENT */
+  /*
   .main-content {
     margin-left: 220px;
     padding: 100px 40px 40px 40px;
     transition: margin-left 0.3s ease-in-out;
   }
+  */
 
+  /* COMENTA ESTA TAMBIÉN */
+  /*
   @media (max-width: 768px) {
     .main-content.collapsed {
       margin-left: 0;
     }
   }
+  */
 </style>
