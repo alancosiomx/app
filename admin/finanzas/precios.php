@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../init.php';
+require_once __DIR__ . '/../init.php';
 $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
 $current_tab = $_GET['vista'] ?? 'precios';
@@ -31,8 +31,7 @@ $resultados = ['Exito', 'Rechazo', 'Visita'];
 $bancos = $pdo->query("SELECT DISTINCT banco FROM servicios_omnipos ORDER BY banco")->fetchAll(PDO::FETCH_COLUMN);
 
 $contenido = __DIR__ . '/precios.php';
-require_once __DIR__ . '/../layout.php';
-
+require_once __DIR__ . '/layout.php';
 ?>
 
 <h1 class="text-xl font-bold mb-4 text-blue-700">⚙️ Configurar Precios por Técnico</h1>
@@ -41,7 +40,7 @@ require_once __DIR__ . '/../layout.php';
   <nav class="flex gap-2 text-sm font-medium text-gray-600 border-b pb-2">
     <a href="?vista=cobros" class="<?= $current_tab === 'cobros' ? 'text-blue-700 font-bold' : 'hover:text-blue-700' ?>">💳 Reporte de Cobros</a>
     <a href="?vista=pagos" class="<?= $current_tab === 'pagos' ? 'text-blue-700 font-bold' : 'hover:text-blue-700' ?>">📦 Pagos por Técnico</a>
-    <a href="?vista=viaticos" class="<?= $current_tab === 'viaticos' ? 'text-blue-700 font-bold' : 'hover:text-blue-700' ?>">🧾 Viáticos</a>
+    <a href="?vista=viaticos" class="<?= $current_tab === 'viaticos' ? 'text-blue-700 font-bold' : 'hover:text-blue-700' ?>">🩾 Viáticos</a>
     <a href="?vista=historial" class="<?= $current_tab === 'historial' ? 'text-blue-700 font-bold' : 'hover:text-blue-700' ?>">📂 Historial de Pagos</a>
     <a href="?vista=precios" class="<?= $current_tab === 'precios' ? 'text-blue-700 font-bold' : 'hover:text-blue-700' ?>">⚙️ Precios por Técnico</a>
   </nav>
@@ -116,7 +115,7 @@ require_once __DIR__ . '/../layout.php';
         <td class="px-4 py-2"><?= htmlspecialchars($p['servicio']) ?></td>
         <td class="px-4 py-2"><?= htmlspecialchars($p['resultado']) ?></td>
         <td class="px-4 py-2"><?= htmlspecialchars($p['banco']) ?></td>
-        <td class="px-4 py-2 text-right font-semibold text-blue-700">\$<?= number_format($p['monto'], 2) ?></td>
+        <td class="px-4 py-2 text-right font-semibold text-blue-700">$<?= number_format($p['monto'], 2) ?></td>
         <td class="px-4 py-2 text-gray-500"><?= htmlspecialchars($p['comentarios']) ?></td>
         <td class="px-4 py-2 text-sm text-gray-400"><?= date('d/m/Y H:i', strtotime($p['creado_en'])) ?></td>
       </tr>
