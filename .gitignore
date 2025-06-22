@@ -2,7 +2,7 @@
 
 
 # Ignorar dependencias
-/vendor/
+vendor/
 node_modules/
 
 # Ignorar logs y errores
