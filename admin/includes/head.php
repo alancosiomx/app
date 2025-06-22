@@ -23,7 +23,6 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
   <!-- Sidebar fijo en desktop -->
   <div class="hidden md:block fixed inset-y-0 left-0 w-64 bg-white border-r z-40">
-    <?php require_once __DIR__ . '/includes/menu.php'; ?>
   </div>
 
   <!-- Contenido principal con padding a la izquierda para evitar solaparse -->
