@@ -38,7 +38,6 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <p class="text-gray-700 text-sm mb-4">Bienvenido, <strong><?= htmlspecialchars($_SESSION['usuario_nombre'] ?? 'Administrador') ?></strong></p>
-
 <?php include __DIR__ . '/../includes/tabs_servicios.php'; ?>
 
 <h2 class="text-xl font-semibold text-gray-800 mb-4">🛠 Servicios En Ruta</h2>
@@ -82,11 +81,12 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </form>
 
 <!-- Tabla -->
-<form method="POST" action="cerrar_servicio.php">
+<form method="POST" action="cerrar_servicio.php" onsubmit="return validarEnvio()">
   <div class="overflow-x-auto bg-white shadow rounded-xl">
     <table class="min-w-full text-sm text-left text-gray-700">
       <thead class="bg-gray-100 text-gray-600 uppercase text-xs">
         <tr>
+          <th class="px-4 py-3 text-center"><input type="checkbox" onclick="toggleAll(this)"></th>
           <th class="px-4 py-3">Ticket</th>
           <th class="px-4 py-3">Afiliación</th>
           <th class="px-4 py-3">Comercio</th>
@@ -94,12 +94,15 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <th class="px-4 py-3">Servicio</th>
           <th class="px-4 py-3">Técnico</th>
           <th class="px-4 py-3">Comentarios</th>
-          <th class="px-4 py-3 text-center">Acciones</th>
+          <th class="px-4 py-3 text-center">Resultado</th>
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-200">
         <?php foreach ($servicios as $s): ?>
           <tr class="hover:bg-gray-50">
+            <td class="px-4 py-2 text-center">
+              <input type="checkbox" name="tickets[]" value="<?= $s['ticket'] ?>">
+            </td>
             <td class="px-4 py-2"><?= htmlspecialchars($s['ticket']) ?></td>
             <td class="px-4 py-2"><?= htmlspecialchars($s['afiliacion']) ?></td>
             <td class="px-4 py-2"><?= htmlspecialchars($s['comercio']) ?></td>
@@ -107,11 +110,9 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <td class="px-4 py-2"><?= htmlspecialchars($s['servicio']) ?></td>
             <td class="px-4 py-2"><?= htmlspecialchars($s['idc']) ?></td>
             <td class="px-4 py-2 whitespace-pre-line"><?= nl2br(htmlspecialchars($s['comentarios'])) ?></td>
-            <td class="px-4 py-2 text-center space-y-1">
-              <a href="#" class="ver-detalle text-blue-600 hover:underline block mb-1" data-ticket="<?= $s['ticket'] ?>">🔍</a>
-
-              <select name="resultados[<?= $s['ticket'] ?>]" class="w-full text-sm px-2 py-1 border border-gray-300 rounded">
-                <option value="">-- Resultado --</option>
+            <td class="px-4 py-2 text-center">
+              <select name="resultados[<?= $s['ticket'] ?>]" class="resultado w-full text-sm px-2 py-1 border border-gray-300 rounded">
+                <option value="">--</option>
                 <option value="Exito">✅ Éxito</option>
                 <option value="Rechazo">❌ Rechazo</option>
                 <option value="Reasignar">🔁 Reasignar</option>
@@ -129,3 +130,31 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </button>
   </div>
 </form>
+
+<!-- JS Validación -->
+<script>
+function toggleAll(source) {
+  document.querySelectorAll('input[name="tickets[]"]').forEach(cb => cb.checked = source.checked);
+}
+
+function validarEnvio() {
+  let errores = 0;
+  document.querySelectorAll('input[name="tickets[]"]:checked').forEach(cb => {
+    const ticket = cb.value;
+    const select = document.querySelector(`select[name="resultados[${ticket}]"]`);
+    if (!select || !select.value) {
+      select.classList.add('border-red-500');
+      errores++;
+    } else {
+      select.classList.remove('border-red-500');
+    }
+  });
+
+  if (errores > 0) {
+    alert("⚠️ Algunos tickets seleccionados no tienen resultado asignado.");
+    return false;
+  }
+
+  return true;
+}
+</script>
