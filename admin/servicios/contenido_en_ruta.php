@@ -1,9 +1,39 @@
 <?php
 require_once __DIR__ . '/../../config.php';
 
-// Obtener servicios en ruta
-$stmt = $pdo->prepare("SELECT * FROM servicios_omnipos WHERE estatus = 'En Ruta' ORDER BY fecha_inicio DESC");
-$stmt->execute();
+$fecha_inicio = $_GET['fecha_inicio'] ?? '';
+$fecha_fin = $_GET['fecha_fin'] ?? '';
+$tecnico = $_GET['idc'] ?? '';
+$ticket = $_GET['ticket'] ?? '';
+
+// Obtener técnicos únicos en ruta
+$tecnicos = $pdo->query("SELECT DISTINCT idc FROM servicios_omnipos WHERE estatus = 'En Ruta' AND idc IS NOT NULL")->fetchAll(PDO::FETCH_COLUMN);
+
+// Query base + filtros
+$sql = "SELECT * FROM servicios_omnipos WHERE estatus = 'En Ruta'";
+$params = [];
+
+if ($fecha_inicio) {
+    $sql .= " AND fecha_inicio >= ?";
+    $params[] = $fecha_inicio . " 00:00:00";
+}
+if ($fecha_fin) {
+    $sql .= " AND fecha_inicio <= ?";
+    $params[] = $fecha_fin . " 23:59:59";
+}
+if ($tecnico) {
+    $sql .= " AND idc = ?";
+    $params[] = $tecnico;
+}
+if ($ticket) {
+    $sql .= " AND (ticket LIKE ? OR afiliacion LIKE ?)";
+    $params[] = "%$ticket%";
+    $params[] = "%$ticket%";
+}
+
+$sql .= " ORDER BY fecha_inicio DESC";
+$stmt = $pdo->prepare($sql);
+$stmt->execute($params);
 $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -13,8 +43,45 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <h2 class="text-xl font-semibold text-gray-800 mb-4">🛠 Servicios En Ruta</h2>
 
-<h2 class="text-xl font-semibold text-gray-800 mb-4">🛠 Servicios En Ruta</h2>
+<!-- Formulario de filtros -->
+<form method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+  <input type="hidden" name="tab" value="en_ruta">
 
+  <div>
+    <label class="text-sm font-medium text-gray-700">Fecha inicio</label>
+    <input type="date" name="fecha_inicio" value="<?= htmlspecialchars($fecha_inicio) ?>" class="mt-1 w-full rounded border-gray-300 shadow-sm text-sm p-2">
+  </div>
+
+  <div>
+    <label class="text-sm font-medium text-gray-700">Fecha fin</label>
+    <input type="date" name="fecha_fin" value="<?= htmlspecialchars($fecha_fin) ?>" class="mt-1 w-full rounded border-gray-300 shadow-sm text-sm p-2">
+  </div>
+
+  <div>
+    <label class="text-sm font-medium text-gray-700">Técnico</label>
+    <select name="idc" class="mt-1 w-full rounded border-gray-300 shadow-sm text-sm p-2">
+      <option value="">Todos</option>
+      <?php foreach ($tecnicos as $nombre): ?>
+        <option value="<?= htmlspecialchars($nombre) ?>" <?= $tecnico === $nombre ? 'selected' : '' ?>>
+          <?= htmlspecialchars($nombre) ?>
+        </option>
+      <?php endforeach; ?>
+    </select>
+  </div>
+
+  <div>
+    <label class="text-sm font-medium text-gray-700">Ticket o Afiliación</label>
+    <input type="text" name="ticket" value="<?= htmlspecialchars($ticket) ?>" placeholder="Buscar..." class="mt-1 w-full rounded border-gray-300 shadow-sm text-sm p-2">
+  </div>
+
+  <div class="md:col-span-4 text-right">
+    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded">
+      Filtrar
+    </button>
+  </div>
+</form>
+
+<!-- Tabla -->
 <form method="POST" action="cerrar_servicio.php">
   <div class="overflow-x-auto bg-white shadow rounded-xl">
     <table class="min-w-full text-sm text-left text-gray-700">
@@ -25,7 +92,7 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <th class="px-4 py-3">Comercio</th>
           <th class="px-4 py-3">Ciudad</th>
           <th class="px-4 py-3">Servicio</th>
-          <th class="px-4 py-3">Técnico</th> <!-- NUEVA COLUMNA -->
+          <th class="px-4 py-3">Técnico</th>
           <th class="px-4 py-3">Comentarios</th>
           <th class="px-4 py-3 text-center">Acciones</th>
         </tr>
@@ -38,7 +105,7 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <td class="px-4 py-2"><?= htmlspecialchars($s['comercio']) ?></td>
             <td class="px-4 py-2"><?= htmlspecialchars($s['ciudad']) ?></td>
             <td class="px-4 py-2"><?= htmlspecialchars($s['servicio']) ?></td>
-            <td class="px-4 py-2"><?= htmlspecialchars($s['idc']) ?></td> <!-- NUEVA COLUMNA -->
+            <td class="px-4 py-2"><?= htmlspecialchars($s['idc']) ?></td>
             <td class="px-4 py-2 whitespace-pre-line"><?= nl2br(htmlspecialchars($s['comentarios'])) ?></td>
             <td class="px-4 py-2 text-center space-y-1">
               <a href="#" class="ver-detalle text-blue-600 hover:underline block mb-1" data-ticket="<?= $s['ticket'] ?>">🔍</a>
@@ -57,7 +124,7 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
   </div>
 
   <div class="mt-4 text-right">
-    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded">
+    <button type="submit" class="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-2 rounded">
       Guardar Resultados
     </button>
   </div>
