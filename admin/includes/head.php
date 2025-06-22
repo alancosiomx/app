@@ -7,101 +7,18 @@
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
 
-  /* COMENTA O ELIMINA ESTAS REGLAS DEL SIDEBAR Y MAIN-CONTENT */
-  /*
-  .sidebar {
-    height: 100vh;
-    width: 220px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #1e293b;
-    padding-top: 60px;
-    color: white;
-    transition: transform 0.3s ease-in-out;
-    z-index: 1000;
-  }
-
-  .sidebar.collapsed {
-    transform: translateX(-100%);
-  }
-
-  .sidebar a {
-    color: #e5e7eb;
-    padding: 12px 20px;
-    display: block;
-    text-decoration: none;
-    font-size: 15px;
-  }
-
-  .sidebar a:hover {
-    background-color: #334155;
-  }
-  */
-
-  /* Mantén estas reglas si las usas para tu barra superior móvil, pero revisa si Tailwind ya lo maneja */
+  /* Mantenemos solo si realmente las usas y no están en Tailwind */
   .top-bar {
-    position: fixed; /* <-- Este también puede entrar en conflicto */
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: #f1f5f9;
-    color: #0f172a;
-    padding: 12px 20px;
-    border-bottom: 1px solid #e2e8f0;
-    z-index: 1050;
-    font-size: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    /* ... tus estilos de top-bar si son personalizados ... */
   }
 
   .top-bar .menu-toggle {
-    display: none;
-    font-size: 24px;
-    background: none;
-    border: none;
+    /* ... tus estilos de menu-toggle si son personalizados ... */
   }
 
   @media (max-width: 768px) {
     .top-bar .menu-toggle {
       display: block;
     }
-
-    /* COMENTA O ELIMINA ESTAS REGLAS SI USAS TAILWIND PARA EL SIDEBAR MÓVIL */
-    /*
-    .sidebar {
-      position: fixed;
-      top: 52px;
-      width: 100%;
-      height: calc(100vh - 52px);
-    }
-    */
-
-    /* COMENTA O ELIMINA ESTAS REGLAS SI USAS TAILWIND PARA EL CONTENIDO MÓVIL */
-    /*
-    .main-content {
-      padding: 100px 20px 20px 20px;
-      margin-left: 0;
-    }
-    */
   }
-
-  /* COMENTA O ELIMINA ESTAS REGLAS DEL MAIN-CONTENT */
-  /*
-  .main-content {
-    margin-left: 220px;
-    padding: 100px 40px 40px 40px;
-    transition: margin-left 0.3s ease-in-out;
-  }
-  */
-
-  /* COMENTA ESTA TAMBIÉN */
-  /*
-  @media (max-width: 768px) {
-    .main-content.collapsed {
-      margin-left: 0;
-    }
-  }
-  */
 </style>
