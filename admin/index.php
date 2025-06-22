@@ -27,4 +27,4 @@ $contenido = match ($tab) {
 
 $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
-require_once __DIR__ . '/../layout.php';
+require_once __DIR__ . '/layout.php';
