@@ -21,7 +21,7 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 <div class="flex min-h-screen">
 
   <!-- Sidebar -->
-  <aside class="w-64 bg-white border-r hidden md:block">
+<aside id="sidebar" class="w-64 bg-white border-r transition-transform duration-300 transform md:translate-x-0 -translate-x-full md:relative fixed h-full z-40">
     <?php require_once __DIR__ . '/includes/menu.php'; ?>
   </aside>
 
@@ -52,9 +52,9 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
 <script>
   function toggleSidebar() {
-    const aside = document.querySelector('aside');
-    aside?.classList.toggle('hidden');
-  }
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('-translate-x-full');
+}
 </script>
 
 <?php require_once __DIR__ . '/includes/foot.php'; ?>
