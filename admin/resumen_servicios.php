@@ -1,14 +1,11 @@
 <?php
-// Filtros opcionales
+require_once __DIR__ . '/../config.php';
+
 $fecha_inicio = $_GET['fecha_inicio'] ?? '';
 $fecha_fin = $_GET['fecha_fin'] ?? '';
-$tecnico = $_GET['idc'] ?? '';
+$tecnico = $_GET['tecnico'] ?? '';
 
-// Lista de técnicos únicos con servicios
-$tecnicos = $pdo->query("SELECT DISTINCT idc FROM servicios_omnipos WHERE idc IS NOT NULL")->fetchAll(PDO::FETCH_COLUMN);
-
-// Armado de condición para filtros
-$where = "WHERE 1=1";
+$where = 'WHERE 1=1';
 $params = [];
 
 if ($fecha_inicio) {
@@ -24,123 +21,73 @@ if ($tecnico) {
     $params[] = $tecnico;
 }
 
-// KPIs
-$total = $pdo->query("SELECT COUNT(*) FROM servicios_omnipos")->fetchColumn();
-$porAsignar = $pdo->query("SELECT COUNT(*) FROM servicios_omnipos WHERE estatus = 'Por Asignar'")->fetchColumn();
-$enRuta = $pdo->query("SELECT COUNT(*) FROM servicios_omnipos WHERE estatus = 'En Ruta'")->fetchColumn();
-$historico = $pdo->query("SELECT COUNT(*) FROM servicios_omnipos WHERE estatus = 'Histórico'")->fetchColumn();
+// KPI Totales
+$kpiQuery = "SELECT 
+    COUNT(*) AS total,
+    SUM(CASE WHEN estatus = 'Histórico' THEN 1 ELSE 0 END) AS concluidos,
+    SUM(CASE WHEN DATE(fecha_cita) = CURDATE() THEN 1 ELSE 0 END) AS citas_hoy,
+    SUM(CASE WHEN DATE(fecha_cita) = CURDATE() + INTERVAL 1 DAY THEN 1 ELSE 0 END) AS citas_manana
+    FROM servicios_omnipos $where";
 
-// Citas
-$hoy = date('Y-m-d');
-$maniana = date('Y-m-d', strtotime('+1 day'));
+$stmt = $pdo->prepare($kpiQuery);
+$stmt->execute($params);
+$kpi = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$citasHoy = $pdo->prepare("SELECT COUNT(*) FROM servicios_omnipos WHERE fecha_cita = ?");
-$citasHoy->execute([$hoy]);
-$citasHoy = $citasHoy->fetchColumn();
-
-$citasManiana = $pdo->prepare("SELECT COUNT(*) FROM servicios_omnipos WHERE fecha_cita = ?");
-$citasManiana->execute([$maniana]);
-$citasManiana = $citasManiana->fetchColumn();
-
-// Gráfica de servicios históricos
+// Gráfica
 $graficaQuery = "
-    SELECT DATE(fecha_atencion) AS fecha, COUNT(*) AS total
+    SELECT DATE(fecha_inicio) AS fecha, COUNT(*) AS total
     FROM servicios_omnipos
-    WHERE estatus = 'Histórico'
-    " . ($where !== "WHERE 1=1" ? $where : "AND fecha_atencion >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)") . "
-    GROUP BY DATE(fecha_atencion)
+    $where
+    GROUP BY DATE(fecha_inicio)
     ORDER BY fecha ASC
 ";
+
 $stmt = $pdo->prepare($graficaQuery);
 $stmt->execute($params);
-$grafica = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$fechas = array_column($grafica, 'fecha');
-$totales = array_column($grafica, 'total');
+$grafica_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
-<h2 class="text-xl font-bold text-gray-800 mb-6">📊 Resumen de Servicios</h2>
 
 <!-- Filtros -->
 <form method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-  <div>
-    <label class="text-sm font-semibold text-gray-700">Fecha Inicio</label>
-    <input type="date" name="fecha_inicio" value="<?= htmlspecialchars($fecha_inicio) ?>" class="w-full rounded border p-2 text-sm">
-  </div>
-  <div>
-    <label class="text-sm font-semibold text-gray-700">Fecha Fin</label>
-    <input type="date" name="fecha_fin" value="<?= htmlspecialchars($fecha_fin) ?>" class="w-full rounded border p-2 text-sm">
-  </div>
-  <div>
-    <label class="text-sm font-semibold text-gray-700">Técnico</label>
-    <select name="idc" class="w-full rounded border p-2 text-sm">
-      <option value="">Todos</option>
-      <?php foreach ($tecnicos as $idc): ?>
-        <option value="<?= htmlspecialchars($idc) ?>" <?= $tecnico === $idc ? 'selected' : '' ?>>
-          <?= htmlspecialchars($idc) ?>
-        </option>
-      <?php endforeach; ?>
-    </select>
-  </div>
-  <div class="flex items-end">
-    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm w-full">
-      Aplicar Filtros
-    </button>
-  </div>
+    <div>
+        <label class="text-sm font-medium text-gray-700">Fecha inicio</label>
+        <input type="date" name="fecha_inicio" value="<?= htmlspecialchars($fecha_inicio) ?>" class="w-full rounded border-gray-300 p-2 text-sm">
+    </div>
+    <div>
+        <label class="text-sm font-medium text-gray-700">Fecha fin</label>
+        <input type="date" name="fecha_fin" value="<?= htmlspecialchars($fecha_fin) ?>" class="w-full rounded border-gray-300 p-2 text-sm">
+    </div>
+    <div>
+        <label class="text-sm font-medium text-gray-700">Técnico</label>
+        <input type="text" name="tecnico" value="<?= htmlspecialchars($tecnico) ?>" placeholder="Nombre IDC" class="w-full rounded border-gray-300 p-2 text-sm">
+    </div>
+    <div class="flex items-end justify-end">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded text-sm">Filtrar</button>
+    </div>
 </form>
 
 <!-- KPIs -->
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-  <div class="bg-white p-4 rounded-xl shadow text-center">
-    <div class="text-sm text-gray-500">Total</div>
-    <div class="text-2xl font-bold text-gray-800"><?= $total ?></div>
-  </div>
-  <div class="bg-white p-4 rounded-xl shadow text-center">
-    <div class="text-sm text-yellow-600">Por Asignar</div>
-    <div class="text-2xl font-bold text-yellow-600"><?= $porAsignar ?></div>
-  </div>
-  <div class="bg-white p-4 rounded-xl shadow text-center">
-    <div class="text-sm text-blue-600">En Ruta</div>
-    <div class="text-2xl font-bold text-blue-600"><?= $enRuta ?></div>
-  </div>
-  <div class="bg-white p-4 rounded-xl shadow text-center">
-    <div class="text-sm text-green-600">Histórico</div>
-    <div class="text-2xl font-bold text-green-600"><?= $historico ?></div>
-  </div>
-  <div class="bg-white p-4 rounded-xl shadow text-center col-span-2">
-    <div class="text-sm text-purple-600">Citas Hoy</div>
-    <div class="text-2xl font-bold text-purple-600"><?= $citasHoy ?></div>
-  </div>
-  <div class="bg-white p-4 rounded-xl shadow text-center col-span-2">
-    <div class="text-sm text-pink-600">Citas Mañana</div>
-    <div class="text-2xl font-bold text-pink-600"><?= $citasManiana ?></div>
-  </div>
+<div class="grid grid-cols-3 gap-4 mb-6">
+    <div class="bg-white shadow p-4 rounded text-center">
+        <div class="text-gray-500 text-sm">Total Servicios</div>
+        <div class="text-2xl font-bold text-blue-600"><?= $kpi['total'] ?? 0 ?></div>
+    </div>
+    <div class="bg-white shadow p-4 rounded text-center">
+        <div class="text-gray-500 text-sm">Concluidos</div>
+        <div class="text-2xl font-bold text-green-600"><?= $kpi['concluidos'] ?? 0 ?></div>
+    </div>
+    <div class="bg-white shadow p-4 rounded text-center">
+        <div class="text-gray-500 text-sm">Citas Hoy / Mañana</div>
+        <div class="text-xl font-semibold text-yellow-600"><?= $kpi['citas_hoy'] ?? 0 ?> / <?= $kpi['citas_manana'] ?? 0 ?></div>
+    </div>
 </div>
 
-<!-- Gráfica -->
-<div class="bg-white p-6 rounded-xl shadow">
-  <h3 class="text-lg font-semibold mb-4">📈 Servicios Atendidos (últimos días)</h3>
-  <canvas id="grafica_servicios" height="100"></canvas>
+<!-- Gráfica (puedes usar Chart.js u otra librería, esto es ejemplo textual) -->
+<div class="bg-white p-4 rounded shadow">
+    <h3 class="text-lg font-bold mb-2">📊 Servicios por Día</h3>
+    <ul class="text-sm text-gray-700 space-y-1">
+        <?php foreach ($grafica_data as $row): ?>
+            <li><?= $row['fecha'] ?>: <?= $row['total'] ?> servicios</li>
+        <?php endforeach; ?>
+    </ul>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-const ctx = document.getElementById('grafica_servicios').getContext('2d');
-new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: <?= json_encode($fechas) ?>,
-        datasets: [{
-            label: 'Servicios concluidos',
-            data: <?= json_encode($totales) ?>,
-            backgroundColor: '#3b82f6'
-        }]
-    },
-    options: {
-        responsive: true,
-        scales: {
-            y: { beginAtZero: true }
-        }
-    }
-});
-</script>
