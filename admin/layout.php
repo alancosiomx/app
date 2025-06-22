@@ -39,12 +39,6 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
     <!-- Contenido -->
 <main class="p-4">
   <?php
-  // Mostrar KPIs antes del contenido del tab
-  $ruta_kpis = __DIR__ . '/kpis_servicios.php';
-  if (file_exists($ruta_kpis)) {
-      include $ruta_kpis;
-  }
-
   // Cargar el contenido dinámico
   if (isset($contenido) && file_exists($contenido)) {
       include $contenido;
