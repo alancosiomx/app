@@ -26,6 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Obtener registros
 $precios = $pdo->query("SELECT * FROM precios_idc ORDER BY creado_en DESC")->fetchAll(PDO::FETCH_ASSOC);
 $tecnicos = $pdo->query("SELECT DISTINCT nombre FROM usuarios WHERE roles LIKE '%idc%' ORDER BY nombre")->fetchAll(PDO::FETCH_COLUMN);
+
+$contenido = __FILE__;
+require_once __DIR__ . '/../layout.php';
 ?>
 
 <h1 class="text-xl font-bold mb-4 text-blue-700">⚙️ Configurar Precios por Técnico</h1>
