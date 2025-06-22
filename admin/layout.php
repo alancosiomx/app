@@ -15,45 +15,54 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php require_once __DIR__ . '/includes/head.php'; ?>
 </head>
-<body>
+<body class="bg-gray-100 text-gray-800 min-h-screen">
 
-<!-- Barra superior -->
-<div class="top-bar">
-  <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-  <span>
-    👋 Bienvenido, <strong><?= htmlspecialchars($usuario) ?></strong>. Este es tu panel de administración.
-  </span>
-</div>
+<!-- Layout tipo dashboard -->
+<div class="flex min-h-screen">
 
-<!-- Sidebar -->
-<?php require_once __DIR__ . '/includes/menu.php'; ?>
+  <!-- Sidebar -->
+  <aside class="w-64 bg-white border-r hidden md:block">
+    <?php require_once __DIR__ . '/includes/menu.php'; ?>
+  </aside>
 
-<!-- Contenido principal -->
-<div class="main-content">
-  <?php
-  if (isset($contenido) && file_exists($contenido)) {
-      include $contenido;
-  } else {
-      echo '<div class="alert alert-danger">❌ Error: contenido no encontrado.</div>';
-  }
-  ?>
+  <!-- Contenido -->
+  <div class="flex-1 flex flex-col">
+
+    <!-- Top bar -->
+    <header class="bg-white shadow sticky top-0 z-50">
+      <div class="flex items-center justify-between px-4 py-3">
+        <button onclick="toggleSidebar()" class="text-xl md:hidden">☰</button>
+        <span class="text-sm text-gray-700">👋 Bienvenido, <strong><?= htmlspecialchars($usuario) ?></strong></span>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="p-4">
+      <?php
+      if (isset($contenido) && file_exists($contenido)) {
+          include $contenido;
+      } else {
+          echo '<div class="text-red-600 font-semibold">❌ Error: contenido no encontrado.</div>';
+      }
+      ?>
+    </main>
+
+  </div>
 </div>
 
 <script>
   function toggleSidebar() {
-    document.querySelector('.sidebar').classList.toggle('collapsed');
-    document.querySelector('.main-content').classList.toggle('collapsed');
+    const aside = document.querySelector('aside');
+    aside?.classList.toggle('hidden');
   }
 </script>
 
-<?php
-require_once __DIR__ . '/includes/foot.php';
-ob_end_flush(); // ← cierra buffer de salida
-?>
+<?php require_once __DIR__ . '/includes/foot.php'; ?>
+<?php ob_end_flush(); ?>
+
 <?php if (str_contains($_SERVER['REQUEST_URI'], '/servicios/')): ?>
   <!-- Modal dinámico -->
   <div id="modal-container"></div>
-
   <script>
   document.addEventListener('DOMContentLoaded', () => {
     document.body.addEventListener('click', function(e) {
