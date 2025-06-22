@@ -32,7 +32,7 @@ foreach ($resultados as $ticket => $resultado) {
 
         logServicio($pdo, $ticket, 'Reasignación', $_SESSION['usuario_nombre'], "Devuelto a Por Asignar");
     } else {
-        $sql = "UPDATE servicios_omnipos SET estatus = 'Histórico', conclusion = ?, fecha_atencion = NOW() WHERE ticket = ?";
+$sql = "UPDATE servicios_omnipos SET estatus = 'Histórico', resultado = ?, fecha_atencion = NOW() WHERE ticket = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$resultado, $ticket]);
 
