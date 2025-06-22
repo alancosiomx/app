@@ -47,7 +47,7 @@ if (
         );
     }
     session_destroy();
-    header("Location: login.php?error=session_expired");
+    header("Location: /admin/servicios/login.php?error=session_expired");
     exit;
 }
 
