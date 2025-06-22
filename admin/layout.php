@@ -21,12 +21,12 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 <div class="flex min-h-screen">
 
   <!-- Sidebar -->
-<aside id="sidebar" class="w-64 bg-white border-r transition-transform duration-300 transform md:translate-x-0 -translate-x-full md:relative fixed h-full z-40">
+  <aside id="sidebar" class="w-64 bg-white border-r transition-transform duration-300 transform md:translate-x-0 -translate-x-full md:relative fixed h-full z-40">
     <?php require_once __DIR__ . '/includes/menu.php'; ?>
   </aside>
 
   <!-- Contenido -->
-  <div class="flex-1 flex flex-col">
+  <div class="flex-1 flex flex-col md:ml-64">
 
     <!-- Top bar -->
     <header class="bg-white shadow sticky top-0 z-50">
@@ -52,9 +52,9 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
 <script>
   function toggleSidebar() {
-  const sidebar = document.getElementById('sidebar');
-  sidebar.classList.toggle('-translate-x-full');
-}
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('-translate-x-full');
+  }
 </script>
 
 <?php require_once __DIR__ . '/includes/foot.php'; ?>
