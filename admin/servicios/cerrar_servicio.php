@@ -8,34 +8,27 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
-$resultados = $_POST['resultados'] ?? [];
+$tickets = $_POST['tickets'] ?? [];
+$resultado = trim($_POST['resultado'] ?? '');
 
-if (empty($resultados)) {
-    $_SESSION['error'] = "No se recibió información para procesar.";
+if (empty($tickets) || !in_array($resultado, ['Exito', 'Rechazo', 'Reasignar'])) {
+    $_SESSION['error'] = "Debes seleccionar al menos un ticket y un resultado válido.";
     header("Location: index.php?tab=en_ruta");
     exit();
 }
 
 $actualizados = 0;
 
-foreach ($resultados as $ticket => $resultado) {
-    $resultado = trim($resultado);
-
-    if (!in_array($resultado, ['Exito', 'Rechazo', 'Reasignar'])) {
-        continue;
-    }
-
+foreach ($tickets as $ticket) {
     if ($resultado === 'Reasignar') {
         $sql = "UPDATE servicios_omnipos SET estatus = 'Por Asignar', tecnico_id = NULL, idc = NULL WHERE ticket = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$ticket]);
-
         logServicio($pdo, $ticket, 'Reasignación', $_SESSION['usuario_nombre'], "Devuelto a Por Asignar");
     } else {
-$sql = "UPDATE servicios_omnipos SET estatus = 'Histórico', resultado = ?, fecha_atencion = NOW() WHERE ticket = ?";
+        $sql = "UPDATE servicios_omnipos SET estatus = 'Histórico', resultado = ?, fecha_atencion = NOW() WHERE ticket = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$resultado, $ticket]);
-
         logServicio($pdo, $ticket, 'Cierre', $_SESSION['usuario_nombre'], "Resultado: $resultado");
     }
 
