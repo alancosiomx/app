@@ -27,19 +27,34 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
       </tr>
     </thead>
     <tbody class="divide-y divide-gray-200">
-      <?php foreach ($servicios as $s): ?>
-        <tr class="hover:bg-gray-50">
-          <td class="px-4 py-2"><?= htmlspecialchars($s['ticket']) ?></td>
-          <td class="px-4 py-2"><?= htmlspecialchars($s['afiliacion']) ?></td>
-          <td class="px-4 py-2"><?= htmlspecialchars($s['comercio']) ?></td>
-          <td class="px-4 py-2"><?= htmlspecialchars($s['ciudad']) ?></td>
-          <td class="px-4 py-2"><?= htmlspecialchars($s['servicio']) ?></td>
-          <td class="px-4 py-2 whitespace-pre-line"><?= nl2br(htmlspecialchars($s['comentarios'])) ?></td>
-          <td class="px-4 py-2 text-center">
-            <a href="#" class="ver-detalle text-blue-600 hover:underline" data-ticket="<?= $s['ticket'] ?>">🔍</a>
-          </td>
-        </tr>
-      <?php endforeach; ?>
-    </tbody>
+  <?php foreach ($servicios as $s): ?>
+    <tr class="hover:bg-gray-50">
+      <td class="px-4 py-2"><?= htmlspecialchars($s['ticket']) ?></td>
+      <td class="px-4 py-2"><?= htmlspecialchars($s['afiliacion']) ?></td>
+      <td class="px-4 py-2"><?= htmlspecialchars($s['comercio']) ?></td>
+      <td class="px-4 py-2"><?= htmlspecialchars($s['ciudad']) ?></td>
+      <td class="px-4 py-2"><?= htmlspecialchars($s['servicio']) ?></td>
+      <td class="px-4 py-2 whitespace-pre-line"><?= nl2br(htmlspecialchars($s['comentarios'])) ?></td>
+      <td class="px-4 py-2 text-center">
+        <a href="#" class="ver-detalle text-blue-600 hover:underline mb-2 block" data-ticket="<?= $s['ticket'] ?>">🔍</a>
+
+        <!-- Formulario para concluir -->
+        <form method="POST" action="acciones/cerrar_servicio.php" class="space-y-1">
+          <input type="hidden" name="ticket" value="<?= htmlspecialchars($s['ticket']) ?>">
+
+          <select name="resultado" required class="w-full text-sm px-2 py-1 border border-gray-300 rounded">
+            <option value="">-- Resultado --</option>
+            <option value="Éxito">✅ Éxito</option>
+            <option value="Rechazo">❌ Rechazo</option>
+            <option value="Reasignar">🔁 Reasignar</option>
+          </select>
+
+          <button type="submit" class="w-full mt-1 bg-blue-600 text-white text-xs px-2 py-1 rounded hover:bg-blue-700">Guardar</button>
+        </form>
+      </td>
+    </tr>
+  <?php endforeach; ?>
+</tbody>
+
   </table>
 </div>
