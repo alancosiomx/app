@@ -1,6 +1,6 @@
 <div class="sidebar">
-  <h4 class="text-center">OMNIPOS</h4>
-  <a href="/admin/dashboard.php">🏠 Dashboard</a>
+  <h4 class="text-center">Administrador de Servicios</h4>
+  <a href="/admin/">🏠 Inicio</a>
   <a href="/admin/servicios/uploader">📂 Cargar Archivos</a>
   <a href="/admin/servicios">📋 Gestión de Servicios</a>
   <a href="/admin/inventario/">📦 Inventario</a>
