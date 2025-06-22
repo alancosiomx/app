@@ -57,9 +57,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Redirección según rol
             if (in_array('admin', $roles)) {
-                header('Location: ../admin/index.php');
+                header('Location: ../admin/');
             } elseif (in_array('idc', $roles)) {
-                header('Location: ../tecnico/index.php');
+                header('Location: ../tecnico/');
             } elseif (in_array('coordinador', $roles)) {
                 header('Location: ../coordinador/home.php');
             } elseif (in_array('finanzas', $roles)) {
