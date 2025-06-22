@@ -11,7 +11,7 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Panel OMNIPOS</title>
+  <title>Panel Administrador</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php require_once __DIR__ . '/includes/head.php'; ?>
 </head>
