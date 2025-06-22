@@ -6,4 +6,5 @@ define('TABS_FINANZAS', [
   'pagos'     => '📦 Pagos por Técnico',
   'viaticos'  => '🧾 Viáticos',
   'historial' => '📂 Historial de Pagos',
+  'precios' => '⚙️ Precios por Técnico',
 ]);
