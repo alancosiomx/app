@@ -18,18 +18,18 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 <body class="bg-gray-100 text-gray-800 min-h-screen">
 
 <!-- Layout tipo dashboard -->
-<div class="flex min-h-screen">
+<div class="min-h-screen">
 
-  <!-- Sidebar -->
-  <aside id="sidebar" class="w-64 bg-white border-r transition-transform duration-300 transform md:translate-x-0 -translate-x-full md:relative fixed h-full z-40">
+  <!-- Sidebar fijo en desktop -->
+  <div class="hidden md:block fixed inset-y-0 left-0 w-64 bg-white border-r z-40">
     <?php require_once __DIR__ . '/includes/menu.php'; ?>
-  </aside>
+  </div>
 
-  <!-- Contenido -->
-<div class="flex-1 flex flex-col pl-0 md:pl-64 transition-all duration-300">
+  <!-- Contenido principal con padding a la izquierda para evitar solaparse -->
+  <div class="md:pl-64">
 
     <!-- Top bar -->
-    <header class="bg-white shadow sticky top-0 z-50">
+    <header class="bg-white shadow sticky top-0 z-30">
       <div class="flex items-center justify-between px-4 py-3">
         <button onclick="toggleSidebar()" class="text-xl md:hidden">☰</button>
         <span class="text-sm text-gray-700">👋 Bienvenido, <strong><?= htmlspecialchars($usuario) ?></strong></span>
