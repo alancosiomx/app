@@ -1,6 +1,6 @@
 <aside style="width: 250px; height: 100vh; position: fixed; top: 0; left: 0; background-color: #fff; border-right: 1px solid #dee2e6;">
     <div class="p-4">
-        <h3>OMNIPOS</h3>
+        <h3>ADMINISTRADOR DE SERVICIOS</h3>
     </div>
     <ul class="list-unstyled px-3">
         <li><a href="/admin/" class="d-block py-2 text-decoration-none">Inicio</a></li>
