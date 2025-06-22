@@ -13,6 +13,8 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <h2 class="text-xl font-semibold text-gray-800 mb-4">🛠 Servicios En Ruta</h2>
 
+<h2 class="text-xl font-semibold text-gray-800 mb-4">🛠 Servicios En Ruta</h2>
+
 <form method="POST" action="cerrar_servicio.php">
   <div class="overflow-x-auto bg-white shadow rounded-xl">
     <table class="min-w-full text-sm text-left text-gray-700">
@@ -23,6 +25,7 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <th class="px-4 py-3">Comercio</th>
           <th class="px-4 py-3">Ciudad</th>
           <th class="px-4 py-3">Servicio</th>
+          <th class="px-4 py-3">Técnico</th> <!-- NUEVA COLUMNA -->
           <th class="px-4 py-3">Comentarios</th>
           <th class="px-4 py-3 text-center">Acciones</th>
         </tr>
@@ -35,6 +38,7 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <td class="px-4 py-2"><?= htmlspecialchars($s['comercio']) ?></td>
             <td class="px-4 py-2"><?= htmlspecialchars($s['ciudad']) ?></td>
             <td class="px-4 py-2"><?= htmlspecialchars($s['servicio']) ?></td>
+            <td class="px-4 py-2"><?= htmlspecialchars($s['idc']) ?></td> <!-- NUEVA COLUMNA -->
             <td class="px-4 py-2 whitespace-pre-line"><?= nl2br(htmlspecialchars($s['comentarios'])) ?></td>
             <td class="px-4 py-2 text-center space-y-1">
               <a href="#" class="ver-detalle text-blue-600 hover:underline block mb-1" data-ticket="<?= $s['ticket'] ?>">🔍</a>
