@@ -30,6 +30,16 @@ $tecnicos = $pdo->query("SELECT DISTINCT nombre FROM usuarios WHERE roles LIKE '
 
 <h1 class="text-xl font-bold mb-4 text-blue-700">⚙️ Configurar Precios por Técnico</h1>
 
+<div class="mb-6">
+  <nav class="flex gap-2 text-sm font-medium text-gray-600 border-b pb-2">
+    <a href="?vista=cobros" class="<?= $current_tab === 'cobros' ? 'text-blue-700 font-bold' : 'hover:text-blue-700' ?>">💳 Reporte de Cobros</a>
+    <a href="?vista=pagos" class="<?= $current_tab === 'pagos' ? 'text-blue-700 font-bold' : 'hover:text-blue-700' ?>">📦 Pagos por Técnico</a>
+    <a href="?vista=viaticos" class="<?= $current_tab === 'viaticos' ? 'text-blue-700 font-bold' : 'hover:text-blue-700' ?>">🧾 Viáticos</a>
+    <a href="?vista=historial" class="<?= $current_tab === 'historial' ? 'text-blue-700 font-bold' : 'hover:text-blue-700' ?>">📂 Historial de Pagos</a>
+    <a href="?vista=precios" class="<?= $current_tab === 'precios' ? 'text-blue-700 font-bold' : 'hover:text-blue-700' ?>">⚙️ Precios por Técnico</a>
+  </nav>
+</div>
+
 <form method="POST" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 bg-white p-4 rounded-xl shadow">
   <div>
     <label class="block text-sm font-medium text-gray-600">Técnico</label>
