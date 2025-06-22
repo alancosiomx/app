@@ -4,7 +4,6 @@
 require_once __DIR__ . '/../init.php';
 require_once __DIR__ . '/constants.php';
 
-session_start();
 $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
 // Definir la vista actual
