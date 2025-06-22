@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once __DIR__ . '/../../init.php';
-require_once __DIR__ . '/../../config/constants.php'; // 👈 Asegura que exista la constante
+require_once __DIR__ . '/constants.php'; // 👈 Asegura que exista la constante
 
 $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
