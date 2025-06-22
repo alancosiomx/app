@@ -22,33 +22,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['archivo']) && isset(
 }
 ?>
 
-<div class="container mt-5">
-    <h2>Cargar Servicios</h2>
-    <form method="POST" enctype="multipart/form-data" class="mb-4">
-        <div class="mb-3">
-            <label for="banco" class="form-label">Selecciona el banco:</label>
-            <select name="banco" id="banco" class="form-select" required>
+<div class="max-w-2xl mx-auto mt-10 bg-white p-6 rounded-lg shadow">
+    <h2 class="text-2xl font-bold mb-6 text-gray-800">📤 Cargar Servicios</h2>
+
+    <form method="POST" enctype="multipart/form-data" class="space-y-6">
+        <div>
+            <label for="banco" class="block text-sm font-medium text-gray-700">Selecciona el banco:</label>
+            <select name="banco" id="banco" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm p-2" required>
                 <option value="">-- Selecciona --</option>
                 <?php foreach ($bancos as $b) : ?>
                     <option value="<?= $b ?>"><?= strtoupper($b) ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
-        <div class="mb-3">
-            <label for="archivo" class="form-label">Archivo CSV o Excel:</label>
-            <input type="file" name="archivo" id="archivo" class="form-control" accept=".csv,.xlsx" required>
+
+        <div>
+            <label for="archivo" class="block text-sm font-medium text-gray-700">Archivo CSV o Excel:</label>
+            <input type="file" name="archivo" id="archivo" accept=".csv,.xlsx" required
+                   class="mt-1 block w-full text-sm text-gray-700 border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500">
         </div>
-        <button type="submit" class="btn btn-primary">Cargar archivo</button>
+
+        <div class="flex justify-end">
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+                Cargar archivo
+            </button>
+        </div>
     </form>
 
     <?php if ($mensaje): ?>
-        <div class="alert alert-info"><?= $mensaje ?></div>
+        <div class="mt-4 p-3 bg-blue-100 text-blue-800 rounded shadow text-sm"><?= $mensaje ?></div>
     <?php endif; ?>
 
     <?php if ($archivoProcesado): ?>
-        <form method="POST" action="importar_omnipos.php">
+        <form method="POST" action="importar_omnipos.php" class="mt-6 text-right">
             <input type="hidden" name="banco" value="<?= htmlspecialchars($_POST['banco']) ?>">
-            <button type="submit" class="btn btn-success">✅ Importar a OMNIPOS</button>
+            <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+                ✅ Importar a OMNIPOS
+            </button>
         </form>
     <?php endif; ?>
 </div>
