@@ -1,84 +1,67 @@
 <?php
 require_once __DIR__ . '/../../config.php';
 
-// Obtener servicios por asignar
+// Obtener servicios POR ASIGNAR
 $stmt = $pdo->prepare("SELECT * FROM servicios_omnipos WHERE estatus = 'Por Asignar' ORDER BY fecha_inicio DESC");
 $stmt->execute();
 $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Obtener técnicos activos
-// Obtener técnicos activos con rol "idc"
-$tecnicos = $pdo->query("
-    SELECT u.id, u.nombre
-    FROM usuarios u
-    JOIN usuarios_roles ur ON ur.usuario_id = u.id
-    WHERE ur.rol = 'idc' AND u.activo = 1
-")->fetchAll(PDO::FETCH_ASSOC);
+$tecnicos = $pdo->query("SELECT id, nombre FROM usuarios WHERE activo = 1 AND roles LIKE '%idc%'")->fetchAll(PDO::FETCH_ASSOC);
+
+// Conteo para dashboard
+$total = count($servicios);
+$citasHoy = array_filter($servicios, fn($s) => $s['fecha_cita'] === date('Y-m-d'));
+$citasManiana = array_filter($servicios, fn($s) => $s['fecha_cita'] === date('Y-m-d', strtotime('+1 day')));
 ?>
-<?php include __DIR__ . '/../includes/tabs_servicios.php'; ?>
 
-<h3 class="mt-3">Servicios Por Asignar</h3>
-
-<form method="post" action="asignar_tecnico.php">
-  <div class="mb-3">
-    <label for="tecnico_id" class="form-label">Asignar al Técnico:</label>
-    <select name="tecnico_id" id="tecnico_id" class="form-select" required>
-      <option value="">Selecciona un técnico</option>
-      <?php foreach ($tecnicos as $t): ?>
-        <option value="<?= $t['id'] ?>"><?= htmlspecialchars($t['nombre']) ?></option>
-      <?php endforeach; ?>
-    </select>
+<!-- Dashboard resumen -->
+<div class="grid grid-cols-3 gap-2 text-center mb-4">
+  <div class="bg-blue-100 text-blue-800 p-3 rounded-xl">
+    <div class="text-sm font-semibold">Total</div>
+    <div class="text-xl font-bold"><?= $total ?></div>
   </div>
+  <div class="bg-yellow-100 text-yellow-800 p-3 rounded-xl">
+    <div class="text-sm font-semibold">Citas Hoy</div>
+    <div class="text-xl font-bold"><?= count($citasHoy) ?></div>
+  </div>
+  <div class="bg-orange-100 text-orange-800 p-3 rounded-xl">
+    <div class="text-sm font-semibold">Citas Mañana</div>
+    <div class="text-xl font-bold"><?= count($citasManiana) ?></div>
+  </div>
+</div>
 
-  <div class="table-responsive">
-    <table class="table table-bordered table-sm table-hover" id="tabla_por_asignar">
-      <thead class="table-light">
-  <tr>
-    <th><input type="checkbox" id="checkAll"></th>
-    <th>Ticket</th>
-    <th>Afiliación</th>
-    <th>Servicio</th>
-    <th>Comercio</th>
-    <th>Ciudad</th>
-    <th>CP</th>
-    <th>Tipo TPV</th>
-    <th>Modelo</th>
-    <th>Teléfono</th>
-    <th>Fecha Límite</th>
-    <th>IDC</th>
-    <th>Comentarios</th>
-    <th>🔍</th>
-  </tr>
-</thead>
-<tbody>
+<!-- Lista tipo tarjetas -->
+<div class="space-y-4">
   <?php foreach ($servicios as $s): ?>
-    <tr>
-      <td><input type="checkbox" name="tickets[]" value="<?= $s['ticket'] ?>"></td>
-      <td><?= htmlspecialchars($s['ticket']) ?></td>
-      <td><?= htmlspecialchars($s['afiliacion']) ?></td>
-      <td><?= htmlspecialchars($s['servicio']) ?></td>
-      <td><?= htmlspecialchars($s['comercio']) ?></td>
-      <td><?= htmlspecialchars($s['ciudad']) ?></td>
-      <td><?= htmlspecialchars($s['cp']) ?></td>
-      <td><?= htmlspecialchars($s['tipo_tpv']) ?></td>
-      <td><?= htmlspecialchars($s['modelo']) ?></td>
-      <td><?= htmlspecialchars($s['telefono_contacto_1']) ?></td>
-      <td><?= htmlspecialchars($s['fecha_limite']) ?></td>
-      <td><?= htmlspecialchars($s['idc']) ?></td>
-      <td><?= htmlspecialchars($s['comentarios']) ?></td>
-      <td><a href="#" class="ver-detalle" data-ticket="<?= $s['ticket'] ?>">🔍</a></td>
-    </tr>
+    <form method="post" action="asignar_tecnico.php" class="bg-white shadow rounded-xl p-4">
+      <div class="flex justify-between items-center">
+        <h3 class="font-bold text-lg">🎫 <?= htmlspecialchars($s['ticket']) ?></h3>
+        <?php if ($s['fecha_cita']): ?>
+          <span class="text-xs px-2 py-1 bg-green-100 text-green-700 rounded-full">CITA</span>
+        <?php endif; ?>
+      </div>
+
+      <p class="text-sm text-gray-600">
+        🏪 <strong><?= htmlspecialchars($s['comercio']) ?></strong><br>
+        📍 <?= htmlspecialchars($s['ciudad']) ?><br>
+        🧾 <?= htmlspecialchars($s['servicio']) ?><br>
+        💬 <?= nl2br(htmlspecialchars($s['comentarios'] ?? 'Sin comentarios')) ?>
+      </p>
+
+      <div class="flex flex-col gap-2 mt-3">
+        <input type="hidden" name="ticket" value="<?= $s['ticket'] ?>">
+        <select name="tecnico_id" required class="px-3 py-2 rounded-lg border border-gray-300">
+          <option value="">Asignar técnico</option>
+          <?php foreach ($tecnicos as $t): ?>
+            <option value="<?= $t['id'] ?>"><?= htmlspecialchars($t['nombre']) ?></option>
+          <?php endforeach; ?>
+        </select>
+        <div class="flex gap-2">
+          <button type="submit" class="text-sm px-3 py-1 bg-green-500 text-white rounded-full">✅ Asignar</button>
+          <a href="#" class="ver-detalle text-sm px-3 py-1 bg-blue-100 text-blue-800 rounded-full" data-ticket="<?= $s['ticket'] ?>">🔍 Detalle</a>
+        </div>
+      </div>
+    </form>
   <?php endforeach; ?>
-</tbody>
-
-  </div>
-
-  <button type="submit" class="btn btn-primary mt-3">Asignar Servicios</button>
-</form>
-
-<script>
-document.getElementById('checkAll').addEventListener('click', function () {
-  const checkboxes = document.querySelectorAll('input[name="tickets[]"]');
-  checkboxes.forEach(cb => cb.checked = this.checked);
-});
-</script>
+</div>
