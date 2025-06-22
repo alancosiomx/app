@@ -1,96 +1,70 @@
-<?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-ob_start(); // ← evita problemas con header()
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 
-$usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
-?>
+<script src="https://cdn.tailwindcss.com"></script> <style>
+  /* --- REGLAS CSS QUE SÍ DEBES MANTENER (si las usas) --- */
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Panel Administrador</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Solo Tailwind, sin Bootstrap -->
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 text-gray-800 min-h-screen">
-
-<!-- Layout tipo dashboard -->
-<div class="min-h-screen">
-
-  <!-- Sidebar fijo en desktop -->
-  <div class="hidden md:block fixed inset-y-0 left-0 w-64 bg-white border-r z-40">
-  </div>
-
-  <!-- Contenido principal con padding a la izquierda para evitar solaparse -->
-  <div class="md:pl-64">
-
-    <!-- Top bar -->
-    <header class="bg-white shadow sticky top-0 z-30">
-      <div class="flex items-center justify-between px-4 py-3">
-        <button onclick="toggleSidebar()" class="text-xl md:hidden">☰</button>
-        <span class="text-sm text-gray-700">👋 Bienvenido, <strong><?= htmlspecialchars($usuario) ?></strong></span>
-      </div>
-    </header>
-
-    <!-- Main content -->
-    <main class="p-4">
-      <?php
-      if (isset($contenido) && file_exists($contenido)) {
-          include $contenido;
-      } else {
-          echo '<div class="text-red-600 font-semibold">❌ Error: contenido no encontrado.</div>';
-      }
-      ?>
-    </main>
-
-  </div>
-</div>
-
-<script>
-  function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    sidebar.classList.toggle('-translate-x-full');
+  body {
+    margin: 0; /* Asegura que no haya márgenes por defecto del navegador */
+    background-color: #f9fafb; /* Color de fondo general */
+    /* Fuente: usa la que prefieras. Tailwind tiene sus propias clases de fuentes. */
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
-</script>
 
-<?php require_once __DIR__ . '/includes/foot.php'; ?>
-<?php ob_end_flush(); ?>
+  /*
+  Reglas para la barra superior (top-bar):
+  Si estás usando clases de Tailwind como 'bg-white shadow sticky top-0 z-30'
+  en tu <header> principal, entonces estas reglas de .top-bar pueden ser redundantes
+  o causar conflictos.
 
-<?php if (str_contains($_SERVER['REQUEST_URI'], '/servicios/')): ?>
-  <!-- Modal dinámico -->
-  <div id="modal-container"></div>
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    document.body.addEventListener('click', function(e) {
-      const btn = e.target.closest('.ver-detalle');
-      if (!btn) return;
+  Si quieres que tu barra superior sea fija y no la manejas totalmente con Tailwind,
+  podrías dejar esta parte, pero asegurándote de que no pelee con las clases
+  de 'sticky' o 'fixed' de Tailwind en el header de tu layout.php.
+  */
+  .top-bar {
+    /* position: fixed; */ /* COMENTA si tu <header> en layout.php ya usa 'sticky' o 'fixed' de Tailwind */
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #f1f5f9;
+    color: #0f172a;
+    padding: 12px 20px;
+    border-bottom: 1px solid #e2e8f0;
+    z-index: 1050;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-      e.preventDefault();
-      const ticket = btn.dataset.ticket;
+  /* Botón de alternar menú móvil (menu-toggle): */
+  /* Si el botón de tu header tiene la clase 'md:hidden', ya se oculta en escritorio. */
+  /* Esto controla cómo se ve el icono cuando está visible. */
+  .top-bar .menu-toggle {
+    display: none; /* Por defecto oculto, Tailwind lo muestra con 'md:hidden' */
+    font-size: 24px;
+    background: none;
+    border: none;
+  }
 
-      fetch('servicios/detalle_servicio.php?ticket=' + encodeURIComponent(ticket))
-        .then(res => res.text())
-        .then(html => {
-          const anterior = document.getElementById('modalDetalleServicio');
-          if (anterior) anterior.remove();
+  @media (max-width: 768px) {
+    .top-bar .menu-toggle {
+      display: block; /* Solo muestra el botón en pantallas pequeñas */
+    }
+  }
 
-          document.getElementById('modal-container').innerHTML = html;
+  /* --- REGLAS CSS QUE CASI SEGURO DEBES ELIMINAR O COMENTAR --- */
+  /* Estas reglas son las que causaban el conflicto con el layout de Tailwind */
+  /* que hemos puesto en layout.php */
 
-          const modal = new bootstrap.Modal(document.getElementById('modalDetalleServicio'));
-          modal.show();
-        })
-        .catch(err => {
-          alert('Error al cargar el detalle del servicio.');
-          console.error(err);
-        });
-    });
-  });
-  </script>
-<?php endif; ?>
+  /* .sidebar { ... }  <-- ¡ELIMINA O COMENTA ESTO! */
+  /* .sidebar.collapsed { ... } <-- ¡ELIMINA O COMENTA ESTO! */
+  /* .sidebar a { ... } <-- Puedes mantenerlo si son estilos de enlaces MUY específicos que Tailwind no cubre para tu menú */
+  /* .sidebar a:hover { ... } <-- Igual que lo anterior */
 
-</body>
-</html>
+  /* @media (max-width: 768px) { .sidebar { ... } } <-- ¡ELIMINA O COMENTA ESTO! */
+
+  /* .main-content { ... } <-- ¡ELIMINA O COMENTA ESTO! */
+  /* @media (max-width: 768px) { .main-content { ... } } <-- ¡ELIMINA O COMENTA ESTO! */
+  /* .main-content.collapsed { ... } <-- ¡ELIMINA O COMENTA ESTO! */
+
+</style>
