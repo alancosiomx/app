@@ -2,7 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-ob_start(); // ← evita problemas con header()
+ob_start(); // Evita problemas con header()
 
 $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 ?>
@@ -17,28 +17,18 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 </head>
 <body class="bg-gray-100 text-gray-800 min-h-screen">
 
-<!-- Layout tipo dashboard -->
-<div class="min-h-screen">
-
-  <!-- Sidebar fijo en desktop -->
-  <div class="hidden md:block fixed inset-y-0 left-0 w-64 bg-white border-r z-40">
+<div class="min-h-screen flex"> <div class="hidden md:block w-64 bg-white border-r z-40">
     <?php require_once __DIR__ . '/includes/menu.php'; ?>
   </div>
 
-  <!-- Contenido principal con padding a la izquierda para evitar solaparse -->
-  <div class="md:pl-64">
-
-    <!-- Top bar -->
-    <header class="bg-white shadow sticky top-0 z-30">
+  <div class="md:pl-64 flex flex-col flex-1"> <header class="bg-white shadow sticky top-0 z-30">
       <div class="flex items-center justify-between px-4 py-3">
         <button onclick="toggleSidebar()" class="text-xl md:hidden">☰</button>
-        <span class="text-sm text-gray-700">👋 Bienvenido, <strong><?= htmlspecialchars($usuario) ?></strong></span>
+        <span class="text-sm text-gray-700">👋 ¡Bienvenido, <strong><?= htmlspecialchars($usuario) ?></strong>!</span>
       </div>
     </header>
 
-    <!-- Main content -->
-    <main class="p-4">
-      <?php
+    <main class="p-4 flex-grow overflow-y-auto"> <?php
       if (isset($contenido) && file_exists($contenido)) {
           include $contenido;
       } else {
@@ -52,8 +42,10 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
 <script>
   function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    sidebar.classList.toggle('-translate-x-full');
+    const sidebar = document.querySelector('.w-64.bg-white.border-r'); // Seleccionamos el sidebar por sus clases
+    sidebar.classList.toggle('hidden'); // Para móvil, simplemente lo ocultamos/mostramos
+    // Si quieres un efecto de deslizamiento, necesitarías una clase como '-translate-x-full'
+    // y una clase para resetearla, además de un elemento específico para el sidebar móvil.
   }
 </script>
 
@@ -61,7 +53,6 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 <?php ob_end_flush(); ?>
 
 <?php if (str_contains($_SERVER['REQUEST_URI'], '/servicios/')): ?>
-  <!-- Modal dinámico -->
   <div id="modal-container"></div>
   <script>
   document.addEventListener('DOMContentLoaded', () => {
