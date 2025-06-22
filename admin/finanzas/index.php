@@ -1,17 +1,22 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// app/admin/finanzas/index.php
 
-require_once __DIR__ . '/../../init.php';
-require_once __DIR__ . '/constants.php'; // 👈 Asegura que exista la constante
+require_once __DIR__ . '/../init.php';
+require_once __DIR__ . '/../constants.php';
 
+session_start();
 $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
+// Definir la vista actual
 $vista = $_GET['vista'] ?? 'cobros';
-$permitidas = ['cobros', 'pagos', 'viaticos', 'historial'];
-if (!in_array($vista, $permitidas)) $vista = 'cobros';
 
-$contenido = __DIR__ . '/' . $vista . '.php';
+// Determinar qué contenido incluir
+$contenido = match ($vista) {
+    'pagos'     => __DIR__ . '/pagos.php',
+    'viaticos'  => __DIR__ . '/viaticos.php',
+    'historial' => __DIR__ . '/historial.php',
+    'precios'   => __DIR__ . '/precios.php',
+    default     => __DIR__ . '/cobros.php'
+};
 
 require_once __DIR__ . '/../layout.php';
