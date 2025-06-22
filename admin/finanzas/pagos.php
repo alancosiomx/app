@@ -75,7 +75,7 @@ if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
     $total = $row['total'];
     $pagados = $row['pagados'];
 
-    $stmt2 = $pdo->prepare("SELECT SUM(p.monto_pago) FROM servicios_omnipos s JOIN precios_idc p ON s.idc = p.idc AND s.servicio = p.tipo_servicio AND s.resultado = p.resultado WHERE s.idc = ? AND s.resultado IN ('Exito', 'Rechazo') AND s.fecha_atencion BETWEEN ? AND ?");
+    $stmt2 = $pdo->prepare("SELECT SUM(p.monto) FROM servicios_omnipos s JOIN precios_idc p ON s.idc = p.idc AND s.servicio = p.tipo_servicio AND s.resultado = p.resultado WHERE s.idc = ? AND s.resultado IN ('Exito', 'Rechazo') AND s.fecha_atencion BETWEEN ? AND ?");
     $stmt2->execute([$idc, $desde, $hasta]);
     $monto = $stmt2->fetchColumn() ?: 0;
 
