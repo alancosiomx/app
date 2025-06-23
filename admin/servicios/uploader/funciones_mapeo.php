@@ -154,8 +154,3 @@ function mapear_azteca($pdo) {
     return "🛠️ Aún no implementado.";
 }
 
-function obtener_columnas($pdo, $tabla)
-{
-    $stmt = $pdo->query("DESCRIBE $tabla");
-    return $stmt->fetchAll(PDO::FETCH_COLUMN);
-}
