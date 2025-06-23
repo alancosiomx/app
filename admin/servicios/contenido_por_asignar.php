@@ -6,7 +6,7 @@ $ciudad = $_GET['ciudad'] ?? '';
 $servicio = $_GET['servicio'] ?? '';
 $buscar = $_GET['buscar'] ?? '';
 
-// Construir la consulta base con filtros dinámicos
+// Query base
 $sql = "SELECT * FROM servicios_omnipos WHERE estatus = 'Por Asignar'";
 $params = [];
 
@@ -32,7 +32,6 @@ if ($buscar !== '') {
     $sql .= " AND (" . implode(" OR ", $filtros) . ")";
 }
 
-
 $sql .= " ORDER BY fecha_inicio DESC";
 $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
@@ -46,7 +45,7 @@ $tecnicos = $pdo->query("
     WHERE r.rol = 'idc' AND u.activo = 1
 ")->fetchAll(PDO::FETCH_ASSOC);
 
-// Listas únicas para filtros
+// Filtros
 $ciudades = $pdo->query("SELECT DISTINCT ciudad FROM servicios_omnipos WHERE estatus = 'Por Asignar' AND ciudad IS NOT NULL AND ciudad != '' ORDER BY ciudad")->fetchAll(PDO::FETCH_COLUMN);
 $serviciosUnicos = $pdo->query("SELECT DISTINCT servicio FROM servicios_omnipos WHERE estatus = 'Por Asignar' AND servicio IS NOT NULL AND servicio != '' ORDER BY servicio")->fetchAll(PDO::FETCH_COLUMN);
 ?>
@@ -87,7 +86,7 @@ $serviciosUnicos = $pdo->query("SELECT DISTINCT servicio FROM servicios_omnipos 
   </div>
 </form>
 
-<!-- Formulario de asignación múltiple -->
+<!-- Asignación múltiple -->
 <form action="asignar_tecnico.php" method="post">
   <div class="flex justify-between items-center mb-3">
     <div class="flex items-center gap-2">
@@ -105,56 +104,74 @@ $serviciosUnicos = $pdo->query("SELECT DISTINCT servicio FROM servicios_omnipos 
   </div>
 
   <div class="overflow-x-auto">
-    <table class="min-w-full table-auto bg-white shadow rounded-lg">
+    <table id="tabla-servicios" class="min-w-full table-auto bg-white shadow rounded-lg">
       <thead class="bg-gray-100 text-gray-700 text-sm">
-  <tr>
-    <th class="px-4 py-2"><input type="checkbox" id="checkAll" onclick="toggleAll(this)"></th>
-    <th class="px-4 py-2">Ticket</th>
-    <th class="px-4 py-2">Afiliación</th>
-    <th class="px-4 py-2">Comercio</th>
-    <th class="px-4 py-2">Ciudad</th>
-    <th class="px-4 py-2">Servicio</th>
-    <th class="px-4 py-2">Horario</th>
-    <th class="px-4 py-2">Fecha Inicio</th>
-    <th class="px-4 py-2">Fecha Límite</th>
-    <th class="px-4 py-2">VIM</th>
-    <th class="px-4 py-2">Comentarios</th>
-    <th class="px-4 py-2 text-center">🔍</th>
-  </tr>
-</thead>
-
-      <<tbody>
-  <?php foreach ($servicios as $s): ?>
-    <tr class="border-t text-sm hover:bg-gray-50">
-      <td class="px-4 py-2 text-center">
-        <input type="checkbox" name="tickets[]" value="<?= htmlspecialchars($s['ticket'] ?? '') ?>">
-      </td>
-      <td class="px-4 py-2 font-medium text-blue-600"><?= htmlspecialchars($s['ticket'] ?? '') ?></td>
-      <td class="px-4 py-2 text-center"><?= htmlspecialchars($s['afiliacion'] ?? '') ?></td>
-      <td class="px-4 py-2"><?= htmlspecialchars($s['comercio'] ?? '') ?></td>
-      <td class="px-4 py-2"><?= htmlspecialchars($s['ciudad'] ?? '') ?></td>
-      <td class="px-4 py-2"><?= htmlspecialchars($s['servicio'] ?? '') ?></td>
-      <td class="px-4 py-2"><?= htmlspecialchars($s['horario'] ?? '') ?></td>
-      <td class="px-4 py-2 text-xs"><?= htmlspecialchars($s['fecha_inicio'] ?? '') ?></td>
-      <td class="px-4 py-2 text-xs"><?= htmlspecialchars($s['fecha_limite'] ?? '') ?></td>
-      <td class="px-4 py-2"><?= htmlspecialchars($s['vim'] ?? '') ?></td>
-      <td class="px-4 py-2 text-gray-500 text-xs whitespace-pre-line">
-        <?= nl2br(htmlspecialchars($s['comentarios'] ?? '—')) ?>
-      </td>
-      <td class="px-4 py-2 text-center">
-        <a href="#" class="ver-detalle text-blue-500 hover:underline" data-ticket="<?= htmlspecialchars($s['ticket'] ?? '') ?>">🔍</a>
-      </td>
-    </tr>
-  <?php endforeach; ?>
-</tbody>
-
-
+        <tr>
+          <th class="px-4 py-2"><input type="checkbox" id="checkAll" onclick="toggleAll(this)"></th>
+          <th class="px-4 py-2">Ticket</th>
+          <th class="px-4 py-2">Afiliación</th>
+          <th class="px-4 py-2">Comercio</th>
+          <th class="px-4 py-2">Ciudad</th>
+          <th class="px-4 py-2">Servicio</th>
+          <th class="px-4 py-2">Horario</th>
+          <th class="px-4 py-2">Fecha Inicio</th>
+          <th class="px-4 py-2">Fecha Límite</th>
+          <th class="px-4 py-2">VIM</th>
+          <th class="px-4 py-2">Comentarios</th>
+          <th class="px-4 py-2 text-center">🔍</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($servicios as $s): ?>
+          <tr class="border-t text-sm hover:bg-gray-50">
+            <td class="px-4 py-2 text-center">
+              <input type="checkbox" name="tickets[]" value="<?= htmlspecialchars($s['ticket'] ?? '') ?>">
+            </td>
+            <td class="px-4 py-2 font-medium text-blue-600"><?= htmlspecialchars($s['ticket'] ?? '') ?></td>
+            <td class="px-4 py-2"><?= htmlspecialchars($s['afiliacion'] ?? '') ?></td>
+            <td class="px-4 py-2"><?= htmlspecialchars($s['comercio'] ?? '') ?></td>
+            <td class="px-4 py-2"><?= htmlspecialchars($s['ciudad'] ?? '') ?></td>
+            <td class="px-4 py-2"><?= htmlspecialchars($s['servicio'] ?? '') ?></td>
+            <td class="px-4 py-2"><?= htmlspecialchars($s['horario'] ?? '') ?></td>
+            <td class="px-4 py-2 text-xs"><?= htmlspecialchars($s['fecha_inicio'] ?? '') ?></td>
+            <td class="px-4 py-2 text-xs"><?= htmlspecialchars($s['fecha_limite'] ?? '') ?></td>
+            <td class="px-4 py-2"><?= htmlspecialchars($s['vim'] ?? '') ?></td>
+            <td class="px-4 py-2 text-xs text-gray-500 whitespace-pre-line"><?= nl2br(htmlspecialchars($s['comentarios'] ?? '—')) ?></td>
+            <td class="px-4 py-2 text-center">
+              <a href="#" class="ver-detalle text-blue-500 hover:underline" data-ticket="<?= htmlspecialchars($s['ticket'] ?? '') ?>">🔍</a>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      </tbody>
     </table>
   </div>
 </form>
+
+<!-- DataTables + scripts -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
 <script>
 function toggleAll(source) {
   document.querySelectorAll('input[name="tickets[]"]').forEach(cb => cb.checked = source.checked);
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+  $('#tabla-servicios').DataTable({
+    pageLength: 100,
+    order: [[1, 'desc']],
+    language: {
+      search: "Buscar:",
+      lengthMenu: "Mostrar _MENU_ registros",
+      zeroRecords: "No se encontraron coincidencias",
+      info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+      infoEmpty: "Mostrando 0 a 0 de 0 registros",
+      paginate: {
+        next: "Siguiente",
+        previous: "Anterior"
+      }
+    }
+  });
+});
 </script>
