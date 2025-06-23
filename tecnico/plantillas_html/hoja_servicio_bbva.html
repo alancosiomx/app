@@ -81,7 +81,122 @@
 </head>
 <body>
 <div class="contenido">
-  <!-- TODO el contenido HTML existente aquí -->
+  <table class="logos no-border">
+  <tr>
+    <td><img src="image1.jpeg" alt="BBVA"></td>
+    <td class="titulo">HOJA DE SERVICIO</td>
+    <td><img src="image3.png" alt="TEDISA"></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td colspan="5"><strong>TICKET:</strong> {{ticket}}</td>
+    <td colspan="5"><strong>AFILIACION PESOS:</strong> {{afiliacion}}</td>
+  </tr>
+  <tr>
+    <td colspan="5"><strong>FECHA:</strong> {{fecha}}</td>
+    <td colspan="5"><strong>TELEFONO:</strong> {{telefono_contacto_1}}</td>
+  </tr>
+  <tr>
+    <td colspan="10"><strong>COMERCIO:</strong> {{comercio}}</td>
+  </tr>
+  <tr>
+    <td colspan="10"><strong>REFERENCIAS:</strong> {{referencia}}</td>
+  </tr>
+  <tr>
+    <td colspan="10"><strong>CALLE Y NÚM:</strong> {{domicilio}}</td>
+  </tr>
+  <tr>
+    <td colspan="5"><strong>COLONIA:</strong> {{colonia}}</td>
+    <td colspan="5"><strong>C.P.:</strong> {{cp}}</td>
+  </tr>
+  <tr>
+    <td colspan="10"><strong>POBLACIÓN Y ESTADO:</strong> {{ciudad}}</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td colspan="10" class="center-text"><strong>TIPO DE SERVICIO:</strong> {{servicio}} ({{cantidad_insumos}})</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td colspan="5" class="center-text">INSTALACIÓN DE TPV</td>
+    <td colspan="5" class="center-text">FALLA DE TPV</td>
+  </tr>
+  <tr>
+    <td colspan="5" class="center-text">RETIRO DE TPV</td>
+    <td colspan="5" class="center-text">ENTREGA DE INSUMOS</td>
+  </tr>
+  <tr>
+    <td colspan="10" class="center-text">CAPACITACIÓN</td>
+  </tr>
+</table>
+
+<table>
+  <tr><td colspan="10"><strong>SOLUCIÓN</strong></td></tr>
+  <tr>
+    <td>INSTALACIÓN</td><td>SUSTITUCIÓN</td><td>REPROGRAMACIÓN</td><td>ENTREGA DE ROLLOS</td><td>ENTREGA DE PUBLICIDAD</td>
+    <td>CAMBIO DE SIM</td><td>CAMBIO DE ELIMINADOR</td><td>CAMBIO DE BATERÍA</td><td>RETIRO</td><td>CAPACITACIÓN</td>
+  </tr>
+  <tr><td colspan="10" class="center-text">INSTALACIÓN S/CAPACITACIÓN</td></tr>
+</table>
+
+<table>
+  <tr>
+    <td colspan="10"><strong>COMENTARIOS TÉCNICOS:</strong> {{comentarios}}</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td><strong>SERIE INSTALADA:</strong></td>
+    <td colspan="4">{{serie_instalada}}</td>
+    <td><strong>SERIE RETIRADA:</strong></td>
+    <td colspan="4">{{serie_retirada}}</td>
+  </tr>
+  <tr>
+    <td><strong>MODELO:</strong></td>
+    <td>MOVE 2500</td><td>VX 520</td><td>IWL</td><td>OTRO</td>
+    <td><strong>MODELO:</strong></td>
+    <td>MOVE 2500</td><td>VX 520</td><td>IWL</td><td>OTRO</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td><strong>CALIFICACIÓN DE IDC:</strong></td>
+    <td>MALO</td><td>BUENO</td><td>EXCELENTE</td>
+    <td><strong>CALIFICACIÓN DE TPV:</strong></td>
+    <td>MALO</td><td>BUENO</td><td>EXCELENTE</td>
+    <td><strong>¿SE SOLUCIONÓ EL PROBLEMA?</strong></td>
+    <td>SI ☐ / NO ☐</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td><strong>NOMBRE Y FIRMA DEL CLIENTE</strong></td>
+    <td class="firma-area"></td>
+    <td><strong>DESEA SU COMPROBANTE</strong></td>
+    <td>DIGITAL ☐</td>
+    <td>FÍSICO ☐</td>
+    <td>NO ☐</td>
+    <td><strong>NOMBRE Y FIRMA DEL IDC</strong></td>
+    <td class="firma-area">{{idc}}</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td colspan="10" class="center-text">
+      HACEMOS DE SU CONOCIMIENTO QUE EL SERVICIO QUE USTED RECIBE POR PARTE DE BBVA NO GENERA NINGUN COSTO ADICIONAL, ASI COMO LA TERMINAL Y LOS INSUMOS QUE USTED SOLICITE POR LO QUE EL PERSONAL QUE LO VISITA NO PUEDE REALIZAR NINGUN COBRO O SOLICITAR ALGÚN PAGO POR EL MISMO
+    </td>
+  </tr>
+</table>
 </div>
 <div class="espacio_qr">
   <!-- Aquí puede ir un QR o texto vertical -->
