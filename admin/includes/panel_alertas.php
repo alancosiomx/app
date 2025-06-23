@@ -7,7 +7,7 @@ $mañana = date('Y-m-d', strtotime('+1 day'));
 // Consulta general de servicios con fecha de cita válida
 $sql = "SELECT ticket, afiliacion, comercio, fecha_cita 
         FROM servicios_omnipos 
-        WHERE actual_status = 'En Ruta' 
+        WHERE status = 'En Ruta' 
         AND fecha_cita IS NOT NULL 
         AND (fecha_cita = :hoy OR fecha_cita = :maniana)";
 
