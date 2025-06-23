@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../init.php';
+require_once __DIR__ . '/../init.php';
 
 $hoy = date('Y-m-d');
 $mañana = date('Y-m-d', strtotime('+1 day'));
