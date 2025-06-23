@@ -11,7 +11,7 @@
 
     body {
       font-family: Arial, sans-serif;
-      font-size: 12px;
+      font-size: 11px;
       margin: 0;
       padding: 0;
       display: flex;
@@ -23,7 +23,7 @@
     }
 
     .espacio_qr {
-      width: 120px;
+      width: 100px;
       border-left: 1px dashed #000;
       padding-left: 5px;
     }
@@ -52,154 +52,207 @@
     }
 
     .logos img {
-      height: 25px;
-    }
-
-    .field-label {
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-
-    .center-text {
-      text-align: center;
-    }
-
-    .checkbox-cell::before {
-      content: "\2610";
-      font-size: 12px;
+      height: 30px;
     }
 
     .firma-area {
-      border: 1px solid #000;
       min-height: 40px;
-    }
-
-    .comment-box {
-      min-height: 80px;
+      border: 1px solid #000;
     }
   </style>
 </head>
 <body>
 <div class="contenido">
   <table class="logos no-border">
-  <tr>
-    <td><img src="image1.jpeg" alt="BBVA"></td>
-    <td class="titulo">HOJA DE SERVICIO</td>
-    <td><img src="image3.png" alt="TEDISA"></td>
-  </tr>
-</table>
+    <tr>
+      <td><img src="image1.jpeg" alt="BBVA"></td>
+      <td class="titulo">HOJA DE SERVICIO</td>
+      <td><img src="image3.png" alt="TEDISA"></td>
+    </tr>
+  </table>
 
-<table>
-  <tr>
-    <td colspan="5"><strong>TICKET:</strong> {{ticket}}</td>
-    <td colspan="5"><strong>AFILIACION PESOS:</strong> {{afiliacion}}</td>
-  </tr>
-  <tr>
-    <td colspan="5"><strong>FECHA:</strong> {{fecha}}</td>
-    <td colspan="5"><strong>TELEFONO:</strong> {{telefono_contacto_1}}</td>
-  </tr>
-  <tr>
-    <td colspan="10"><strong>COMERCIO:</strong> {{comercio}}</td>
-  </tr>
-  <tr>
-    <td colspan="10"><strong>REFERENCIAS:</strong> {{referencia}}</td>
-  </tr>
-  <tr>
-    <td colspan="10"><strong>CALLE Y NÚM:</strong> {{domicilio}}</td>
-  </tr>
-  <tr>
-    <td colspan="5"><strong>COLONIA:</strong> {{colonia}}</td>
-    <td colspan="5"><strong>C.P.:</strong> {{cp}}</td>
-  </tr>
-  <tr>
-    <td colspan="10"><strong>POBLACIÓN Y ESTADO:</strong> {{ciudad}}</td>
-  </tr>
-</table>
+  <table>
+    <tr>
+      <td rowspan="2"><strong>TICKET:</strong><br>{{ticket}}</td>
+      <td><strong>AFILIACION PESOS:</strong><br>{{afiliacion}}</td>
+    </tr>
+    <tr>
+      <td><strong>DLLS:</strong><br>__________</td>
+    </tr>
+    <tr><td colspan="2"><strong>COMERCIO:</strong><br>{{comercio}}</td></tr>
+    <tr><td colspan="2"><strong>CALLE Y NÚM:</strong><br>{{domicilio}}</td></tr>
+    <tr><td colspan="2"><strong>COLONIA:</strong><br>{{colonia}}</td></tr>
+    <tr>
+      <td><strong>C.P.:</strong> {{cp}}</td>
+      <td><strong>POBLACIÓN Y ESTADO:</strong> {{ciudad}}</td>
+    </tr>
+  </table>
 
-<table>
-  <tr>
-    <td colspan="10" class="center-text"><strong>TIPO DE SERVICIO:</strong> {{servicio}} ({{cantidad_insumos}})</td>
-  </tr>
-</table>
+  <table>
+    <tr><td><strong>FECHA:</strong> {{fecha}}</td></tr>
+    <tr><td><strong>TELEFONO:</strong> {{telefono_contacto_1}}</td></tr>
+    <tr><td><strong>REFERENCIAS:</strong> {{referencia}}</td></tr>
+  </table>
 
-<table>
-  <tr>
-    <td colspan="5" class="center-text">INSTALACIÓN DE TPV</td>
-    <td colspan="5" class="center-text">FALLA DE TPV</td>
-  </tr>
-  <tr>
-    <td colspan="5" class="center-text">RETIRO DE TPV</td>
-    <td colspan="5" class="center-text">ENTREGA DE INSUMOS</td>
-  </tr>
-  <tr>
-    <td colspan="10" class="center-text">CAPACITACIÓN</td>
-  </tr>
-</table>
+  <table>
+    <tr>
+      <td colspan="5" class="center-text"><strong>TIPO DE SERVICIO:</strong> {{servicio}} {{cantidad_insumos}}</td>
+    </tr>
+    <tr>
+      <td>INSTALACIÓN DE TPV</td>
+      <td>FALLA DE TPV</td>
+      <td>RETIRO DE TPV</td>
+      <td>ENTREGA DE INSUMOS</td>
+      <td>CAPACITACIÓN</td>
+    </tr>
+  </table>
 
-<table>
-  <tr><td colspan="10"><strong>SOLUCIÓN</strong></td></tr>
-  <tr>
-    <td>INSTALACIÓN</td><td>SUSTITUCIÓN</td><td>REPROGRAMACIÓN</td><td>ENTREGA DE ROLLOS</td><td>ENTREGA DE PUBLICIDAD</td>
-    <td>CAMBIO DE SIM</td><td>CAMBIO DE ELIMINADOR</td><td>CAMBIO DE BATERÍA</td><td>RETIRO</td><td>CAPACITACIÓN</td>
-  </tr>
-  <tr><td colspan="10" class="center-text">INSTALACIÓN S/CAPACITACIÓN</td></tr>
-</table>
+  <table>
+    <tr><td colspan="4"><strong>SOLUCIÓN</strong></td></tr>
+    <tr>
+      <td>INSTALACIÓN</td>
+      <td>SUSTITUCIÓN</td>
+      <td>REPROGRAMACIÓN</td>
+      <td>ENTREGA DE ROLLOS</td>
+    </tr>
+    <tr>
+      <td>ENTREGA DE PUBLICIDAD</td>
+      <td>CAMBIO DE SIM</td>
+      <td>CAMBIO DE ELIMINADOR</td>
+      <td>CAMBIO DE BATERÍA</td>
+    </tr>
+    <tr>
+      <td>RETIRO</td>
+      <td>CAPACITACIÓN</td>
+      <td colspan="2">INSTALACIÓN S/CAPACITACIÓN</td>
+    </tr>
+  </table>
 
-<table>
-  <tr>
-    <td colspan="10"><strong>COMENTARIOS TÉCNICOS:</strong> {{comentarios}}</td>
-  </tr>
-</table>
+  <table>
+    <tr>
+      <td rowspan="4"><strong>SEÑAL</strong></td>
+      <td>%</td>
+      <td>GPRS</td>
+      <td>SI</td>
+      <td>NO</td>
+      <td rowspan="4"><strong>KIT DE INSTALACIÓN ENTREGADO</strong></td>
+      <td>RETAIL</td>
+    </tr>
+    <tr>
+      <td rowspan="3"><strong>CARRIER</strong></td>
+      <td>MOVISTAR</td>
+      <td>ETHERNET</td>
+      <td>SI</td>
+      <td>NO</td>
+      <td>HOTEL</td>
+    </tr>
+    <tr>
+      <td>TELCEL</td>
+      <td>WIFI</td>
+      <td>SI</td>
+      <td>NO</td>
+      <td>RESTAURANTE</td>
+    </tr>
+    <tr>
+      <td>M2M GLOBAL</td>
+      <td colspan="2">ROLLOS ENTREGADOS</td>
+      <td colspan="2"></td>
+    </tr>
+  </table>
 
-<table>
-  <tr>
-    <td><strong>SERIE INSTALADA:</strong></td>
-    <td colspan="4">{{serie_instalada}}</td>
-    <td><strong>SERIE RETIRADA:</strong></td>
-    <td colspan="4">{{serie_retirada}}</td>
-  </tr>
-  <tr>
-    <td><strong>MODELO:</strong></td>
-    <td>MOVE 2500</td><td>VX 520</td><td>IWL</td><td>OTRO</td>
-    <td><strong>MODELO:</strong></td>
-    <td>MOVE 2500</td><td>VX 520</td><td>IWL</td><td>OTRO</td>
-  </tr>
-</table>
+  <table>
+    <tr>
+      <td><strong>SERIE INSTALADA</strong></td>
+      <td colspan="3">{{serie_instalada}}</td>
+      <td><strong>SERIE RETIRADA</strong></td>
+      <td colspan="4">{{serie_retirada}}</td>
+    </tr>
+    <tr>
+      <td><strong>MODELO</strong></td>
+      <td>MOVE 2500</td>
+      <td>VX 520</td>
+      <td>IWL</td>
+      <td>OTRO</td>
+      <td>MOVE 2500</td>
+      <td>VX 520</td>
+      <td>IWL</td>
+      <td>OTRO</td>
+    </tr>
+  </table>
 
-<table>
-  <tr>
-    <td><strong>CALIFICACIÓN DE IDC:</strong></td>
-    <td>MALO</td><td>BUENO</td><td>EXCELENTE</td>
-    <td><strong>CALIFICACIÓN DE TPV:</strong></td>
-    <td>MALO</td><td>BUENO</td><td>EXCELENTE</td>
-    <td><strong>¿SE SOLUCIONÓ EL PROBLEMA?</strong></td>
-    <td>SI ☐ / NO ☐</td>
-  </tr>
-</table>
+  <table>
+    <tr><td colspan="10"><strong>COMENTARIOS TÉCNICOS:</strong><br>{{comentarios}}</td></tr>
+  </table>
 
-<table>
-  <tr>
-    <td><strong>NOMBRE Y FIRMA DEL CLIENTE</strong></td>
-    <td class="firma-area"></td>
-    <td><strong>DESEA SU COMPROBANTE</strong></td>
-    <td>DIGITAL ☐</td>
-    <td>FÍSICO ☐</td>
-    <td>NO ☐</td>
-    <td><strong>NOMBRE Y FIRMA DEL IDC</strong></td>
-    <td class="firma-area">{{idc}}</td>
-  </tr>
-</table>
+  <table>
+    <tr>
+      <td><strong>CALIFICACIÓN DE IDC</strong></td>
+      <td></td>
+      <td><strong>CALIFICACIÓN DE TPV</strong></td>
+      <td></td>
+      <td colspan="2"><strong>¿SE SOLUCIONÓ EL PROBLEMA?</strong></td>
+      <td>SI</td>
+      <td>NO</td>
+      <td colspan="2"></td>
+    </tr>
+    <tr>
+      <td>MALO</td><td></td>
+      <td>BUENO</td><td></td>
+      <td colspan="2"></td>
+      <td><strong>SU AFILIACIÓN</strong></td>
+      <td><strong>ES LA MISMA QUE SU TPV</strong></td>
+      <td>SI</td><td>NO</td>
+    </tr>
+    <tr>
+      <td>BUENO</td><td></td>
+      <td>MALO</td><td></td>
+      <td colspan="6"></td>
+    </tr>
+    <tr>
+      <td>EXCELENTE</td><td></td>
+      <td colspan="8"></td>
+    </tr>
+  </table>
 
-<table>
-  <tr>
-    <td colspan="10" class="center-text">
-      HACEMOS DE SU CONOCIMIENTO QUE EL SERVICIO QUE USTED RECIBE POR PARTE DE BBVA NO GENERA NINGUN COSTO ADICIONAL, ASI COMO LA TERMINAL Y LOS INSUMOS QUE USTED SOLICITE POR LO QUE EL PERSONAL QUE LO VISITA NO PUEDE REALIZAR NINGUN COBRO O SOLICITAR ALGÚN PAGO POR EL MISMO
-    </td>
-  </tr>
-</table>
+  <table>
+    <tr>
+      <td><strong>NOMBRE Y FIRMA DEL CLIENTE</strong></td>
+      <td class="firma-area"></td>
+      <td><strong>DESEA SU</strong></td>
+      <td colspan="2"><strong>COMPROBANTE</strong></td>
+      <td><strong>NOMBRE Y FIRMA DEL IDC</strong></td>
+      <td class="firma-area"></td>
+    </tr>
+    <tr>
+      <td colspan="3"></td>
+      <td>DIGITAL</td>
+      <td></td>
+      <td colspan="2" class="center-text">{{idc}}</td>
+    </tr>
+    <tr>
+      <td colspan="3"></td>
+      <td>FÍSICO</td>
+      <td></td>
+      <td colspan="2"></td>
+    </tr>
+    <tr>
+      <td colspan="3"></td>
+      <td>NO</td>
+      <td></td>
+      <td colspan="2"></td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td class="center-text">
+        HACEMOS DE SU CONOCIMIENTO QUE EL SERVICIO QUE USTED RECIBE POR PARTE DE BBVA NO GENERA NINGÚN COSTO ADICIONAL, ASÍ COMO LA TERMINAL Y LOS INSUMOS QUE USTED SOLICITE, POR LO QUE EL PERSONAL QUE LO VISITA NO PUEDE REALIZAR NINGÚN COBRO O SOLICITAR ALGÚN PAGO POR EL MISMO.
+      </td>
+    </tr>
+  </table>
 </div>
 <div class="espacio_qr">
-  <!-- Aquí puede ir un QR o texto vertical -->
+  <!-- QR o espacio para firma interna -->
 </div>
 </body>
 </html>
