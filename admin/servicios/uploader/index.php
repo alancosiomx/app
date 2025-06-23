@@ -1,11 +1,11 @@
 <?php
 require_once __DIR__ . '/../../../config.php';
-$contenido = __FILE__;
-require_once __DIR__ . '/../../layout.php';
+require_once __DIR__ . '/funciones_carga.php';
+require_once __DIR__ . '/funciones_mapeo.php';
+$contenido = __FILE__; // para layout tailwind
 
 $bancos = ['bbva', 'banregio', 'azteca'];
 $mensaje = '';
-$archivoProcesado = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['archivo']) && isset($_POST['banco'])) {
     $banco = strtolower($_POST['banco']);
@@ -14,9 +14,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['archivo']) && isset(
     $extension = strtolower(pathinfo($nombreArchivo, PATHINFO_EXTENSION));
 
     if (in_array($banco, $bancos) && in_array($extension, ['csv', 'xlsx'])) {
-        require_once __DIR__ . "/funciones_carga.php";
-        $mensaje = cargar_a_staging($archivoTmp, $extension, $banco, $pdo);
-        $archivoProcesado = true;
+        // Paso 1: Cargar a tabla staging
+        $mensaje_staging = cargar_a_staging($archivoTmp, $extension, $banco, $pdo);
+
+        // Paso 2: Migrar automáticamente a OMNIPOS
+        switch ($banco) {
+            case 'bbva':
+                $mensaje_mapeo = mapear_bbva($pdo);
+                break;
+            case 'banregio':
+                $mensaje_mapeo = mapear_banregio($pdo);
+                break;
+            case 'azteca':
+                $mensaje_mapeo = mapear_azteca($pdo);
+                break;
+            default:
+                $mensaje_mapeo = '❌ Banco no reconocido.';
+        }
+
+        $mensaje = $mensaje_staging . "\n\n" . $mensaje_mapeo;
     } else {
         $mensaje = '⚠️ Formato de archivo o banco inválido.';
     }
@@ -50,24 +66,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['archivo']) && isset(
     <div class="flex justify-end">
       <button type="submit"
               class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">
-        Cargar archivo
+        🚀 Subir y migrar
       </button>
     </div>
   </form>
 
   <?php if ($mensaje): ?>
-    <div class="mt-6 bg-blue-50 border border-blue-200 text-blue-800 px-4 py-3 rounded text-sm shadow-sm">
-      <?= $mensaje ?>
+    <div class="mt-6 bg-blue-50 border border-blue-200 text-blue-800 px-4 py-3 rounded text-sm shadow-sm whitespace-pre-line">
+      <?= nl2br(htmlspecialchars($mensaje)) ?>
     </div>
-  <?php endif; ?>
-
-  <?php if ($archivoProcesado): ?>
-    <form method="POST" action="importar_omnipos.php" class="mt-6 text-right">
-      <input type="hidden" name="banco" value="<?= htmlspecialchars($_POST['banco']) ?>">
-      <button type="submit"
-              class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium">
-        ✅ Importar a OMNIPOS
-      </button>
-    </form>
   <?php endif; ?>
 </div>
