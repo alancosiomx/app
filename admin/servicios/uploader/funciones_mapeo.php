@@ -8,12 +8,11 @@ function mapear_bbva($pdo)
     $tabla_destino = 'servicios_omnipos';
 
     $columnas_destino = obtener_columnas($pdo, $tabla_destino);
-
     $stmt = $pdo->query("SELECT * FROM $tabla_origen");
     $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($registros as $fila) {
-        $ticket = $fila['ticket'] ?? null;
+        $ticket = trim($fila['ticket'] ?? '');
         if (!$ticket) continue;
 
         // Validar duplicado en OMNIPOS
@@ -24,7 +23,6 @@ function mapear_bbva($pdo)
             continue;
         }
 
-        // Preparar el array de inserción mapeando los campos manualmente
         $datos = [];
 
         $mapeo = [
@@ -52,16 +50,21 @@ function mapear_bbva($pdo)
 
         foreach ($mapeo as $origen => $destino) {
             if (in_array($destino, $columnas_destino)) {
-                $datos[$destino] = $fila[$origen] ?? null;
+                $valor = trim($fila[$origen] ?? '');
+
+                // Normalizar fechas
+                if (in_array($destino, ['fecha_inicio', 'fecha_limite', 'fecha_atencion'])) {
+                    $valor = normalizar_fecha($valor);
+                }
+
+                $datos[$destino] = $valor !== '' ? $valor : null;
             }
         }
 
-        // Agregar campos adicionales
         $datos['banco'] = 'BBVA';
         $datos['estatus'] = 'Por Asignar';
         $datos['fecha_carga'] = date('Y-m-d H:i:s');
 
-        // Insertar
         $campos = array_keys($datos);
         $sql = "INSERT INTO $tabla_destino (" . implode(',', $campos) . ") VALUES (:" . implode(', :', $campos) . ")";
         $stmt = $pdo->prepare($sql);
