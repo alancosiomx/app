@@ -101,35 +101,45 @@ $serviciosUnicos = $pdo->query("SELECT DISTINCT servicio FROM servicios_omnipos 
   <div class="overflow-x-auto">
     <table class="min-w-full table-auto bg-white shadow rounded-lg">
       <thead class="bg-gray-100 text-gray-700 text-sm">
-        <tr>
-          <th class="px-4 py-2"><input type="checkbox" id="checkAll" onclick="toggleAll(this)"></th>
-          <th class="px-4 py-2">Ticket</th>
-          <th class="px-4 py-2">Afiliación</th>
-          <th class="px-4 py-2">Comercio</th>
-          <th class="px-4 py-2">Ciudad</th>
-          <th class="px-4 py-2">Servicio</th>
-          <th class="px-4 py-2">Comentarios</th>
-          <th class="px-4 py-2 text-center">🔍</th>
-        </tr>
-      </thead>
+  <tr>
+    <th class="px-4 py-2"><input type="checkbox" id="checkAll" onclick="toggleAll(this)"></th>
+    <th class="px-4 py-2">Ticket</th>
+    <th class="px-4 py-2">Afiliación</th>
+    <th class="px-4 py-2">Comercio</th>
+    <th class="px-4 py-2">Ciudad</th>
+    <th class="px-4 py-2">Servicio</th>
+    <th class="px-4 py-2">Horario</th>
+    <th class="px-4 py-2">Fecha Inicio</th>
+    <th class="px-4 py-2">Fecha Límite</th>
+    <th class="px-4 py-2">VIM</th>
+    <th class="px-4 py-2">Comentarios</th>
+    <th class="px-4 py-2 text-center">🔍</th>
+  </tr>
+</thead>
+
       <tbody>
-        <?php foreach ($servicios as $s): ?>
-          <tr class="border-t text-sm hover:bg-gray-50">
-            <td class="px-4 py-2 text-center">
-              <input type="checkbox" name="tickets[]" value="<?= $s['ticket'] ?>">
-            </td>
-            <td class="px-4 py-2 font-medium text-blue-600"><?= htmlspecialchars($s['ticket']) ?></td>
-            <td class="px-4 py-2 text-center"><?= htmlspecialchars($s['afiliacion']) ?></td>
-            <td class="px-4 py-2"><?= htmlspecialchars($s['comercio']) ?></td>
-            <td class="px-4 py-2"><?= htmlspecialchars($s['ciudad']) ?></td>
-            <td class="px-4 py-2"><?= htmlspecialchars($s['servicio']) ?></td>
-            <td class="px-4 py-2 text-gray-500 text-xs whitespace-pre-line"><?= nl2br(htmlspecialchars($s['comentarios'] ?? '—')) ?></td>
-            <td class="px-4 py-2 text-center">
-              <a href="#" class="ver-detalle text-blue-500 hover:underline" data-ticket="<?= $s['ticket'] ?>">🔍</a>
-            </td>
-          </tr>
-        <?php endforeach; ?>
-      </tbody>
+  <?php foreach ($servicios as $s): ?>
+    <tr class="border-t text-sm hover:bg-gray-50">
+      <td class="px-4 py-2 text-center">
+        <input type="checkbox" name="tickets[]" value="<?= $s['ticket'] ?>">
+      </td>
+      <td class="px-4 py-2 font-medium text-blue-600"><?= htmlspecialchars($s['ticket']) ?></td>
+      <td class="px-4 py-2 text-center"><?= htmlspecialchars($s['afiliacion']) ?></td>
+      <td class="px-4 py-2"><?= htmlspecialchars($s['comercio']) ?></td>
+      <td class="px-4 py-2"><?= htmlspecialchars($s['ciudad']) ?></td>
+      <td class="px-4 py-2"><?= htmlspecialchars($s['servicio']) ?></td>
+      <td class="px-4 py-2"><?= htmlspecialchars($s['horario']) ?></td>
+      <td class="px-4 py-2 text-xs"><?= htmlspecialchars($s['fecha_inicio']) ?></td>
+      <td class="px-4 py-2 text-xs"><?= htmlspecialchars($s['fecha_limite']) ?></td>
+      <td class="px-4 py-2"><?= htmlspecialchars($s['vim']) ?></td>
+      <td class="px-4 py-2 text-gray-500 text-xs whitespace-pre-line"><?= nl2br(htmlspecialchars($s['comentarios'] ?? '—')) ?></td>
+      <td class="px-4 py-2 text-center">
+        <a href="#" class="ver-detalle text-blue-500 hover:underline" data-ticket="<?= $s['ticket'] ?>">🔍</a>
+      </td>
+    </tr>
+  <?php endforeach; ?>
+</tbody>
+
     </table>
   </div>
 </form>
