@@ -47,7 +47,7 @@ ob_start();
 </div>
 
 <!-- Panel de Alertas (si aplica) -->
-<?php include __DIR__ . '/includes/panel_alertas.php'; ?>
+<?php include __DIR__ . '/../includes/panel_alertas.php'; ?>
 
 <!-- Contenido dinámico del tab -->
 <?php include $contenido; ?>
