@@ -1,7 +1,25 @@
+<?php
+// service_functions.php
+// Funciones reutilizables para el módulo de servicios OMNIPOS
+
 /**
- * Mostrar el panel de alertas de CITA HOY / CITA MAÑANA.
+ * Registrar una acción en el log de servicios.
  *
- * @param PDO $pdo Instancia PDO activa
+ * @param PDO $pdo
+ * @param string $ticket
+ * @param string $accion
+ * @param string $usuario
+ * @param string $detalles
+ */
+function logServicio($pdo, $ticket, $accion, $usuario, $detalles = '') {
+    $stmt = $pdo->prepare("INSERT INTO log_servicios (ticket, accion, usuario, detalles) VALUES (?, ?, ?, ?)");
+    $stmt->execute([$ticket, $accion, $usuario, $detalles]);
+}
+
+/**
+ * Mostrar el panel de citas programadas (hoy y mañana).
+ *
+ * @param PDO $pdo
  */
 function mostrar_panel_alertas(PDO $pdo): void {
     try {
@@ -21,9 +39,7 @@ function mostrar_panel_alertas(PDO $pdo): void {
         $citas_hoy = array_filter($citas, fn($c) => $c['fecha_cita'] === $hoy);
         $citas_manana = array_filter($citas, fn($c) => $c['fecha_cita'] === $mañana);
 
-        if (empty($citas_hoy) && empty($citas_manana)) {
-            return;
-        }
+        if (empty($citas_hoy) && empty($citas_manana)) return;
 
         ?>
         <div class="bg-white shadow-md rounded-xl p-4 mb-6 border-l-4 border-blue-500">
