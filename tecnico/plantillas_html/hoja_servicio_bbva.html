@@ -94,38 +94,44 @@
   </div>
 
   <table>
-  <tr>
-    <td colspan="2"><strong>TICKET</strong><br>{{ticket}}</td>
-    <td colspan="2"><strong>AFILIACIÓN</strong><br>{{afiliacion}}</td>
-  </tr>
-  <tr>
-    <td><strong>PESOS</strong><br>$__________</td>
-    <td><strong>DLLS</strong><br>$__________</td>
-    <td colspan="2"><strong>FECHA</strong><br>{{fecha}}</td>
-  </tr>
-  <tr>
-    <td colspan="4"><strong>COMERCIO</strong><br>{{comercio}}</td>
-  </tr>
-  <tr>
-    <td colspan="4"><strong>CALLE Y NÚM</strong><br>{{domicilio}}</td>
-  </tr>
-  <tr>
-    <td colspan="2"><strong>COLONIA</strong><br>{{colonia}}</td>
-    <td><strong>C.P.</strong><br>{{cp}}</td>
-    <td><strong>POBLACIÓN</strong><br>{{ciudad}}</td>
-  </tr>
-  <tr>
-    <td colspan="2"><strong>ESTADO</strong><br>{{estado}}</td>
-    <td colspan="2"><strong>REFERENCIAS</strong><br>{{referencia}}</td>
-  </tr>
-  <tr>
-    <td colspan="4"><strong>HORARIO</strong><br>{{horario}}</td>
-  </tr>
-  <tr>
-    <td colspan="4"><strong>TELÉFONO</strong><br>{{telefono_contacto_1}}</td>
-  </tr>
-</table>
-
+    <tr>
+      <td rowspan="6" style="width: 50%; vertical-align: top; padding: 0;">
+        <table style="width: 100%; height: 100%; border: none;">
+          <tr>
+            <td style="width: 15%"><strong>TICKET:</strong></td>
+            <td style="width: 35%">{{ticket}}</td>
+            <td style="width: 25%"><strong>AFILIACIÓN /<br>PESOS:</strong></td>
+            <td style="width: 25%">{{afiliacion}}</td>
+          </tr>
+          <tr>
+            <td colspan="2"></td>
+            <td><strong>DLLS:</strong></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td colspan="4"><strong>COMERCIO:</strong> {{comercio}}</td>
+          </tr>
+          <tr>
+            <td colspan="4"><strong>CALLE Y NÚM:</strong> {{domicilio}}</td>
+          </tr>
+          <tr>
+            <td colspan="4"><strong>COLONIA:</strong> {{colonia}}</td>
+          </tr>
+          <tr>
+            <td><strong>C.P.:</strong> {{cp}}</td>
+            <td><strong>POBLACIÓN:</strong> {{ciudad}}</td>
+            <td colspan="2"><strong>ESTADO:</strong> {{estado}}</td>
+          </tr>
+        </table>
+      </td>
+      <td style="width: 50%;"><strong>FECHA:</strong><br>{{fecha}}</td>
+    </tr>
+    <tr>
+      <td><strong>TELÉFONO:</strong><br>{{telefono_contacto_1}}</td>
+    </tr>
+    <tr>
+      <td rowspan="4"><strong>REFERENCIAS:</strong><br>{{referencia}}<br><strong>HORARIO:</strong><br>{{horario}}</td>
+    </tr>
   <table>
     <tr>
       <td colspan="5" class="center">TIPO DE SERVICIO: {{servicio}} {{cantidad_insumos}}</td>
