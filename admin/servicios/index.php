@@ -15,9 +15,8 @@ $tabs = [
     'citas'       => 'Citas',
 ];
 
-// Detectar tab activo
 $tab = $_GET['tab'] ?? 'por_asignar';
-$contenido = match($tab) {
+$contenido_tab = match($tab) {
     'en_ruta'   => __DIR__ . '/contenido_en_ruta.php',
     'concluido' => __DIR__ . '/contenido_concluido.php',
     'citas'     => __DIR__ . '/contenido_citas.php',
@@ -46,11 +45,8 @@ ob_start();
     <?php endforeach; ?>
 </div>
 
-<!-- Panel de Alertas (si aplica) -->
 <?php include __DIR__ . '/../includes/panel_alertas.php'; ?>
-
-<!-- Contenido dinámico del tab -->
-<?php include $contenido; ?>
+<?php include $contenido_tab; ?>
 
 <?php
 $contenido = ob_get_clean();
