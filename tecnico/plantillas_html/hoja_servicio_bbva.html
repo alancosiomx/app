@@ -106,9 +106,267 @@
     </tr>
   </table>
 
-  <!-- Aquí se insertará el resto del contenido que ya fue validado y corregido -->
-  <!-- Debido al límite de tokens y para asegurar precisión, puedes pedirme insertar a continuación el resto si deseas conservar este bloque HEAD limpio y correcto. -->
+  <table>
+    <tr>
+      <td style="width: 50%;">
+        <table class="no-border">
+          <tr>
+            <td rowspan="2" style="width: 50%;">
+              <span class="field-label">TICKET:</span> {{ticket}}
+            </td>
+            <td style="width: 50%;">
+              <span class="field-label">AFILIACION PESOS:</span> {{afiliacion}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="field-label">DLLS:</span> __________
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <span class="field-label">COMERCIO:</span> {{comercio}}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <span class="field-label">CALLE Y NÚM:</span> {{domicilio}}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <span class="field-label">COLONIA:</span> {{colonia}}
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 50%;">
+              <span class="field-label">C.P.:</span> {{cp}}
+            </td>
+            <td style="width: 50%;">
+              <span class="field-label">POBLACION Y ESTADO:</span> {{ciudad}}
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td style="width: 50%;">
+        <table class="no-border">
+          <tr>
+            <td>
+              <span class="field-label">FECHA:</span> {{fecha}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="field-label">TELEFONO:</span> {{telefono_contacto_1}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="field-label">REFERENCIAS:</span> {{referencia}}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
 
+  <table>
+    <colgroup>
+      <col style="width: 20%;">
+      <col style="width: 20%;">
+      <col style="width: 20%;">
+      <col style="width: 20%;">
+      <col style="width: 20%;">
+    </colgroup>
+    <tr>
+      <td colspan="5" class="center-text"><span class="field-label">TIPO DE SERVICIO:</span> {{servicio}} {{cantidad_insumos}}</td>
+    </tr>
+    <tr>
+      <td><div class="checkbox-container"><span class="checkbox"></span>INSTALACION DE TPV</div></td>
+      <td><div class="checkbox-container"><span class="checkbox"></span>FALLA DE TPV</div></td>
+      <td><div class="checkbox-container"><span class="checkbox"></span>RETIRO DE TPV</div></td>
+      <td><div class="checkbox-container"><span class="checkbox"></span>ENTREGA DE INSUMOS</div></td>
+      <td><div class="checkbox-container"><span class="checkbox"></span>CAPACITACION</div></td>
+    </tr>
+  </table>
+
+  <table>
+    <colgroup>
+      <col style="width: 50%;">
+      <col style="width: 50%;">
+    </colgroup>
+    <tr>
+      <td>
+        <span class="field-label">SOLUCION</span><br>
+        <table class="no-border" style="width: 100%;">
+          <tr>
+            <td style="width: 25%;"><div class="checkbox-container"><span class="checkbox"></span>INSTALACION</div></td>
+            <td style="width: 25%;"><div class="checkbox-container"><span class="checkbox"></span>SUSTITUCION</div></td>
+            <td style="width: 25%;"><div class="checkbox-container"><span class="checkbox"></span>REPROGRAMACION</div></td>
+            <td style="width: 25%;"><div class="checkbox-container"><span class="checkbox"></span>ENTREGA DE ROLLOS</div></td>
+          </tr>
+          <tr>
+            <td><div class="checkbox-container"><span class="checkbox"></span>ENTREGA DE PUBLICIDAD</div></td>
+            <td><div class="checkbox-container"><span class="checkbox"></span>CAMBIO DE SIM</div></td>
+            <td><div class="checkbox-container"><span class="checkbox"></span>CAMBIO DE ELIMINADOR</div></td>
+            <td><div class="checkbox-container"><span class="checkbox"></span>CAMBIO DE BATERIA</div></td>
+          </tr>
+          <tr>
+            <td><div class="checkbox-container"><span class="checkbox"></span>RETIRO</div></td>
+            <td><div class="checkbox-container"><span class="checkbox"></span>CAPACITACION</div></td>
+            <td colspan="2"><div class="checkbox-container"><span class="checkbox"></span>INSTALACION S/CAPACITACION</div></td>
+          </tr>
+        </table>
+      </td>
+      <td>
+        <span class="field-label">COMENTARIOS TECNICOS:</span><br>
+        {{comentarios}}
+      </td>
+    </tr>
+  </table>
+
+  <table>
+    <colgroup>
+        <col style="width: 10%;">
+        <col style="width: 10%;">
+        <col style="width: 15%;">
+        <col style="width: 5%;">
+        <col style="width: 5%;">
+        <col style="width: 20%;">
+        <col style="width: 10%;">
+    </colgroup>
+    <tr>
+        <td rowspan="4"><span class="field-label">SEÑAL</span></td>
+        <td>%</td>
+        <td colspan="2">GPRS</td>
+        <td><div class="checkbox-container"><span class="checkbox"></span>SI</div></td>
+        <td><div class="checkbox-container"><span class="checkbox"></span>NO</div></td>
+        <td rowspan="4"><span class="field-label">KIT DE INSTALACION ENTREGADO</span></td>
+        <td><div class="checkbox-container"><span class="checkbox"></span>RETAIL</div></td>
+    </tr>
+    <tr>
+        <td rowspan="3"><span class="field-label">CARRIER</span></td>
+        <td>MOVISTAR</td>
+        <td colspan="2">ETHERNET</td>
+        <td><div class="checkbox-container"><span class="checkbox"></span>SI</div></td>
+        <td><div class="checkbox-container"><span class="checkbox"></span>NO</div></td>
+        <td><div class="checkbox-container"><span class="checkbox"></span>HOTEL</div></td>
+    </tr>
+    <tr>
+        <td>TELCEL</td>
+        <td colspan="2">WIFI</td>
+        <td><div class="checkbox-container"><span class="checkbox"></span>SI</div></td>
+        <td><div class="checkbox-container"><span class="checkbox"></span>NO</div></td>
+        <td><div class="checkbox-container"><span class="checkbox"></span>RESTAURANTE</div></td>
+    </tr>
+    <tr>
+        <td>M2M GLOBAL</td>
+        <td colspan="3">ROLLOS ENTREGADOS</td>
+        <td></td>
+        <td><div class="checkbox-container"><span class="checkbox"></span>OTRO</div></td>
+    </tr>
+  </table>
+
+  <table>
+    <colgroup>
+      <col style="width: 15%;">
+      <col style="width: 15%;">
+      <col style="width: 15%;">
+      <col style="width: 15%;">
+      <col style="width: 10%;">
+      <col style="width: 15%;">
+      <col style="width: 15%;">
+      <col style="width: 15%;">
+      <col style="width: 15%;">
+      <col style="width: 10%;">
+    </colgroup>
+    <tr>
+      <td><span class="field-label">SERIE INSTALADA</span></td>
+      <td colspan="4">{{serie_instalada}}</td>
+      <td><span class="field-label">SERIE RETIRADA</span></td>
+      <td colspan="4">{{serie_retirada}}</td>
+    </tr>
+    <tr>
+      <td><span class="field-label">MODELO</span></td>
+      <td><div class="checkbox-container"><span class="checkbox"></span>MOVE 2500</div></td>
+      <td><div class="checkbox-container"><span class="checkbox"></span>VX 520</div></td>
+      <td><div class="checkbox-container"><span class="checkbox"></span>IWL</div></td>
+      <td><div class="checkbox-container"><span class="checkbox"></span>OTRO</div></td>
+      <td><span class="field-label">MODELO</span></td>
+      <td><div class="checkbox-container"><span class="checkbox"></span>MOVE 2500</div></td>
+      <td><div class="checkbox-container"><span class="checkbox"></span>VX 520</div></td>
+      <td><div class="checkbox-container"><span class="checkbox"></span>IWL</div></td>
+      <td><div class="checkbox-container"><span class="checkbox"></span>OTRO</div></td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td colspan="8" class="center-text"><span class="field-label">CALIFICACION DE LA CALIDAD DEL SERVICIO TECNICO</span></td>
+    </tr>
+    <tr>
+      <td style="width: 12.5%;"><span class="field-label">CALIFICACION DE IDC</span></td>
+      <td style="width: 12.5%;"></td>
+      <td style="width: 12.5%;"><span class="field-label">CALIFICACION DE TPV</span></td>
+      <td style="width: 12.5%;"></td>
+      <td colspan="2" style="width: 25%;"><span class="field-label">SE SOLUCIONO EL PROBLEMA</span></td>
+      <td style="width: 12.5%;"><div class="checkbox-container"><span class="checkbox"></span>SI</div></td>
+      <td style="width: 12.5%;"><div class="checkbox-container"><span class="checkbox"></span>NO</div></td>
+    </tr>
+    <tr>
+      <td><div class="checkbox-container"><span class="checkbox"></span>MALO</div></td>
+      <td></td>
+      <td><div class="checkbox-container"><span class="checkbox"></span>BUENO</div></td>
+      <td></td>
+      <td colspan="2"></td>
+      <td colspan="2">
+        <span class="field-label">SU AFILIACION ES LA MISMA QUE SU TPV</span>
+      </td>
+    </tr>
+    <tr>
+      <td><div class="checkbox-container"><span class="checkbox"></span>BUENO</div></td>
+      <td></td>
+      <td><div class="checkbox-container"><span class="checkbox"></span>MALO</div></td>
+      <td></td>
+      <td colspan="2"></td>
+      <td><div class="checkbox-container"><span class="checkbox"></span>SI</div></td>
+      <td><div class="checkbox-container"><span class="checkbox"></span>NO</div></td>
+    </tr>
+    <tr>
+      <td><div class="checkbox-container"><span class="checkbox"></span>EXCELENTE</div></td>
+      <td></td>
+      <td colspan="6"></td>
+    </tr>
+  </table>
+
+  <table>
+    <colgroup>
+      <col style="width: 25%;">
+      <col style="width: 25%;">
+      <col style="width: 25%;">
+      <col style="width: 25%;">
+    </colgroup>
+    <tr>
+      <td><span class="field-label">NOMBRE Y FIRMA DEL CLIENTE</span></td>
+      <td class="firma-area"></td>
+      <td><span class="field-label">NOMBRE Y FIRMA DEL IDC</span></td>
+      <td class="firma-area">{{idc}}</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div style="display: flex; align-items: center; gap: 15px;">
+          <span class="field-label">DESEA SU COMPROBANTE:</span>
+          <div class="checkbox-container"><span class="checkbox"></span>DIGITAL</div>
+          <div class="checkbox-container"><span class="checkbox"></span>FISICO</div>
+          <div class="checkbox-container"><span class="checkbox"></span>NO</div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <p class="center-text" style="font-size: 9px; margin-top: 5px;">
+    HACEMOS DE SU CONOCIMIENTO QUE EL SERVICIO QUE USTED RECIBE POR PARTE DE BBVA NO GENERA NINGUN COSTO ADICIONAL, ASI COMO LA TERMINAL Y LOS INSUMOS QUE USTED SOLICITE POR LO QUE EL PERSONAL QUE LO VISITA NO PUEDE REALIZAR NINGUN COBRO O SOLICITAR ALGUN PAGO POR EL MISMO.
+  </p>
 </div>
 <div class="espacio_qr">
   <img src="image6.png" alt="QR Superior">
