@@ -18,15 +18,23 @@ function cargar_a_staging($archivoTmp, $extension, $banco, $pdo)
             fgetcsv($handle, 1000, ","); // ignorar encabezado
 
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                $clave_valor = $data[$clave_index] ?? null;
+                $clave_valor = trim($data[$clave_index] ?? '');
 
                 if (!empty($clave_valor) && !ticket_duplicado($clave_valor, $pdo, $tabla)) {
                     $fila = [];
+
                     foreach ($columnasDestino as $index => $columnaBD) {
                         if (isset($data[$index])) {
-                            $fila[$columnaBD] = $data[$index];
+                            $valor = trim($data[$index]);
+
+                            if (in_array($columnaBD, ['fecha_inicio', 'fecha_limite', 'fecha_atencion'])) {
+                                $valor = normalizar_fecha($valor);
+                            }
+
+                            $fila[$columnaBD] = $valor !== '' ? $valor : null;
                         }
                     }
+
                     insertar_fila_directa($pdo, $tabla, $fila);
                     $insertados++;
                 } else {
@@ -43,15 +51,23 @@ function cargar_a_staging($archivoTmp, $extension, $banco, $pdo)
         array_shift($rows); // ignorar encabezado
 
         foreach ($rows as $data) {
-            $clave_valor = $data[$clave_index] ?? null;
+            $clave_valor = trim($data[$clave_index] ?? '');
 
             if (!empty($clave_valor) && !ticket_duplicado($clave_valor, $pdo, $tabla)) {
                 $fila = [];
+
                 foreach ($columnasDestino as $index => $columnaBD) {
                     if (isset($data[$index])) {
-                        $fila[$columnaBD] = $data[$index];
+                        $valor = trim($data[$index]);
+
+                        if (in_array($columnaBD, ['fecha_inicio', 'fecha_limite', 'fecha_atencion'])) {
+                            $valor = normalizar_fecha($valor);
+                        }
+
+                        $fila[$columnaBD] = $valor !== '' ? $valor : null;
                     }
                 }
+
                 insertar_fila_directa($pdo, $tabla, $fila);
                 $insertados++;
             } else {
@@ -61,6 +77,23 @@ function cargar_a_staging($archivoTmp, $extension, $banco, $pdo)
     }
 
     return "✅ Se cargaron correctamente $insertados registros. ⚠️ Duplicados ignorados: $errores.";
+}
+
+function normalizar_fecha($valor)
+{
+    $valor = trim($valor);
+    if ($valor === '') return null;
+
+    $formatos = ['d/m/Y', 'd-m-Y', 'Y-m-d', 'Y/m/d'];
+
+    foreach ($formatos as $formato) {
+        $fecha = DateTime::createFromFormat($formato, $valor);
+        if ($fecha && $fecha->format($formato) === $valor) {
+            return $fecha->format('Y-m-d');
+        }
+    }
+
+    return null;
 }
 
 function ticket_duplicado($valor, $pdo, $tabla)
