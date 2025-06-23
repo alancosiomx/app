@@ -1,13 +1,13 @@
 <?php
 require_once __DIR__ . '/../init.php';
 
-// Verificar sesión activa
+// Validar sesión
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: /login.php");
     exit();
 }
 
-// Tabs disponibles
+// Tabs
 $tabs = [
     'por_asignar' => 'Por Asignar',
     'en_ruta'     => 'En Ruta',
@@ -16,6 +16,7 @@ $tabs = [
 ];
 
 $tab = $_GET['tab'] ?? 'por_asignar';
+
 $contenido_tab = match($tab) {
     'en_ruta'   => __DIR__ . '/contenido_en_ruta.php',
     'concluido' => __DIR__ . '/contenido_concluido.php',
@@ -26,7 +27,7 @@ $contenido_tab = match($tab) {
 ob_start();
 ?>
 
-<!-- Encabezado de módulo -->
+<!-- Header -->
 <div class="flex flex-wrap items-center justify-between mb-4">
     <h1 class="text-2xl font-bold">📋 Servicios</h1>
     <div class="space-x-2">
@@ -40,12 +41,15 @@ ob_start();
     <?php foreach ($tabs as $key => $label): ?>
         <a href="?tab=<?= $key ?>"
            class="px-4 py-2 rounded-full border <?= $tab === $key ? 'bg-blue-500 text-white' : 'bg-white text-gray-700 hover:bg-gray-100' ?>">
-            <?= $label ?>
+           <?= $label ?>
         </a>
     <?php endforeach; ?>
 </div>
 
+<!-- Panel de Alertas -->
 <?php include __DIR__ . '/../includes/panel_alertas.php'; ?>
+
+<!-- Contenido dinámico -->
 <?php include $contenido_tab; ?>
 
 <?php
