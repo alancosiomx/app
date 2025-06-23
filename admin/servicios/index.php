@@ -1,13 +1,14 @@
 <?php
 require_once __DIR__ . '/../init.php';
+require_once __DIR__ . '/service_functions.php';
 
-// Validar sesión
+// Verificar sesión activa
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: /login.php");
     exit();
 }
 
-// Tabs
+// Tabs del módulo
 $tabs = [
     'por_asignar' => 'Por Asignar',
     'en_ruta'     => 'En Ruta',
@@ -15,8 +16,8 @@ $tabs = [
     'citas'       => 'Citas',
 ];
 
+// Detectar tab activo
 $tab = $_GET['tab'] ?? 'por_asignar';
-
 $contenido_tab = match($tab) {
     'en_ruta'   => __DIR__ . '/contenido_en_ruta.php',
     'concluido' => __DIR__ . '/contenido_concluido.php',
@@ -24,10 +25,11 @@ $contenido_tab = match($tab) {
     default     => __DIR__ . '/contenido_por_asignar.php',
 };
 
+// Capturar contenido para insertar en layout
 ob_start();
 ?>
 
-<!-- Header -->
+<!-- Encabezado -->
 <div class="flex flex-wrap items-center justify-between mb-4">
     <h1 class="text-2xl font-bold">📋 Servicios</h1>
     <div class="space-x-2">
@@ -36,7 +38,7 @@ ob_start();
     </div>
 </div>
 
-<!-- Tabs -->
+<!-- Tabs de navegación -->
 <div class="flex space-x-2 mb-6">
     <?php foreach ($tabs as $key => $label): ?>
         <a href="?tab=<?= $key ?>"
@@ -46,10 +48,10 @@ ob_start();
     <?php endforeach; ?>
 </div>
 
-<!-- Panel de Alertas -->
-<?php include __DIR__ . '/../includes/panel_alertas.php'; ?>
+<!-- Panel de alertas dinámico -->
+<?php mostrar_panel_alertas($pdo); ?>
 
-<!-- Contenido dinámico -->
+<!-- Cargar el contenido correspondiente al tab -->
 <?php include $contenido_tab; ?>
 
 <?php
