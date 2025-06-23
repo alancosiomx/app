@@ -1,25 +1,27 @@
 <?php
-echo "<div style='color: orange; font-weight: bold;'>🧪 DEBUG: Entrando a panel_alertas.php</div>";
-
 require_once __DIR__ . '/../init.php';
 
-$hoy = date('Y-m-d');
-$mañana = date('Y-m-d', strtotime('+1 day'));
+try {
+    $hoy = date('Y-m-d');
+    $mañana = date('Y-m-d', strtotime('+1 day'));
 
-// Consulta general de servicios con fecha de cita válida
-$sql = "SELECT ticket, afiliacion, comercio, fecha_cita 
-        FROM servicios_omnipos 
-        WHERE estatus = 'En Ruta' 
-        AND fecha_cita IS NOT NULL 
-        AND (fecha_cita = :hoy OR fecha_cita = :maniana)";
+    $sql = "SELECT ticket, afiliacion, comercio, fecha_cita 
+            FROM servicios_omnipos 
+            WHERE estatus = 'En Ruta' 
+            AND fecha_cita IS NOT NULL 
+            AND (fecha_cita = :hoy OR fecha_cita = :maniana)";
 
-$stmt = $pdo->prepare($sql);
-$stmt->execute(['hoy' => $hoy, 'maniana' => $mañana]);
-$citas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['hoy' => $hoy, 'maniana' => $mañana]);
+    $citas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Agrupar por fecha
-$citas_hoy = array_filter($citas, fn($c) => $c['fecha_cita'] === $hoy);
-$citas_manana = array_filter($citas, fn($c) => $c['fecha_cita'] === $mañana);
+    $citas_hoy = array_filter($citas, fn($c) => $c['fecha_cita'] === $hoy);
+    $citas_manana = array_filter($citas, fn($c) => $c['fecha_cita'] === $mañana);
+
+} catch (Exception $e) {
+    echo "<div class='bg-red-100 text-red-700 p-3 rounded-md font-bold'>❌ Error al cargar alertas: " . $e->getMessage() . "</div>";
+    return;
+}
 ?>
 
 <?php if (!empty($citas_hoy) || !empty($citas_manana)): ?>
