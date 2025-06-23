@@ -86,7 +86,149 @@
 </head>
 <body>
 <div class="contenido">
-  <!-- ... mismo contenido que antes ... -->
+  <table class="logos no-border">
+    <tr>
+      <td><img src="image1.jpeg" alt="BBVA"></td>
+      <td class="titulo">HOJA DE SERVICIO</td>
+      <td><img src="image3.png" alt="TEDISA"></td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td><strong>TICKET:</strong><br>{{ticket}}</td>
+      <td><strong>AFILIACIÓN PESOS:</strong><br>{{afiliacion}}</td>
+      <td><strong>FECHA:</strong><br>{{fecha}}</td>
+      <td><strong>TELÉFONO:</strong><br>{{telefono_contacto_1}}</td>
+    </tr>
+    <tr>
+      <td colspan="2"><strong>COMERCIO:</strong><br>{{comercio}}</td>
+      <td colspan="2"><strong>REFERENCIAS:</strong><br>{{referencia}}</td>
+    </tr>
+    <tr>
+      <td colspan="2"><strong>CALLE Y NÚM:</strong><br>{{domicilio}}</td>
+      <td><strong>COLONIA:</strong><br>{{colonia}}</td>
+      <td><strong>C.P.:</strong><br>{{cp}}</td>
+    </tr>
+    <tr>
+      <td colspan="4"><strong>POBLACIÓN Y ESTADO:</strong><br>{{ciudad}}</td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td colspan="5" class="center-text"><strong>TIPO DE SERVICIO:</strong> {{servicio}} {{cantidad_insumos}}</td>
+    </tr>
+    <tr>
+      <td>INSTALACIÓN DE TPV</td>
+      <td>FALLA DE TPV</td>
+      <td>RETIRO DE TPV</td>
+      <td>ENTREGA DE INSUMOS</td>
+      <td>CAPACITACIÓN</td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <strong>SOLUCIÓN</strong><br>
+        INSTALACIÓN ☐ SUSTITUCIÓN ☐ REPROGRAMACIÓN ☐ ENTREGA DE ROLLOS ☐<br>
+        ENTREGA DE PUBLICIDAD ☐ CAMBIO DE SIM ☐ CAMBIO DE ELIMINADOR ☐ CAMBIO DE BATERÍA ☐<br>
+        RETIRO ☐ CAPACITACIÓN ☐ INSTALACIÓN S/CAPACITACIÓN ☐
+      </td>
+      <td colspan="2">
+        <strong>COMENTARIOS TÉCNICOS:</strong><br>
+        {{comentarios}}
+      </td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td rowspan="4"><strong>SEÑAL</strong></td>
+      <td>%</td>
+      <td>GPRS</td>
+      <td>SI ☐</td>
+      <td>NO ☐</td>
+      <td rowspan="4"><strong>KIT DE INSTALACIÓN ENTREGADO</strong></td>
+      <td>RETAIL</td>
+    </tr>
+    <tr>
+      <td rowspan="3"><strong>CARRIER</strong></td>
+      <td>MOVISTAR</td>
+      <td>ETHERNET</td>
+      <td>SI ☐</td>
+      <td>NO ☐</td>
+      <td>HOTEL</td>
+    </tr>
+    <tr>
+      <td>TELCEL</td>
+      <td>WIFI</td>
+      <td>SI ☐</td>
+      <td>NO ☐</td>
+      <td>RESTAURANTE</td>
+    </tr>
+    <tr>
+      <td>M2M GLOBAL</td>
+      <td colspan="2">ROLLOS ENTREGADOS</td>
+      <td colspan="2"></td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td><strong>SERIE INSTALADA</strong></td>
+      <td colspan="4">{{serie_instalada}}</td>
+      <td><strong>SERIE RETIRADA</strong></td>
+      <td colspan="3">{{serie_retirada}}</td>
+    </tr>
+    <tr>
+      <td><strong>MODELO</strong></td>
+      <td>MOVE 2500 ☐</td>
+      <td>VX 520 ☐</td>
+      <td>IWL ☐</td>
+      <td>OTRO ☐</td>
+      <td>MOVE 2500 ☐</td>
+      <td>VX 520 ☐</td>
+      <td>IWL ☐</td>
+      <td>OTRO ☐</td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td><strong>CALIFICACIÓN DE LA CALIDAD DEL SERVICIO TÉCNICO</strong></td>
+    </tr>
+    <tr>
+      <td>CALIFICACIÓN DE IDC: MALO ☐ BUENO ☐ EXCELENTE ☐</td>
+    </tr>
+    <tr>
+      <td>CALIFICACIÓN DE TPV: MALO ☐ BUENO ☐ EXCELENTE ☐</td>
+    </tr>
+    <tr>
+      <td>¿SE SOLUCIONÓ EL PROBLEMA? SI ☐ NO ☐</td>
+    </tr>
+    <tr>
+      <td>SU AFILIACIÓN ES LA MISMA QUE SU TPV: SI ☐ NO ☐</td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td><strong>NOMBRE Y FIRMA DEL CLIENTE</strong></td>
+      <td class="firma-area"></td>
+      <td><strong>NOMBRE Y FIRMA DEL IDC</strong></td>
+      <td class="firma-area">{{idc}}</td>
+    </tr>
+    <tr>
+      <td colspan="4">DESEA SU COMPROBANTE: DIGITAL ☐ FÍSICO ☐ NO ☐</td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td class="center-text">
+        HACEMOS DE SU CONOCIMIENTO QUE EL SERVICIO QUE USTED RECIBE POR PARTE DE BBVA NO GENERA NINGÚN COSTO ADICIONAL, ASÍ COMO LA TERMINAL Y LOS INSUMOS QUE USTED SOLICITE, POR LO QUE EL PERSONAL QUE LO VISITA NO PUEDE REALIZAR NINGÚN COBRO O SOLICITAR ALGÚN PAGO POR EL MISMO.
+      </td>
+    </tr>
+  </table>
 </div>
 <div class="espacio_qr">
   <img src="image6.png" alt="QR Superior">
