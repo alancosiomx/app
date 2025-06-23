@@ -21,11 +21,17 @@ if ($servicio !== '') {
 }
 
 if ($buscar !== '') {
-    $sql .= " AND (ticket LIKE ? OR afiliacion LIKE ? OR comercio LIKE ?)";
-    $params[] = "%$buscar%";
-    $params[] = "%$buscar%";
-    $params[] = "%$buscar%";
+    $busquedas = array_map('trim', explode(',', $buscar));
+    $filtros = [];
+    foreach ($busquedas as $b) {
+        $filtros[] = "(ticket LIKE ? OR afiliacion LIKE ? OR comercio LIKE ?)";
+        $params[] = "%$b%";
+        $params[] = "%$b%";
+        $params[] = "%$b%";
+    }
+    $sql .= " AND (" . implode(" OR ", $filtros) . ")";
 }
+
 
 $sql .= " ORDER BY fecha_inicio DESC";
 $stmt = $pdo->prepare($sql);
