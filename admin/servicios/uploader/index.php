@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../../../config.php';
-session_start();
 $contenido = __FILE__;
 require_once __DIR__ . '/../../layout.php';
 
