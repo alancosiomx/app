@@ -1,4 +1,6 @@
 <?php
+echo "<div style='color: orange; font-weight: bold;'>🧪 DEBUG: Entrando a panel_alertas.php</div>";
+
 require_once __DIR__ . '/../init.php';
 
 $hoy = date('Y-m-d');
