@@ -77,6 +77,23 @@
       padding: 6px;
       margin-bottom: 10px;
     }
+    .bloque-derecho {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .celda-alta {
+      height: 100%;
+    }
+    .height-row td {
+      height: 30px;
+    }
+    .sin-margen {
+      margin: 0;
+      padding: 0;
+      line-height: 1.1;
+    }
   </style>
 </head>
 <body>
@@ -93,20 +110,22 @@
     </table>
   </div>
 
-  <table>
-    <tr>
+  <table style="height: auto;">
+    <tr class="height-row">
       <td rowspan="6" style="width: 50%; vertical-align: top; padding: 0;">
         <table style="width: 100%; height: 100%; border: none;">
           <tr>
             <td style="width: 15%"><strong>TICKET:</strong></td>
             <td style="width: 35%">{{ticket}}</td>
-            <td style="width: 25%"><strong>AFILIACIÓN /<br>PESOS:</strong></td>
-            <td style="width: 25%">{{afiliacion}}</td>
-          </tr>
-          <tr>
-            <td colspan="2"></td>
-            <td><strong>DLLS:</strong></td>
-            <td></td>
+            <td style="width: 25%">
+              <div class="sin-margen"><strong>AFILIACIÓN</strong></div>
+              <div class="sin-margen">PESOS</div>
+              <hr style="margin: 2px 0 0 0;">
+              <div class="sin-margen">DLLS</div>
+            </td>
+            <td style="width: 25%">
+              <div class="sin-margen">{{afiliacion}}</div>
+            </td>
           </tr>
           <tr>
             <td colspan="4"><strong>COMERCIO:</strong> {{comercio}}</td>
@@ -124,14 +143,16 @@
           </tr>
         </table>
       </td>
-      <td style="width: 50%;"><strong>FECHA:</strong><br>{{fecha}}</td>
+      <td rowspan="6" style="width: 50%; vertical-align: top; padding: 0;">
+        <table style="width: 100%; height: 100%; border: none;">
+          <tr class="height-row"><td><strong>FECHA:</strong><br>{{fecha}}</td></tr>
+          <tr class="height-row"><td><strong>TELÉFONO:</strong><br>{{telefono_contacto_1}}</td></tr>
+          <tr class="height-row"><td style="height: auto;"><strong>REFERENCIAS:</strong><br>{{referencia}}<br><strong>HORARIO:</strong><br>{{horario}}</td></tr>
+        </table>
+      </td>
     </tr>
-    <tr>
-      <td><strong>TELÉFONO:</strong><br>{{telefono_contacto_1}}</td>
-    </tr>
-    <tr>
-      <td rowspan="4"><strong>REFERENCIAS:</strong><br>{{referencia}}<br><strong>HORARIO:</strong><br>{{horario}}</td>
-    </tr>
+  </table>
+
   <table>
     <tr>
       <td colspan="5" class="center">TIPO DE SERVICIO: {{servicio}} {{cantidad_insumos}}</td>
@@ -205,25 +226,32 @@
   </table>
 
   <table>
-  <tr>
-    <td colspan="4" style="border: 1px solid #000; text-align: center;">
-      NOMBRE Y FIRMA DEL CLIENTE<br><div class="firma-area"></div>
-    </td>
-    <td rowspan="1" style="width: 90px; text-align: center; border: 1px solid #000; padding: 4px;">
-      <div style="font-size: 9px; font-weight: bold; line-height: 1.1;">DESEA SU</div>
-      <div style="font-size: 9px; font-weight: bold; line-height: 1.1;">COMPROBANTE</div>
-      <table style="font-size: 8.5px; margin-top: 6px; margin-left: auto; margin-right: auto;">
-        <tr><td>DIGITAL</td><td style="padding-left: 4px;">□</td></tr>
-        <tr><td>FÍSICO</td><td style="padding-left: 4px;">□</td></tr>
-        <tr><td>NO</td><td style="padding-left: 4px;">□</td></tr>
-      </table>
-    </td>
-    <td colspan="4" style="border: 1px solid #000; text-align: center;">
-      NOMBRE Y FIRMA DEL IDC<br><div class="firma-area"></div>
-    </td>
-  </tr>
-</table>
+    <tr>
+      <td colspan="4" style="border: 1px solid #000; text-align: center;">
+        NOMBRE Y FIRMA DEL CLIENTE<br><div class="firma-area"></div>
+      </td>
+      <td rowspan="1" style="width: 90px; text-align: center; border: 1px solid #000; padding: 4px;">
+        <div style="font-size: 9px; font-weight: bold; line-height: 1.1;">DESEA SU</div>
+        <div style="font-size: 9px; font-weight: bold; line-height: 1.1;">COMPROBANTE</div>
+        <table style="font-size: 8.5px; margin-top: 6px; margin-left: auto; margin-right: auto;">
+          <tr><td>DIGITAL</td><td style="padding-left: 4px;">□</td></tr>
+          <tr><td>FÍSICO</td><td style="padding-left: 4px;">□</td></tr>
+          <tr><td>NO</td><td style="padding-left: 4px;">□</td></tr>
+        </table>
+      </td>
+      <td colspan="4" style="border: 1px solid #000; text-align: center;">
+        NOMBRE Y FIRMA DEL IDC<br><div class="firma-area"></div>
+      </td>
+    </tr>
+  </table>
 
   <div class="aviso-legal">
     HACEMOS DE SU CONOCIMIENTO QUE EL SERVICIO QUE USTED RECIBE POR PARTE DE BBVA NO GENERA NINGUN COSTO ADICIONAL, ASI COMO LA TERMINAL Y LOS INSUMOS QUE USTED SOLICITE POR LO QUE EL PERSONAL QUE LO VISITA NO PUEDE REALIZAR NINGUN COBRO O SOLICITAR ALGUN PAGO POR EL MISMO
   </div>
+
+</div>
+<div class="espacio_qr">
+  <!-- Aquí va el QR -->
+</div>
+</body>
+</html>
