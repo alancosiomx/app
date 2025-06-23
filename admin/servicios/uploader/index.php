@@ -3,7 +3,8 @@ require_once __DIR__ . '/../../../config.php';
 require_once __DIR__ . '/funciones_carga.php';
 require_once __DIR__ . '/funciones_mapeo.php';
 
-ob_start(); // empieza a capturar contenido para layout
+$contenido = __FILE__; // IMPORTANTE: esto es lo que espera tu layout
+require_once __DIR__ . '/../../layout.php';
 
 $bancos = ['bbva', 'banregio', 'azteca'];
 $mensaje = '';
@@ -15,7 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['archivo']) && isset(
     $extension = strtolower(pathinfo($nombreArchivo, PATHINFO_EXTENSION));
 
     if (in_array($banco, $bancos) && in_array($extension, ['csv', 'xlsx'])) {
+        // Cargar archivo a tabla temporal
         $mensaje_staging = cargar_a_staging($archivoTmp, $extension, $banco, $pdo);
+
+        // Migrar automáticamente
         switch ($banco) {
             case 'bbva':
                 $mensaje_mapeo = mapear_bbva($pdo);
@@ -29,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['archivo']) && isset(
             default:
                 $mensaje_mapeo = '❌ Banco no reconocido.';
         }
+
         $mensaje = $mensaje_staging . "\n\n" . $mensaje_mapeo;
     } else {
         $mensaje = '⚠️ Formato de archivo o banco inválido.';
@@ -74,7 +79,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['archivo']) && isset(
     </div>
   <?php endif; ?>
 </div>
-
-<?php
-$contenido = ob_get_clean(); // guarda lo que se generó como contenido
-require_once __DIR__ . '/../../layout.php'; // renderiza usando el layout del admin
