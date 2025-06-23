@@ -49,7 +49,7 @@
     td, th {
       border: 1px solid #000;
       vertical-align: top;
-      padding: 2px;
+      padding: 4px;
     }
 
     .no-border td, .no-border th {
@@ -58,12 +58,12 @@
 
     .titulo {
       text-align: center;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: bold;
     }
 
     .logos img {
-      height: 30px;
+      height: 40px;
     }
 
     .firma-area {
@@ -96,22 +96,21 @@
 
   <table>
     <tr>
-      <td><strong>TICKET:</strong><br>{{ticket}}</td>
-      <td><strong>AFILIACIÓN PESOS:</strong><br>{{afiliacion}}</td>
-      <td><strong>FECHA:</strong><br>{{fecha}}</td>
-      <td><strong>TELÉFONO:</strong><br>{{telefono_contacto_1}}</td>
-    </tr>
-    <tr>
-      <td colspan="2"><strong>COMERCIO:</strong><br>{{comercio}}</td>
-      <td colspan="2"><strong>REFERENCIAS:</strong><br>{{referencia}}</td>
-    </tr>
-    <tr>
-      <td colspan="2"><strong>CALLE Y NÚM:</strong><br>{{domicilio}}</td>
-      <td><strong>COLONIA:</strong><br>{{colonia}}</td>
-      <td><strong>C.P.:</strong><br>{{cp}}</td>
-    </tr>
-    <tr>
-      <td colspan="4"><strong>POBLACIÓN Y ESTADO:</strong><br>{{ciudad}}</td>
+      <td style="width: 50%;">
+        <strong>TICKET:</strong> {{ticket}}<br>
+        <strong>AFILIACION PESOS:</strong> {{afiliacion}}<br>
+        <strong>DLLS:</strong> __________<br>
+        <strong>COMERCIO:</strong> {{comercio}}<br>
+        <strong>CALLE Y NÚM:</strong> {{domicilio}}<br>
+        <strong>COLONIA:</strong> {{colonia}}<br>
+        <strong>C.P.:</strong> {{cp}}<br>
+        <strong>POBLACION Y ESTADO:</strong> {{ciudad}}
+      </td>
+      <td style="width: 50%;">
+        <strong>FECHA:</strong> {{fecha}}<br>
+        <strong>TELEFONO:</strong> {{telefono_contacto_1}}<br>
+        <strong>REFERENCIAS:</strong> {{referencia}}
+      </td>
     </tr>
   </table>
 
@@ -120,21 +119,24 @@
       <td colspan="5" class="center-text"><strong>TIPO DE SERVICIO:</strong> {{servicio}} {{cantidad_insumos}}</td>
     </tr>
     <tr>
-      <td>INSTALACIÓN DE TPV</td>
-      <td>FALLA DE TPV</td>
-      <td>RETIRO DE TPV</td>
-      <td>ENTREGA DE INSUMOS</td>
-      <td>CAPACITACIÓN</td>
+      <td>☐ INSTALACION DE TPV</td>
+      <td>☐ FALLA DE TPV</td>
+      <td>☐ RETIRO DE TPV</td>
+      <td>☐ ENTREGA DE INSUMOS</td>
+      <td>☐ CAPACITACION</td>
     </tr>
+  </table>
+
+  <table>
     <tr>
       <td colspan="3">
-        <strong>SOLUCIÓN</strong><br>
-        INSTALACIÓN ☐ SUSTITUCIÓN ☐ REPROGRAMACIÓN ☐ ENTREGA DE ROLLOS ☐<br>
-        ENTREGA DE PUBLICIDAD ☐ CAMBIO DE SIM ☐ CAMBIO DE ELIMINADOR ☐ CAMBIO DE BATERÍA ☐<br>
-        RETIRO ☐ CAPACITACIÓN ☐ INSTALACIÓN S/CAPACITACIÓN ☐
+        <strong>SOLUCION</strong><br>
+        ☐ INSTALACION ☐ SUSTITUCION ☐ REPROGRAMACION ☐ ENTREGA DE ROLLOS<br>
+        ☐ ENTREGA DE PUBLICIDAD ☐ CAMBIO DE SIM ☐ CAMBIO DE ELIMINADOR ☐ CAMBIO DE BATERIA<br>
+        ☐ RETIRO ☐ CAPACITACION ☐ INSTALACION S/CAPACITACION
       </td>
       <td colspan="2">
-        <strong>COMENTARIOS TÉCNICOS:</strong><br>
+        <strong>COMENTARIOS TECNICOS:</strong><br>
         {{comentarios}}
       </td>
     </tr>
@@ -145,25 +147,25 @@
       <td rowspan="4"><strong>SEÑAL</strong></td>
       <td>%</td>
       <td>GPRS</td>
-      <td>SI ☐</td>
-      <td>NO ☐</td>
-      <td rowspan="4"><strong>KIT DE INSTALACIÓN ENTREGADO</strong></td>
-      <td>RETAIL</td>
+      <td>☐ SI</td>
+      <td>☐ NO</td>
+      <td rowspan="4"><strong>KIT DE INSTALACION ENTREGADO</strong></td>
+      <td>☐ RETAIL</td>
     </tr>
     <tr>
       <td rowspan="3"><strong>CARRIER</strong></td>
       <td>MOVISTAR</td>
       <td>ETHERNET</td>
-      <td>SI ☐</td>
-      <td>NO ☐</td>
-      <td>HOTEL</td>
+      <td>☐ SI</td>
+      <td>☐ NO</td>
+      <td>☐ HOTEL</td>
     </tr>
     <tr>
       <td>TELCEL</td>
       <td>WIFI</td>
-      <td>SI ☐</td>
-      <td>NO ☐</td>
-      <td>RESTAURANTE</td>
+      <td>☐ SI</td>
+      <td>☐ NO</td>
+      <td>☐ RESTAURANTE</td>
     </tr>
     <tr>
       <td>M2M GLOBAL</td>
@@ -181,32 +183,31 @@
     </tr>
     <tr>
       <td><strong>MODELO</strong></td>
-      <td>MOVE 2500 ☐</td>
-      <td>VX 520 ☐</td>
-      <td>IWL ☐</td>
-      <td>OTRO ☐</td>
-      <td>MOVE 2500 ☐</td>
-      <td>VX 520 ☐</td>
-      <td>IWL ☐</td>
-      <td>OTRO ☐</td>
+      <td>☐ MOVE 2500</td>
+      <td>☐ VX 520</td>
+      <td>☐ IWL</td>
+      <td>☐ OTRO</td>
+      <td>☐ MOVE 2500</td>
+      <td>☐ VX 520</td>
+      <td>☐ IWL</td>
+      <td>☐ OTRO</td>
     </tr>
   </table>
 
   <table>
     <tr>
-      <td><strong>CALIFICACIÓN DE LA CALIDAD DEL SERVICIO TÉCNICO</strong></td>
+      <td colspan="10" class="center-text"><strong>CALIFICACION DE LA CALIDAD DEL SERVICIO TECNICO</strong></td>
     </tr>
     <tr>
-      <td>CALIFICACIÓN DE IDC: MALO ☐ BUENO ☐ EXCELENTE ☐</td>
-    </tr>
-    <tr>
-      <td>CALIFICACIÓN DE TPV: MALO ☐ BUENO ☐ EXCELENTE ☐</td>
-    </tr>
-    <tr>
-      <td>¿SE SOLUCIONÓ EL PROBLEMA? SI ☐ NO ☐</td>
-    </tr>
-    <tr>
-      <td>SU AFILIACIÓN ES LA MISMA QUE SU TPV: SI ☐ NO ☐</td>
+      <td>☐ MALO</td>
+      <td>☐ BUENO</td>
+      <td>☐ EXCELENTE</td>
+      <td colspan="2"><strong>SE SOLUCIONO EL PROBLEMA</strong></td>
+      <td>☐ SI</td>
+      <td>☐ NO</td>
+      <td><strong>SU AFILIACION</strong></td>
+      <td>☐ ES LA MISMA QUE SU TPV</td>
+      <td>☐ NO</td>
     </tr>
   </table>
 
@@ -218,17 +219,13 @@
       <td class="firma-area">{{idc}}</td>
     </tr>
     <tr>
-      <td colspan="4">DESEA SU COMPROBANTE: DIGITAL ☐ FÍSICO ☐ NO ☐</td>
+      <td colspan="4">DESEA SU COMPROBANTE: ☐ DIGITAL ☐ FISICO ☐ NO</td>
     </tr>
   </table>
 
-  <table>
-    <tr>
-      <td class="center-text">
-        HACEMOS DE SU CONOCIMIENTO QUE EL SERVICIO QUE USTED RECIBE POR PARTE DE BBVA NO GENERA NINGÚN COSTO ADICIONAL, ASÍ COMO LA TERMINAL Y LOS INSUMOS QUE USTED SOLICITE, POR LO QUE EL PERSONAL QUE LO VISITA NO PUEDE REALIZAR NINGÚN COBRO O SOLICITAR ALGÚN PAGO POR EL MISMO.
-      </td>
-    </tr>
-  </table>
+  <p class="center-text">
+    HACEMOS DE SU CONOCIMIENTO QUE EL SERVICIO QUE USTED RECIBE POR PARTE DE BBVA NO GENERA NINGUN COSTO ADICIONAL, ASI COMO LA TERMINAL Y LOS INSUMOS QUE USTED SOLICITE POR LO QUE EL PERSONAL QUE LO VISITA NO PUEDE REALIZAR NINGUN COBRO O SOLICITAR ALGUN PAGO POR EL MISMO.
+  </p>
 </div>
 <div class="espacio_qr">
   <img src="image6.png" alt="QR Superior">
