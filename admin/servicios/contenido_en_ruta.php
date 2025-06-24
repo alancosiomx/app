@@ -123,7 +123,7 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <td class="px-4 py-2 text-center">
               <input type="checkbox" name="tickets[]" value="<?= htmlspecialchars($s['ticket']) ?>">
             </td>
-            <td class="px-4 py-2"><?= htmlspecialchars($s['banca']) ?></td>
+            <td class="px-4 py-2"><?= htmlspecialchars($s['banco']) ?></td>
             <td class="px-4 py-2"><?= htmlspecialchars($s['ticket']) ?></td>
             <td class="px-4 py-2">
               <?php
