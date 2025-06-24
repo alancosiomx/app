@@ -6,21 +6,20 @@
   <style>
     @page {
       size: A4 landscape;
-      margin: 15px;
+      margin: 10mm;
     }
     body {
       font-family: Arial, sans-serif;
       font-size: 10px;
       margin: 0;
       padding: 0;
-      display: flex;
-      flex-direction: row;
     }
     .contenido {
-      width: 80%;
-      padding: 10px;
+      width: 100%;
+      padding: 0 5px;
     }
     .espacio_qr {
+      float: right;
       width: 20%;
       border-left: 1px dashed #000;
       padding-left: 10px;
@@ -33,9 +32,6 @@
       border: 1px solid #000;
       padding: 4px;
       vertical-align: top;
-    }
-    .no-border {
-      border: none;
     }
     .center {
       text-align: center;
@@ -54,11 +50,6 @@
       height: 40px;
       border: 1px solid #000;
     }
-    .label {
-      font-weight: bold;
-      display: inline-block;
-      width: 100px;
-    }
     .aviso-legal {
       border: 1px solid #000;
       padding: 6px;
@@ -66,25 +57,14 @@
     }
     .soluciones-table td {
       width: 12.5%;
-      height: auto;
     }
     .soluciones-table td.comentarios-tecnicos {
       width: 50%;
-      height: auto;
     }
     .encabezado-marco {
       border: 1px solid #000;
       padding: 6px;
       margin-bottom: 10px;
-    }
-    .bloque-derecho {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .celda-alta {
-      height: 100%;
     }
     .height-row td {
       height: 30px;
@@ -102,54 +82,36 @@
     <table>
       <tr>
         <td style="width: 20%"><img src="image1.jpeg" alt="BBVA" height="40"></td>
-        <td class="titulo-hoja">
-          HOJA DE<br>SERVICIO
-        </td>
+        <td class="titulo-hoja">HOJA DE<br>SERVICIO</td>
         <td style="width: 20%"><img src="image3.png" alt="TEDISA" height="40"></td>
       </tr>
     </table>
   </div>
 
-  <table style="height: auto;">
-    <tr class="height-row">
-      <td rowspan="6" style="width: 50%; vertical-align: top; padding: 0;">
-        <table style="width: 100%; height: 100%; border: none;">
-          <tr>
-            <td style="width: 15%"><strong>TICKET:</strong></td>
-            <td style="width: 35%">{{ticket}}</td>
-            <td style="width: 25%">
-              <div class="sin-margen"><strong>AFILIACIÓN</strong></div>
-              <div class="sin-margen">PESOS</div>
-              <hr style="margin: 2px 0 0 0;">
-              <div class="sin-margen">DLLS</div>
-            </td>
-            <td style="width: 25%">
-              <div class="sin-margen">{{afiliacion}}</div>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="4"><strong>COMERCIO:</strong> {{comercio}}</td>
-          </tr>
-          <tr>
-            <td colspan="4"><strong>CALLE Y NÚM:</strong> {{domicilio}}</td>
-          </tr>
-          <tr>
-            <td colspan="4"><strong>COLONIA:</strong> {{colonia}}</td>
-          </tr>
-          <tr>
-            <td><strong>C.P.:</strong> {{cp}}</td>
-            <td><strong>POBLACIÓN:</strong> {{ciudad}}</td>
-            <td colspan="2"><strong>ESTADO:</strong> {{estado}}</td>
-          </tr>
-        </table>
+  <table>
+    <tr>
+      <td colspan="4"><strong>TICKET:</strong> {{ticket}}</td>
+      <td colspan="4">
+        <strong>AFILIACIÓN</strong><br>PESOS:<br><hr style="margin:2px 0;">DLLS:
       </td>
-      <td rowspan="6" style="width: 50%; vertical-align: top; padding: 0;">
-        <table style="width: 100%; height: 100%; border: none;">
-          <tr class="height-row"><td><strong>FECHA:</strong><br>{{fecha}}</td></tr>
-          <tr class="height-row"><td><strong>TELÉFONO:</strong><br>{{telefono_contacto_1}}</td></tr>
-          <tr class="height-row"><td style="height: auto;"><strong>REFERENCIAS:</strong><br>{{referencia}}<br><strong>HORARIO:</strong><br>{{horario}}</td></tr>
-        </table>
-      </td>
+    </tr>
+    <tr>
+      <td colspan="8"><strong>COMERCIO:</strong> {{comercio}}</td>
+    </tr>
+    <tr>
+      <td colspan="8"><strong>CALLE Y NÚM:</strong> {{domicilio}}</td>
+    </tr>
+    <tr>
+      <td colspan="8"><strong>COLONIA:</strong> {{colonia}}</td>
+    </tr>
+    <tr>
+      <td><strong>C.P.:</strong> {{cp}}</td>
+      <td colspan="2"><strong>POBLACIÓN:</strong> {{ciudad}}</td>
+      <td colspan="2"><strong>ESTADO:</strong> {{estado}}</td>
+      <td colspan="3"><strong>TELÉFONO:</strong> {{telefono_contacto_1}}</td>
+    </tr>
+    <tr>
+      <td colspan="8"><strong>REFERENCIAS:</strong> {{referencia}} <br><strong>HORARIO:</strong> {{horario}}</td>
     </tr>
   </table>
 
@@ -168,13 +130,13 @@
 
   <table class="soluciones-table">
     <tr>
-      <td colspan="4" style="text-align:left;"><strong>SOLUCION</strong></td>
-      <td class="comentarios-tecnicos"><strong>COMENTARIOS TECNICOS</strong></td>
+      <td colspan="4"><strong>SOLUCION</strong></td>
+      <td class="comentarios-tecnicos"><strong>COMENTARIOS TÉCNICOS</strong></td>
     </tr>
     <tr>
-      <td>INSTALACION</td>
-      <td>SUSTITUCION</td>
-      <td>REPROGRAMACION</td>
+      <td>INSTALACIÓN</td>
+      <td>SUSTITUCIÓN</td>
+      <td>REPROGRAMACIÓN</td>
       <td>ENTREGA DE ROLLOS</td>
       <td class="comentarios-tecnicos" rowspan="3">{{comentarios}}</td>
     </tr>
@@ -182,46 +144,47 @@
       <td>ENTREGA DE PUBLICIDAD</td>
       <td>CAMBIO DE SIM</td>
       <td>CAMBIO DE ELIMINADOR</td>
-      <td>CAMBIO DE BATERIA</td>
+      <td>CAMBIO DE BATERÍA</td>
     </tr>
     <tr>
       <td>RETIRO</td>
-      <td>CAPACITACION</td>
-      <td colspan="2">INSTALACION S/CAPACITACION</td>
+      <td>CAPACITACIÓN</td>
+      <td colspan="2">INSTALACIÓN S/CAPACITACIÓN</td>
     </tr>
   </table>
 
   <table>
+    <tr><td colspan="4" class="center">CALIFICACIÓN DE LA CALIDAD DEL SERVICIO TÉCNICO</td></tr>
     <tr>
-      <td>SEÑAL %</td><td>GPRS</td><td class="checkbox-cell">SI</td><td class="checkbox-cell">NO</td>
-      <td>ETHERNET</td><td class="checkbox-cell">SI</td><td class="checkbox-cell">NO</td>
-      <td>WIFI</td><td class="checkbox-cell">SI</td><td class="checkbox-cell">NO</td>
-    </tr>
-  </table>
-
-  <table>
-    <tr>
-      <td>KIT DE INSTALACION ENTREGADO</td><td>RETAIL</td><td class="checkbox-cell"></td><td>HOTEL</td><td class="checkbox-cell"></td><td>RESTAURANTE</td><td class="checkbox-cell"></td>
-    </tr>
-  </table>
-
-  <table>
-    <tr>
-      <td>SERIE INSTALADA</td><td colspan="4"></td>
-      <td>SERIE RETIRADA</td><td colspan="4"></td>
-    </tr>
-    <tr>
-      <td>MODELO</td><td>MOVE 2500</td><td>VX 520</td><td>IWL</td><td>OTRO</td>
-      <td>MODELO</td><td>MOVE 2500</td><td>VX 520</td><td>IWL</td><td>OTRO</td>
-    </tr>
-  </table>
-
-  <table>
-    <tr><td colspan="10" class="center">CALIFICACION DE LA CALIDAD DEL SERVICIO TECNICO</td></tr>
-    <tr>
-      <td>CALIFICACION DE IDC</td><td>MALO</td><td>BUENO</td><td>EXCELENTE</td>
-      <td>CALIFICACION DE TPV</td><td>MALO</td><td>BUENO</td><td>EXCELENTE</td>
-      <td>SE SOLUCIONÓ EL PROBLEMA</td><td>SI / NO</td>
+      <td style="width: 25%; vertical-align: top;">
+        <table style="width: 100%;">
+          <tr><td colspan="2" class="center"><strong>CALIFICACIÓN DE IDC</strong></td></tr>
+          <tr><td>MALO</td><td></td></tr>
+          <tr><td>BUENO</td><td></td></tr>
+          <tr><td>EXCELENTE</td><td></td></tr>
+        </table>
+      </td>
+      <td style="width: 25%; vertical-align: top;">
+        <table style="width: 100%;">
+          <tr><td colspan="2" class="center"><strong>CALIFICACIÓN DE TPV</strong></td></tr>
+          <tr><td>BUENO</td><td></td></tr>
+          <tr><td>MALO</td><td></td></tr>
+        </table>
+      </td>
+      <td style="width: 25%; vertical-align: top;">
+        <table style="width: 100%;">
+          <tr><td colspan="2" class="center"><strong>¿SE SOLUCIONÓ EL PROBLEMA?</strong></td></tr>
+          <tr><td>SÍ</td><td></td></tr>
+          <tr><td>NO</td><td></td></tr>
+        </table>
+      </td>
+      <td style="width: 25%; vertical-align: top;">
+        <table style="width: 100%;">
+          <tr><td colspan="2" class="center"><strong>¿SU AFILIACIÓN ES LA MISMA QUE SU TPV?</strong></td></tr>
+          <tr><td>SÍ</td><td></td></tr>
+          <tr><td>NO</td><td></td></tr>
+        </table>
+      </td>
     </tr>
   </table>
 
@@ -248,7 +211,6 @@
   <div class="aviso-legal">
     HACEMOS DE SU CONOCIMIENTO QUE EL SERVICIO QUE USTED RECIBE POR PARTE DE BBVA NO GENERA NINGUN COSTO ADICIONAL, ASI COMO LA TERMINAL Y LOS INSUMOS QUE USTED SOLICITE POR LO QUE EL PERSONAL QUE LO VISITA NO PUEDE REALIZAR NINGUN COBRO O SOLICITAR ALGUN PAGO POR EL MISMO
   </div>
-
 </div>
 <div class="espacio_qr">
   <!-- Aquí va el QR -->
