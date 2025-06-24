@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $tickets = $_POST['tickets'] ?? [];
 $resultado = trim($_POST['resultado'] ?? '');
 
-if (empty($tickets) || !in_array($resultado, ['Exito', 'Rechazo', 'Reasignar'])) {
+if (empty($tickets) || !in_array($resultado, ['Exito', 'Rechazo', 'Reasignar', 'Cancelado'])) {
     $_SESSION['error'] = "Debes seleccionar al menos un ticket y un resultado válido.";
     header("Location: index.php?tab=en_ruta");
     exit();
