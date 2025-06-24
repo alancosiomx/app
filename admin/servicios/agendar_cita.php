@@ -1,14 +1,14 @@
 <?php
 require_once __DIR__ . '/../../config.php';
 require_once __DIR__ . '/service_functions.php';
-session_start();
+
+if (session_status() === PHP_SESSION_NONE) session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $tickets = explode(',', $_POST['tickets'] ?? '');
+    $tickets_raw = $_POST['tickets'] ?? '';
     $fecha_cita = $_POST['fecha_cita'] ?? null;
 
-    $tickets = array_map('trim', $tickets);
-    $tickets = array_filter($tickets);
+    $tickets = array_filter(array_map('trim', explode(',', $tickets_raw)));
 
     $agendadas = 0;
     foreach ($tickets as $ticket) {
