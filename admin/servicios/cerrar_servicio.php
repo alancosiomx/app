@@ -25,6 +25,11 @@ foreach ($tickets as $ticket) {
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$ticket]);
         logServicio($pdo, $ticket, 'Reasignación', $_SESSION['usuario_nombre'], "Devuelto a Por Asignar");
+    } elseif ($resultado === 'Cancelado') {
+        $sql = "UPDATE servicios_omnipos SET estatus = 'Histórico', resultado = 'Cancelado', fecha_atencion = NOW() WHERE ticket = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$ticket]);
+        logServicio($pdo, $ticket, 'Cancelado', $_SESSION['usuario_nombre'], "Servicio marcado como Cancelado");
     } else {
         $sql = "UPDATE servicios_omnipos SET estatus = 'Histórico', resultado = ?, fecha_atencion = NOW() WHERE ticket = ?";
         $stmt = $pdo->prepare($sql);
@@ -34,6 +39,7 @@ foreach ($tickets as $ticket) {
 
     $actualizados++;
 }
+
 
 $_SESSION['mensaje'] = "✅ Se procesaron $actualizados servicios correctamente.";
 header("Location: index.php?tab=en_ruta");
