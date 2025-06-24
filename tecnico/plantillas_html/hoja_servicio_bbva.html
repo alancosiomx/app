@@ -54,6 +54,7 @@
       border: 1px solid #000;
       padding: 6px;
       margin-top: 8px;
+      font-size: 9px;
     }
     .soluciones-table td {
       width: 12.5%;
@@ -61,161 +62,125 @@
     .soluciones-table td.comentarios-tecnicos {
       width: 50%;
     }
-    .encabezado-marco {
-      border: 1px solid #000;
-      padding: 6px;
-      margin-bottom: 4px;
+    .checkbox {
+      padding-left: 5px;
     }
   </style>
 </head>
 <body>
-<div class="contenido">
-  <table style="width: 100%; border: 1px solid #000; margin-bottom: 0;">
-  <tr>
-    <td style="width: 20%; border-right: 1px solid #000;"><img src="image1.jpeg" alt="BBVA" height="40"></td>
-    <td class="titulo-hoja" style="border-left: none; border-right: none;">HOJA DE<br>SERVICIO</td>
-    <td style="width: 20%; border-left: 1px solid #000;"><img src="image3.png" alt="TEDISA" height="40"></td>
-  </tr>
-  <table>
-    <tr>
-      <td colspan="2"><strong>TICKET:</strong> {{ticket}}</td>
-      <td colspan="2"><strong>TELÉFONO:</strong> {{telefono}}</td>
-      <td colspan="4"><strong>AFILIACIÓN</strong><br>PESOS:<br><hr style="margin:2px 0;">DLLS:</td>
-    </tr>
-    <tr>
-      <td colspan="4"><strong>FECHA:</strong> {{fecha}}</td>
-      <td colspan="4"><strong>REFERENCIAS:</strong> {{referencia}}<br><strong>HORARIO:</strong> {{horario}}</td>
-    </tr><br>PESOS:<br><hr style="margin:2px 0;">DLLS:</td>
-    </tr>
-    <tr><td colspan="8"><strong>COMERCIO:</strong> {{comercio}}</td></tr>
-    <tr><td colspan="8"><strong>CALLE Y NÚM:</strong> {{domicilio}}</td></tr>
-    <tr><td colspan="8"><strong>COLONIA:</strong> {{colonia}}</td></tr>
-    <tr>
-      <td><strong>C.P.:</strong> {{cp}}</td>
-      <td colspan="2"><strong>POBLACIÓN:</strong> {{ciudad}}</td>
-      <td colspan="2"><strong>ESTADO:</strong> {{estado}}</td>
-      <td colspan="3"><strong>TELÉFONO:</strong> {{telefono_contacto_1}}</td>
-    </tr>
-    <tr>
-      <td colspan="4"><strong>REFERENCIAS:</strong> {{referencia}}</td>
-      <td colspan="4"><strong>HORARIO:</strong> {{horario}}</td>
-    </tr>
-  </table>
+  <div class="contenido">
+    <table>
+      <tr>
+        <td style="width: 20%;"><img src="image1.jpeg" alt="BBVA" height="40"></td>
+        <td class="titulo-hoja">HOJA DE<br>SERVICIO</td>
+        <td style="width: 20%;"><img src="image3.png" alt="TEDISA" height="40"></td>
+      </tr>
+    </table>
 
-  <table>
-    <tr><td colspan="5" class="center">TIPO DE SERVICIO: {{servicio}} {{cantidad_insumos}}</td></tr>
-    <tr>
-      <td>INSTALACION DE TPV</td>
-      <td>FALLA DE TPV</td>
-      <td>RETIRO DE TPV</td>
-      <td>ENTREGA DE INSUMOS</td>
-      <td>CAPACITACION</td>
-    </tr>
-  </table>
+    <table>
+      <tr>
+        <td colspan="2"><strong>TICKET:</strong> {{ticket}}</td>
+        <td colspan="2"><strong>TELÉFONO:</strong> {{telefono}}</td>
+        <td colspan="4"><strong>AFILIACIÓN</strong><br>PESOS: {{pesos}}<br><hr>DLLS: {{dolares}}</td>
+      </tr>
+      <tr>
+        <td colspan="4"><strong>FECHA:</strong> {{fecha}}</td>
+        <td colspan="4"><strong>REFERENCIAS:</strong> {{referencia}}<br><strong>HORARIO:</strong> {{horario}}</td>
+      </tr>
+      <tr><td colspan="8"><strong>COMERCIO:</strong> {{comercio}}</td></tr>
+      <tr><td colspan="8"><strong>CALLE Y NÚM:</strong> {{domicilio}}</td></tr>
+      <tr><td colspan="8"><strong>COLONIA:</strong> {{colonia}}</td></tr>
+      <tr>
+        <td><strong>C.P.:</strong> {{cp}}</td>
+        <td colspan="2"><strong>POBLACIÓN:</strong> {{ciudad}}</td>
+        <td colspan="2"><strong>ESTADO:</strong> {{estado}}</td>
+        <td colspan="3"><strong>TELÉFONO:</strong> {{telefono_contacto_1}}</td>
+      </tr>
+    </table>
 
+    <table>
+      <tr><td colspan="5" class="center">TIPO DE SERVICIO: {{servicio}} {{cantidad_insumos}}</td></tr>
+      <tr>
+        <td>INSTALACION DE TPV</td>
+        <td>FALLA DE TPV</td>
+        <td>RETIRO DE TPV</td>
+        <td>ENTREGA DE INSUMOS</td>
+        <td>CAPACITACION</td>
+      </tr>
+    </table>
 
-  <table class="soluciones-table">
-    <tr><td colspan="4"><strong>SOLUCION</strong></td><td class="comentarios-tecnicos"><strong>COMENTARIOS TÉCNICOS</strong></td></tr>
-    <tr>
-      <td>INSTALACIÓN</td>
-      <td>SUSTITUCIÓN</td>
-      <td>REPROGRAMACIÓN</td>
-      <td>ENTREGA DE ROLLOS</td>
-      <td class="comentarios-tecnicos" rowspan="3">{{comentarios}}</td>
-    </tr>
-    <tr>
-      <td>ENTREGA DE PUBLICIDAD</td>
-      <td>CAMBIO DE SIM</td>
-      <td>CAMBIO DE ELIMINADOR</td>
-      <td>CAMBIO DE BATERÍA</td>
-    </tr>
-    <tr>
-      <td>RETIRO</td>
-      <td>CAPACITACIÓN</td>
-      <td colspan="2">INSTALACIÓN S/CAPACITACIÓN</td>
-    </tr>
-  </table>
+    <table class="soluciones-table">
+      <tr><td colspan="4"><strong>SOLUCIÓN</strong></td><td class="comentarios-tecnicos"><strong>COMENTARIOS TÉCNICOS</strong></td></tr>
+      <tr>
+        <td>INSTALACIÓN</td>
+        <td>SUSTITUCIÓN</td>
+        <td>REPROGRAMACIÓN</td>
+        <td>ENTREGA DE ROLLOS</td>
+        <td class="comentarios-tecnicos" rowspan="3">{{comentarios}}</td>
+      </tr>
+      <tr>
+        <td>ENTREGA DE PUBLICIDAD</td>
+        <td>CAMBIO DE SIM</td>
+        <td>CAMBIO DE ELIMINADOR</td>
+        <td>CAMBIO DE BATERÍA</td>
+      </tr>
+      <tr>
+        <td>RETIRO</td>
+        <td>CAPACITACIÓN</td>
+        <td colspan="2">INSTALACIÓN S/CAPACITACIÓN</td>
+      </tr>
+    </table>
 
-  <table>
-    <tr>
-      <td><strong>SERIE INSTALADA</strong></td>
-      <td colspan="3"></td>
-      <td><strong>SERIE RETIRADA</strong></td>
-      <td colspan="3"></td>
-    </tr>
-    <tr>
-      <td><strong>MODELO</strong></td>
-      <td>MOVE 2500</td>
-      
-      <td>OTRO</td>
-      <td><strong>MODELO</strong></td>
-      <td>MOVE 2500</td>
-      <td>VX 520</td>
-      <td>IWL</td>
-    </tr>
-  </table>
+    <table>
+      <tr>
+        <td><strong>SERIE INSTALADA</strong></td><td colspan="3">{{serie_instalada}}</td>
+        <td><strong>SERIE RETIRADA</strong></td><td colspan="3">{{serie_retirada}}</td>
+      </tr>
+      <tr>
+        <td><strong>MODELO</strong></td><td>MOVE 2500</td><td>VX 520</td><td>IWL</td>
+        <td><strong>MODELO</strong></td><td>MOVE 2500</td><td>VX 520</td><td>IWL</td>
+      </tr>
+    </table>
 
-  <table>
-    <tr><td colspan="4" class="center">CALIFICACIÓN DE LA CALIDAD DEL SERVICIO TÉCNICO</td></tr>
-    <tr>
-      <td>
-        <table style="width: 100%;">
-          <tr><td colspan="2" class="center"><strong>CALIFICACIÓN DE IDC</strong></td></tr>
-          <tr><td>MALO</td><td></td></tr>
-          <tr><td>BUENO</td><td></td></tr>
-          <tr><td>EXCELENTE</td><td></td></tr>
-        </table>
-      </td>
-      <td>
-        <table style="width: 100%;">
-          <tr><td colspan="2" class="center"><strong>CALIFICACIÓN DE TPV</strong></td></tr>
-          <tr><td>BUENO</td><td></td></tr>
-          <tr><td>MALO</td><td></td></tr>
-        </table>
-      </td>
-      <td>
-        <table style="width: 100%;">
-          <tr><td colspan="2" class="center"><strong>¿SE SOLUCIONÓ EL PROBLEMA?</strong></td></tr>
-          <tr><td>SÍ</td><td></td></tr>
-          <tr><td>NO</td><td></td></tr>
-        </table>
-      </td>
-      <td>
-        <table style="width: 100%;">
-          <tr><td colspan="2" class="center"><strong>¿SU AFILIACIÓN ES LA MISMA QUE SU TPV?</strong></td></tr>
-          <tr><td>SÍ</td><td></td></tr>
-          <tr><td>NO</td><td></td></tr>
-        </table>
-      </td>
-    </tr>
-  </table>
+    <table>
+      <tr><td colspan="4" class="center">CALIFICACIÓN DE LA CALIDAD DEL SERVICIO TÉCNICO</td></tr>
+      <tr>
+        <td>
+          <strong>CALIFICACIÓN DE IDC</strong><br>MALO □<br>BUENO □<br>EXCELENTE □
+        </td>
+        <td>
+          <strong>CALIFICACIÓN DE TPV</strong><br>BUENO □<br>MALO □
+        </td>
+        <td>
+          <strong>¿SE SOLUCIONÓ EL PROBLEMA?</strong><br>SÍ □<br>NO □
+        </td>
+        <td>
+          <strong>¿SU AFILIACIÓN ES LA MISMA QUE SU TPV?</strong><br>SÍ □<br>NO □
+        </td>
+      </tr>
+    </table>
 
-  <table>
-    <tr>
-      <td colspan="4" style="text-align: center; width: 40%;">
-        NOMBRE Y FIRMA DEL CLIENTE<br><div class="firma-area"></div>
-      </td>
-      <td style="text-align: center; width: 20%; vertical-align: top;">
-        <div style="font-size: 9px; font-weight: bold; line-height: 1.1;">DESEA SU</div>
-        <div style="font-size: 9px; font-weight: bold; line-height: 1.1;">COMPROBANTE</div>
-        <table style="font-size: 8.5px; margin-top: 6px; margin-left: auto; margin-right: auto;">
-          <tr><td>DIGITAL</td><td style="padding-left: 4px;">□</td></tr>
-          <tr><td>FÍSICO</td><td style="padding-left: 4px;">□</td></tr>
-          <tr><td>NO</td><td style="padding-left: 4px;">□</td></tr>
-        </table>
-      </td>
-      <td colspan="4" style="text-align: center; width: 40%;">
-        NOMBRE Y FIRMA DEL IDC<br><div class="firma-area"></div>
-      </td>
-    </tr>
-  </table>
+    <table>
+      <tr>
+        <td colspan="4" class="center">NOMBRE Y FIRMA DEL CLIENTE<br><div class="firma-area"></div></td>
+        <td style="text-align: center;">
+          <strong>DESEA SU COMPROBANTE</strong><br>
+          <table style="margin:auto;">
+            <tr><td>DIGITAL</td><td class="checkbox">□</td></tr>
+            <tr><td>FÍSICO</td><td class="checkbox">□</td></tr>
+            <tr><td>NO</td><td class="checkbox">□</td></tr>
+          </table>
+        </td>
+        <td colspan="4" class="center">NOMBRE Y FIRMA DEL IDC<br><div class="firma-area"></div></td>
+      </tr>
+    </table>
 
-  <div class="aviso-legal">
-    HACEMOS DE SU CONOCIMIENTO QUE EL SERVICIO QUE USTED RECIBE POR PARTE DE BBVA NO GENERA NINGUN COSTO ADICIONAL, ASI COMO LA TERMINAL Y LOS INSUMOS QUE USTED SOLICITE POR LO QUE EL PERSONAL QUE LO VISITA NO PUEDE REALIZAR NINGUN COBRO O SOLICITAR ALGUN PAGO POR EL MISMO
+    <div class="aviso-legal">
+      HACEMOS DE SU CONOCIMIENTO QUE EL SERVICIO QUE USTED RECIBE POR PARTE DE BBVA NO GENERA NINGUN COSTO ADICIONAL, ASI COMO LA TERMINAL Y LOS INSUMOS QUE USTED SOLICITE POR LO QUE EL PERSONAL QUE LO VISITA NO PUEDE REALIZAR NINGUN COBRO O SOLICITAR ALGUN PAGO POR EL MISMO.
+    </div>
   </div>
-</div>
-<div style="width: 100%; height: 100%; border: 1px solid #000; border-radius: 20px; display: flex; align-items: center; justify-content: center;">
-    <span style="writing-mode: vertical-rl; transform: rotate(180deg); font-size: 8px; color: #aaa;">ESPACIO QR</span>
+  <div class="espacio_qr">
+    <span style="writing-mode: vertical-rl; transform: rotate(180deg); font-size: 8px; color: #aaa;">ESPACIO QR</span>
   </div>
 </body>
 </html>
