@@ -1,8 +1,15 @@
 <?php
 require_once '../../config.php';
 require_once __DIR__ . '/service_functions.php';
+
 if (session_status() === PHP_SESSION_NONE) session_start();
 
+// Validación de sesión
+if (!isset($_SESSION['usuario_id'])) {
+    die('<div class="bg-red-100 text-red-800 px-4 py-2 rounded mb-4">⚠️ Error de seguridad. Por favor recarga la página.</div>');
+}
+
+$usuario = $_SESSION['usuario_nombre'] ?? 'Sistema';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tickets = explode(',', $_POST['tickets'] ?? '');
     $fecha_cita = $_POST['fecha_cita'] ?? null;
