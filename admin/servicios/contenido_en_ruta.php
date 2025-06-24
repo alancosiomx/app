@@ -85,12 +85,14 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <div class="flex justify-between items-center mb-4">
     <div>
       <label class="text-sm font-medium text-gray-700">Aplicar resultado a los seleccionados:</label>
-      <select name="resultado" class="ml-2 border rounded px-3 py-1 text-sm">
-        <option value="">-- Seleccionar --</option>
-        <option value="Exito">✅ Éxito</option>
-        <option value="Rechazo">❌ Rechazo</option>
-        <option value="Reasignar">🔁 Reasignar</option>
-      </select>
+      <select name="resultado_servicio" required class="border rounded px-3 py-1 text-sm">
+  <option value="">Selecciona resultado</option>
+  <option value="ÉXITO">✅ ÉXITO</option>
+  <option value="RECHAZO">❌ RECHAZO</option>
+  <option value="REASIGNAR">🔁 REASIGNAR</option>
+  <option value="CANCELADO">🚫 CANCELADO</option>
+</select>
+
     </div>
 
     <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm">
