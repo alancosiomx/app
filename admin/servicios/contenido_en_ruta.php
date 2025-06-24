@@ -108,15 +108,15 @@ function safe($val) {
       <thead class="bg-gray-100 text-gray-600 uppercase text-xs">
         <tr>
           <th class="px-4 py-3"><input type="checkbox" onclick="document.querySelectorAll('input[name*=tickets]').forEach(c=>c.checked=this.checked)"></th>
-          <th class="px-4 py-3">🏦 Banco</th>
+          <th class="px-4 py-3">Banco</th>
           <th class="px-4 py-3">Ticket</th>
-          <th class="px-4 py-3">📌 Extras</th>
+          <th class="px-4 py-3">Extras</th>
           <th class="px-4 py-3">Afiliación</th>
           <th class="px-4 py-3">Comercio</th>
           <th class="px-4 py-3">Ciudad</th>
           <th class="px-4 py-3">Servicio</th>
           <th class="px-4 py-3">Técnico</th>
-          <th class="px-4 py-3">📦 Insumos</th>
+          <th class="px-4 py-3">Insumos</th>
           <th class="px-4 py-3">Comentarios</th>
           <th class="px-4 py-3 text-center">🔍</th>
         </tr>
