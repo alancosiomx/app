@@ -127,7 +127,7 @@ function safe($val) {
             <td class="px-4 py-2 text-center">
               <input type="checkbox" name="tickets[]" value="<?= safe($s['ticket']) ?>">
             </td>
-            <td class="px-4 py-2"><?= safe($s['banca']) ?></td>
+            <td class="px-4 py-2"><?= safe($s['banco']) ?></td>
             <td class="px-4 py-2"><?= safe($s['ticket']) ?></td>
             <td class="px-4 py-2">
               <?php
