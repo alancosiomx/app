@@ -87,10 +87,10 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <label class="text-sm font-medium text-gray-700">Aplicar resultado a los seleccionados:</label>
       <select name="resultado_servicio" required class="border rounded px-3 py-1 text-sm">
   <option value="">Selecciona resultado</option>
-  <option value="ÉXITO">✅ ÉXITO</option>
-  <option value="RECHAZO">❌ RECHAZO</option>
-  <option value="REASIGNAR">🔁 REASIGNAR</option>
-  <option value="CANCELADO">🚫 CANCELADO</option>
+  <option value="Exito">✅ ÉXITO</option>
+  <option value="Rechazo">❌ RECHAZO</option>
+  <option value="Reasignar">🔁 REASIGNAR</option>
+  <option value="Cancelado">🚫 CANCELADO</option>
 </select>
 
     </div>
