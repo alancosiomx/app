@@ -4,35 +4,31 @@
   <meta charset="UTF-8">
   <title>Hoja de Servicio BBVA</title>
   <style>
-    @page {
-      size: A4 landscape;
-      margin: 10mm;
-    }
+    @page { size: A4 landscape; margin: 10mm; }
     body {
+      margin: 0; padding: 0;
       font-family: Arial, sans-serif;
       font-size: 10px;
-      margin: 0;
-      padding: 0;
       display: flex;
     }
     .contenido {
       width: calc(100% - 160px);
       padding: 5px;
+      box-sizing: border-box;
     }
     .qr-area {
       width: 160px;
-      min-width: 160px;
       border: 1px solid #000;
       border-radius: 20px;
       display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: center;
-      padding: 10px;
+      justify-content: center;
+      align-items: flex-end;
+      padding-bottom: 10px;
+      box-sizing: border-box;
     }
     .qr-area img {
-      width: 100px;
-      height: 100px;
+      width: 120px;
+      height: 120px;
     }
     table {
       width: 100%;
@@ -44,13 +40,12 @@
       padding: 4px;
       vertical-align: top;
     }
-    .center {
-      text-align: center;
-    }
+    .center { text-align: center; }
     .titulo {
       font-size: 18px;
       font-weight: bold;
       text-align: center;
+      line-height: 1.1;
     }
     .firma-area {
       height: 40px;
@@ -60,9 +55,7 @@
       border: 1px solid #000;
       padding: 6px;
       font-size: 9px;
-    }
-    .checkbox {
-      padding-left: 5px;
+      margin-top: 4px;
     }
   </style>
 </head>
@@ -77,7 +70,7 @@
       </tr>
     </table>
 
-    <!-- Datos Generales -->
+    <!-- Datos generales -->
     <table>
       <tr>
         <td><strong>TICKET:</strong> {{ticket}}</td>
@@ -112,11 +105,11 @@
       </tr>
     </table>
 
-    <!-- Solución -->
+    <!-- Solución y comentarios -->
     <table>
       <tr>
         <td colspan="4"><strong>SOLUCIÓN</strong></td>
-        <td rowspan="3"><strong>COMENTARIOS TÉCNICOS:</strong><br>{{comentarios}}</td>
+        <td rowspan="4"><strong>COMENTARIOS TÉCNICOS:</strong><br>{{comentarios}}</td>
       </tr>
       <tr>
         <td>INSTALACIÓN</td>
@@ -134,63 +127,47 @@
         <td>RETIRO</td>
         <td>CAPACITACIÓN</td>
         <td colspan="2">INSTALACIÓN S/CAPACITACIÓN</td>
-        <td></td>
       </tr>
     </table>
 
-    <!-- Señal y Carrier -->
+    <!-- Señal / Carrier / Kit -->
     <table>
       <tr>
-        <td><strong>SEÑAL</strong><br>GPRS □<br>WIFI □<br>ETHERNET □</td>
-        <td>%</td>
-        <td><strong>Carrier</strong><br>MOVISTAR □<br>TELCEL □<br>M2M GLOBAL □</td>
+        <td><strong>SEÑAL:</strong><br>GPRS □  WIFI □  ETHERNET □</td>
+        <td><strong>:</strong> {{senal_porcentaje}}%</td>
+        <td><strong>CARRIER:</strong><br>MOVISTAR □  TELCEL □  M2M GLOBAL □</td>
         <td><strong>ROLLOS ENTREGADOS:</strong> □</td>
-        <td><strong>KIT DE INSTALACIÓN ENTREGADO:</strong> □</td>
-        <td>RETAIL □<br>HOTEL □<br>RESTAURANTE □<br>OTRO □</td>
+        <td><strong>KIT INSTALACIÓN:</strong> □</td>
+        <td><strong>TIPO UBICACIÓN:</strong><br>RETAIL □  HOTEL □  RESTAURANTE □  OTRO □</td>
       </tr>
     </table>
 
-    <!-- Serie -->
+    <!-- Serie y modelo -->
     <table>
       <tr>
         <td><strong>SERIE INSTALADA:</strong> {{serie_instalada}}</td>
-        <td><strong>MODELO:</strong><br>MOVE 2500 □<br>VX 520 □<br>IWL □<br>OTRO □</td>
+        <td><strong>MODELO:</strong><br>MOVE 2500 □  VX 520 □  IWL □  OTRO □</td>
         <td><strong>SERIE RETIRADA:</strong> {{serie_retirada}}</td>
-        <td><strong>MODELO:</strong><br>MOVE 2500 □<br>VX 520 □<br>IWL □<br>OTRO □</td>
+        <td><strong>MODELO:</strong><br>MOVE 2500 □  VX 520 □  IWL □  OTRO □</td>
       </tr>
     </table>
 
-    <!-- Calificaciones -->
+    <!-- Evaluaciones -->
     <table>
       <tr>
-        <td>
-          <strong>CALIFICACIÓN DE IDC:</strong><br>MALO □<br>BUENO □<br>EXCELENTE □
-        </td>
-        <td>
-          <strong>CALIFICACIÓN DE TPV:</strong><br>BUENO □<br>MALO □
-        </td>
-        <td>
-          <strong>¿SE SOLUCIONÓ EL PROBLEMA?</strong><br>SÍ □<br>NO □
-        </td>
-        <td>
-          <strong>¿SU AFILIACIÓN ES LA MISMA QUE SU TPV?</strong><br>SÍ □<br>NO □
-        </td>
+        <td><strong>CALIFICACIÓN IDC:</strong><br>MALO □  BUENO □  EXCELENTE □</td>
+        <td><strong>CALIFICACIÓN TPV:</strong><br>BUENO □  MALO □</td>
+        <td><strong>¿SE SOLUCIONÓ?</strong><br>SÍ □  NO □</td>
+        <td><strong¿AFILIACIÓN = TPV?</strong><br>SÍ □  NO □</td>
       </tr>
     </table>
 
     <!-- Firmas -->
     <table>
       <tr>
-        <td colspan="4" class="center">
-          NOMBRE Y FIRMA DEL CLIENTE<br><div class="firma-area"></div>
-        </td>
-        <td class="center">
-          <strong>DESEA SU COMPROBANTE</strong><br>
-          DIGITAL □<br>FÍSICO □<br>NO □
-        </td>
-        <td colspan="4" class="center">
-          NOMBRE Y FIRMA DEL IDC<br><div class="firma-area"></div>
-        </td>
+        <td colspan="4" class="center">NOMBRE Y FIRMA DEL CLIENTE<br><div class="firma-area"></div></td>
+        <td class="center">DESEA SU COMPROBANTE<br>DIGITAL □  FÍSICO □  NO □</td>
+        <td colspan="4" class="center">NOMBRE Y FIRMA DEL IDC<br><div class="firma-area"></div></td>
       </tr>
     </table>
 
@@ -200,9 +177,9 @@
     </div>
   </div>
 
-  <!-- QR Visual Box -->
+  <!-- Caja derecha para QR -->
   <div class="qr-area">
-    <img src="image6.png" alt="QR Código Cliente">
+    <img src="image6.png" alt="QR Cliente">
   </div>
 </body>
 </html>
