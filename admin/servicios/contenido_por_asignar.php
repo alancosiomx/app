@@ -129,9 +129,19 @@ $serviciosUnicos = $pdo->query("SELECT DISTINCT servicio FROM servicios_omnipos 
   <?php foreach ($servicios as $s): ?>
     <?php
       $extras = '';
-      if (!empty($s['fecha_cita'])) $extras .= '📅 ';
-      if (stripos($s['vim'], '4 horas') !== false || stripos($s['vim'], '24 horas') !== false) $extras .= '⚡ ';
-      if (stripos($s['vim'], 'premium') !== false) $extras .= '💎 ';
+      $vim = (string)($s['vim'] ?? '');
+
+      if (stripos($vim, '4 horas') !== false || stripos($vim, '24 horas') !== false) {
+          $extras .= '⚡';
+      }
+
+      if (stripos($vim, 'premium') !== false) {
+          $extras .= '💎';
+      }
+
+      if (!empty($s['fecha_cita'])) {
+          $extras .= ' 📅';
+      }
     ?>
     <tr class="border-t text-sm hover:bg-gray-50">
       <td class="px-4 py-2 text-center">
@@ -139,7 +149,7 @@ $serviciosUnicos = $pdo->query("SELECT DISTINCT servicio FROM servicios_omnipos 
       </td>
       <td class="px-4 py-2"><?= htmlspecialchars($s['banco'] ?? '') ?></td>
       <td class="px-4 py-2 font-medium text-blue-600"><?= htmlspecialchars($s['ticket'] ?? '') ?></td>
-      <td class="px-4 py-2 text-lg"><?= trim($extras) ?: '—' ?></td>
+      <td class="px-4 py-2"><?= $extras ?></td>
       <td class="px-4 py-2"><?= htmlspecialchars($s['afiliacion'] ?? '') ?></td>
       <td class="px-4 py-2"><?= htmlspecialchars($s['comercio'] ?? '') ?></td>
       <td class="px-4 py-2"><?= htmlspecialchars($s['ciudad'] ?? '') ?></td>
@@ -148,14 +158,15 @@ $serviciosUnicos = $pdo->query("SELECT DISTINCT servicio FROM servicios_omnipos 
       <td class="px-4 py-2 text-xs"><?= htmlspecialchars($s['fecha_inicio'] ?? '') ?></td>
       <td class="px-4 py-2 text-xs"><?= htmlspecialchars($s['fecha_limite'] ?? '') ?></td>
       <td class="px-4 py-2"><?= htmlspecialchars($s['vim'] ?? '') ?></td>
+      <td class="px-4 py-2"><?= htmlspecialchars($s['cantidad_insumos'] ?? '') ?></td>
       <td class="px-4 py-2 text-xs text-gray-500 whitespace-pre-line"><?= nl2br(htmlspecialchars($s['comentarios'] ?? '—')) ?></td>
-      <td class="px-4 py-2 text-center"><?= htmlspecialchars($s['cantidad_insumos'] ?? '0') ?></td>
       <td class="px-4 py-2 text-center">
         <a href="#" class="ver-detalle text-blue-500 hover:underline" data-ticket="<?= htmlspecialchars($s['ticket'] ?? '') ?>">🔍</a>
       </td>
     </tr>
   <?php endforeach; ?>
 </tbody>
+
 
     </table>
   </div>
