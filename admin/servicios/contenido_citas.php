@@ -21,3 +21,8 @@
     </button>
   </div>
 </form>
+
+<?php if (isset($_SESSION['mensaje'])): ?>
+  <div class="bg-green-100 text-green-800 px-4 py-2 rounded mt-4"><?= $_SESSION['mensaje'] ?></div>
+  <?php unset($_SESSION['mensaje']); ?>
+<?php endif; ?>
