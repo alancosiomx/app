@@ -76,39 +76,16 @@
     <td class="titulo-hoja" style="border-left: none; border-right: none;">HOJA DE<br>SERVICIO</td>
     <td style="width: 20%; border-left: 1px solid #000;"><img src="image3.png" alt="TEDISA" height="40"></td>
   </tr>
-<table>
-    <tr><td colspan="10" class="center"><strong>CONEXIÓN Y ENTORNO</strong></td></tr>
-    <tr>
-      <td colspan="2">SEÑAL</td>
-      <td>%</td>
-      <td>GPRS</td>
-      <td>SI</td>
-      <td>NO</td>
-      <td>KIT DE INSTALACIÓN</td>
-      <td colspan="2">ENTREGADO</td>
-    </tr>
-    <tr>
-      <td colspan="2">CARRIER</td>
-      <td>TELCEL</td>
-      <td>MOVISTAR</td>
-      <td>WIFI</td>
-      <td>ETHERNET</td>
-      <td>ROLLOS ENTREGADOS</td>
-      <td colspan="2"></td>
-    </tr>
-    <tr>
-      <td>RETAIL</td>
-      <td>HOTEL</td>
-      <td>RESTAURANTE</td>
-      <td>OTRO</td>
-      <td colspan="6"></td>
-    </tr>
-  </table>
-
   <table>
-    <td colspan="2"><strong>FECHA:</strong> {{fecha}}</td>
+    <tr>
+      <td colspan="2"><strong>TICKET:</strong> {{ticket}}</td>
       <td colspan="2"><strong>TELÉFONO:</strong> {{telefono}}</td>
       <td colspan="4"><strong>AFILIACIÓN</strong><br>PESOS:<br><hr style="margin:2px 0;">DLLS:</td>
+    </tr>
+    <tr>
+      <td colspan="4"><strong>FECHA:</strong> {{fecha}}</td>
+      <td colspan="4"><strong>REFERENCIAS:</strong> {{referencia}}<br><strong>HORARIO:</strong> {{horario}}</td>
+    </tr><br>PESOS:<br><hr style="margin:2px 0;">DLLS:</td>
     </tr>
     <tr><td colspan="8"><strong>COMERCIO:</strong> {{comercio}}</td></tr>
     <tr><td colspan="8"><strong>CALLE Y NÚM:</strong> {{domicilio}}</td></tr>
@@ -119,7 +96,10 @@
       <td colspan="2"><strong>ESTADO:</strong> {{estado}}</td>
       <td colspan="3"><strong>TELÉFONO:</strong> {{telefono_contacto_1}}</td>
     </tr>
-    <tr><td colspan="8"><strong>REFERENCIAS:</strong> {{referencia}} <br><strong>HORARIO:</strong> {{horario}}</td></tr>
+    <tr>
+      <td colspan="4"><strong>REFERENCIAS:</strong> {{referencia}}</td>
+      <td colspan="4"><strong>HORARIO:</strong> {{horario}}</td>
+    </tr>
   </table>
 
   <table>
