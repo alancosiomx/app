@@ -14,23 +14,30 @@
       margin: 0;
       padding: 0;
       display: flex;
-      flex-direction: row;
     }
     .contenido {
-      width: calc(100% - 150px);
-      padding: 0 5px;
+      width: calc(100% - 160px);
+      padding: 5px;
     }
-    .espacio_qr {
-      width: 150px;
-      min-width: 150px;
-      border-left: 1px dashed #000;
+    .qr-area {
+      width: 160px;
+      min-width: 160px;
+      border: 1px solid #000;
+      border-radius: 20px;
       display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
       align-items: center;
-      justify-content: center;
+      padding: 10px;
+    }
+    .qr-area img {
+      width: 100px;
+      height: 100px;
     }
     table {
       width: 100%;
       border-collapse: collapse;
+      margin-bottom: 4px;
     }
     td, th {
       border: 1px solid #000;
@@ -40,27 +47,19 @@
     .center {
       text-align: center;
     }
-    .titulo-hoja {
-      font-size: 20px;
+    .titulo {
+      font-size: 18px;
       font-weight: bold;
       text-align: center;
-      line-height: 1.1;
     }
     .firma-area {
       height: 40px;
       border: 1px solid #000;
     }
-    .aviso-legal {
+    .aviso {
       border: 1px solid #000;
       padding: 6px;
-      margin-top: 8px;
       font-size: 9px;
-    }
-    .soluciones-table td {
-      width: 12.5%;
-    }
-    .soluciones-table td.comentarios-tecnicos {
-      width: 50%;
     }
     .checkbox {
       padding-left: 5px;
@@ -69,54 +68,61 @@
 </head>
 <body>
   <div class="contenido">
+    <!-- Encabezado -->
     <table>
       <tr>
         <td style="width: 20%;"><img src="image1.jpeg" alt="BBVA" height="40"></td>
-        <td class="titulo-hoja">HOJA DE<br>SERVICIO</td>
+        <td class="titulo">HOJA DE<br>SERVICIO</td>
         <td style="width: 20%;"><img src="image3.png" alt="TEDISA" height="40"></td>
       </tr>
     </table>
 
+    <!-- Datos Generales -->
     <table>
       <tr>
-        <td colspan="2"><strong>TICKET:</strong> {{ticket}}</td>
-        <td colspan="2"><strong>TELÉFONO:</strong> {{telefono}}</td>
-        <td colspan="4"><strong>AFILIACIÓN</strong><br>PESOS: {{pesos}}<br><hr>DLLS: {{dolares}}</td>
+        <td><strong>TICKET:</strong> {{ticket}}</td>
+        <td><strong>AFILIACIÓN</strong><br>PESOS: {{pesos}}<br>DLLS: {{dls}}</td>
+        <td><strong>FECHA:</strong> {{fecha}}</td>
+        <td><strong>TELÉFONO:</strong> {{telefono}}</td>
       </tr>
       <tr>
-        <td colspan="4"><strong>FECHA:</strong> {{fecha}}</td>
-        <td colspan="4"><strong>REFERENCIAS:</strong> {{referencia}}<br><strong>HORARIO:</strong> {{horario}}</td>
+        <td colspan="2"><strong>COMERCIO:</strong> {{comercio}}</td>
+        <td colspan="2"><strong>REFERENCIAS:</strong> {{referencia}}</td>
       </tr>
-      <tr><td colspan="8"><strong>COMERCIO:</strong> {{comercio}}</td></tr>
-      <tr><td colspan="8"><strong>CALLE Y NÚM:</strong> {{domicilio}}</td></tr>
-      <tr><td colspan="8"><strong>COLONIA:</strong> {{colonia}}</td></tr>
       <tr>
+        <td colspan="2"><strong>CALLE Y NÚM:</strong> {{domicilio}}</td>
+        <td colspan="2"><strong>HORARIO:</strong> {{horario}}</td>
+      </tr>
+      <tr>
+        <td colspan="2"><strong>COLONIA:</strong> {{colonia}}</td>
         <td><strong>C.P.:</strong> {{cp}}</td>
-        <td colspan="2"><strong>POBLACIÓN:</strong> {{ciudad}}</td>
-        <td colspan="2"><strong>ESTADO:</strong> {{estado}}</td>
-        <td colspan="3"><strong>TELÉFONO:</strong> {{telefono_contacto_1}}</td>
+        <td><strong>POBLACIÓN Y ESTADO:</strong> {{ciudad}}, {{estado}}</td>
       </tr>
     </table>
 
+    <!-- Tipo de servicio -->
     <table>
-      <tr><td colspan="5" class="center">TIPO DE SERVICIO: {{servicio}} {{cantidad_insumos}}</td></tr>
+      <tr><td colspan="5" class="center"><strong>TIPO DE SERVICIO:</strong> {{servicio}}</td></tr>
       <tr>
-        <td>INSTALACION DE TPV</td>
+        <td>INSTALACIÓN DE TPV</td>
         <td>FALLA DE TPV</td>
         <td>RETIRO DE TPV</td>
         <td>ENTREGA DE INSUMOS</td>
-        <td>CAPACITACION</td>
+        <td>CAPACITACIÓN</td>
       </tr>
     </table>
 
-    <table class="soluciones-table">
-      <tr><td colspan="4"><strong>SOLUCIÓN</strong></td><td class="comentarios-tecnicos"><strong>COMENTARIOS TÉCNICOS</strong></td></tr>
+    <!-- Solución -->
+    <table>
+      <tr>
+        <td colspan="4"><strong>SOLUCIÓN</strong></td>
+        <td rowspan="3"><strong>COMENTARIOS TÉCNICOS:</strong><br>{{comentarios}}</td>
+      </tr>
       <tr>
         <td>INSTALACIÓN</td>
         <td>SUSTITUCIÓN</td>
         <td>REPROGRAMACIÓN</td>
         <td>ENTREGA DE ROLLOS</td>
-        <td class="comentarios-tecnicos" rowspan="3">{{comentarios}}</td>
       </tr>
       <tr>
         <td>ENTREGA DE PUBLICIDAD</td>
@@ -128,28 +134,40 @@
         <td>RETIRO</td>
         <td>CAPACITACIÓN</td>
         <td colspan="2">INSTALACIÓN S/CAPACITACIÓN</td>
+        <td></td>
       </tr>
     </table>
 
+    <!-- Señal y Carrier -->
     <table>
       <tr>
-        <td><strong>SERIE INSTALADA</strong></td><td colspan="3">{{serie_instalada}}</td>
-        <td><strong>SERIE RETIRADA</strong></td><td colspan="3">{{serie_retirada}}</td>
-      </tr>
-      <tr>
-        <td><strong>MODELO</strong></td><td>MOVE 2500</td><td>VX 520</td><td>IWL</td>
-        <td><strong>MODELO</strong></td><td>MOVE 2500</td><td>VX 520</td><td>IWL</td>
+        <td><strong>SEÑAL</strong><br>GPRS □<br>WIFI □<br>ETHERNET □</td>
+        <td>%</td>
+        <td><strong>Carrier</strong><br>MOVISTAR □<br>TELCEL □<br>M2M GLOBAL □</td>
+        <td><strong>ROLLOS ENTREGADOS:</strong> □</td>
+        <td><strong>KIT DE INSTALACIÓN ENTREGADO:</strong> □</td>
+        <td>RETAIL □<br>HOTEL □<br>RESTAURANTE □<br>OTRO □</td>
       </tr>
     </table>
 
+    <!-- Serie -->
     <table>
-      <tr><td colspan="4" class="center">CALIFICACIÓN DE LA CALIDAD DEL SERVICIO TÉCNICO</td></tr>
+      <tr>
+        <td><strong>SERIE INSTALADA:</strong> {{serie_instalada}}</td>
+        <td><strong>MODELO:</strong><br>MOVE 2500 □<br>VX 520 □<br>IWL □<br>OTRO □</td>
+        <td><strong>SERIE RETIRADA:</strong> {{serie_retirada}}</td>
+        <td><strong>MODELO:</strong><br>MOVE 2500 □<br>VX 520 □<br>IWL □<br>OTRO □</td>
+      </tr>
+    </table>
+
+    <!-- Calificaciones -->
+    <table>
       <tr>
         <td>
-          <strong>CALIFICACIÓN DE IDC</strong><br>MALO □<br>BUENO □<br>EXCELENTE □
+          <strong>CALIFICACIÓN DE IDC:</strong><br>MALO □<br>BUENO □<br>EXCELENTE □
         </td>
         <td>
-          <strong>CALIFICACIÓN DE TPV</strong><br>BUENO □<br>MALO □
+          <strong>CALIFICACIÓN DE TPV:</strong><br>BUENO □<br>MALO □
         </td>
         <td>
           <strong>¿SE SOLUCIONÓ EL PROBLEMA?</strong><br>SÍ □<br>NO □
@@ -160,27 +178,31 @@
       </tr>
     </table>
 
+    <!-- Firmas -->
     <table>
       <tr>
-        <td colspan="4" class="center">NOMBRE Y FIRMA DEL CLIENTE<br><div class="firma-area"></div></td>
-        <td style="text-align: center;">
-          <strong>DESEA SU COMPROBANTE</strong><br>
-          <table style="margin:auto;">
-            <tr><td>DIGITAL</td><td class="checkbox">□</td></tr>
-            <tr><td>FÍSICO</td><td class="checkbox">□</td></tr>
-            <tr><td>NO</td><td class="checkbox">□</td></tr>
-          </table>
+        <td colspan="4" class="center">
+          NOMBRE Y FIRMA DEL CLIENTE<br><div class="firma-area"></div>
         </td>
-        <td colspan="4" class="center">NOMBRE Y FIRMA DEL IDC<br><div class="firma-area"></div></td>
+        <td class="center">
+          <strong>DESEA SU COMPROBANTE</strong><br>
+          DIGITAL □<br>FÍSICO □<br>NO □
+        </td>
+        <td colspan="4" class="center">
+          NOMBRE Y FIRMA DEL IDC<br><div class="firma-area"></div>
+        </td>
       </tr>
     </table>
 
-    <div class="aviso-legal">
-      HACEMOS DE SU CONOCIMIENTO QUE EL SERVICIO QUE USTED RECIBE POR PARTE DE BBVA NO GENERA NINGUN COSTO ADICIONAL, ASI COMO LA TERMINAL Y LOS INSUMOS QUE USTED SOLICITE POR LO QUE EL PERSONAL QUE LO VISITA NO PUEDE REALIZAR NINGUN COBRO O SOLICITAR ALGUN PAGO POR EL MISMO.
+    <!-- Aviso legal -->
+    <div class="aviso">
+      HACEMOS DE SU CONOCIMIENTO QUE EL SERVICIO QUE USTED RECIBE POR PARTE DE BBVA NO GENERA NINGÚN COSTO ADICIONAL, ASÍ COMO LA TERMINAL Y LOS INSUMOS QUE USTED SOLICITE POR LO QUE EL PERSONAL QUE LO VISITA NO PUEDE REALIZAR NINGÚN COBRO O SOLICITAR ALGÚN PAGO POR EL MISMO.
     </div>
   </div>
-  <div class="espacio_qr">
-    <span style="writing-mode: vertical-rl; transform: rotate(180deg); font-size: 8px; color: #aaa;">ESPACIO QR</span>
+
+  <!-- QR Visual Box -->
+  <div class="qr-area">
+    <img src="image6.png" alt="QR Código Cliente">
   </div>
 </body>
 </html>
