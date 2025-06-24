@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $tickets = $_POST['tickets'] ?? [];
-$resultado = trim($_POST['resultado'] ?? '');
+$resultado = trim($_POST['resultado_servicio'] ?? '');
 
 if (empty($tickets) || !in_array($resultado, ['Exito', 'Rechazo', 'Reasignar', 'Cancelado'])) {
     $_SESSION['error'] = "Debes seleccionar al menos un ticket y un resultado válido.";
