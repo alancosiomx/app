@@ -35,9 +35,13 @@ $sql .= " ORDER BY fecha_inicio DESC";
 $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
 $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+function safe($val) {
+    return htmlspecialchars($val ?? '');
+}
 ?>
 
-<p class="text-gray-700 text-sm mb-4">Bienvenido, <strong><?= htmlspecialchars($_SESSION['usuario_nombre'] ?? 'Administrador') ?></strong></p>
+<p class="text-gray-700 text-sm mb-4">Bienvenido, <strong><?= safe($_SESSION['usuario_nombre']) ?: 'Administrador' ?></strong></p>
 <?php include __DIR__ . '/../includes/tabs_servicios.php'; ?>
 
 <h2 class="text-xl font-semibold text-gray-800 mb-4">🛠 Servicios En Ruta</h2>
@@ -48,12 +52,12 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
   <div>
     <label class="text-sm font-medium text-gray-700">Fecha inicio</label>
-    <input type="date" name="fecha_inicio" value="<?= htmlspecialchars($fecha_inicio) ?>" class="mt-1 w-full rounded border-gray-300 shadow-sm text-sm p-2">
+    <input type="date" name="fecha_inicio" value="<?= safe($fecha_inicio) ?>" class="mt-1 w-full rounded border-gray-300 shadow-sm text-sm p-2">
   </div>
 
   <div>
     <label class="text-sm font-medium text-gray-700">Fecha fin</label>
-    <input type="date" name="fecha_fin" value="<?= htmlspecialchars($fecha_fin) ?>" class="mt-1 w-full rounded border-gray-300 shadow-sm text-sm p-2">
+    <input type="date" name="fecha_fin" value="<?= safe($fecha_fin) ?>" class="mt-1 w-full rounded border-gray-300 shadow-sm text-sm p-2">
   </div>
 
   <div>
@@ -61,8 +65,8 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <select name="idc" class="mt-1 w-full rounded border-gray-300 shadow-sm text-sm p-2">
       <option value="">Todos</option>
       <?php foreach ($tecnicos as $nombre): ?>
-        <option value="<?= htmlspecialchars($nombre) ?>" <?= $tecnico === $nombre ? 'selected' : '' ?>>
-          <?= htmlspecialchars($nombre) ?>
+        <option value="<?= safe($nombre) ?>" <?= $tecnico === $nombre ? 'selected' : '' ?>>
+          <?= safe($nombre) ?>
         </option>
       <?php endforeach; ?>
     </select>
@@ -70,7 +74,7 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
   <div>
     <label class="text-sm font-medium text-gray-700">Ticket o Afiliación</label>
-    <input type="text" name="ticket" value="<?= htmlspecialchars($ticket) ?>" placeholder="Buscar..." class="mt-1 w-full rounded border-gray-300 shadow-sm text-sm p-2">
+    <input type="text" name="ticket" value="<?= safe($ticket) ?>" placeholder="Buscar..." class="mt-1 w-full rounded border-gray-300 shadow-sm text-sm p-2">
   </div>
 
   <div class="md:col-span-4 text-right">
@@ -121,10 +125,10 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php foreach ($servicios as $s): ?>
           <tr class="hover:bg-gray-50">
             <td class="px-4 py-2 text-center">
-              <input type="checkbox" name="tickets[]" value="<?= htmlspecialchars($s['ticket']) ?>">
+              <input type="checkbox" name="tickets[]" value="<?= safe($s['ticket']) ?>">
             </td>
-            <td class="px-4 py-2"><?= htmlspecialchars($s['banco']) ?></td>
-            <td class="px-4 py-2"><?= htmlspecialchars($s['ticket']) ?></td>
+            <td class="px-4 py-2"><?= safe($s['banca']) ?></td>
+            <td class="px-4 py-2"><?= safe($s['ticket']) ?></td>
             <td class="px-4 py-2">
               <?php
                 $vim = strtolower($s['vim'] ?? '');
@@ -134,15 +138,15 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 echo !empty($s['fecha_cita']) ? '🗓' : '';
               ?>
             </td>
-            <td class="px-4 py-2"><?= htmlspecialchars($s['afiliacion']) ?></td>
-            <td class="px-4 py-2"><?= htmlspecialchars($s['comercio']) ?></td>
-            <td class="px-4 py-2"><?= htmlspecialchars($s['ciudad']) ?></td>
-            <td class="px-4 py-2"><?= htmlspecialchars($s['servicio']) ?></td>
-            <td class="px-4 py-2"><?= htmlspecialchars($s['idc']) ?></td>
-            <td class="px-4 py-2"><?= htmlspecialchars($s['cantidad_insumos']) ?></td>
-            <td class="px-4 py-2 whitespace-pre-line"><?= nl2br(htmlspecialchars($s['comentarios'])) ?></td>
+            <td class="px-4 py-2"><?= safe($s['afiliacion']) ?></td>
+            <td class="px-4 py-2"><?= safe($s['comercio']) ?></td>
+            <td class="px-4 py-2"><?= safe($s['ciudad']) ?></td>
+            <td class="px-4 py-2"><?= safe($s['servicio']) ?></td>
+            <td class="px-4 py-2"><?= safe($s['idc']) ?></td>
+            <td class="px-4 py-2"><?= safe($s['cantidad_insumos']) ?></td>
+            <td class="px-4 py-2 whitespace-pre-line"><?= nl2br(safe($s['comentarios'])) ?></td>
             <td class="px-4 py-2 text-center">
-              <a href="#" class="ver-detalle text-blue-600 hover:underline" data-ticket="<?= $s['ticket'] ?>">🔍</a>
+              <a href="#" class="ver-detalle text-blue-600 hover:underline" data-ticket="<?= safe($s['ticket']) ?>">🔍</a>
             </td>
           </tr>
         <?php endforeach; ?>
