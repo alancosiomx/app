@@ -9,13 +9,15 @@ if (!isset($_SESSION['usuario_id'])) {
 }
 
 $tecnico_id = $_SESSION['usuario_id'];
-$apiKey = "AIzaSyBxTzJOwe4yXKwmC6gSo47rPZzw4YwKww0"; // Reemplaza con tu clave real
-$hoy = date("Y-m-d");
+$apiKey = "AIzaSyBxTzJOwe4yXKwmC6gSo47rPZzw4YwKww0"; // Clave real ya insertada
+
+// Obtener fecha (puede venir por GET, sino usa hoy)
+$fecha = $_GET['fecha'] ?? date("Y-m-d");
 
 // 1. Obtener direcciones asignadas con afiliación
 $stmt = $pdo->prepare("SELECT afiliacion, domicilio, colonia, ciudad, cp FROM servicios_omnipos 
     WHERE idc = ? AND actual_status = 'En Ruta' AND DATE(fecha_inicio) = ?");
-$stmt->execute([$tecnico_id, $hoy]);
+$stmt->execute([$tecnico_id, $fecha]);
 $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $direcciones_validas = [];
@@ -89,6 +91,7 @@ $url .= "&travelmode=driving";
 </head>
 <body>
     <h2>📍 Ruta sugerida (cacheada por afiliación + dirección)</h2>
+    <p><strong>Fecha:</strong> <?= htmlspecialchars($fecha) ?></p>
     <ul>
         <li><strong>Origen:</strong> <?= htmlspecialchars($origen) ?></li>
         <?php foreach ($direcciones_validas as $i => $dir): ?>
