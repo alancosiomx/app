@@ -86,13 +86,12 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div>
       <label class="text-sm font-medium text-gray-700">Aplicar resultado a los seleccionados:</label>
       <select name="resultado_servicio" required class="border rounded px-3 py-1 text-sm">
-  <option value="">Selecciona resultado</option>
-  <option value="Exito">✅ ÉXITO</option>
-  <option value="Rechazo">❌ RECHAZO</option>
-  <option value="Reasignar">🔁 REASIGNAR</option>
-  <option value="Cancelado">🚫 CANCELADO</option>
-</select>
-
+        <option value="">Selecciona resultado</option>
+        <option value="Exito">✅ ÉXITO</option>
+        <option value="Rechazo">❌ RECHAZO</option>
+        <option value="Reasignar">🔁 REASIGNAR</option>
+        <option value="Cancelado">🚫 CANCELADO</option>
+      </select>
     </div>
 
     <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm">
@@ -105,12 +104,15 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <thead class="bg-gray-100 text-gray-600 uppercase text-xs">
         <tr>
           <th class="px-4 py-3"><input type="checkbox" onclick="document.querySelectorAll('input[name*=tickets]').forEach(c=>c.checked=this.checked)"></th>
+          <th class="px-4 py-3">🏦 Banco</th>
           <th class="px-4 py-3">Ticket</th>
+          <th class="px-4 py-3">📌 Extras</th>
           <th class="px-4 py-3">Afiliación</th>
           <th class="px-4 py-3">Comercio</th>
           <th class="px-4 py-3">Ciudad</th>
           <th class="px-4 py-3">Servicio</th>
           <th class="px-4 py-3">Técnico</th>
+          <th class="px-4 py-3">📦 Insumos</th>
           <th class="px-4 py-3">Comentarios</th>
           <th class="px-4 py-3 text-center">🔍</th>
         </tr>
@@ -121,12 +123,23 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <td class="px-4 py-2 text-center">
               <input type="checkbox" name="tickets[]" value="<?= htmlspecialchars($s['ticket']) ?>">
             </td>
+            <td class="px-4 py-2"><?= htmlspecialchars($s['banca']) ?></td>
             <td class="px-4 py-2"><?= htmlspecialchars($s['ticket']) ?></td>
+            <td class="px-4 py-2">
+              <?php
+                $vim = strtolower($s['vim'] ?? '');
+                echo stripos($vim, '4 horas') !== false || stripos($vim, '4hrs') !== false ? '⚡' : '';
+                echo stripos($vim, '24 horas') !== false || stripos($vim, '24hrs') !== false ? '⚡' : '';
+                echo stripos($vim, 'premium') !== false ? '💎' : '';
+                echo !empty($s['fecha_cita']) ? '🗓' : '';
+              ?>
+            </td>
             <td class="px-4 py-2"><?= htmlspecialchars($s['afiliacion']) ?></td>
             <td class="px-4 py-2"><?= htmlspecialchars($s['comercio']) ?></td>
             <td class="px-4 py-2"><?= htmlspecialchars($s['ciudad']) ?></td>
             <td class="px-4 py-2"><?= htmlspecialchars($s['servicio']) ?></td>
             <td class="px-4 py-2"><?= htmlspecialchars($s['idc']) ?></td>
+            <td class="px-4 py-2"><?= htmlspecialchars($s['cantidad_insumos']) ?></td>
             <td class="px-4 py-2 whitespace-pre-line"><?= nl2br(htmlspecialchars($s['comentarios'])) ?></td>
             <td class="px-4 py-2 text-center">
               <a href="#" class="ver-detalle text-blue-600 hover:underline" data-ticket="<?= $s['ticket'] ?>">🔍</a>
@@ -137,7 +150,6 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </table>
   </div>
 </form>
-
 
 <!-- JS Validación -->
 <script>
