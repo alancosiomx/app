@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../init.php'; // Usa el INIT del sistema
+require_once __DIR__ . '/../init.php'; // Usa el INIT del sistema
 if (!isset($_SESSION['usuario_id'])) {
     die('<div class="bg-red-100 text-red-800 px-4 py-2 rounded mb-4">⚠️ Error de seguridad. Por favor recarga la página.</div>');
 }
