@@ -9,16 +9,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $tickets = array_map('trim', $tickets);
     $tickets = array_filter($tickets);
+    $fecha_cita = trim($fecha_cita);
 
     $agendadas = 0;
-    foreach ($tickets as $ticket) {
-        $update = $pdo->prepare("UPDATE servicios_omnipos SET estatus = 'En Ruta', fecha_cita = ?, observaciones = CONCAT(IFNULL(observaciones, ''), '\\nCita programada para $fecha_cita.') WHERE ticket = ?");
-        $update->execute([$fecha_cita, $ticket]);
 
-        $pdo->prepare("INSERT INTO visitas_servicios (ticket, fecha_visita, tipo_visita, resultado, creado_por) VALUES (?, ?, 'Cita', 'Pendiente', ?)")
+    foreach ($tickets as $ticket) {
+        // Agregar como nueva visita tipo "Cita"
+        $pdo->prepare("INSERT INTO visitas_servicios (ticket, fecha_visita, tipo_visita, resultado, creado_por) 
+                       VALUES (?, ?, 'Cita', 'Pendiente', ?)")
             ->execute([$ticket, $fecha_cita, $_SESSION['usuario_nombre']]);
 
-        logServicio($pdo, $ticket, 'Cita Programada', $_SESSION['usuario_nombre'], "Fecha programada: $fecha_cita");
+        // Actualizar el estatus a Por Asignar y dejar nota en observaciones
+        $pdo->prepare("UPDATE servicios_omnipos 
+                       SET estatus = 'Por Asignar', 
+                           observaciones = CONCAT(IFNULL(observaciones, ''), '\n📅 Cita programada para $fecha_cita.') 
+                       WHERE ticket = ?")
+            ->execute([$ticket]);
+
+        // Log
+        logServicio($pdo, $ticket, 'Cita Programada', $_SESSION['usuario_nombre'], "Se programó cita para el $fecha_cita");
 
         $agendadas++;
     }
