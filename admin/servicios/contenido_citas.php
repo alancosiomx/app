@@ -2,9 +2,13 @@
 require_once __DIR__ . '/../init.php';
 require_once __DIR__ . '/service_functions.php';
 
-if (!isset($_SESSION['usuario_id'])) {
-    die('<div class="text-red-600 font-semibold">⚠️ Error de seguridad. Por favor recarga la página.</div>');
+if (session_status() === PHP_SESSION_NONE) session_start();
+
+if (!isset($_SESSION['usuario_id']) || empty($_SESSION['usuario_nombre'])) {
+    header("Location: /login.php");
+    exit();
 }
+
 
 $mensaje = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
