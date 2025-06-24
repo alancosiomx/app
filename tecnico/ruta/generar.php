@@ -8,7 +8,7 @@ $waypoints = [
 ];
 
 // API Key de Google
-$apiKey = "TU_API_KEY";
+$apiKey = "AIzaSyBxTzJOwe4yXKwmC6gSo47rPZzw4YwKww0";
 
 // Codificar direcciones
 $origenEncoded = urlencode($origen);
