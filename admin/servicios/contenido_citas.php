@@ -33,6 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
+ob_start();
+?>
+
 <h2 class="text-xl font-bold mb-4">📅 Programar Cita</h2>
 
 <form method="post" class="bg-white shadow rounded-xl p-6 space-y-4 max-w-xl">
@@ -58,4 +61,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php
 $contenido = ob_get_clean();
 require_once __DIR__ . '/../layout.php';
-?>
