@@ -9,11 +9,11 @@ $where = 'WHERE 1=1';
 $params = [];
 
 if ($fecha_inicio) {
-    $where .= " AND fecha_inicio >= ?";
+    $where .= " AND fecha_atencion >= ?";
     $params[] = $fecha_inicio . " 00:00:00";
 }
 if ($fecha_fin) {
-    $where .= " AND fecha_inicio <= ?";
+    $where .= " AND fecha_atencion <= ?";
     $params[] = $fecha_fin . " 23:59:59";
 }
 if ($tecnico) {
@@ -21,30 +21,36 @@ if ($tecnico) {
     $params[] = $tecnico;
 }
 
-// KPI Totales
+// KPI Totales por estatus
+$estadoQuery = "SELECT 
+    SUM(CASE WHEN estatus = 'Por Asignar' THEN 1 ELSE 0 END) AS por_asignar,
+    SUM(CASE WHEN estatus = 'En Ruta' THEN 1 ELSE 0 END) AS en_ruta,
+    SUM(CASE WHEN estatus = 'Histórico' AND conclusion = 'Éxito' THEN 1 ELSE 0 END) AS exitos,
+    SUM(CASE WHEN estatus = 'Histórico' AND conclusion = 'Rechazo' THEN 1 ELSE 0 END) AS rechazos
+    FROM servicios_omnipos";
+$resumen = $pdo->query($estadoQuery)->fetch(PDO::FETCH_ASSOC);
+
+// KPIs
 $kpiQuery = "SELECT 
     COUNT(*) AS total,
-    SUM(CASE WHEN estatus = 'Histórico' THEN 1 ELSE 0 END) AS concluidos,
     SUM(CASE WHEN DATE(fecha_cita) = CURDATE() THEN 1 ELSE 0 END) AS citas_hoy,
     SUM(CASE WHEN DATE(fecha_cita) = CURDATE() + INTERVAL 1 DAY THEN 1 ELSE 0 END) AS citas_manana
     FROM servicios_omnipos $where";
-
 $stmt = $pdo->prepare($kpiQuery);
 $stmt->execute($params);
 $kpi = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Gráfica
-$graficaQuery = "
-    SELECT DATE(fecha_inicio) AS fecha, COUNT(*) AS total
-    FROM servicios_omnipos
-    $where
-    GROUP BY DATE(fecha_inicio)
-    ORDER BY fecha ASC
-";
-
+// Gráfica por día
+$graficaQuery = "SELECT DATE(fecha_atencion) AS fecha, COUNT(*) AS total FROM servicios_omnipos $where GROUP BY fecha ORDER BY fecha ASC";
 $stmt = $pdo->prepare($graficaQuery);
 $stmt->execute($params);
 $grafica_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Gráfica por técnico
+$graficaTecnicoQuery = "SELECT idc, COUNT(*) AS total FROM servicios_omnipos $where AND estatus = 'Histórico' GROUP BY idc ORDER BY total DESC";
+$stmt = $pdo->prepare($graficaTecnicoQuery);
+$stmt->execute($params);
+$grafica_tecnicos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!-- Filtros -->
@@ -67,27 +73,57 @@ $grafica_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </form>
 
 <!-- KPIs -->
-<div class="grid grid-cols-3 gap-4 mb-6">
+<div class="grid grid-cols-4 gap-4 mb-6">
     <div class="bg-white shadow p-4 rounded text-center">
-        <div class="text-gray-500 text-sm">Total Servicios</div>
-        <div class="text-2xl font-bold text-blue-600"><?= $kpi['total'] ?? 0 ?></div>
+        <div class="text-gray-500 text-sm">Por Asignar</div>
+        <div class="text-2xl font-bold text-yellow-600"><?= $resumen['por_asignar'] ?></div>
     </div>
     <div class="bg-white shadow p-4 rounded text-center">
-        <div class="text-gray-500 text-sm">Concluidos</div>
-        <div class="text-2xl font-bold text-green-600"><?= $kpi['concluidos'] ?? 0 ?></div>
+        <div class="text-gray-500 text-sm">En Ruta</div>
+        <div class="text-2xl font-bold text-blue-600"><?= $resumen['en_ruta'] ?></div>
     </div>
     <div class="bg-white shadow p-4 rounded text-center">
-        <div class="text-gray-500 text-sm">Citas Hoy / Mañana</div>
-        <div class="text-xl font-semibold text-yellow-600"><?= $kpi['citas_hoy'] ?? 0 ?> / <?= $kpi['citas_manana'] ?? 0 ?></div>
+        <div class="text-gray-500 text-sm">Éxitos</div>
+        <div class="text-2xl font-bold text-green-600"><?= $resumen['exitos'] ?></div>
+    </div>
+    <div class="bg-white shadow p-4 rounded text-center">
+        <div class="text-gray-500 text-sm">Rechazos</div>
+        <div class="text-2xl font-bold text-red-600"><?= $resumen['rechazos'] ?></div>
     </div>
 </div>
 
-<!-- Gráfica (puedes usar Chart.js u otra librería, esto es ejemplo textual) -->
-<div class="bg-white p-4 rounded shadow">
-    <h3 class="text-lg font-bold mb-2">📊 Servicios por Día</h3>
+<!-- KPIs adicionales -->
+<div class="grid grid-cols-3 gap-4 mb-6">
+    <div class="bg-white shadow p-4 rounded text-center">
+        <div class="text-gray-500 text-sm">Total Filtrados</div>
+        <div class="text-2xl font-bold text-indigo-600"><?= $kpi['total'] ?? 0 ?></div>
+    </div>
+    <div class="bg-white shadow p-4 rounded text-center">
+        <div class="text-gray-500 text-sm">Citas Hoy</div>
+        <div class="text-2xl font-bold text-yellow-600"><?= $kpi['citas_hoy'] ?? 0 ?></div>
+    </div>
+    <div class="bg-white shadow p-4 rounded text-center">
+        <div class="text-gray-500 text-sm">Citas Mañana</div>
+        <div class="text-2xl font-bold text-yellow-600"><?= $kpi['citas_manana'] ?? 0 ?></div>
+    </div>
+</div>
+
+<!-- Gráfica por día -->
+<div class="bg-white p-4 rounded shadow mb-6">
+    <h3 class="text-lg font-bold mb-2">📅 Servicios Atendidos por Día</h3>
     <ul class="text-sm text-gray-700 space-y-1">
         <?php foreach ($grafica_data as $row): ?>
-            <li><?= $row['fecha'] ?>: <?= $row['total'] ?> servicios</li>
+            <li><?= $row['fecha'] ?>: <strong><?= $row['total'] ?></strong> servicios</li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+
+<!-- Gráfica por técnico -->
+<div class="bg-white p-4 rounded shadow">
+    <h3 class="text-lg font-bold mb-2">🧰 Servicios Concluidos por Técnico</h3>
+    <ul class="text-sm text-gray-700 space-y-1">
+        <?php foreach ($grafica_tecnicos as $t): ?>
+            <li><strong><?= htmlspecialchars($t['idc']) ?></strong>: <?= $t['total'] ?> servicios</li>
         <?php endforeach; ?>
     </ul>
 </div>
