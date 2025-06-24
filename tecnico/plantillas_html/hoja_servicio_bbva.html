@@ -9,25 +9,24 @@
       margin: 10mm;
     }
     body {
-      display: flex;
-      flex-direction: row;
       font-family: Arial, sans-serif;
       font-size: 10px;
       margin: 0;
       padding: 0;
+      display: flex;
+      flex-direction: row;
     }
     .contenido {
       width: calc(100% - 150px);
-      width: 100%;
       padding: 0 5px;
     }
     .espacio_qr {
       width: 150px;
       min-width: 150px;
-      float: right;
-      width: 20%;
       border-left: 1px dashed #000;
-      padding-left: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     table {
       width: 100%;
@@ -47,10 +46,6 @@
       text-align: center;
       line-height: 1.1;
     }
-    .checkbox-cell {
-      text-align: center;
-      width: 20px;
-    }
     .firma-area {
       height: 40px;
       border: 1px solid #000;
@@ -69,15 +64,7 @@
     .encabezado-marco {
       border: 1px solid #000;
       padding: 6px;
-      margin-bottom: 10px;
-    }
-    .height-row td {
-      height: 30px;
-    }
-    .sin-margen {
-      margin: 0;
-      padding: 0;
-      line-height: 1.1;
+      margin-bottom: 4px;
     }
   </style>
 </head>
@@ -87,7 +74,7 @@
     <table>
       <tr>
         <td style="width: 20%"><img src="image1.jpeg" alt="BBVA" height="40"></td>
-        <td style="width: 20%"><img src="image2.png" alt="HOJA DE SERVICIO" height="40"></td>
+        <td class="titulo-hoja">HOJA DE<br>SERVICIO</td>
         <td style="width: 20%"><img src="image3.png" alt="TEDISA" height="40"></td>
       </tr>
     </table>
@@ -96,34 +83,22 @@
   <table>
     <tr>
       <td colspan="4"><strong>TICKET:</strong> {{ticket}}</td>
-      <td colspan="4">
-        <strong>AFILIACIÓN</strong><br>PESOS:<br><hr style="margin:2px 0;">DLLS:
-      </td>
+      <td colspan="4"><strong>AFILIACIÓN</strong><br>PESOS:<br><hr style="margin:2px 0;">DLLS:</td>
     </tr>
-    <tr>
-      <td colspan="8"><strong>COMERCIO:</strong> {{comercio}}</td>
-    </tr>
-    <tr>
-      <td colspan="8"><strong>CALLE Y NÚM:</strong> {{domicilio}}</td>
-    </tr>
-    <tr>
-      <td colspan="8"><strong>COLONIA:</strong> {{colonia}}</td>
-    </tr>
+    <tr><td colspan="8"><strong>COMERCIO:</strong> {{comercio}}</td></tr>
+    <tr><td colspan="8"><strong>CALLE Y NÚM:</strong> {{domicilio}}</td></tr>
+    <tr><td colspan="8"><strong>COLONIA:</strong> {{colonia}}</td></tr>
     <tr>
       <td><strong>C.P.:</strong> {{cp}}</td>
       <td colspan="2"><strong>POBLACIÓN:</strong> {{ciudad}}</td>
       <td colspan="2"><strong>ESTADO:</strong> {{estado}}</td>
       <td colspan="3"><strong>TELÉFONO:</strong> {{telefono_contacto_1}}</td>
     </tr>
-    <tr>
-      <td colspan="8"><strong>REFERENCIAS:</strong> {{referencia}} <br><strong>HORARIO:</strong> {{horario}}</td>
-    </tr>
+    <tr><td colspan="8"><strong>REFERENCIAS:</strong> {{referencia}} <br><strong>HORARIO:</strong> {{horario}}</td></tr>
   </table>
 
   <table>
-    <tr>
-      <td colspan="5" class="center">TIPO DE SERVICIO: {{servicio}} {{cantidad_insumos}}</td>
-    </tr>
+    <tr><td colspan="5" class="center">TIPO DE SERVICIO: {{servicio}} {{cantidad_insumos}}</td></tr>
     <tr>
       <td>INSTALACION DE TPV</td>
       <td>FALLA DE TPV</td>
@@ -133,7 +108,6 @@
     </tr>
   </table>
 
-  
   <table>
     <tr>
       <td><strong>SERIE INSTALADA</strong></td>
@@ -153,12 +127,8 @@
     </tr>
   </table>
 
-
-<table class="soluciones-table">
-    <tr>
-      <td colspan="4"><strong>SOLUCION</strong></td>
-      <td class="comentarios-tecnicos"><strong>COMENTARIOS TÉCNICOS</strong></td>
-    </tr>
+  <table class="soluciones-table">
+    <tr><td colspan="4"><strong>SOLUCION</strong></td><td class="comentarios-tecnicos"><strong>COMENTARIOS TÉCNICOS</strong></td></tr>
     <tr>
       <td>INSTALACIÓN</td>
       <td>SUSTITUCIÓN</td>
@@ -179,31 +149,10 @@
     </tr>
   </table>
 
-  
   <table>
-    <tr>
-      <td><strong>SERIE INSTALADA</strong></td>
-      <td colspan="3"></td>
-      <td><strong>SERIE RETIRADA</strong></td>
-      <td colspan="3"></td>
-    </tr>
-    <tr>
-      <td><strong>MODELO</strong></td>
-      <td>MOVE 2500</td>
-      <td>VX 520</td>
-      <td>IWL</td>
-      <td><strong>MODELO</strong></td>
-      <td>MOVE 2500</td>
-      <td>VX 520</td>
-      <td>IWL</td>
-    </tr>
-  </table>
-
-
-<table>
     <tr><td colspan="4" class="center">CALIFICACIÓN DE LA CALIDAD DEL SERVICIO TÉCNICO</td></tr>
     <tr>
-      <td style="width: 25%; vertical-align: top;">
+      <td>
         <table style="width: 100%;">
           <tr><td colspan="2" class="center"><strong>CALIFICACIÓN DE IDC</strong></td></tr>
           <tr><td>MALO</td><td></td></tr>
@@ -211,21 +160,21 @@
           <tr><td>EXCELENTE</td><td></td></tr>
         </table>
       </td>
-      <td style="width: 25%; vertical-align: top;">
+      <td>
         <table style="width: 100%;">
           <tr><td colspan="2" class="center"><strong>CALIFICACIÓN DE TPV</strong></td></tr>
           <tr><td>BUENO</td><td></td></tr>
           <tr><td>MALO</td><td></td></tr>
         </table>
       </td>
-      <td style="width: 25%; vertical-align: top;">
+      <td>
         <table style="width: 100%;">
           <tr><td colspan="2" class="center"><strong>¿SE SOLUCIONÓ EL PROBLEMA?</strong></td></tr>
           <tr><td>SÍ</td><td></td></tr>
           <tr><td>NO</td><td></td></tr>
         </table>
       </td>
-      <td style="width: 25%; vertical-align: top;">
+      <td>
         <table style="width: 100%;">
           <tr><td colspan="2" class="center"><strong>¿SU AFILIACIÓN ES LA MISMA QUE SU TPV?</strong></td></tr>
           <tr><td>SÍ</td><td></td></tr>
@@ -237,10 +186,10 @@
 
   <table>
     <tr>
-      <td colspan="4" style="border: 1px solid #000; text-align: center;">
+      <td colspan="4" style="text-align: center;">
         NOMBRE Y FIRMA DEL CLIENTE<br><div class="firma-area"></div>
       </td>
-      <td rowspan="1" style="width: 90px; text-align: center; border: 1px solid #000; padding: 4px;">
+      <td rowspan="1" style="width: 90px; text-align: center; padding: 4px;">
         <div style="font-size: 9px; font-weight: bold; line-height: 1.1;">DESEA SU</div>
         <div style="font-size: 9px; font-weight: bold; line-height: 1.1;">COMPROBANTE</div>
         <table style="font-size: 8.5px; margin-top: 6px; margin-left: auto; margin-right: auto;">
@@ -249,7 +198,7 @@
           <tr><td>NO</td><td style="padding-left: 4px;">□</td></tr>
         </table>
       </td>
-      <td colspan="4" style="border: 1px solid #000; text-align: center;">
+      <td colspan="4" style="text-align: center;">
         NOMBRE Y FIRMA DEL IDC<br><div class="firma-area"></div>
       </td>
     </tr>
@@ -260,7 +209,7 @@
   </div>
 </div>
 <div class="espacio_qr">
-  <!-- Aquí va el QR -->
+  <span style="writing-mode: vertical-rl; transform: rotate(180deg); font-size: 8px; color: #aaa;">ESPACIO QR</span>
 </div>
 </body>
 </html>
