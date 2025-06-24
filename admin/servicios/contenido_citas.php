@@ -1,40 +1,30 @@
 <?php
-require_once '../../config.php';
-require_once __DIR__ . '/service_functions.php';
-
-if (session_status() === PHP_SESSION_NONE) session_start();
-
-// Validación de sesión
+require_once __DIR__ . '/../../init.php'; // Usa el INIT del sistema
 if (!isset($_SESSION['usuario_id'])) {
     die('<div class="bg-red-100 text-red-800 px-4 py-2 rounded mb-4">⚠️ Error de seguridad. Por favor recarga la página.</div>');
 }
 
-$usuario = $_SESSION['usuario_nombre'] ?? 'Sistema';
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $tickets = explode(',', $_POST['tickets'] ?? '');
-    $fecha_cita = $_POST['fecha_cita'] ?? null;
+ob_start();
 
-    $tickets = array_map('trim', $tickets);
-    $tickets = array_filter($tickets);
-    $fecha_cita = trim($fecha_cita);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $tickets_raw = $_POST['tickets'] ?? '';
+    $fecha_cita = $_POST['fecha_cita'] ?? null;
+    $usuario = $_SESSION['usuario_nombre'] ?? 'Sistema';
+
+    $tickets = array_filter(array_map('trim', explode(',', $tickets_raw)));
 
     $agendadas = 0;
-
     foreach ($tickets as $ticket) {
-        // Agregar como nueva visita tipo "Cita"
-        $pdo->prepare("INSERT INTO visitas_servicios (ticket, fecha_visita, tipo_visita, resultado, creado_por) 
-                       VALUES (?, ?, 'Cita', 'Pendiente', ?)")
-            ->execute([$ticket, $fecha_cita, $_SESSION['usuario_nombre']]);
+        // Actualizar servicio
+        $update = $pdo->prepare("UPDATE servicios_omnipos SET estatus = 'En Ruta', fecha_cita = ?, observaciones = CONCAT(IFNULL(observaciones, ''), '\nCita programada para $fecha_cita.') WHERE ticket = ?");
+        $update->execute([$fecha_cita, $ticket]);
 
-        // Actualizar el estatus a Por Asignar y dejar nota en observaciones
-        $pdo->prepare("UPDATE servicios_omnipos 
-                       SET estatus = 'Por Asignar', 
-                           observaciones = CONCAT(IFNULL(observaciones, ''), '\n📅 Cita programada para $fecha_cita.') 
-                       WHERE ticket = ?")
-            ->execute([$ticket]);
+        // Registrar en visitas
+        $pdo->prepare("INSERT INTO visitas_servicios (ticket, fecha_visita, tipo_visita, resultado, creado_por) VALUES (?, ?, 'Cita', 'Pendiente', ?)")
+            ->execute([$ticket, $fecha_cita, $usuario]);
 
         // Log
-        logServicio($pdo, $ticket, 'Cita Programada', $_SESSION['usuario_nombre'], "Se programó cita para el $fecha_cita");
+        logServicio($pdo, $ticket, 'Cita Programada', $usuario, "Fecha: $fecha_cita");
 
         $agendadas++;
     }
@@ -64,3 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </button>
   </div>
 </form>
+
+<?php
+$contenido = ob_get_clean();
+require_once __DIR__ . '/../../layout.php';
+?>
