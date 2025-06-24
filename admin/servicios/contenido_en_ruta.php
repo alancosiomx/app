@@ -100,7 +100,7 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
   </div>
 
   <div class="overflow-x-auto bg-white shadow rounded-xl">
-    <table class="min-w-full text-sm text-left text-gray-700">
+    <table id="tabla-enruta" class="min-w-full text-sm text-left text-gray-700">
       <thead class="bg-gray-100 text-gray-600 uppercase text-xs">
         <tr>
           <th class="px-4 py-3"><input type="checkbox" onclick="document.querySelectorAll('input[name*=tickets]').forEach(c=>c.checked=this.checked)"></th>
@@ -151,30 +151,30 @@ $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
   </div>
 </form>
 
-<!-- JS Validación -->
+<!-- JS DataTable y Validación -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script>
 function toggleAll(source) {
   document.querySelectorAll('input[name="tickets[]"]').forEach(cb => cb.checked = source.checked);
 }
 
-function validarEnvio() {
-  let errores = 0;
-  document.querySelectorAll('input[name="tickets[]"]:checked').forEach(cb => {
-    const ticket = cb.value;
-    const select = document.querySelector(`select[name="resultados[${ticket}]"]`);
-    if (!select || !select.value) {
-      select.classList.add('border-red-500');
-      errores++;
-    } else {
-      select.classList.remove('border-red-500');
+$(document).ready(function () {
+  $('#tabla-enruta').DataTable({
+    pageLength: 100,
+    order: [[2, 'desc']],
+    language: {
+      search: "Buscar:",
+      lengthMenu: "Mostrar _MENU_ registros",
+      zeroRecords: "No se encontraron coincidencias",
+      info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+      infoEmpty: "Mostrando 0 a 0 de 0 registros",
+      paginate: {
+        next: "Siguiente",
+        previous: "Anterior"
+      }
     }
   });
-
-  if (errores > 0) {
-    alert("⚠️ Algunos tickets seleccionados no tienen resultado asignado.");
-    return false;
-  }
-
-  return true;
-}
+});
 </script>
