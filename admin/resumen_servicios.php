@@ -25,8 +25,8 @@ if ($tecnico) {
 $estadoQuery = "SELECT 
     SUM(CASE WHEN estatus = 'Por Asignar' THEN 1 ELSE 0 END) AS por_asignar,
     SUM(CASE WHEN estatus = 'En Ruta' THEN 1 ELSE 0 END) AS en_ruta,
-    SUM(CASE WHEN estatus = 'Histórico' AND conclusion = 'Éxito' THEN 1 ELSE 0 END) AS exitos,
-    SUM(CASE WHEN estatus = 'Histórico' AND conclusion = 'Rechazo' THEN 1 ELSE 0 END) AS rechazos
+    SUM(CASE WHEN estatus = 'Histórico' AND resultado = 'Éxito' THEN 1 ELSE 0 END) AS exitos,
+    SUM(CASE WHEN estatus = 'Histórico' AND resultado = 'Rechazo' THEN 1 ELSE 0 END) AS rechazos
     FROM servicios_omnipos";
 $resumen = $pdo->query($estadoQuery)->fetch(PDO::FETCH_ASSOC);
 
