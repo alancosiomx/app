@@ -102,6 +102,10 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
           $rechazo_previo = $pdo->prepare("SELECT fecha_visita FROM visitas_servicios WHERE ticket = ? AND resultado = 'Rechazo' LIMIT 1");
           $rechazo_previo->execute([$ticket]);
           $rechazo_info = $rechazo_previo->fetchColumn();
+
+          $cita_info = $pdo->prepare("SELECT fecha_visita FROM visitas_servicios WHERE ticket = ? AND tipo_visita = 'Cita' ORDER BY fecha_visita DESC LIMIT 1");
+          $cita_info->execute([$ticket]);
+          $cita_fecha = $cita_info->fetchColumn();
       ?>
       <tr>
         <td class="px-4 py-2 font-mono text-blue-700"><?= htmlspecialchars($ticket) ?></td>
@@ -122,6 +126,10 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
           <?php if ($rechazo_info): ?>
             <div class="text-[10px] text-gray-500 italic mt-1">Rechazo previo el <?= date('Y-m-d', strtotime($rechazo_info)) ?></div>
+          <?php endif; ?>
+
+          <?php if ($cita_fecha): ?>
+            <div class="text-[10px] text-blue-500 italic mt-1">Cita realizada el <?= date('Y-m-d', strtotime($cita_fecha)) ?></div>
           <?php endif; ?>
         </td>
       </tr>
