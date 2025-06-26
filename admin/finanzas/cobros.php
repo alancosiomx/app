@@ -93,15 +93,15 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
     </thead>
     <tbody class="divide-y divide-gray-100 text-sm">
       <?php foreach ($servicios as $serv): 
-          $sla = (strtotime($serv['fecha_atencion']) <= strtotime($serv['fecha_limite'])) ? 'DT' : 'FT';
+          $fecha_atencion = $serv['fecha_atencion'] ?? null;
+          $fecha_limite = $serv['fecha_limite'] ?? null;
+          $sla = ($fecha_atencion && $fecha_limite && strtotime($fecha_atencion) <= strtotime($fecha_limite)) ? 'DT' : 'FT';
           $pagado = $serv['pago_generado'] ?? 0;
           $ticket = $serv['ticket'];
 
-          // VISITAS desactivado porque aún no existe la tabla
-         $rechazo_previo = $pdo->prepare("SELECT fecha_visita FROM visitas_servicios WHERE ticket = ? AND resultado = 'Rechazo' LIMIT 1");
-$rechazo_previo->execute([$ticket]);
-$rechazo_info = $rechazo_previo->fetchColumn();
-
+          $rechazo_previo = $pdo->prepare("SELECT fecha_visita FROM visitas_servicios WHERE ticket = ? AND resultado = 'Rechazo' LIMIT 1");
+          $rechazo_previo->execute([$ticket]);
+          $rechazo_info = $rechazo_previo->fetchColumn();
       ?>
       <tr>
         <td class="px-4 py-2 font-mono text-blue-700"><?= htmlspecialchars($ticket) ?></td>
@@ -110,8 +110,8 @@ $rechazo_info = $rechazo_previo->fetchColumn();
         <td class="px-4 py-2"><?= htmlspecialchars($serv['resultado']) ?></td>
         <td class="px-4 py-2"><?= $sla ?></td>
         <td class="px-4 py-2"><?= $serv['fecha_atencion'] ?></td>
-        <td class="px-4 py-2">$
-          <?= number_format(calcular_pago($pdo, $serv), 2) ?>
+        <td class="px-4 py-2">
+          $<?= number_format(calcular_pago($pdo, $serv), 2) ?>
         </td>
         <td class="px-4 py-2">
           <?php if ($pagado): ?>
@@ -147,4 +147,3 @@ function calcular_pago($pdo, $serv) {
     return $stmt->fetchColumn() ?: 0;
 }
 ?>
-
