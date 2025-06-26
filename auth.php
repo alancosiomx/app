@@ -3,15 +3,6 @@
 // auth.php - Verificación segura de sesión
 // =============================================
 
-// Configuración de seguridad para sesiones
-ini_set('session.cookie_httponly', 1);
-ini_set('session.use_strict_mode', 1);
-
-// Solo activar cookie_secure si es HTTPS
-if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
-    ini_set('session.cookie_secure', 1);
-}
-
 // Iniciar sesión si no está iniciada
 if (session_status() === PHP_SESSION_NONE) {
     session_start([
