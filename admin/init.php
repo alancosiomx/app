@@ -3,6 +3,11 @@
 // INIT.PHP - Carga centralizada para el admin
 // ==============================================
 
+// Iniciar sesión antes de cualquier uso de $_SESSION
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Seguridad: impedir acceso directo fuera del admin
 if (!defined('IN_OMNIPOS_ADMIN')) {
     define('IN_OMNIPOS_ADMIN', true);
