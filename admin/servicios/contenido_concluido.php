@@ -103,6 +103,7 @@ function safe($val) {
         <th class="px-4 py-3">Ciudad</th>
         <th class="px-4 py-3">Fecha Atención</th>
         <th class="px-4 py-3">Resultado</th>
+        <th class="px-4 py-3">Técnico</th>
         <th class="px-4 py-3">Comentarios</th>
         <th class="px-4 py-3 text-center">📃 HS</th>
       </tr>
@@ -116,6 +117,7 @@ function safe($val) {
           <td class="px-4 py-2"><?= safe($s['ciudad']) ?></td>
           <td class="px-4 py-2"><?= safe($s['fecha_atencion']) ?></td>
           <td class="px-4 py-2"><?= safe($s['resultado']) ?: '—' ?></td>
+            <td class="px-4 py-2"><?= safe($s['idc']) ?></td>
           <td class="px-4 py-2"><?= safe($s['comentarios']) ?></td>
           <td class="px-4 py-2 text-center flex justify-center gap-2">
   <a href="generar_hs.php?ticket=<?= urlencode($s['ticket']) ?>" target="_blank" class="text-blue-600 hover:underline">📃</a>
