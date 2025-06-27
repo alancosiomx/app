@@ -1,7 +1,8 @@
-<?php
-require_once __DIR__ . '/whatsapp_functions.php';
+require_once 'whatsapp_functions.php';
 
-$telefono = '+5219982460606'; // Tu número verificado en Sandbox
-$mensaje  = "🚀 Hola Alan, mensaje desde front_whatsapp PHP listo";
-
-echo enviarWhatsapp($mensaje, $telefono);
+try {
+    $response = send_whatsapp('5219981234567', 'Hola técnico, tienes un nuevo servicio asignado 📋');
+    echo "✅ Mensaje enviado con SID: {$response->sid}";
+} catch (Exception $e) {
+    echo "❌ Error: " . $e->getMessage();
+}
