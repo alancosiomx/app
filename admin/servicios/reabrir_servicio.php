@@ -15,7 +15,7 @@ try {
     $stmt = $pdo->prepare("UPDATE servicios_omnipos SET 
         estatus = 'En Ruta',
         resultado = NULL,
-        fecha_cierre = NULL,
+        fecha_atencion = NULL,
         sla = NULL
         WHERE ticket = ?");
     $stmt->execute([$ticket]);
