@@ -13,7 +13,6 @@ $ticket = $_POST['ticket'];
 
 try {
     $stmt = $pdo->prepare("UPDATE servicios_omnipos SET 
-        actual_status = 'En Ruta',
         estado = 'EN RUTA',
         conclusion = NULL,
         fecha_cierre = NULL,
