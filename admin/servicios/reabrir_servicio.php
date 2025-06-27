@@ -13,7 +13,7 @@ $ticket = $_POST['ticket'];
 
 try {
     $stmt = $pdo->prepare("UPDATE servicios_omnipos SET 
-        estado = 'EN RUTA',
+        estatus = 'En Ruta',
         conclusion = NULL,
         fecha_cierre = NULL,
         sla = NULL
@@ -21,10 +21,10 @@ try {
     $stmt->execute([$ticket]);
 
     if ($stmt->rowCount() > 0) {
-        echo json_encode(['success' => true, 'message' => 'Servicio reabierto correctamente.']);
+        echo json_encode(['success' => true, 'message' => '✅ Servicio reabierto correctamente.']);
     } else {
-        echo json_encode(['success' => false, 'message' => 'No se encontró el ticket o ya estaba en ruta.']);
+        echo json_encode(['success' => false, 'message' => '⚠️ No se encontró el ticket o ya estaba en ruta.']);
     }
 } catch (Exception $e) {
-    echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
+    echo json_encode(['success' => false, 'message' => '❌ Error: ' . $e->getMessage()]);
 }
