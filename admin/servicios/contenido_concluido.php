@@ -117,11 +117,30 @@ function safe($val) {
           <td class="px-4 py-2"><?= safe($s['fecha_atencion']) ?></td>
           <td class="px-4 py-2"><?= safe($s['resultado']) ?: '—' ?></td>
           <td class="px-4 py-2"><?= safe($s['comentarios']) ?></td>
-          <td class="px-4 py-2 text-center">
-            <a href="generar_hs.php?ticket=<?= urlencode($s['ticket']) ?>" target="_blank" class="text-blue-600 hover:underline">📃</a>
-          </td>
+          <td class="px-4 py-2 text-center flex justify-center gap-2">
+  <a href="generar_hs.php?ticket=<?= urlencode($s['ticket']) ?>" target="_blank" class="text-blue-600 hover:underline">📃</a>
+  <button onclick="reabrirServicio('<?= $s['ticket'] ?>')" class="text-yellow-600 hover:underline">↩</button>
+</td>
+
         </tr>
       <?php endforeach; ?>
     </tbody>
   </table>
 </div>
+<script>
+function reabrirServicio(ticket) {
+  if (!confirm(`¿Reabrir el servicio ${ticket}? Esto lo regresará a EN RUTA y borrará el cierre.`)) return;
+
+  fetch('reabrir_servicio.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: 'ticket=' + encodeURIComponent(ticket)
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert(data.message);
+    if (data.success) location.reload();
+  });
+}
+</script>
+
