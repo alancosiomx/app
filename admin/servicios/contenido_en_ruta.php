@@ -26,10 +26,22 @@ if ($tecnico) {
     $params[] = $tecnico;
 }
 if ($ticket) {
-    $sql .= " AND (ticket LIKE ? OR afiliacion LIKE ?)";
-    $params[] = "%$ticket%";
-    $params[] = "%$ticket%";
+    // Normaliza separadores: cualquier cantidad de espacios o saltos de línea → espacio simple
+    $busquedas = preg_split('/\s+/', trim($ticket));
+    $busquedas = array_filter($busquedas); // Elimina vacíos
+
+    $condiciones = [];
+    foreach ($busquedas as $b) {
+        $condiciones[] = "(ticket LIKE ? OR afiliacion LIKE ?)";
+        $params[] = "%$b%";
+        $params[] = "%$b%";
+    }
+
+    if ($condiciones) {
+        $sql .= " AND (" . implode(" OR ", $condiciones) . ")";
+    }
 }
+
 
 $sql .= " ORDER BY fecha_inicio DESC";
 $stmt = $pdo->prepare($sql);
