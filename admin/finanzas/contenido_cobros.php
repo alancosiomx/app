@@ -82,6 +82,7 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
     <thead class="bg-gray-50 text-xs font-semibold text-gray-600">
       <tr>
         <th class="px-4 py-2 text-left">Ticket</th>
+        <th class="px-4 py-2 text-left">Comercio</th>
         <th class="px-4 py-2 text-left">Técnico</th>
         <th class="px-4 py-2 text-left">Servicio</th>
         <th class="px-4 py-2 text-left">Resultado</th>
@@ -109,6 +110,7 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
       ?>
       <tr>
         <td class="px-4 py-2 font-mono text-blue-700"><?= htmlspecialchars($ticket) ?></td>
+        <td class="px-4 py-2"><?= htmlspecialchars($serv['comercio']) ?></td>
         <td class="px-4 py-2"><?= htmlspecialchars($serv['idc']) ?></td>
         <td class="px-4 py-2"><?= htmlspecialchars($serv['servicio']) ?></td>
         <td class="px-4 py-2"><?= htmlspecialchars($serv['resultado']) ?></td>
