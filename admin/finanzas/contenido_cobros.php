@@ -1,107 +1,82 @@
 <?php
-require_once __DIR__ . '/../init.php';
-require_once __DIR__ . '/constants.php';
-
-$usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
-$current_tab = $_GET['vista'] ?? 'cobros';
 $desde = $_GET['desde'] ?? '';
 $hasta = $_GET['hasta'] ?? '';
 $tecnico = $_GET['tecnico'] ?? '';
-
-// Consulta desde visitas_servicios y servicios_omnipos
-$condiciones = ["v.resultado IN ('Exito', 'Rechazo')"];
-$parametros = [];
-
-if ($desde && $hasta) {
-  $condiciones[] = "v.fecha_visita BETWEEN ? AND ?";
-  $parametros[] = "$desde 00:00:00";
-  $parametros[] = "$hasta 23:59:59";
-}
-
-if ($tecnico) {
-  $condiciones[] = "v.idc = ?";
-  $parametros[] = $tecnico;
-}
-
-$where = count($condiciones) ? "WHERE " . implode(' AND ', $condiciones) : "";
-$sql = "SELECT v.*, s.comercio, s.servicio, s.ticket, s.fecha_limite
-        FROM visitas_servicios v
-        JOIN servicios_omnipos s ON s.ticket = v.ticket
-        $where
-        ORDER BY v.fecha_visita DESC";
-$stmt = $pdo->prepare($sql);
-$stmt->execute($parametros);
-$visitas = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// Obtener técnicos únicos
-$tecnicos = $pdo->query("SELECT DISTINCT idc FROM visitas_servicios WHERE idc IS NOT NULL ORDER BY idc")->fetchAll(PDO::FETCH_COLUMN);
 ?>
-<!-- 🔗 TABS DE FINANZAS -->
-<div class="mb-4 border-b border-gray-200">
-  <nav class="flex flex-wrap gap-2 text-sm font-medium text-gray-500" aria-label="Tabs">
-    <?php foreach (TABS_FINANZAS as $clave => $titulo): ?>
-      <a href="?vista=<?= $clave ?>"
-         class="px-4 py-2 rounded-xl <?= $current_tab === $clave ? 'bg-blue-600 text-white' : 'hover:text-blue-700 bg-gray-100' ?>">
-        <?= $titulo ?>
-      </a>
-    <?php endforeach; ?>
-  </nav>
-</div>
 
-<h1 class="text-xl font-bold mb-4 text-blue-700"><?= TABS_FINANZAS['cobros'] ?></h1>
+<h2 class="text-lg font-semibold text-blue-700 mb-4">💳 Reporte de Cobros</h2>
+
 <form method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
   <input type="hidden" name="vista" value="cobros">
+
   <div>
     <label class="block text-sm font-medium text-gray-600">Desde</label>
-    <input type="date" name="desde" value="<?= htmlspecialchars($desde) ?>" class="w-full border-gray-300 rounded-md">
+    <input type="date" name="desde" value="<?= $desde ?>" class="w-full border-gray-300 rounded shadow-sm">
   </div>
+
   <div>
     <label class="block text-sm font-medium text-gray-600">Hasta</label>
-    <input type="date" name="hasta" value="<?= htmlspecialchars($hasta) ?>" class="w-full border-gray-300 rounded-md">
+    <input type="date" name="hasta" value="<?= $hasta ?>" class="w-full border-gray-300 rounded shadow-sm">
   </div>
+
   <div>
     <label class="block text-sm font-medium text-gray-600">Técnico</label>
-    <select name="tecnico" class="w-full border-gray-300 rounded-md">
+    <select name="tecnico" class="w-full border-gray-300 rounded shadow-sm">
       <option value="">Todos</option>
-      <?php foreach ($tecnicos as $t): ?>
-        <option value="<?= $t ?>" <?= $t === $tecnico ? 'selected' : '' ?>><?= $t ?></option>
-      <?php endforeach; ?>
+      <?php
+      $tecnicos = $pdo->query("SELECT DISTINCT idc FROM servicios_omnipos WHERE idc IS NOT NULL")->fetchAll(PDO::FETCH_COLUMN);
+      foreach ($tecnicos as $t) {
+        $sel = ($t === $tecnico) ? 'selected' : '';
+        echo "<option value='$t' $sel>$t</option>";
+      }
+      ?>
     </select>
   </div>
+
   <div class="flex items-end">
-    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Filtrar</button>
+    <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">Filtrar</button>
   </div>
 </form>
 
-<?php if (count($visitas) > 0): ?>
-<table class="min-w-full divide-y divide-gray-200 bg-white rounded-xl shadow overflow-hidden text-sm">
-  <thead class="bg-gray-50 text-xs font-semibold text-gray-600">
-    <tr>
-      <th class="px-4 py-2 text-left">Ticket</th>
-      <th class="px-4 py-2 text-left">Comercio</th>
-      <th class="px-4 py-2 text-left">Técnico</th>
-      <th class="px-4 py-2 text-left">Servicio</th>
-      <th class="px-4 py-2 text-left">Resultado</th>
-      <th class="px-4 py-2 text-left">SLA</th>
-      <th class="px-4 py-2 text-left">Fecha de visita</th>
-    </tr>
-  </thead>
-  <tbody class="divide-y divide-gray-100">
-    <?php foreach ($visitas as $v):
-      $sla = ($v['fecha_visita'] <= $v['fecha_limite']) ? 'DT' : 'FT';
-    ?>
-      <tr>
-        <td class="px-4 py-2 font-mono text-blue-700"><?= htmlspecialchars($v['ticket']) ?></td>
-        <td class="px-4 py-2"><?= htmlspecialchars($v['comercio']) ?></td>
-        <td class="px-4 py-2"><?= htmlspecialchars($v['idc']) ?></td>
-        <td class="px-4 py-2"><?= htmlspecialchars($v['servicio']) ?></td>
-        <td class="px-4 py-2"><?= htmlspecialchars($v['resultado']) ?></td>
-        <td class="px-4 py-2"><?= $sla ?></td>
-        <td class="px-4 py-2"><?= $v['fecha_visita'] ?></td>
-      </tr>
-    <?php endforeach; ?>
-  </tbody>
-</table>
-<?php else: ?>
-  <div class="bg-yellow-50 text-yellow-800 p-4 rounded mt-4">No se encontraron visitas en ese rango.</div>
-<?php endif; ?>
+<?php
+if ($desde && $hasta) {
+  $f1 = $desde . ' 00:00:00';
+  $f2 = $hasta . ' 23:59:59';
+
+  $params = [$f1, $f2];
+  $sql = "SELECT * FROM servicios_omnipos WHERE resultado IN ('Exito','Rechazo') AND fecha_atencion BETWEEN ? AND ?";
+
+  if ($tecnico) {
+    $sql .= " AND idc = ?";
+    $params[] = $tecnico;
+  }
+
+  $sql .= " ORDER BY fecha_atencion DESC";
+
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute($params);
+  $servicios = $stmt->fetchAll();
+
+  if (count($servicios) === 0) {
+    echo "<div class='bg-yellow-50 text-yellow-800 p-4 rounded'>No se encontraron visitas en ese rango.</div>";
+  } else {
+    echo "<table class='min-w-full mt-4 text-sm'><thead><tr>
+    <th class='text-left px-2 py-1'>Ticket</th>
+    <th class='text-left px-2 py-1'>IDC</th>
+    <th class='text-left px-2 py-1'>Servicio</th>
+    <th class='text-left px-2 py-1'>Resultado</th>
+    <th class='text-left px-2 py-1'>Fecha</th>
+    </tr></thead><tbody>";
+    foreach ($servicios as $s) {
+      echo "<tr>
+        <td class='px-2 py-1'>{$s['ticket']}</td>
+        <td class='px-2 py-1'>{$s['idc']}</td>
+        <td class='px-2 py-1'>{$s['servicio']}</td>
+        <td class='px-2 py-1'>{$s['resultado']}</td>
+        <td class='px-2 py-1'>{$s['fecha_atencion']}</td>
+      </tr>";
+    }
+    echo "</tbody></table>";
+  }
+}
+?>
