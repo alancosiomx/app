@@ -8,7 +8,7 @@ $desde = $_GET['desde'] ?? '';
 $hasta = $_GET['hasta'] ?? '';
 $tecnico = $_GET['tecnico'] ?? '';
 
-$condiciones = ["actual_status = 'Histórico'", "resultado IN ('Exito', 'Rechazo')"];
+$condiciones = ["estatus = 'Histórico'", "resultado IN ('Exito', 'Rechazo')"];
 $parametros = [];
 
 if ($desde && $hasta) {
