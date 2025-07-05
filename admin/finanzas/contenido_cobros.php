@@ -79,4 +79,17 @@ if ($desde && $hasta) {
     echo "</tbody></table>";
   }
 }
+  <?php
+function calcular_pago($pdo, $serv) {
+    $idc = trim($serv['idc']);
+    $servicio = trim($serv['servicio']);
+    $resultado = trim($serv['resultado']);
+    $banco = strtoupper(trim($serv['banco'])); // Asegura que sea BBVA, BANREGIO o AZTECA
+
+    $stmt = $pdo->prepare("SELECT monto FROM precios_idc 
+        WHERE idc = ? AND servicio = ? AND resultado = ? AND banco = ?");
+    $stmt->execute([$idc, $servicio, $resultado, $banco]);
+    
+    return $stmt->fetchColumn() ?: 0;
+}
 ?>
