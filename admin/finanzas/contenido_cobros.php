@@ -51,7 +51,7 @@ if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
   $stmt->execute($params);
   $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-  if (count($servicios) > 0):
+  if (count($servicios) > 0) {
 ?>
 
 <!-- ✅ BOTÓN EXPORTAR A EXCEL -->
@@ -81,7 +81,7 @@ if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
     </tr>
   </thead>
   <tbody class="divide-y divide-gray-100 text-sm">
-    <?php foreach ($servicios as $serv):
+    <?php foreach ($servicios as $serv) {
       $fecha_atencion = $serv['fecha_atencion'] ?? null;
       $fecha_limite = $serv['fecha_limite'] ?? null;
       $sla = ($fecha_atencion && $fecha_limite && strtotime($fecha_atencion) <= strtotime($fecha_limite)) ? 'DT' : 'FT';
@@ -106,27 +106,30 @@ if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
       <td class="px-4 py-2"><?= $serv['fecha_atencion'] ?></td>
       <td class="px-4 py-2">$<?= number_format(calcular_pago($pdo, $serv), 2) ?></td>
       <td class="px-4 py-2">
-        <?php if ($pagado): ?>
+        <?php if ($pagado) { ?>
           <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Pagado</span>
-        <?php else: ?>
+        <?php } else { ?>
           <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Pendiente</span>
-        <?php endif; ?>
+        <?php } ?>
 
-        <?php if ($rechazo_info): ?>
+        <?php if ($rechazo_info) { ?>
           <div class="text-[10px] text-gray-500 italic mt-1">Rechazo previo el <?= date('Y-m-d', strtotime($rechazo_info)) ?></div>
-        <?php endif; ?>
+        <?php } ?>
 
-        <?php if ($cita_fecha): ?>
+        <?php if ($cita_fecha) { ?>
           <div class="text-[10px] text-blue-500 italic mt-1">Cita realizada el <?= date('Y-m-d', strtotime($cita_fecha)) ?></div>
-        <?php endif; ?>
+        <?php } ?>
       </td>
     </tr>
-    <?php endforeach; ?>
+    <?php } ?>
   </tbody>
 </table>
 
-<?php else: ?>
-  <div class="bg-yellow-50 text-yellow-800 p-4 rounded mt-4">No se encontraron servicios para ese rango.</div>
-<?php endif; } else: ?>
-  <div class="text-gray-500 italic">Usa el formulario para generar un reporte de cobros.</div>
-<?php endif; ?>
+<?php
+  } else {
+    echo '<div class="bg-yellow-50 text-yellow-800 p-4 rounded mt-4">No se encontraron servicios para ese rango.</div>';
+  }
+} else {
+  echo '<div class="text-gray-500 italic">Usa el formulario para generar un reporte de cobros.</div>';
+}
+?>
