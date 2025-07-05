@@ -4,7 +4,7 @@ if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
   $hasta = $_GET['hasta'] . ' 23:59:59';
   $tecnico = $_GET['tecnico'] ?? '';
 
-  // Generar CSRF token si no existe
+  // Generar token CSRF si no existe
   if (empty($_SESSION['csrf_token'])) {
       $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
   }
@@ -12,16 +12,14 @@ if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
   $sql = "SELECT * FROM servicios_omnipos 
           WHERE resultado IN ('Exito', 'Rechazo') 
           AND fecha_atencion BETWEEN ? AND ?";
-
   $params = [$desde, $hasta];
 
   if (!empty($tecnico)) {
-      $sql .= " AND idc = ?";
-      $params[] = $tecnico;
+    $sql .= " AND idc = ?";
+    $params[] = $tecnico;
   }
 
   $sql .= " ORDER BY fecha_atencion DESC";
-
   $stmt = $pdo->prepare($sql);
   $stmt->execute($params);
   $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -29,7 +27,7 @@ if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
   if (count($servicios) > 0):
 ?>
 
-<!-- ✅ BOTÓN EXPORTAR A EXCEL CON CSRF -->
+<!-- ✅ BOTÓN EXPORTAR A EXCEL -->
 <form method="POST" action="exportar_cobros_excel.php" target="_blank" class="mb-4">
   <input type="hidden" name="desde" value="<?= htmlspecialchars($_GET['desde']) ?>">
   <input type="hidden" name="hasta" value="<?= htmlspecialchars($_GET['hasta']) ?>">
@@ -56,20 +54,20 @@ if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
     </tr>
   </thead>
   <tbody class="divide-y divide-gray-100 text-sm">
-    <?php foreach ($servicios as $serv): 
-        $fecha_atencion = $serv['fecha_atencion'] ?? null;
-        $fecha_limite = $serv['fecha_limite'] ?? null;
-        $sla = ($fecha_atencion && $fecha_limite && strtotime($fecha_atencion) <= strtotime($fecha_limite)) ? 'DT' : 'FT';
-        $pagado = $serv['pago_generado'] ?? 0;
-        $ticket = $serv['ticket'];
+    <?php foreach ($servicios as $serv):
+      $fecha_atencion = $serv['fecha_atencion'] ?? null;
+      $fecha_limite = $serv['fecha_limite'] ?? null;
+      $sla = ($fecha_atencion && $fecha_limite && strtotime($fecha_atencion) <= strtotime($fecha_limite)) ? 'DT' : 'FT';
+      $pagado = $serv['pago_generado'] ?? 0;
+      $ticket = $serv['ticket'];
 
-        $rechazo_previo = $pdo->prepare("SELECT fecha_visita FROM visitas_servicios WHERE ticket = ? AND resultado = 'Rechazo' LIMIT 1");
-        $rechazo_previo->execute([$ticket]);
-        $rechazo_info = $rechazo_previo->fetchColumn();
+      $rechazo_stmt = $pdo->prepare("SELECT fecha_visita FROM visitas_servicios WHERE ticket = ? AND resultado = 'Rechazo' LIMIT 1");
+      $rechazo_stmt->execute([$ticket]);
+      $rechazo_info = $rechazo_stmt->fetchColumn();
 
-        $cita_info = $pdo->prepare("SELECT fecha_visita FROM visitas_servicios WHERE ticket = ? AND tipo_visita = 'Cita' ORDER BY fecha_visita DESC LIMIT 1");
-        $cita_info->execute([$ticket]);
-        $cita_fecha = $cita_info->fetchColumn();
+      $cita_stmt = $pdo->prepare("SELECT fecha_visita FROM visitas_servicios WHERE ticket = ? AND tipo_visita = 'Cita' ORDER BY fecha_visita DESC LIMIT 1");
+      $cita_stmt->execute([$ticket]);
+      $cita_fecha = $cita_stmt->fetchColumn();
     ?>
     <tr>
       <td class="px-4 py-2 font-mono text-blue-700"><?= htmlspecialchars($ticket) ?></td>
@@ -79,9 +77,7 @@ if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
       <td class="px-4 py-2"><?= htmlspecialchars($serv['resultado']) ?></td>
       <td class="px-4 py-2"><?= $sla ?></td>
       <td class="px-4 py-2"><?= $serv['fecha_atencion'] ?></td>
-      <td class="px-4 py-2">
-        $<?= number_format(calcular_pago($pdo, $serv), 2) ?>
-      </td>
+      <td class="px-4 py-2">$<?= number_format(calcular_pago($pdo, $serv), 2) ?></td>
       <td class="px-4 py-2">
         <?php if ($pagado): ?>
           <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Pagado</span>
