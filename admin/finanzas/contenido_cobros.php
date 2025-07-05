@@ -105,6 +105,3 @@ $tecnicos = $pdo->query("SELECT DISTINCT idc FROM visitas_servicios WHERE idc IS
 <?php else: ?>
   <div class="bg-yellow-50 text-yellow-800 p-4 rounded mt-4">No se encontraron visitas en ese rango.</div>
 <?php endif; ?>
-"""
-
-updated_code[:1500]  # mostrar una parte para confirmar que se generó bien
