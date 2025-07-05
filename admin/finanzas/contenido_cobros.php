@@ -79,7 +79,7 @@ if ($desde && $hasta) {
     echo "</tbody></table>";
   }
 }
-  <?php
+  
 function calcular_pago($pdo, $serv) {
     $idc = trim($serv['idc']);
     $servicio = trim($serv['servicio']);
