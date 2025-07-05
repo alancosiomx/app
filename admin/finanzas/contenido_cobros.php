@@ -8,28 +8,33 @@ $desde = $_GET['desde'] ?? '';
 $hasta = $_GET['hasta'] ?? '';
 $tecnico = $_GET['tecnico'] ?? '';
 
-$condiciones = ["estatus = 'Histórico'", "resultado IN ('Exito', 'Rechazo')"];
+// Consulta desde visitas_servicios y servicios_omnipos
+$condiciones = ["v.resultado IN ('Exito', 'Rechazo')"];
 $parametros = [];
 
 if ($desde && $hasta) {
-  $condiciones[] = "fecha_atencion BETWEEN ? AND ?";
+  $condiciones[] = "v.fecha_visita BETWEEN ? AND ?";
   $parametros[] = "$desde 00:00:00";
   $parametros[] = "$hasta 23:59:59";
 }
 
 if ($tecnico) {
-  $condiciones[] = "idc = ?";
+  $condiciones[] = "v.idc = ?";
   $parametros[] = $tecnico;
 }
 
 $where = count($condiciones) ? "WHERE " . implode(' AND ', $condiciones) : "";
-$sql = "SELECT * FROM servicios_omnipos $where ORDER BY fecha_atencion DESC";
+$sql = "SELECT v.*, s.comercio, s.servicio, s.ticket, s.fecha_limite
+        FROM visitas_servicios v
+        JOIN servicios_omnipos s ON s.ticket = v.ticket
+        $where
+        ORDER BY v.fecha_visita DESC";
 $stmt = $pdo->prepare($sql);
 $stmt->execute($parametros);
-$servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$visitas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Obtener técnicos únicos
-$tecnicos = $pdo->query("SELECT DISTINCT idc FROM servicios_omnipos WHERE idc IS NOT NULL ORDER BY idc")->fetchAll(PDO::FETCH_COLUMN);
+$tecnicos = $pdo->query("SELECT DISTINCT idc FROM visitas_servicios WHERE idc IS NOT NULL ORDER BY idc")->fetchAll(PDO::FETCH_COLUMN);
 ?>
 <!-- 🔗 TABS DE FINANZAS -->
 <div class="mb-4 border-b border-gray-200">
@@ -67,3 +72,39 @@ $tecnicos = $pdo->query("SELECT DISTINCT idc FROM servicios_omnipos WHERE idc IS
     <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Filtrar</button>
   </div>
 </form>
+
+<?php if (count($visitas) > 0): ?>
+<table class="min-w-full divide-y divide-gray-200 bg-white rounded-xl shadow overflow-hidden text-sm">
+  <thead class="bg-gray-50 text-xs font-semibold text-gray-600">
+    <tr>
+      <th class="px-4 py-2 text-left">Ticket</th>
+      <th class="px-4 py-2 text-left">Comercio</th>
+      <th class="px-4 py-2 text-left">Técnico</th>
+      <th class="px-4 py-2 text-left">Servicio</th>
+      <th class="px-4 py-2 text-left">Resultado</th>
+      <th class="px-4 py-2 text-left">SLA</th>
+      <th class="px-4 py-2 text-left">Fecha de visita</th>
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-gray-100">
+    <?php foreach ($visitas as $v):
+      $sla = ($v['fecha_visita'] <= $v['fecha_limite']) ? 'DT' : 'FT';
+    ?>
+      <tr>
+        <td class="px-4 py-2 font-mono text-blue-700"><?= htmlspecialchars($v['ticket']) ?></td>
+        <td class="px-4 py-2"><?= htmlspecialchars($v['comercio']) ?></td>
+        <td class="px-4 py-2"><?= htmlspecialchars($v['idc']) ?></td>
+        <td class="px-4 py-2"><?= htmlspecialchars($v['servicio']) ?></td>
+        <td class="px-4 py-2"><?= htmlspecialchars($v['resultado']) ?></td>
+        <td class="px-4 py-2"><?= $sla ?></td>
+        <td class="px-4 py-2"><?= $v['fecha_visita'] ?></td>
+      </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+<?php else: ?>
+  <div class="bg-yellow-50 text-yellow-800 p-4 rounded mt-4">No se encontraron visitas en ese rango.</div>
+<?php endif; ?>
+"""
+
+updated_code[:1500]  # mostrar una parte para confirmar que se generó bien
