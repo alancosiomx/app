@@ -1,40 +1,46 @@
 <?php
-  if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
-    $desde = $_GET['desde'] . ' 00:00:00';
-    $hasta = $_GET['hasta'] . ' 23:59:59';
-    $tecnico = $_GET['tecnico'] ?? '';
+if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
+  $desde = $_GET['desde'] . ' 00:00:00';
+  $hasta = $_GET['hasta'] . ' 23:59:59';
+  $tecnico = $_GET['tecnico'] ?? '';
 
-    $sql = "SELECT * FROM servicios_omnipos 
-            WHERE resultado IN ('Exito', 'Rechazo') 
-            AND fecha_atencion BETWEEN ? AND ?";
+  // Generar CSRF token si no existe
+  if (empty($_SESSION['csrf_token'])) {
+      $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+  }
 
-    $params = [$desde, $hasta];
+  $sql = "SELECT * FROM servicios_omnipos 
+          WHERE resultado IN ('Exito', 'Rechazo') 
+          AND fecha_atencion BETWEEN ? AND ?";
 
-    if (!empty($tecnico)) {
-        $sql .= " AND idc = ?";
-        $params[] = $tecnico;
-    }
+  $params = [$desde, $hasta];
 
-    $sql .= " ORDER BY fecha_atencion DESC";
+  if (!empty($tecnico)) {
+      $sql .= " AND idc = ?";
+      $params[] = $tecnico;
+  }
 
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute($params);
-    $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  $sql .= " ORDER BY fecha_atencion DESC";
 
-    if (count($servicios) > 0):
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute($params);
+  $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+  if (count($servicios) > 0):
 ?>
 
-<!-- ✅ BOTÓN EXPORTAR A EXCEL -->
+<!-- ✅ BOTÓN EXPORTAR A EXCEL CON CSRF -->
 <form method="POST" action="exportar_cobros_excel.php" target="_blank" class="mb-4">
   <input type="hidden" name="desde" value="<?= htmlspecialchars($_GET['desde']) ?>">
   <input type="hidden" name="hasta" value="<?= htmlspecialchars($_GET['hasta']) ?>">
   <input type="hidden" name="tecnico" value="<?= htmlspecialchars($_GET['tecnico'] ?? '') ?>">
+  <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
   <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 text-sm">
     📥 Exportar a Excel
   </button>
 </form>
 
-<!-- 🔽 LA TABLA EXISTENTE QUE YA TENÍAS -->
+<!-- 🔽 TABLA DE SERVICIOS -->
 <table class="min-w-full divide-y divide-gray-200 mt-6 bg-white rounded-xl shadow overflow-hidden">
   <thead class="bg-gray-50 text-xs font-semibold text-gray-600">
     <tr>
