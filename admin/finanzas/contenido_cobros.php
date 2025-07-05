@@ -1,13 +1,40 @@
 <?php
+// Generar token CSRF si no existe
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+?>
+
+<!-- 🔍 FORMULARIO DE FILTRO -->
+<div class="bg-white p-4 rounded shadow mb-6">
+  <form method="GET" action="">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div>
+        <label class="text-sm font-medium">Desde</label>
+        <input type="date" name="desde" value="<?= htmlspecialchars($_GET['desde'] ?? '') ?>" class="w-full border rounded px-2 py-1">
+      </div>
+      <div>
+        <label class="text-sm font-medium">Hasta</label>
+        <input type="date" name="hasta" value="<?= htmlspecialchars($_GET['hasta'] ?? '') ?>" class="w-full border rounded px-2 py-1">
+      </div>
+      <div>
+        <label class="text-sm font-medium">Técnico (opcional)</label>
+        <input type="text" name="tecnico" value="<?= htmlspecialchars($_GET['tecnico'] ?? '') ?>" class="w-full border rounded px-2 py-1">
+      </div>
+      <div class="flex items-end">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">
+          Filtrar
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<?php
 if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
   $desde = $_GET['desde'] . ' 00:00:00';
   $hasta = $_GET['hasta'] . ' 23:59:59';
   $tecnico = $_GET['tecnico'] ?? '';
-
-  // Generar token CSRF si no existe
-  if (empty($_SESSION['csrf_token'])) {
-      $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-  }
 
   $sql = "SELECT * FROM servicios_omnipos 
           WHERE resultado IN ('Exito', 'Rechazo') 
@@ -100,4 +127,6 @@ if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
 
 <?php else: ?>
   <div class="bg-yellow-50 text-yellow-800 p-4 rounded mt-4">No se encontraron servicios para ese rango.</div>
-<?php endif; } ?>
+<?php endif; } else: ?>
+  <div class="text-gray-500 italic">Usa el formulario para generar un reporte de cobros.</div>
+<?php endif; ?>
