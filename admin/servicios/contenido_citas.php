@@ -15,12 +15,20 @@
            class="mt-1 block w-full rounded border-gray-300 shadow-sm text-sm p-2">
   </div>
 
+  <div>
+    <label class="inline-flex items-center">
+      <input type="checkbox" name="registrar_visita" class="rounded text-blue-600">
+      <span class="ml-2 text-sm text-gray-700">¿Registrar como visita?</span>
+    </label>
+  </div>
+
   <div class="text-right">
     <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm">
       Agendar Cita
     </button>
   </div>
 </form>
+
 
 <?php if (isset($_SESSION['mensaje'])): ?>
   <div class="bg-green-100 text-green-800 px-4 py-2 rounded mt-4"><?= $_SESSION['mensaje'] ?></div>
