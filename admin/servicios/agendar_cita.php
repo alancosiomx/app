@@ -13,14 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     foreach ($tickets as $ticket) {
         // Revisión del estado actual
-        $stmt = $pdo->prepare("SELECT estatus, conclusion FROM servicios_omnipos WHERE ticket = ?");
+        $stmt = $pdo->prepare("SELECT estatus, resultado FROM servicios_omnipos WHERE ticket = ?");
         $stmt->execute([$ticket]);
         $servicio = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (!$servicio) continue; // Ticket inválido
 
         $estatus = $servicio['estatus'];
-        $conclusion = $servicio['conclusion'];
+        $resultado = $servicio['resultado'];
 
         if ($estatus === 'Por Asignar' || $estatus === 'En Ruta') {
             // Solo actualizar fecha_cita y pasar a En Ruta si no lo está
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                            WHERE ticket = ?")
                 ->execute([$fecha_cita, $ticket]);
 
-        } elseif ($estatus === 'Histórico' && strtolower($conclusion) === 'rechazo') {
+        } elseif ($estatus === 'Histórico' && strtolower($resultado) === 'rechazo') {
             // Reabrir el servicio con una nueva cita
             $pdo->prepare("UPDATE servicios_omnipos 
                            SET estatus = 'En Ruta', fecha_cita = ?, observaciones = CONCAT(IFNULL(observaciones, ''), '\\nReagenda por rechazo - cita para $fecha_cita.') 
