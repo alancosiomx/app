@@ -75,15 +75,25 @@ $payload = [
         "nombre" => "COMERCIALIZADORA BRING IT",
         "regimenFiscal" => "626"
     ],
-    "receptor" => [
-        "rfc" => $cliente['rfc'],
-        "nombre" => $cliente['razon_social'],
-        "uso_cfdi" => $cliente['uso_cfdi'],
-        "regimen_fiscal_receptor" => $cliente['regimen_fiscal'],
-        "domicilio_fiscal_receptor" => $cliente['codigo_postal']
-    ],
-    "conceptos" => $conceptos
-];
+    {
+  "receptor": {
+    "rfc": "TDI860730D9A",
+    "nombre": "TELEINFORMATICA DINAMICA SA DE CV",
+    "uso_cfdi": "G03",
+    "regimen_fiscal_receptor": "601",
+    "domicilio_fiscal_receptor": "04330"
+  },
+  "conceptos": [
+    {
+      "cantidad": 1,
+      "descripcion": "Servicio Cancún - Cozumel",
+      "clave_prod_serv": "78101800",
+      "clave_unidad": "E48",
+      "unidad": "Servicio",
+      "valor_unitario": 650
+    }
+  ]
+}
 
 $url = "https://api.fiscalpop.com/api/v1/cfdi/stamp/" . FISCALPOP_TOKEN;
 
