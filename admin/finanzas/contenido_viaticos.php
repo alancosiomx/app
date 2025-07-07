@@ -23,8 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idc'], $_POST['ticket
     $ciudad = $servicio['ciudad'];
 
     // Registrar viático
-    $insert = $pdo->prepare("INSERT INTO viaticos (idc, monto, afiliacion, colonia, ciudad, comentarios) VALUES (?, ?, ?, ?, ?, ?)");
-    $insert->execute([$idc, $monto, $afiliacion, $colonia, $ciudad, $comentarios]);
+    $insert = $pdo->prepare("INSERT INTO viaticos (idc, ticket, monto, afiliacion, poblacion, colonia, ciudad, comentarios) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+$insert->execute([$idc, $ticket, $monto, $afiliacion, $poblacion, $colonia, $ciudad, $comentarios]);
+
 
     echo "<div class='bg-green-100 text-green-800 p-4 mb-4 rounded'>✅ Viático registrado exitosamente para $ticket por \$$monto</div>";
 
