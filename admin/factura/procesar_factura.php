@@ -81,14 +81,13 @@ $payload = [
     "metodoPago" => "PUE",
     "lugarExpedicion" => $cliente['codigo_postal'],
     "receptor" => [
-        "nombre" => $cliente['razon_social'],
-        "rfc" => $cliente['rfc'],
-        "usoCFDI" => $cliente['uso_cfdi'],
-        "regimen" => $cliente['regimen_fiscal'],
-        "zip" => $cliente['codigo_postal']
-        "correo" => $cliente['email'],  // Asegúrate que esté en tu tabla clientes
-
-    ],
+    "nombre" => $cliente['razon_social'],
+    "rfc" => $cliente['rfc'],
+    "usoCFDI" => $cliente['uso_cfdi'],
+    "regimen" => $cliente['regimen_fiscal'],
+    "zip" => $cliente['codigo_postal'],
+    "correo" => $cliente['email']  // Aquí exacto
+],
     "conceptos" => $conceptos
 ];
 
