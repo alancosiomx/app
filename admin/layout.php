@@ -4,6 +4,10 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 ob_start();
 
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 ?>
 
