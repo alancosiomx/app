@@ -2,6 +2,21 @@
 // app/admin/sims/asignar.php
 require_once __DIR__ . '/../../config.php';
 
+// MENU DE TABS SUPERIOR
+$vista_actual = $_GET['vista'] ?? 'asignar';
+$tabs = [
+    'inventario' => '📦 Inventario',
+    'asignar' => '👤 Asignar SIMs',
+    'logs' => '📜 Movimientos'
+];
+
+echo '<div class="tabs">';
+foreach ($tabs as $key => $label) {
+    $active = ($vista_actual === $key) ? 'style="font-weight:bold; text-decoration:underline;"' : '';
+    echo "<a href='index.php?vista=$key' $active>$label</a> | ";
+}
+echo '</div><hr>';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $series = $_POST['series'] ?? [];
     $tecnico = $_POST['tecnico'] ?? '';
