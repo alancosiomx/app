@@ -1,7 +1,8 @@
+
 <?php
+ob_start();
 if (session_status() === PHP_SESSION_NONE) session_start();
 require_once __DIR__ . '/../../config.php';
-
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: index.php?vista=nueva");
@@ -12,18 +13,23 @@ if (!isset($_SESSION['usuario_id'])) {
     die("Error de seguridad. Por favor recarga la página.");
 }
 
-// INPUTS
-$cliente_id = $_POST['cliente_id'] ?? null;
-$origenes   = $_POST['origen'] ?? [];
-$destinos   = $_POST['destino'] ?? [];
-$cantidades = $_POST['cantidad'] ?? [];
-$precios    = $_POST['precio'] ?? [];
+if (
+    empty($_POST['csrf_token']) ||
+    empty($_SESSION['csrf_token']) ||
+    $_POST['csrf_token'] !== $_SESSION['csrf_token']
+) {
+    die("❌ Token CSRF inválido. Recarga la página.");
+}
 
-if (!$cliente_id || count($origenes) === 0) {
+$cliente_id = $_POST['cliente_id'] ?? null;
+$concepto_ids = $_POST['concepto_id'] ?? [];
+$cantidades = $_POST['cantidad'] ?? [];
+
+if (!$cliente_id || empty($concepto_ids) || empty($cantidades)) {
     die("❌ Faltan datos del formulario.");
 }
 
-// OBTENER CLIENTE
+// Obtener datos del cliente
 $stmt = $pdo->prepare("SELECT * FROM clientes WHERE id = :id");
 $stmt->execute([':id' => $cliente_id]);
 $cliente = $stmt->fetch();
@@ -32,54 +38,58 @@ if (!$cliente) {
     die("❌ Cliente no encontrado.");
 }
 
-// VALIDAR CAMPOS RECEPTOR
+// Validar campos requeridos del cliente
 foreach (['uso_cfdi', 'regimen_fiscal', 'codigo_postal'] as $campo) {
     if (empty($cliente[$campo])) {
         die("❌ El campo '$campo' del cliente está vacío.");
     }
 }
 
-// CONSTRUIR CONCEPTOS
+// Obtener conceptos desde la base
 $conceptos = [];
 $total = 0;
 
-for ($i = 0; $i < count($origenes); $i++) {
-    $origen   = trim($origenes[$i]);
-    $destino  = trim($destinos[$i]);
+for ($i = 0; $i < count($concepto_ids); $i++) {
+    $id = intval($concepto_ids[$i]);
     $cantidad = floatval($cantidades[$i]) ?: 1;
-    $precio   = floatval($precios[$i]);
 
-    if (!$origen || !$destino || $precio <= 0 || $cantidad <= 0) continue;
+    if ($id <= 0 || $cantidad <= 0) continue;
+
+    $stmt = $pdo->prepare("SELECT * FROM conceptos_factura WHERE id = :id");
+    $stmt->execute([':id' => $id]);
+    $c = $stmt->fetch();
+
+    if (!$c) continue;
 
     $conceptos[] = [
-        "cantidad"         => $cantidad,
-        "clave_prod_serv"  => "78101800",
-        "clave_unidad"     => "E48",
-        "unidad"           => "Servicio",
-        "descripcion"      => "Servicio de paquetería de {$origen} - {$destino}",
-        "valor_unitario"   => $precio
+        "cantidad" => $cantidad,
+        "clave_prod_serv" => $c['clave_prod_serv'] ?? '78101800',
+        "clave_unidad" => $c['clave_unidad'] ?? 'E48',
+        "unidad" => $c['unidad'] ?? 'Servicio',
+        "descripcion" => $c['descripcion'],
+        "valor_unitario" => floatval($c['precio_unitario'])
     ];
 
-    $total += $cantidad * $precio;
+    $total += $cantidad * floatval($c['precio_unitario']);
 }
 
-if (empty($conceptos)) {
-    die("❌ No hay líneas válidas de producto.");
+if (count($conceptos) === 0) {
+    die("❌ No se construyó ningún concepto. Verifica que todos los campos estén llenos.");
 }
 
-// CONSTRUIR PAYLOAD PARA FISCALPOP
+// Armar payload
 $payload = [
     "receptor" => [
-        "rfc"                       => $cliente['rfc'],
-        "nombre"                    => $cliente['razon_social'],
-        "uso_cfdi"                  => $cliente['uso_cfdi'],
-        "regimen_fiscal_receptor"  => $cliente['regimen_fiscal'],
-        "domicilio_fiscal_receptor"=> $cliente['codigo_postal']
+        "rfc" => $cliente['rfc'],
+        "nombre" => $cliente['razon_social'],
+        "uso_cfdi" => $cliente['uso_cfdi'],
+        "regimen_fiscal_receptor" => $cliente['regimen_fiscal'],
+        "domicilio_fiscal_receptor" => $cliente['codigo_postal']
     ],
     "conceptos" => $conceptos
 ];
 
-// ENVIAR A FISCALPOP
+// Enviar a FiscalPOP
 $token = "ce74b81a-771b-4bed-9d26-666b5f023ae8";
 $url = "https://api.fiscalpop.com/api/v1/cfdi/stamp/$token";
 
@@ -95,7 +105,7 @@ $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 $error_msg = curl_error($ch);
 curl_close($ch);
 
-// DEBUG SI FALLA
+// Validar respuesta
 if (!$response || $http_code !== 200) {
     echo "<pre>❌ Error al generar factura\n";
     echo "HTTP: $http_code\n";
@@ -115,23 +125,18 @@ if ($result === null || empty($result['uuid'])) {
     exit;
 }
 
-// GUARDAR REGISTRO LOCAL
-$stmt = $pdo->prepare("
-    INSERT INTO facturas (cliente_id, origen, destino, precio, id_usuario)
-    VALUES (:cliente_id, :origen, :destino, :precio, :usuario)
-");
+// Guardar localmente (opcional)
+$stmt = $pdo->prepare("INSERT INTO facturas (cliente_id, origen, destino, precio, id_usuario) VALUES (:cliente_id, :origen, :destino, :precio, :usuario)");
 
 foreach ($conceptos as $c) {
-    preg_match('/de (.*?) - (.*)/', $c['descripcion'], $partes);
-    $origen  = $partes[1] ?? '---';
-    $destino = $partes[2] ?? '---';
-
+    $origen = explode('-', $c['descripcion'])[0] ?? '---';
+    $destino = explode('-', $c['descripcion'])[1] ?? '---';
     $stmt->execute([
         ':cliente_id' => $cliente_id,
-        ':origen'     => $origen,
-        ':destino'    => $destino,
-        ':precio'     => $c['cantidad'] * $c['valor_unitario'],
-        ':usuario'    => $_SESSION['usuario_id']
+        ':origen' => trim($origen),
+        ':destino' => trim($destino),
+        ':precio' => $c['cantidad'] * $c['valor_unitario'],
+        ':usuario' => $_SESSION['usuario_id']
     ]);
 }
 
