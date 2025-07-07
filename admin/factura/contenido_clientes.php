@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <label class="block font-semibold mb-1">Código Postal</label>
       <input type="text" name="codigo_postal" class="w-full border p-2 rounded" required>
     </div>
-<input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?? '' ?>">
+<input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
     <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
       Guardar Cliente
     </button>
