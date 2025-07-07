@@ -39,28 +39,25 @@ foreach (['uso_cfdi', 'regimen_fiscal', 'codigo_postal'] as $campo) {
 
 // Obtener conceptos desde la base
 $conceptos = [];
-$total = 0;
+foreach ($_POST['concepto_id'] as $i => $concepto_id) {
+    $cantidad = $_POST['cantidad'][$i] ?? 1;
 
-for ($i = 0; $i < count($concepto_ids); $i++) {
-    $id = intval($concepto_ids[$i]);
-    $cantidad = floatval($cantidades[$i]) ?: 1;
-
-    if ($id <= 0 || $cantidad <= 0) continue;
-
-    $stmt = $pdo->prepare("SELECT * FROM conceptos_factura WHERE id = :id");
-    $stmt->execute([':id' => $id]);
+    $stmt = $pdo->prepare("SELECT * FROM conceptos_factura WHERE id = ?");
+    $stmt->execute([$concepto_id]);
     $c = $stmt->fetch();
 
-    if (!$c) continue;
+    if (!$c) continue; // si no lo encuentra, salta
 
     $conceptos[] = [
-        "cantidad" => $cantidad,
-        "clave_prod_serv" => $c['clave_prod_serv'] ?? '78101800',
-        "clave_unidad" => $c['clave_unidad'] ?? 'E48',
-        "unidad" => $c['unidad'] ?? 'Servicio',
+        "cantidad" => floatval($cantidad),
+        "clave_prod_serv" => $c['clave_prod_serv'],
+        "clave_unidad" => $c['clave_unidad'],
+        "unidad" => $c['unidad'],
         "descripcion" => $c['descripcion'],
         "valor_unitario" => floatval($c['precio_unitario'])
     ];
+}
+
 
     $total += $cantidad * floatval($c['precio_unitario']);
 }
