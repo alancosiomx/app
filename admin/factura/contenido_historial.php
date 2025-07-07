@@ -4,7 +4,9 @@
 if (session_status() === PHP_SESSION_NONE) session_start();
 require_once __DIR__ . '/../../config.php';
 
-// Obtener últimas facturas con cliente y usuario
+// Asegúrate que FISCALPOP_TOKEN esté definido en config.php
+// define('FISCALPOP_TOKEN', 'tu-token-aqui');
+
 $stmt = $pdo->query("
   SELECT 
     f.id,
@@ -41,10 +43,15 @@ $facturas = $stmt->fetchAll();
             <th class="text-left px-4 py-2 border-b">Precio</th>
             <th class="text-left px-4 py-2 border-b">Fecha</th>
             <th class="text-left px-4 py-2 border-b">Usuario</th>
+            <th class="text-left px-4 py-2 border-b">PDF</th>
+            <th class="text-left px-4 py-2 border-b">XML</th>
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($facturas as $f): ?>
+          <?php foreach ($facturas as $f):
+            $pdf_url = "https://api.fiscalpop.com/api/v1/cfdi/pdf/" . $f['uuid'] . "?token=" . FISCALPOP_TOKEN;
+            $xml_url = "https://api.fiscalpop.com/api/v1/cfdi/xml/" . $f['uuid'] . "?token=" . FISCALPOP_TOKEN;
+          ?>
             <tr class="border-t">
               <td class="px-4 py-2"><?= htmlspecialchars($f['uuid']) ?></td>
               <td class="px-4 py-2"><?= htmlspecialchars($f['cliente']) ?></td>
@@ -53,6 +60,12 @@ $facturas = $stmt->fetchAll();
               <td class="px-4 py-2 text-right">$<?= number_format($f['precio'], 2) ?></td>
               <td class="px-4 py-2"><?= date("d/m/Y H:i", strtotime($f['fecha'])) ?></td>
               <td class="px-4 py-2"><?= htmlspecialchars($f['usuario']) ?></td>
+              <td class="px-4 py-2">
+                <a href="<?= htmlspecialchars($pdf_url) ?>" target="_blank" class="text-blue-600 hover:underline">PDF</a>
+              </td>
+              <td class="px-4 py-2">
+                <a href="<?= htmlspecialchars($xml_url) ?>" target="_blank" class="text-blue-600 hover:underline">XML</a>
+              </td>
             </tr>
           <?php endforeach; ?>
         </tbody>
