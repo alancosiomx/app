@@ -62,14 +62,15 @@ if (empty($conceptos)) {
 // PREPARAR PAYLOAD
 $payload = [
     "receptor" => [
-        "rfc"                         => $cliente['rfc'],
-        "nombre"                      => $cliente['razon_social'],
-        "uso_cfdi"                    => $cliente['uso_cfdi'],
-        "regimen_fiscal_receptor"     => $cliente['regimen_fiscal'],
-        "domicilio_fiscal_receptor"   => $cliente['codigo_postal']
+        "rfc"                       => $cliente['rfc'],
+        "nombre"                    => $cliente['razon_social'],
+        "uso_cfdi"                  => $cliente['uso_cfdi'], // ✅ CORRECTO
+        "regimen_fiscal_receptor"  => $cliente['regimen_fiscal'], // ✅ CORRECTO
+        "domicilio_fiscal_receptor"=> $cliente['codigo_postal'] // ✅ CORRECTO
     ],
     "conceptos" => $conceptos
 ];
+
 
 // ENVÍO A FISCALPOP
 $token = "ce74b81a-771b-4bed-9d26-666b5f023ae8";
