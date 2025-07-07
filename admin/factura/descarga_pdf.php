@@ -6,7 +6,7 @@ if (empty($_GET['uuid'])) {
 }
 
 $uuid = $_GET['uuid'];
-$token = 'TU_FISCALPOP_TOKEN_AQUI'; // Cambia por tu token real
+$token = 'TU_FISCALPOP_TOKEN_AQUI'; // Cambia por tu token
 
 $url = "https://api.fiscalpop.com/api/v1/cfdi/pdf/$uuid?token=$token";
 
