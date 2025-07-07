@@ -1,5 +1,7 @@
 <?php
+// Tabs disponibles para SIMs
 $tabs_sims = [
-    'inventario' => 'Inventario SIMs',
-    'logs' => 'Movimientos'
+    'inventario' => '📦 Inventario',
+    'asignar'    => '👤 Asignar SIMs',
+    'logs'       => '📜 Movimientos'
 ];
