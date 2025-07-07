@@ -42,7 +42,7 @@ $conceptos = $pdo->query("SELECT id, descripcion, precio_unitario FROM conceptos
       <button type="button" onclick="agregarConcepto()" class="text-sm text-blue-600 underline mt-2">+ Agregar otra línea</button>
     </div>
 
-    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?? '' ?>">
+<input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
     <button type="submit" class="bg-orange-500 text-white px-6 py-2 rounded hover:bg-orange-600">
       Generar Factura
     </button>
