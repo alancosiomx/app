@@ -1,117 +1,52 @@
 <?php
-// app/admin/facturacion/procesar_factura.php
-
 require_once __DIR__ . '/../../init.php';
+echo "✓ init cargado<br>";
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header("Location: index.php?vista=nueva");
+    echo "Método incorrecto";
     exit();
 }
 
-// Seguridad CSRF
+echo "✓ POST detectado<br>";
+
 if (
     empty($_POST['csrf_token']) ||
     empty($_SESSION['csrf_token']) ||
     $_POST['csrf_token'] !== $_SESSION['csrf_token']
 ) {
-    die("❌ Error de seguridad. Por favor recarga la página.");
+    die("❌ CSRF inválido");
 }
+
+echo "✓ Token válido<br>";
 
 $cliente_id = $_POST['cliente_id'] ?? null;
 $concepto_ids = $_POST['concepto_id'] ?? [];
 $cantidades = $_POST['cantidad'] ?? [];
 
 if (!$cliente_id || empty($concepto_ids)) {
-    die("❌ Faltan datos para generar la factura.");
+    die("❌ Datos incompletos");
 }
 
-// Obtener datos del cliente
+echo "✓ Datos completos<br>";
+
 $stmt = $pdo->prepare("SELECT * FROM clientes WHERE id = ?");
 $stmt->execute([$cliente_id]);
 $cliente = $stmt->fetch();
 
 if (!$cliente) {
-    die("❌ Cliente no encontrado.");
+    die("❌ Cliente no encontrado");
 }
 
-// Armar conceptos
-$conceptos = [];
+echo "✓ Cliente cargado<br>";
 
-foreach ($concepto_ids as $i => $concepto_id) {
-    $cantidad = floatval($cantidades[$i] ?? 1);
+$stmt = $pdo->prepare("SELECT * FROM conceptos_factura WHERE id = ?");
+$stmt->execute([$concepto_ids[0]]);
+$c = $stmt->fetch();
 
-    $stmt = $pdo->prepare("SELECT * FROM conceptos_factura WHERE id = ?");
-    $stmt->execute([$concepto_id]);
-    $c = $stmt->fetch();
-
-    if (!$c) continue;
-
-    $conceptos[] = [
-        "cantidad" => $cantidad,
-        "clave_prod_serv" => $c['clave_prod_serv'],
-        "clave_unidad" => $c['clave_unidad'],
-        "unidad" => $c['unidad'],
-        "descripcion" => $c['descripcion'],
-        "valor_unitario" => floatval($c['precio_unitario'])
-    ];
+if (!$c) {
+    die("❌ Concepto no válido");
 }
 
-if (empty($conceptos)) {
-    die("❌ No se especificaron conceptos válidos.");
-}
+echo "✓ Concepto válido<br>";
 
-// Armar payload FiscalPOP
-$payload = [
-    "fecha" => date("Y-m-d\TH:i:s"),
-    "serie" => "A",
-    "folio" => "01",
-    "formaPago" => "01",
-    "metodoPago" => "PUE",
-    "lugarExpedicion" => "77533",
-    "moneda" => "MXN",
-    "tipoDeComprobante" => "I",
-    "emisor" => [
-        "rfc" => "CBI220621QM9",
-        "nombre" => "COMERCIALIZADORA BRING IT",
-        "regimenFiscal" => "626"
-    ],
-    "receptor" => [
-        "rfc" => $cliente['rfc'],
-        "nombre" => $cliente['razon_social'],
-        "uso_cfdi" => $cliente['uso_cfdi'],
-        "regimen_fiscal_receptor" => $cliente['regimen_fiscal'],
-        "domicilio_fiscal_receptor" => $cliente['codigo_postal']
-    ],
-    "conceptos" => $conceptos
-];
-
-$url = "https://api.fiscalpop.com/api/v1/cfdi/stamp/" . FISCALPOP_TOKEN;
-
-$ch = curl_init($url);
-curl_setopt_array($ch, [
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_POST => true,
-    CURLOPT_HTTPHEADER => [
-        "Content-Type: application/json"
-    ],
-    CURLOPT_POSTFIELDS => json_encode($payload)
-]);
-
-$response = curl_exec($ch);
-$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-curl_close($ch);
-
-// Ver resultado
-if ($http_code !== 200) {
-    echo "❌ Error al generar factura<br>";
-    echo "HTTP: " . $http_code . "<br>";
-    echo "Error: <br>";
-    echo "Respuesta:<br>";
-    echo "<pre>" . htmlspecialchars($response) . "</pre>";
-    exit;
-}
-
-// ✅ Éxito
-echo "✅ Factura generada correctamente.";
-echo "<pre>" . htmlspecialchars($response) . "</pre>";
-?>
+exit("✅ Todo OK hasta aquí");
