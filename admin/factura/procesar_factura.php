@@ -152,12 +152,17 @@ $stmt->execute([
     ':usuario' => $_SESSION['usuario_id'] ?? null
 ]);
 
-// Mostrar éxito con links de descarga
+// ...tu código de facturación y guardado en BD...
+
+// URLs para PDF y XML
 $pdf_url = "https://api.fiscalpop.com/api/v1/cfdi/pdf/" . $result['uuid'] . "?token=" . FISCALPOP_TOKEN;
 $xml_url = "https://api.fiscalpop.com/api/v1/cfdi/xml/" . $result['uuid'] . "?token=" . FISCALPOP_TOKEN;
 
+// Mostrar mensaje con link (opcional)
 echo "<h2>✅ Factura generada correctamente</h2>";
 echo "<p>UUID: " . htmlspecialchars($result['uuid']) . "</p>";
-echo "<p><a href='" . htmlspecialchars($pdf_url) . "' target='_blank'>Ver / Descargar PDF</a></p>";
-echo "<p><a href='" . htmlspecialchars($xml_url) . "' target='_blank'>Ver / Descargar XML</a></p>";
-echo "<p><a href='index.php?vista=historial'>Volver al historial</a></p>";
+echo "<p>Descargando PDF...</p>";
+
+// Redirigir a script que descarga el PDF
+header("Refresh: 2; url=descarga_pdf.php?uuid=" . urlencode($result['uuid']));
+exit;
