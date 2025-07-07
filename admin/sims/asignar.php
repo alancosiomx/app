@@ -1,17 +1,13 @@
 <?php
 // app/admin/sims/asignar.php
 require_once __DIR__ . '/../../config.php';
+require_once __DIR__ . '/constants.php';
 
-// MENU DE TABS SUPERIOR
+// TABS SUPERIOR
 $vista_actual = $_GET['vista'] ?? 'asignar';
-$tabs = [
-    'inventario' => '📦 Inventario',
-    'asignar' => '👤 Asignar SIMs',
-    'logs' => '📜 Movimientos'
-];
 
 echo '<div class="tabs">';
-foreach ($tabs as $key => $label) {
+foreach ($tabs_sims as $key => $label) {
     $active = ($vista_actual === $key) ? 'style="font-weight:bold; text-decoration:underline;"' : '';
     echo "<a href='index.php?vista=$key' $active>$label</a> | ";
 }
@@ -28,7 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $serie = trim($serie_raw);
         if ($serie === '') continue;
 
-        // Verifica existencia
         $check = $conn->prepare("SELECT estado FROM inventario_sims WHERE serie_sim = ?");
         $check->bind_param('s', $serie);
         $check->execute();
@@ -47,7 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             continue;
         }
 
-        // Asigna SIM
         $update = $conn->prepare("UPDATE inventario_sims SET estado = 'Asignada', tecnico_actual = ?, fecha_ultimo_movimiento = CURDATE() WHERE serie_sim = ?");
         $update->bind_param('ss', $tecnico, $serie);
         if ($update->execute()) {
@@ -66,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<!-- HTML para formulario de asignación -->
+<!-- HTML -->
 <h2>👤 Asignar SIMs a Técnico</h2>
 <form method="POST" id="formAsignarSIM">
     <label>Técnico:</label>
