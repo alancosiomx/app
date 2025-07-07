@@ -46,6 +46,7 @@ $tecnicos = $pdo->query("SELECT DISTINCT idc FROM servicios_omnipos WHERE idc IS
   </div>
 
   <div class="flex items-end">
+    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?? '' ?>">
     <button type="submit" name="vista" value="pagos" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">
       Ver Pagos
     </button>
@@ -92,6 +93,7 @@ if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
       echo "<input type='hidden' name='hasta' value='{$_GET['hasta']}'>";
       echo "<input type='text' name='observaciones' placeholder='Observaciones' class='border rounded px-2 py-1 w-full'>";
       echo "<input type='text' name='folio' placeholder='Folio de pago' class='border rounded px-2 py-1 w-full'>";
+      <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?? '' ?>">
       echo "<button type='submit' class='bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700'>💳 Marcar como Pagado</button>";
       echo '</form>';
     } else {
