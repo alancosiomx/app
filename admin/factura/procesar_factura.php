@@ -1,3 +1,4 @@
+
 <?php
 require_once __DIR__ . '/../../config.php';
 if (session_status() === PHP_SESSION_NONE) session_start();
@@ -31,6 +32,13 @@ if (!$cliente) {
     die("❌ Cliente no encontrado.");
 }
 
+// VALIDAR CAMPOS RECEPTOR
+foreach (['uso_cfdi', 'regimen_fiscal', 'codigo_postal'] as $campo) {
+    if (empty($cliente[$campo])) {
+        die("❌ El campo '$campo' del cliente está vacío.");
+    }
+}
+
 // CONSTRUIR CONCEPTOS
 $conceptos = [];
 $total = 0;
@@ -48,7 +56,7 @@ for ($i = 0; $i < count($origenes); $i++) {
         "clave_prod_serv"  => "78101800",
         "clave_unidad"     => "E48",
         "unidad"           => "Servicio",
-        "descripcion"      => "Traslado de $origen a $destino",
+        "descripcion"      => "Servicio de paquetería de {$origen} - {$destino}",
         "valor_unitario"   => $precio
     ];
 
@@ -56,23 +64,22 @@ for ($i = 0; $i < count($origenes); $i++) {
 }
 
 if (empty($conceptos)) {
-    die("❌ Debes ingresar al menos una línea válida.");
+    die("❌ No hay líneas válidas de producto.");
 }
 
-// PREPARAR PAYLOAD
+// CONSTRUIR PAYLOAD PARA FISCALPOP
 $payload = [
     "receptor" => [
         "rfc"                       => $cliente['rfc'],
         "nombre"                    => $cliente['razon_social'],
-        "uso_cfdi"                  => $cliente['uso_cfdi'], // ✅ CORRECTO
-        "regimen_fiscal_receptor"  => $cliente['regimen_fiscal'], // ✅ CORRECTO
-        "domicilio_fiscal_receptor"=> $cliente['codigo_postal'] // ✅ CORRECTO
+        "uso_cfdi"                  => $cliente['uso_cfdi'],
+        "regimen_fiscal_receptor"  => $cliente['regimen_fiscal'],
+        "domicilio_fiscal_receptor"=> $cliente['codigo_postal']
     ],
     "conceptos" => $conceptos
 ];
 
-
-// ENVÍO A FISCALPOP
+// ENVIAR A FISCALPOP
 $token = "ce74b81a-771b-4bed-9d26-666b5f023ae8";
 $url = "https://api.fiscalpop.com/api/v1/cfdi/stamp/$token";
 
@@ -115,7 +122,7 @@ $stmt = $pdo->prepare("
 ");
 
 foreach ($conceptos as $c) {
-    preg_match('/de (.*?) a (.*)/', $c['descripcion'], $partes);
+    preg_match('/de (.*?) - (.*)/', $c['descripcion'], $partes);
     $origen  = $partes[1] ?? '---';
     $destino = $partes[2] ?? '---';
 
@@ -130,3 +137,4 @@ foreach ($conceptos as $c) {
 
 header("Location: index.php?vista=nueva&ok=1");
 exit;
+?>
