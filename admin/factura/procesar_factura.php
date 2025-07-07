@@ -1,7 +1,7 @@
 <?php
 echo "✅ Inicio<br>";
 
-$init = __DIR__ . '/../../init.php';
+$init = __DIR__ . '/../init.php';
 echo "Incluyendo: $init<br>";
 
 if (!file_exists($init)) {
