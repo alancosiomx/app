@@ -12,8 +12,10 @@ $vista = $_GET['vista'] ?? 'inventario';
 // Define el mapa de vistas
 $mapa_vistas = [
     'inventario' => __DIR__ . '/contenido_inventario.php',
-    'logs'       => __DIR__ . '/contenido_logs.php'
+    'logs'       => __DIR__ . '/contenido_logs.php',
+    'asignar'    => __DIR__ . '/asignar.php' // 👈 AGREGA ESTA LÍNEA
 ];
+
 
 // Determina el archivo a cargar, o fallback
 $contenido = $mapa_vistas[$vista] ?? __DIR__ . '/contenido_inventario.php';
