@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
-// Seguridad CSRF
+// Validación CSRF
 if (
     empty($_POST['csrf_token']) ||
     empty($_SESSION['csrf_token']) ||
@@ -21,7 +21,7 @@ $cliente_id = $_POST['cliente_id'] ?? null;
 $concepto_ids = $_POST['concepto_id'] ?? [];
 $cantidades = $_POST['cantidad'] ?? [];
 
-if (!$cliente_id || empty($concepto_ids)) {
+if (!$cliente_id || empty($concepto_ids) || empty($cantidades)) {
     die("❌ Faltan datos para generar la factura.");
 }
 
@@ -34,11 +34,20 @@ if (!$cliente) {
     die("❌ Cliente no encontrado.");
 }
 
-// Armar conceptos
-$conceptos = [];
+// Validar campos requeridos
+foreach (['uso_cfdi', 'regimen_fiscal', 'codigo_postal', 'rfc', 'razon_social'] as $campo) {
+    if (empty($cliente[$campo])) {
+        die("❌ El campo '$campo' del cliente está vacío.");
+    }
+}
 
-foreach ($concepto_ids as $i => $concepto_id) {
-    $cantidad = floatval($cantidades[$i] ?? 1);
+// Construir conceptos para el payload
+$conceptos = [];
+for ($i = 0; $i < count($concepto_ids); $i++) {
+    $concepto_id = intval($concepto_ids[$i]);
+    $cantidad = floatval($cantidades[$i]) ?: 1;
+
+    if ($concepto_id <= 0 || $cantidad <= 0) continue;
 
     $stmt = $pdo->prepare("SELECT * FROM conceptos_factura WHERE id = ?");
     $stmt->execute([$concepto_id]);
@@ -47,12 +56,18 @@ foreach ($concepto_ids as $i => $concepto_id) {
     if (!$c) continue;
 
     $conceptos[] = [
+        "claveProdServ" => $c['clave_prod_serv'],
+        "claveUnidad" => $c['clave_unidad'],
         "cantidad" => $cantidad,
-        "clave_prod_serv" => $c['clave_prod_serv'],
-        "clave_unidad" => $c['clave_unidad'],
-        "unidad" => $c['unidad'],
         "descripcion" => $c['descripcion'],
-        "valor_unitario" => floatval($c['precio_unitario'])
+        "valorUnitario" => floatval($c['precio_unitario']),
+        "impuestos" => [
+            [
+                "type" => "iva",
+                "retencion" => false,
+                "tasa" => 0.16
+            ]
+        ]
     ];
 }
 
@@ -60,27 +75,17 @@ if (empty($conceptos)) {
     die("❌ No se especificaron conceptos válidos.");
 }
 
-// Armar payload FiscalPOP
+// Construir payload para FiscalPOP
 $payload = [
-    "fecha" => date("Y-m-d\TH:i:s"),
-    "serie" => "A",
-    "folio" => "01",
     "formaPago" => "01",
     "metodoPago" => "PUE",
-    "lugarExpedicion" => "77533",
-    "moneda" => "MXN",
-    "tipoDeComprobante" => "I",
-    "emisor" => [
-        "rfc" => "CBI220621QM9",
-        "nombre" => "COMERCIALIZADORA BRING IT",
-        "regimenFiscal" => "626"
-    ],
+    "lugarExpedicion" => $cliente['codigo_postal'],
     "receptor" => [
-        "rfc" => $cliente['rfc'],
         "nombre" => $cliente['razon_social'],
-        "uso_cfdi" => $cliente['uso_cfdi'],
-        "regimen_fiscal_receptor" => $cliente['regimen_fiscal'],
-        "domicilio_fiscal_receptor" => $cliente['codigo_postal']
+        "rfc" => $cliente['rfc'],
+        "usoCFDI" => $cliente['uso_cfdi'],
+        "regimen" => $cliente['regimen_fiscal'],
+        "zip" => $cliente['codigo_postal']
     ],
     "conceptos" => $conceptos
 ];
@@ -99,19 +104,53 @@ curl_setopt_array($ch, [
 
 $response = curl_exec($ch);
 $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+$error_msg = curl_error($ch);
 curl_close($ch);
 
-// Ver resultado
 if ($http_code !== 200) {
-    echo "❌ Error al generar factura<br>";
-    echo "HTTP: " . $http_code . "<br>";
-    echo "Error: <br>";
-    echo "Respuesta:<br>";
+    echo "<h2>❌ Error al generar factura</h2>";
+    echo "<strong>HTTP Code:</strong> " . $http_code . "<br>";
+    echo "<strong>Error cURL:</strong> " . htmlspecialchars($error_msg) . "<br>";
+    echo "<strong>Respuesta:</strong><pre>" . htmlspecialchars($response) . "</pre>";
+    exit;
+}
+
+$result = json_decode($response, true);
+
+if ($result === null || empty($result['uuid'])) {
+    echo "<h2>❌ Respuesta inválida de FiscalPOP</h2>";
     echo "<pre>" . htmlspecialchars($response) . "</pre>";
     exit;
 }
 
-// ✅ Éxito
-echo "✅ Factura generada correctamente.";
-echo "<pre>" . htmlspecialchars($response) . "</pre>";
+// Guardar factura localmente (puedes adaptar la tabla y campos según tu estructura)
+$stmt = $pdo->prepare("
+    INSERT INTO facturas (cliente_id, origen, destino, precio, uuid, fecha, id_usuario)
+    VALUES (:cliente_id, :origen, :destino, :precio, :uuid, NOW(), :usuario)
+");
+
+// Guardar cada concepto como línea en factura
+foreach ($conceptos as $c) {
+    // Origen y destino se deben extraer o asignar según tu lógica
+    // Aquí como ejemplo lo dejamos vacío o usa la descripción
+    $descripcion = $c['descripcion'];
+    $origen = '';
+    $destino = '';
+    if (preg_match('/de (.*?) - (.*)/i', $descripcion, $matches)) {
+        $origen = $matches[1];
+        $destino = $matches[2];
+    }
+
+    $stmt->execute([
+        ':cliente_id' => $cliente_id,
+        ':origen' => $origen,
+        ':destino' => $destino,
+        ':precio' => $c['cantidad'] * $c['valorUnitario'],
+        ':uuid' => $result['uuid'],
+        ':usuario' => $_SESSION['usuario_id'] ?? null
+    ]);
+}
+
+header("Location: index.php?vista=historial&ok=1");
+exit;
 ?>
