@@ -86,8 +86,8 @@ $payload = [
         "usoCFDI" => $cliente['uso_cfdi'],
         "regimen" => $cliente['regimen_fiscal'],
         "zip" => $cliente['codigo_postal'],
-        "correo" => $cliente['email'] ?? null
-    ],
+        "correo" => "c.alancosio@gmail.com"
+   ],
     "conceptos" => $conceptos
 ];
 
