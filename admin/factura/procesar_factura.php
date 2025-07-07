@@ -70,6 +70,11 @@ if (count($conceptos) === 0) {
 }
 
 // Payload para FiscalPOP
+echo "<pre>";
+print_r($_POST);
+echo "</pre>";
+exit;
+
 $payload = [
     "receptor" => [
         "rfc" => $cliente['rfc'],
