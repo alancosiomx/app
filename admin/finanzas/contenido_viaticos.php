@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idc'], $_POST['ticket
 
     // Registrar viático
     $insert = $pdo->prepare("INSERT INTO viaticos (idc, ticket, monto, afiliacion, poblacion, colonia, ciudad, comentarios) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-$insert->execute([$idc, $ticket, $monto, $afiliacion, $poblacion, $colonia, $ciudad, $comentarios]);
+$stmt = $pdo->prepare("SELECT afiliacion, poblacion, colonia, ciudad FROM servicios_omnipos WHERE ticket = ? LIMIT 1");
 
 
     echo "<div class='bg-green-100 text-green-800 p-4 mb-4 rounded'>✅ Viático registrado exitosamente para $ticket por \$$monto</div>";
