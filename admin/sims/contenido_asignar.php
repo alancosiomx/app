@@ -1,6 +1,7 @@
 <?php
 // app/admin/sims/contenido_asignar.php
 require_once __DIR__ . '/constants.php';
+require_once __DIR__ . '/../../config.php';
 
 $vista_actual = $_GET['vista'] ?? 'asignar';
 
@@ -10,6 +11,13 @@ foreach ($tabs_sims as $key => $label) {
     echo "<a href='index.php?vista=$key' class='mr-4 $active'>$label</a>";
 }
 echo '</div>';
+
+// Obtener técnicos disponibles
+$tecnicos = [];
+$query = $conn->query("SELECT nombre FROM usuarios WHERE roles LIKE '%tecnico%' AND activo = 1 ORDER BY nombre ASC");
+while ($row = $query->fetch_assoc()) {
+    $tecnicos[] = $row['nombre'];
+}
 ?>
 
 <h2 class="text-xl font-bold mb-4">👤 Asignar SIMs a Técnico</h2>
@@ -17,7 +25,12 @@ echo '</div>';
 <form method="POST" id="formAsignarSIM" class="space-y-4 max-w-xl">
   <div>
     <label class="block font-medium">Técnico:</label>
-    <input type="text" name="tecnico" required class="w-full border rounded px-3 py-2">
+    <select name="tecnico" required class="w-full border rounded px-3 py-2">
+      <option value="">-- Selecciona un técnico --</option>
+      <?php foreach ($tecnicos as $tecnico): ?>
+        <option value="<?= htmlspecialchars($tecnico) ?>"><?= htmlspecialchars($tecnico) ?></option>
+      <?php endforeach; ?>
+    </select>
   </div>
 
   <div>
