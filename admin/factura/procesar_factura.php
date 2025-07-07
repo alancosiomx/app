@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/../../config.php';
 
 $cliente_id = $_POST['cliente_id'];
 $origen     = $_POST['origen'];
