@@ -54,3 +54,8 @@ if (ENVIRONMENT === 'development') {
     error_reporting(0);
     ini_set('display_errors', 0);
 }
+
+// ======================
+// API KEYS PRIVADAS
+// ======================
+define('FISCALPOP_TOKEN', 'ce74b81a-771b-4bed-9d26-666b5f023ae8'); // ⚠️ Sustituye por el nuevo si ya lo revocaste
