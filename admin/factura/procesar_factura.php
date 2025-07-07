@@ -1,26 +1,19 @@
-
 <?php
 ob_start();
 if (session_status() === PHP_SESSION_NONE) session_start();
 require_once __DIR__ . '/../../config.php';
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header("Location: index.php?vista=nueva");
-    exit;
-}
-
-if (!isset($_SESSION['usuario_id'])) {
-    die("Error de seguridad. Por favor recarga la página.");
-}
-
+// ✅ Validación CSRF segura
 if (
+    $_SERVER['REQUEST_METHOD'] !== 'POST' ||
     empty($_POST['csrf_token']) ||
     empty($_SESSION['csrf_token']) ||
     $_POST['csrf_token'] !== $_SESSION['csrf_token']
 ) {
-    die("❌ Token CSRF inválido. Recarga la página.");
+    die("❌ Error de seguridad. Por favor recarga la página.");
 }
 
+// Variables del POST
 $cliente_id = $_POST['cliente_id'] ?? null;
 $concepto_ids = $_POST['concepto_id'] ?? [];
 $cantidades = $_POST['cantidad'] ?? [];
@@ -38,7 +31,6 @@ if (!$cliente) {
     die("❌ Cliente no encontrado.");
 }
 
-// Validar campos requeridos del cliente
 foreach (['uso_cfdi', 'regimen_fiscal', 'codigo_postal'] as $campo) {
     if (empty($cliente[$campo])) {
         die("❌ El campo '$campo' del cliente está vacío.");
@@ -77,7 +69,7 @@ if (count($conceptos) === 0) {
     die("❌ No se construyó ningún concepto. Verifica que todos los campos estén llenos.");
 }
 
-// Armar payload
+// Payload para FiscalPOP
 $payload = [
     "receptor" => [
         "rfc" => $cliente['rfc'],
@@ -89,9 +81,8 @@ $payload = [
     "conceptos" => $conceptos
 ];
 
-// Enviar a FiscalPOP
+// Endpoint y token
 $url = "https://api.fiscalpop.com/api/v1/cfdi/stamp/" . FISCALPOP_TOKEN;
-
 
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -105,7 +96,7 @@ $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 $error_msg = curl_error($ch);
 curl_close($ch);
 
-// Validar respuesta
+// Validación de respuesta
 if (!$response || $http_code !== 200) {
     echo "<pre>❌ Error al generar factura\n";
     echo "HTTP: $http_code\n";
@@ -125,7 +116,7 @@ if ($result === null || empty($result['uuid'])) {
     exit;
 }
 
-// Guardar localmente (opcional)
+// Guardar en la base de datos local (opcional)
 $stmt = $pdo->prepare("INSERT INTO facturas (cliente_id, origen, destino, precio, id_usuario) VALUES (:cliente_id, :origen, :destino, :precio, :usuario)");
 
 foreach ($conceptos as $c) {
@@ -142,4 +133,3 @@ foreach ($conceptos as $c) {
 
 header("Location: index.php?vista=nueva&ok=1");
 exit;
-?>
