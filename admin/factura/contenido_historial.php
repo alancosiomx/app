@@ -4,12 +4,21 @@
 if (session_status() === PHP_SESSION_NONE) session_start();
 require_once __DIR__ . '/../../config.php';
 
-// Obtener últimas facturas
+// Obtener últimas facturas con cliente y usuario
 $stmt = $pdo->query("
-  SELECT f.id, f.uuid, f.cliente_id, c.razon_social, f.total, f.fecha_creacion
+  SELECT 
+    f.id,
+    f.uuid,
+    f.origen,
+    f.destino,
+    f.precio,
+    f.fecha,
+    c.razon_social AS cliente,
+    u.nombre AS usuario
   FROM facturas f
   LEFT JOIN clientes c ON f.cliente_id = c.id
-  ORDER BY f.fecha_creacion DESC
+  LEFT JOIN usuarios u ON f.id_usuario = u.id
+  ORDER BY f.fecha DESC
   LIMIT 50
 ");
 $facturas = $stmt->fetchAll();
@@ -27,17 +36,23 @@ $facturas = $stmt->fetchAll();
           <tr>
             <th class="text-left px-4 py-2 border-b">UUID</th>
             <th class="text-left px-4 py-2 border-b">Cliente</th>
-            <th class="text-left px-4 py-2 border-b">Total</th>
+            <th class="text-left px-4 py-2 border-b">Origen</th>
+            <th class="text-left px-4 py-2 border-b">Destino</th>
+            <th class="text-left px-4 py-2 border-b">Precio</th>
             <th class="text-left px-4 py-2 border-b">Fecha</th>
+            <th class="text-left px-4 py-2 border-b">Usuario</th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($facturas as $f): ?>
             <tr class="border-t">
               <td class="px-4 py-2"><?= htmlspecialchars($f['uuid']) ?></td>
-              <td class="px-4 py-2"><?= htmlspecialchars($f['razon_social']) ?></td>
-              <td class="px-4 py-2 text-right">$<?= number_format($f['total'], 2) ?></td>
-              <td class="px-4 py-2"><?= date("d/m/Y H:i", strtotime($f['fecha_creacion'])) ?></td>
+              <td class="px-4 py-2"><?= htmlspecialchars($f['cliente']) ?></td>
+              <td class="px-4 py-2"><?= htmlspecialchars($f['origen']) ?></td>
+              <td class="px-4 py-2"><?= htmlspecialchars($f['destino']) ?></td>
+              <td class="px-4 py-2 text-right">$<?= number_format($f['precio'], 2) ?></td>
+              <td class="px-4 py-2"><?= date("d/m/Y H:i", strtotime($f['fecha'])) ?></td>
+              <td class="px-4 py-2"><?= htmlspecialchars($f['usuario']) ?></td>
             </tr>
           <?php endforeach; ?>
         </tbody>
