@@ -71,7 +71,7 @@ $payload = [
 ];
 
 // Enviar a FiscalPOP
-$ch = https://api.fiscalpop.com/api/v1/factura
+$ch = curl_init('https://api.fiscalpop.com/api/v1/factura'); // ✅ endpoint real
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
