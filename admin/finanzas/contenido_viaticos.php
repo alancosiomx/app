@@ -13,19 +13,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idc'], $_POST['ticket
   $comentarios = $_POST['comentarios'] ?? '';
 
   // Obtener datos del servicio para ese ticket
-  $stmt = $pdo->prepare("SELECT afiliacion, poblacion, colonia, ciudad FROM servicios_omnipos WHERE ticket = ? LIMIT 1");
+  $stmt = $pdo->prepare("SELECT afiliacion, colonia, ciudad FROM servicios_omnipos WHERE ticket = ? LIMIT 1");
   $stmt->execute([$ticket]);
   $servicio = $stmt->fetch(PDO::FETCH_ASSOC);
 
   if ($servicio) {
     $afiliacion = $servicio['afiliacion'];
-    $poblacion = $servicio['poblacion'];
     $colonia = $servicio['colonia'];
     $ciudad = $servicio['ciudad'];
 
     // Registrar viático
-    $insert = $pdo->prepare("INSERT INTO viaticos (idc, monto, afiliacion, poblacion, colonia, ciudad, comentarios) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $insert->execute([$idc, $monto, $afiliacion, $poblacion, $colonia, $ciudad, $comentarios]);
+    $insert = $pdo->prepare("INSERT INTO viaticos (idc, monto, afiliacion, colonia, ciudad, comentarios) VALUES (?, ?, ?, ?, ?, ?)");
+    $insert->execute([$idc, $monto, $afiliacion, $colonia, $ciudad, $comentarios]);
 
     echo "<div class='bg-green-100 text-green-800 p-4 mb-4 rounded'>✅ Viático registrado exitosamente para $ticket por \$$monto</div>";
 
