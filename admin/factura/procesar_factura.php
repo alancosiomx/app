@@ -90,8 +90,8 @@ $payload = [
 ];
 
 // Enviar a FiscalPOP
-$token = "ce74b81a-771b-4bed-9d26-666b5f023ae8";
-$url = "https://api.fiscalpop.com/api/v1/cfdi/stamp/$token";
+$url = "https://api.fiscalpop.com/api/v1/cfdi/stamp/" . FISCALPOP_TOKEN;
+
 
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
