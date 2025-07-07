@@ -158,11 +158,11 @@ $stmt->execute([
 $pdf_url = "https://api.fiscalpop.com/api/v1/cfdi/pdf/" . $result['uuid'] . "?token=" . FISCALPOP_TOKEN;
 $xml_url = "https://api.fiscalpop.com/api/v1/cfdi/xml/" . $result['uuid'] . "?token=" . FISCALPOP_TOKEN;
 
-// Mostrar mensaje con link (opcional)
-echo "<h2>✅ Factura generada correctamente</h2>";
-echo "<p>UUID: " . htmlspecialchars($result['uuid']) . "</p>";
-echo "<p>Descargando PDF...</p>";
+// Mostrar mensaje (opcional)
+// echo "<h2>✅ Factura generada correctamente</h2>";
+// echo "<p>UUID: " . htmlspecialchars($result['uuid']) . "</p>";
+// echo "<p>Descargando PDF...</p>";
 
-// Redirigir a script que descarga el PDF
+// Redirigir a descarga PDF
 header("Refresh: 2; url=descarga_pdf.php?uuid=" . urlencode($result['uuid']));
 exit;
