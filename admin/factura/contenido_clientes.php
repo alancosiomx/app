@@ -1,5 +1,12 @@
 <?php
 require_once __DIR__ . '/../../config.php';
+if (session_status() === PHP_SESSION_NONE) session_start();
+
+if (!isset($_SESSION['usuario_id'])) {
+    die("<div class='p-4 bg-red-100 text-red-800 rounded'>⚠️ Sesión expirada. Vuelve a iniciar sesión.</div>");
+}
+
+$mensaje = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
@@ -22,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $mensaje = "✅ Cliente registrado correctamente.";
     } catch (PDOException $e) {
-        $mensaje = "❌ Error al registrar: " . $e->getMessage();
+        $mensaje = "❌ Error al registrar cliente: " . $e->getMessage();
     }
 }
 ?>
@@ -58,7 +65,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <div>
       <label class="block font-semibold mb-1">Régimen Fiscal</label>
-      <input type="text" name="regimen_fiscal" class="w-full border p-2 rounded" required>
+      <select name="regimen_fiscal" class="w-full border p-2 rounded" required>
+        <option value="601">601 - General de Ley Personas Morales</option>
+        <option value="603">603 - Personas Morales con Fines no Lucrativos</option>
+        <option value="605">605 - Sueldos y Salarios e Ingresos Asimilados</option>
+        <option value="612">612 - Personas Físicas con Actividades Empresariales</option>
+      </select>
     </div>
     <div>
       <label class="block font-semibold mb-1">Código Postal</label>
