@@ -113,9 +113,9 @@ $tecnicos = $pdo->query("SELECT DISTINCT idc FROM servicios_omnipos WHERE idc IS
     foreach ($ultimos as $v): ?>
       <tr>
         <td class="px-4 py-2"><?= htmlspecialchars($v['idc']) ?></td>
-        <td class="px-4 py-2"><?= htmlspecialchars($v['ticket']) ?></td>
+        <td class="px-4 py-2"><?= htmlspecialchars($v['ticket'] ?? '—') ?></td>
         <td class="px-4 py-2"><?= htmlspecialchars($v['afiliacion']) ?></td>
-        <td class="px-4 py-2"><?= htmlspecialchars($v['poblacion']) ?></td>
+        <td class="px-4 py-2"><?= htmlspecialchars($v['poblacion'] ?? '—') ?></td>
         <td class="px-4 py-2"><?= htmlspecialchars($v['colonia']) ?></td>
         <td class="px-4 py-2"><?= htmlspecialchars($v['ciudad']) ?></td>
         <td class="px-4 py-2">\$<?= number_format($v['monto'], 2) ?></td>
