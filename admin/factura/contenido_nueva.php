@@ -34,7 +34,8 @@ $clientes = $pdo->query("SELECT id, razon_social FROM clientes ORDER BY razon_so
     <button type="button" onclick="agregarConcepto()" class="text-sm text-blue-600 underline">+ Agregar otra línea</button>
   </div>
 
-  <button type="submit" class="bg-orange-500 text-white px-6 py-2 rounded hover:bg-orange-600">
+  <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?? '' ?>">
+    <button type="submit" class="bg-orange-500 text-white px-6 py-2 rounded hover:bg-orange-600">
     Generar Factura
   </button>
 </form>
