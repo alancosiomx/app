@@ -80,7 +80,22 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, [
 ]);
 
 $response = curl_exec($ch);
+$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+$error_msg = curl_error($ch);
+
+if (!$response) {
+    die("❌ No hubo respuesta de la API FiscalPOP. Error cURL: $error_msg");
+}
+
 $result = json_decode($response, true);
+
+if ($result === null) {
+    echo "<pre>❌ JSON inválido recibido de FiscalPOP:\n\n";
+    echo htmlspecialchars($response);
+    echo "\n\nHTTP CODE: $http_code</pre>";
+    exit;
+}
+
 
 // Validar respuesta
 if ($result['status'] === true) {
