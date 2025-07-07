@@ -24,6 +24,11 @@ if (session_status() === PHP_SESSION_NONE) {
     ]);
 }
 
+// ✅ Generar token CSRF si no existe
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 // Rutas absolutas
 define('BASE_PATH', dirname(__DIR__));
 define('ADMIN_PATH', __DIR__);
