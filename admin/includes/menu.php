@@ -9,6 +9,7 @@
     <a href="/admin/sims/" class="block py-2 px-3 rounded hover:bg-gray-100">💾 Sims</a>
     <a href="/admin/ajustes/" class="block py-2 px-3 rounded hover:bg-gray-100">⚙️ Ajustes</a>
     <a href="/admin/finanzas/" class="block py-2 px-3 rounded hover:bg-gray-100">💰 Finanzas</a>
+    <a href="/admin/factura/" class="block py-2 px-3 rounded hover:bg-gray-100">🧾 Factura</a>
     <a href="/admin/minidrive/" class="block py-2 px-3 rounded hover:bg-gray-100">📁 MiniDrive</a>
 
     <a href="/logout.php" class="block py-2 px-3 rounded mt-4 bg-red-50 text-red-600 hover:bg-red-100 font-semibold">🚪 Cerrar sesión</a>
