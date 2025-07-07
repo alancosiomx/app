@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../init.php';
+require_once __DIR__ . '/../init.php';
 
 function fiscalpop_api_post(string $url, array $data, string $token): array {
     $ch = curl_init($url);
