@@ -11,38 +11,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idc'], $_POST['ticket
   $ticket = $_POST['ticket'];
   $monto = $_POST['monto'];
   $comentarios = $_POST['comentarios'] ?? '';
+  $motivo = 'Sin motivo';
 
-  // Obtener datos del servicio para ese ticket
-  $stmt = $pdo->prepare("SELECT afiliacion, colonia, ciudad FROM servicios_omnipos WHERE ticket = ? LIMIT 1");
-  $stmt->execute([$ticket]);
-  $servicio = $stmt->fetch(PDO::FETCH_ASSOC);
-
-  if ($servicio) {
-    $afiliacion = $servicio['afiliacion'];
-    $colonia = $servicio['colonia'];
-    $ciudad = $servicio['ciudad'];
-
-    // Registrar viático
-    $insert = $pdo->prepare("INSERT INTO viaticos (idc, ticket, monto, afiliacion, poblacion, colonia, ciudad, comentarios) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt = $pdo->prepare("SELECT afiliacion, colonia, ciudad FROM servicios_omnipos WHERE ticket = ? LIMIT 1");
-
-
-    echo "<div class='bg-green-100 text-green-800 p-4 mb-4 rounded'>✅ Viático registrado exitosamente para $ticket por \$$monto</div>";
-
-    // Verificar si ya se había dado viático antes para esa afiliación y técnico
-    $verificar = $pdo->prepare("SELECT monto, fecha_registro FROM viaticos WHERE afiliacion = ? AND idc = ? ORDER BY fecha_registro DESC LIMIT 1 OFFSET 1");
-    $verificar->execute([$afiliacion, $idc]);
-    $anterior = $verificar->fetch(PDO::FETCH_ASSOC);
-
-    if ($anterior) {
-      echo "<div class='bg-yellow-100 text-yellow-800 p-4 mb-4 rounded'>⚠️ Ya se visitó esta afiliación ($afiliacion) por \${$anterior['monto']} el " . date('d/m/Y', strtotime($anterior['fecha_registro'])) . ".</div>";
-    }
+  // Verifica si ya existe viático para ese ticket
+  $existe = $pdo->prepare("SELECT 1 FROM viaticos WHERE ticket = ?");
+  $existe->execute([$ticket]);
+  if ($existe->fetch()) {
+    echo "<div class='bg-yellow-100 text-yellow-800 p-4 mb-4 rounded'>⚠️ Ya existe un viático registrado para este ticket.</div>";
   } else {
-    echo "<div class='bg-red-100 text-red-800 p-4 mb-4 rounded'>❌ Ticket no válido.</div>";
+    // Obtener datos del servicio
+    $stmt = $pdo->prepare("SELECT afiliacion, colonia, ciudad FROM servicios_omnipos WHERE ticket = ? LIMIT 1");
+    $stmt->execute([$ticket]);
+    $servicio = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($servicio) {
+      $insert = $pdo->prepare("INSERT INTO viaticos (idc, ticket, monto, afiliacion, poblacion, colonia, ciudad, comentarios, motivo, estado, fecha_solicitud)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Pendiente', NOW())");
+
+      $insert->execute([
+        $idc,
+        $ticket,
+        $monto,
+        $servicio['afiliacion'],
+        $servicio['ciudad'], // poblacion
+        $servicio['colonia'],
+        $servicio['ciudad'],
+        $comentarios,
+        $motivo
+      ]);
+
+      echo "<div class='bg-green-100 text-green-800 p-4 mb-4 rounded'>✅ Viático registrado exitosamente para $ticket por \$$monto</div>";
+
+      // Verificar si hubo viático anterior
+      $verificar = $pdo->prepare("SELECT monto, fecha_solicitud FROM viaticos WHERE afiliacion = ? AND idc = ? ORDER BY fecha_solicitud DESC LIMIT 1 OFFSET 1");
+      $verificar->execute([$servicio['afiliacion'], $idc]);
+      $anterior = $verificar->fetch(PDO::FETCH_ASSOC);
+
+      if ($anterior) {
+        echo "<div class='bg-yellow-100 text-yellow-800 p-4 mb-4 rounded'>⚠️ Ya se visitó esta afiliación ({$servicio['afiliacion']}) por \${$anterior['monto']} el " . date('d/m/Y', strtotime($anterior['fecha_solicitud'])) . ".</div>";
+      }
+    } else {
+      echo "<div class='bg-red-100 text-red-800 p-4 mb-4 rounded'>❌ Ticket no válido.</div>";
+    }
   }
 }
 
-$tickets = $pdo->query("SELECT ticket FROM servicios_omnipos ORDER BY fecha_inicio DESC LIMIT 50")->fetchAll(PDO::FETCH_COLUMN);
 $tecnicos = $pdo->query("SELECT DISTINCT idc FROM servicios_omnipos WHERE idc IS NOT NULL")->fetchAll(PDO::FETCH_COLUMN);
 ?>
 
@@ -62,7 +75,8 @@ $tecnicos = $pdo->query("SELECT DISTINCT idc FROM servicios_omnipos WHERE idc IS
 <form method="POST" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
   <div>
     <label class="block text-sm font-medium text-gray-600">Técnico</label>
-    <select name="idc" class="w-full border-gray-300 rounded-md">
+    <select name="idc" id="idc-select" class="w-full border-gray-300 rounded-md">
+      <option value="">Selecciona un técnico</option>
       <?php foreach ($tecnicos as $id): ?>
         <option value="<?= $id ?>"><?= $id ?></option>
       <?php endforeach; ?>
@@ -71,16 +85,14 @@ $tecnicos = $pdo->query("SELECT DISTINCT idc FROM servicios_omnipos WHERE idc IS
 
   <div>
     <label class="block text-sm font-medium text-gray-600">Ticket</label>
-    <select name="ticket" class="w-full border-gray-300 rounded-md">
-      <?php foreach ($tickets as $tk): ?>
-        <option value="<?= $tk ?>"><?= $tk ?></option>
-      <?php endforeach; ?>
+    <select name="ticket" id="ticket-select" class="w-full border-gray-300 rounded-md" disabled>
+      <option value="">Selecciona un técnico primero</option>
     </select>
   </div>
 
   <div>
     <label class="block text-sm font-medium text-gray-600">Monto</label>
-    <input type="number" step="0.01" name="monto" class="w-full border-gray-300 rounded-md">
+    <input type="number" step="0.01" name="monto" class="w-full border-gray-300 rounded-md" required>
   </div>
 
   <div class="md:col-span-3">
@@ -110,7 +122,7 @@ $tecnicos = $pdo->query("SELECT DISTINCT idc FROM servicios_omnipos WHERE idc IS
   </thead>
   <tbody class="divide-y divide-gray-100 text-sm">
     <?php
-    $ultimos = $pdo->query("SELECT * FROM viaticos ORDER BY fecha_registro DESC LIMIT 20")->fetchAll(PDO::FETCH_ASSOC);
+    $ultimos = $pdo->query("SELECT * FROM viaticos ORDER BY fecha_solicitud DESC LIMIT 20")->fetchAll(PDO::FETCH_ASSOC);
     foreach ($ultimos as $v): ?>
       <tr>
         <td class="px-4 py-2"><?= htmlspecialchars($v['idc']) ?></td>
@@ -119,9 +131,42 @@ $tecnicos = $pdo->query("SELECT DISTINCT idc FROM servicios_omnipos WHERE idc IS
         <td class="px-4 py-2"><?= htmlspecialchars($v['poblacion'] ?? '—') ?></td>
         <td class="px-4 py-2"><?= htmlspecialchars($v['colonia']) ?></td>
         <td class="px-4 py-2"><?= htmlspecialchars($v['ciudad']) ?></td>
-        <td class="px-4 py-2">\$<?= number_format($v['monto'], 2) ?></td>
-        <td class="px-4 py-2"><?= date('d/m/Y', strtotime($v['fecha_registro'])) ?></td>
+        <td class="px-4 py-2">$<?= number_format($v['monto'], 2) ?></td>
+        <td class="px-4 py-2"><?= date('d/m/Y', strtotime($v['fecha_solicitud'])) ?></td>
       </tr>
     <?php endforeach; ?>
   </tbody>
 </table>
+
+<script>
+  document.getElementById('idc-select').addEventListener('change', function () {
+    const tecnico = this.value;
+    const ticketSelect = document.getElementById('ticket-select');
+
+    ticketSelect.innerHTML = '<option value="">Cargando...</option>';
+    ticketSelect.disabled = true;
+
+    if (tecnico) {
+      fetch('fetch_tickets.php?idc=' + encodeURIComponent(tecnico))
+        .then(response => response.json())
+        .then(data => {
+          ticketSelect.innerHTML = '';
+          if (data.length > 0) {
+            data.forEach(ticket => {
+              const option = document.createElement('option');
+              option.value = ticket;
+              option.textContent = ticket;
+              ticketSelect.appendChild(option);
+            });
+            ticketSelect.disabled = false;
+          } else {
+            ticketSelect.innerHTML = '<option value="">Sin tickets asignados</option>';
+            ticketSelect.disabled = true;
+          }
+        });
+    } else {
+      ticketSelect.innerHTML = '<option value="">Selecciona un técnico primero</option>';
+      ticketSelect.disabled = true;
+    }
+  });
+</script>
