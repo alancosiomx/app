@@ -129,9 +129,10 @@ if ($rechazo_data) {
             <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Pendiente</span>
           <?php endif; ?>
 
-          <?php if ($rechazo_info): ?>
-            <div class="text-[10px] text-gray-500 italic mt-1">Rechazo previo el <?= date('Y-m-d', strtotime($rechazo_info)) ?></div>
-          <?php endif; ?>
+          <?php if (isset($rechazo_info) && $rechazo_info): ?>
+  <div class="text-[10px] text-gray-500 italic mt-1">Rechazo previo el <?= date('Y-m-d', strtotime($rechazo_info)) ?></div>
+<?php endif; ?>
+
 
           <?php if ($cita_fecha): ?>
             <div class="text-[10px] text-blue-500 italic mt-1">Cita realizada el <?= date('Y-m-d', strtotime($cita_fecha)) ?></div>
