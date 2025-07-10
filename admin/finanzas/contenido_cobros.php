@@ -108,9 +108,12 @@ if ($rechazo_data) {
 }
 
 
-          $cita_info = $pdo->prepare("SELECT fecha_visita FROM visitas_servicios WHERE ticket = ? AND tipo_visita = 'Cita' ORDER BY fecha_visita DESC LIMIT 1");
-          $cita_info->execute([$ticket]);
-          $cita_fecha = $cita_info->fetchColumn();
+          $cita_info = $pdo->prepare("SELECT fecha_visita FROM visitas_servicios 
+                            WHERE ticket = ? AND tipo_visita = 'Cita' AND idc = ?
+                            ORDER BY fecha_visita DESC LIMIT 1");
+$cita_info->execute([$ticket, $serv['idc']]);
+$cita_fecha = $cita_info->fetchColumn();
+
       ?>
       <tr>
         <td class="px-4 py-2 font-mono text-blue-700"><?= htmlspecialchars($ticket) ?></td>
