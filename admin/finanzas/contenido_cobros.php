@@ -83,6 +83,14 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
     $stmt = $pdo->prepare($sql);
     $stmt->execute($params);
     $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo "<pre style='background:#eee;padding:1rem;margin:1rem 0;overflow:auto;'>";
+echo "SQL ejecutado:\n$sql\n\n";
+echo "Parámetros:\n";
+print_r($params);
+echo "Resultados:\n";
+print_r($servicios);
+echo "</pre>";
+
 
     if (count($servicios) > 0):
   ?>
