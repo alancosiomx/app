@@ -98,7 +98,7 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
         $ticket = $serv['ticket'];
         $idc = $serv['idc'];
 
-        $visitas_stmt = $pdo->prepare("SELECT fecha_visita FROM visitas_servicios WHERE ticket = ? AND idc = ? AND resultado = 'Rechazo' ORDER BY fecha_visita ASC");
+        $visitas_stmt = $pdo->prepare("SELECT fecha_visita FROM visitas_servicios WHERE ticket = ? AND idc = ? AND LOWER(TRIM(resultado)) = 'rechazo' ORDER BY fecha_visita ASC");
         $visitas_stmt->execute([$ticket, $idc]);
         $fechas_visita = $visitas_stmt->fetchAll(PDO::FETCH_COLUMN);
 
