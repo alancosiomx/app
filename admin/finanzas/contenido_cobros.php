@@ -142,8 +142,12 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
       <tr>
         <th class="px-4 py-2 text-left">Ticket</th>
         <th class="px-4 py-2 text-left">Técnico</th>
-        <th class="px-4 py-2 text-left">Fecha Visita</th>
+        <th class="px-4 py-2 text-left">Servicio</th>
+        <th class="px-4 py-2 text-left">Resultado</th>
+        <th class="px-4 py-2 text-left">SLA</th>
+        <th class="px-4 py-2 text-left">Fecha</th>
         <th class="px-4 py-2 text-left">Pago</th>
+        <th class="px-4 py-2 text-left">Estado</th>
       </tr>
     </thead>
     <tbody class="divide-y divide-gray-100 text-sm">
@@ -156,12 +160,19 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
           'banco' => $visita['banco'] ?? ''
         ]);
         $fecha_formateada = date('d/m/Y', strtotime($visita['fecha_visita']));
+        $estado_pago = 'Pendiente';
       ?>
       <tr>
         <td class="px-4 py-2 font-mono text-blue-700"><?= $visita['ticket'] ?></td>
         <td class="px-4 py-2"><?= $visita['idc'] ?></td>
+        <td class="px-4 py-2"><?= $visita['servicio'] ?></td>
+        <td class="px-4 py-2">Rechazo</td>
+        <td class="px-4 py-2">FT</td>
         <td class="px-4 py-2"><?= $fecha_formateada ?></td>
         <td class="px-4 py-2">$<?= number_format($pago, 2) ?></td>
+        <td class="px-4 py-2">
+          <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Pendiente</span>
+        </td>
       </tr>
       <?php } ?>
     </tbody>
