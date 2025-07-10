@@ -53,44 +53,26 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
   <?php
   if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
-    $desde = $_GET['desde'];
-    $hasta = $_GET['hasta'];
+    $desde = $_GET['desde'] . ' 00:00:00';
+    $hasta = $_GET['hasta'] . ' 23:59:59';
     $tecnico = $_GET['tecnico'] ?? '';
 
-    $sql = "SELECT 
-      v.ticket, 
-      v.idc, 
-      v.resultado, 
-      v.fecha_visita, 
-      s.servicio, 
-      s.fecha_limite, 
-      s.banco,
-      s.pago_generado
-    FROM visitas_servicios v
-    JOIN servicios_omnipos s ON v.ticket = s.ticket
-    WHERE v.resultado IN ('Exito', 'Rechazo')
-    AND DATE(v.fecha_visita) BETWEEN ? AND ?";
+    $sql = "SELECT * FROM servicios_omnipos 
+            WHERE resultado IN ('Exito', 'Rechazo') 
+            AND fecha_atencion BETWEEN ? AND ?";
 
     $params = [$desde, $hasta];
 
     if (!empty($tecnico)) {
-        $sql .= " AND v.idc = ?";
+        $sql .= " AND idc = ?";
         $params[] = $tecnico;
     }
 
-    $sql .= " ORDER BY v.fecha_visita DESC";
+    $sql .= " ORDER BY fecha_atencion DESC";
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute($params);
     $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo "<pre style='background:#eee;padding:1rem;margin:1rem 0;overflow:auto;'>";
-echo "SQL ejecutado:\n$sql\n\n";
-echo "Parámetros:\n";
-print_r($params);
-echo "Resultados:\n";
-print_r($servicios);
-echo "</pre>";
-
 
     if (count($servicios) > 0):
   ?>
@@ -112,59 +94,42 @@ echo "</pre>";
     </thead>
     <tbody class="divide-y divide-gray-100 text-sm">
       <?php
-      $agrupado = [];
-
       foreach ($servicios as $serv) {
-        $key = $serv['ticket'] . '|' . $serv['idc'];
+        $ticket = $serv['ticket'];
+        $idc = $serv['idc'];
 
-        if (!isset($agrupado[$key])) {
-          $agrupado[$key] = [
-            'ticket' => $serv['ticket'],
-            'idc' => $serv['idc'],
-            'servicio' => $serv['servicio'],
-            'banco' => $serv['banco'],
-            'fecha_limite' => $serv['fecha_limite'],
-            'visitas' => [],
-            'fecha_final' => null,
-            'resultado_final' => null,
-            'pago_total' => 0,
-            'pagado' => $serv['pago_generado'] ?? 0
-          ];
+        $visitas_stmt = $pdo->prepare("SELECT fecha_visita FROM visitas_servicios WHERE ticket = ? AND idc = ? AND resultado = 'Rechazo' ORDER BY fecha_visita ASC");
+        $visitas_stmt->execute([$ticket, $idc]);
+        $fechas_visita = $visitas_stmt->fetchAll(PDO::FETCH_COLUMN);
+
+        $total_pago = calcular_pago($pdo, $serv);
+
+        foreach ($fechas_visita as $fv) {
+          $rechazo_fake = $serv;
+          $rechazo_fake['resultado'] = 'Rechazo';
+          $total_pago += calcular_pago($pdo, $rechazo_fake);
         }
 
-        if ($serv['resultado'] === 'Exito') {
-          $agrupado[$key]['resultado_final'] = 'ÉXITO';
-          $agrupado[$key]['fecha_final'] = $serv['fecha_visita'];
-        } else {
-          $agrupado[$key]['visitas'][] = date('d/m/Y', strtotime($serv['fecha_visita']));
-        }
-
-        $agrupado[$key]['pago_total'] += calcular_pago($pdo, $serv);
-      }
-
-      foreach ($agrupado as $row):
-        $resultado = $row['resultado_final'] ?? 'RECHAZO';
-        $fecha_final = $row['fecha_final'] ?? end($row['visitas']);
-        $sla = ($fecha_final && $row['fecha_limite'] && strtotime($fecha_final) <= strtotime($row['fecha_limite'])) ? 'DT' : 'FT';
-        $estado_pago = $row['pagado'] ? 'Pagado' : 'Pendiente';
+        $sla = ($serv['fecha_atencion'] && $serv['fecha_limite'] && strtotime($serv['fecha_atencion']) <= strtotime($serv['fecha_limite'])) ? 'DT' : 'FT';
+        $estado_pago = $serv['pago_generado'] ? 'Pagado' : 'Pendiente';
       ?>
       <tr>
-        <td class="px-4 py-2 font-mono text-blue-700"><?= $row['ticket'] ?></td>
-        <td class="px-4 py-2"><?= $row['idc'] ?></td>
-        <td class="px-4 py-2"><?= $row['servicio'] ?></td>
-        <td class="px-4 py-2"><?= $resultado ?></td>
+        <td class="px-4 py-2 font-mono text-blue-700"><?= $ticket ?></td>
+        <td class="px-4 py-2"><?= $idc ?></td>
+        <td class="px-4 py-2"><?= $serv['servicio'] ?></td>
+        <td class="px-4 py-2"><?= $serv['resultado'] ?></td>
         <td class="px-4 py-2"><?= $sla ?></td>
-        <td class="px-4 py-2"><?= $fecha_final ?></td>
-        <td class="px-4 py-2">$<?= number_format($row['pago_total'], 2) ?></td>
+        <td class="px-4 py-2"><?= $serv['fecha_atencion'] ?></td>
+        <td class="px-4 py-2">$<?= number_format($total_pago, 2) ?></td>
         <td class="px-4 py-2">
           <span class="inline-block <?= $estado_pago === 'Pagado' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' ?> text-xs px-2 py-1 rounded">
             <?= $estado_pago ?>
           </span>
         </td>
-        <td class="px-4 py-2 text-center"><?= count($row['visitas']) ?: '' ?></td>
-        <td class="px-4 py-2"><?= implode(', ', $row['visitas']) ?: '' ?></td>
+        <td class="px-4 py-2 text-center"><?= count($fechas_visita) ?: '' ?></td>
+        <td class="px-4 py-2"><?= implode(', ', array_map(fn($f) => date('d/m/Y', strtotime($f)), $fechas_visita)) ?></td>
       </tr>
-      <?php endforeach; ?>
+      <?php } ?>
     </tbody>
   </table>
 
@@ -175,13 +140,12 @@ echo "</pre>";
 
 <?php
 function calcular_pago($pdo, $serv) {
-  $stmt = $pdo->prepare("SELECT monto FROM precios_idc 
-      WHERE idc = ? AND servicio = ? AND resultado = ? AND banco = ?");
+  $stmt = $pdo->prepare("SELECT monto FROM precios_idc WHERE idc = ? AND servicio = ? AND resultado = ? AND banco = ?");
   $stmt->execute([
-      $serv['idc'],
-      $serv['servicio'],
-      $serv['resultado'],
-      $serv['banco']
+    $serv['idc'],
+    $serv['servicio'],
+    $serv['resultado'],
+    $serv['banco']
   ]);
   return $stmt->fetchColumn() ?: 0;
 }
