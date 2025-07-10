@@ -98,9 +98,15 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
           $pagado = $serv['pago_generado'] ?? 0;
           $ticket = $serv['ticket'];
 
-          $rechazo_previo = $pdo->prepare("SELECT fecha_visita FROM visitas_servicios WHERE ticket = ? AND resultado = 'Rechazo' LIMIT 1");
-          $rechazo_previo->execute([$ticket]);
-          $rechazo_info = $rechazo_previo->fetchColumn();
+        $rechazo_previo = $pdo->prepare("SELECT fecha_visita, idc FROM visitas_servicios WHERE ticket = ? AND resultado = 'Rechazo' AND idc != ? ORDER BY fecha_visita ASC LIMIT 1");
+$rechazo_previo->execute([$ticket, $serv['idc']]);
+$rechazo_data = $rechazo_previo->fetch(PDO::FETCH_ASSOC);
+
+if ($rechazo_data) {
+    $fecha = date('Y-m-d', strtotime($rechazo_data['fecha_visita']));
+    echo "<div class='text-[10px] text-gray-500 italic mt-1'>Rechazo previo el $fecha por {$rechazo_data['idc']}</div>";
+}
+
 
           $cita_info = $pdo->prepare("SELECT fecha_visita FROM visitas_servicios WHERE ticket = ? AND tipo_visita = 'Cita' ORDER BY fecha_visita DESC LIMIT 1");
           $cita_info->execute([$ticket]);
