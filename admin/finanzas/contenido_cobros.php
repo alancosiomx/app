@@ -118,11 +118,11 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
     </tbody>
   </table>
 
-  <h2 class="text-lg font-semibold mt-10 mb-4 text-red-700">🧾 Rechazos Previos (visitas_servicios)</h2>
+  <h2 class="text-lg font-semibold mt-10 mb-4 text-red-700">📜 Rechazos Previos (visitas_servicios)</h2>
 
   <?php
   $rechazos_sql = "SELECT * FROM visitas_servicios 
-                   WHERE resultado = 'Observación' 
+                   WHERE LOWER(resultado) = 'observación' 
                    AND fecha_visita BETWEEN ? AND ?";
   $rechazos_params = [$desde, $hasta];
   if (!empty($tecnico)) {
@@ -150,15 +150,16 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
       foreach ($rechazos as $visita) {
         $pago = calcular_pago($pdo, [
           'idc' => $visita['idc'],
-          'servicio' => 'RECHAZO', // este valor debe ser ajustado si se requiere el tipo real de servicio
+          'servicio' => 'RECHAZO',
           'resultado' => 'Rechazo',
           'banco' => ''
         ]);
+        $fecha_formateada = date('d/m/Y', strtotime($visita['fecha_visita']));
       ?>
       <tr>
         <td class="px-4 py-2 font-mono text-blue-700"><?= $visita['ticket'] ?></td>
         <td class="px-4 py-2"><?= $visita['idc'] ?></td>
-        <td class="px-4 py-2"><?= $visita['fecha_visita'] ?></td>
+        <td class="px-4 py-2"><?= $fecha_formateada ?></td>
         <td class="px-4 py-2">$<?= number_format($pago, 2) ?></td>
       </tr>
       <?php } ?>
