@@ -58,9 +58,19 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
     $hasta = $_GET['hasta'] . ' 23:59:59';
     $tecnico = $_GET['tecnico'] ?? '';
 
-    $sql = "SELECT * FROM servicios_omnipos 
-            WHERE resultado IN ('Exito', 'Rechazo') 
-            AND fecha_atencion BETWEEN ? AND ?";
+    $sql = "SELECT 
+  v.ticket, 
+  v.idc, 
+  v.resultado, 
+  v.fecha_visita, 
+  s.servicio, 
+  s.fecha_limite, 
+  s.banco
+FROM visitas_servicios v
+JOIN servicios_omnipos s ON v.ticket = s.ticket
+WHERE v.resultado IN ('Exito', 'Rechazo')
+AND v.fecha_visita BETWEEN ? AND ?
+
     $params = [$desde, $hasta];
 
     if (!empty($tecnico)) {
