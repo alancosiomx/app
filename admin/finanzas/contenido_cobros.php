@@ -69,7 +69,7 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 FROM visitas_servicios v
 JOIN servicios_omnipos s ON v.ticket = s.ticket
 WHERE v.resultado IN ('Exito', 'Rechazo')
-AND v.fecha_visita BETWEEN ? AND ?
+AND v.fecha_visita BETWEEN ? AND ?";
 
     $params = [$desde, $hasta];
 
