@@ -79,17 +79,20 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
   <table class="min-w-full divide-y divide-gray-200 mt-6 bg-white rounded-xl shadow overflow-hidden">
     <thead class="bg-gray-50 text-xs font-semibold text-gray-600">
-      <tr>
-        <th class="px-4 py-2 text-left">Ticket</th>
-        <th class="px-4 py-2 text-left">Técnico</th>
-        <th class="px-4 py-2 text-left">Servicio</th>
-        <th class="px-4 py-2 text-left">Resultado</th>
-        <th class="px-4 py-2 text-left">SLA</th>
-        <th class="px-4 py-2 text-left">Fecha</th>
-        <th class="px-4 py-2 text-left">Pago</th>
-        <th class="px-4 py-2 text-left">Estado</th>
-      </tr>
-    </thead>
+  <tr>
+    <th class="px-4 py-2 text-left">Ticket</th>
+    <th class="px-4 py-2 text-left">Técnico</th>
+    <th class="px-4 py-2 text-left">Servicio</th>
+    <th class="px-4 py-2 text-left">Resultado</th>
+    <th class="px-4 py-2 text-left">SLA</th>
+    <th class="px-4 py-2 text-left">Fecha</th>
+    <th class="px-4 py-2 text-left">Pago</th>
+    <th class="px-4 py-2 text-left">Estado</th>
+    <th class="px-4 py-2 text-left">Visitas</th>
+    <th class="px-4 py-2 text-left">Fecha de Visita</th>
+  </tr>
+</thead>
+
     <tbody class="divide-y divide-gray-100 text-sm">
       <?php
 $agrupado = [];
