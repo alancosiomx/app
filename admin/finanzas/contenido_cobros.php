@@ -121,15 +121,16 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
   <h2 class="text-lg font-semibold mt-10 mb-4 text-red-700">📜 Rechazos Previos (visitas_servicios)</h2>
 
   <?php
-  $rechazos_sql = "SELECT * FROM visitas_servicios 
-                   WHERE LOWER(resultado) = 'observación' 
-                   AND fecha_visita BETWEEN ? AND ?";
+  $rechazos_sql = "SELECT v.*, s.servicio, s.banco FROM visitas_servicios v
+                   LEFT JOIN servicios_omnipos s ON v.ticket = s.ticket
+                   WHERE LOWER(v.resultado) = 'observación' 
+                   AND v.fecha_visita BETWEEN ? AND ?";
   $rechazos_params = [$desde, $hasta];
   if (!empty($tecnico)) {
-    $rechazos_sql .= " AND idc = ?";
+    $rechazos_sql .= " AND v.idc = ?";
     $rechazos_params[] = $tecnico;
   }
-  $rechazos_sql .= " ORDER BY fecha_visita DESC";
+  $rechazos_sql .= " ORDER BY v.fecha_visita DESC";
   $rechazos_stmt = $pdo->prepare($rechazos_sql);
   $rechazos_stmt->execute($rechazos_params);
   $rechazos = $rechazos_stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -150,9 +151,9 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
       foreach ($rechazos as $visita) {
         $pago = calcular_pago($pdo, [
           'idc' => $visita['idc'],
-          'servicio' => 'RECHAZO',
+          'servicio' => $visita['servicio'] ?? '',
           'resultado' => 'Rechazo',
-          'banco' => ''
+          'banco' => $visita['banco'] ?? ''
         ]);
         $fecha_formateada = date('d/m/Y', strtotime($visita['fecha_visita']));
       ?>
