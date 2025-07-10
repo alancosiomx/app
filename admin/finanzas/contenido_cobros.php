@@ -58,118 +58,113 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
     $hasta = $_GET['hasta'] . ' 23:59:59';
     $tecnico = $_GET['tecnico'] ?? '';
 
-    $sql = "SELECT 
-  v.ticket, 
-  v.idc, 
-  v.resultado, 
-  v.fecha_visita, 
-  s.servicio, 
-  s.fecha_limite, 
-  s.banco
-FROM visitas_servicios v
-JOIN servicios_omnipos s ON v.ticket = s.ticket
-WHERE v.resultado IN ('Exito', 'Rechazo')
-AND v.fecha_visita BETWEEN ? AND ?";
+        $sql = "SELECT 
+      v.ticket, 
+      v.idc, 
+      v.resultado, 
+      v.fecha_visita, 
+      s.servicio, 
+      s.fecha_limite, 
+      s.banco
+    FROM visitas_servicios v
+    JOIN servicios_omnipos s ON v.ticket = s.ticket
+    WHERE v.resultado IN ('Exito', 'Rechazo')
+    AND DATE(v.fecha_visita) BETWEEN ? AND ?";
 
-    $params = [$desde, $hasta];
+    $params = [$_GET['desde'], $_GET['hasta']];
 
     if (!empty($tecnico)) {
-        $sql .= " AND idc = ?";
+        $sql .= " AND v.idc = ?";
         $params[] = $tecnico;
     }
 
-    $sql .= " ORDER BY fecha_atencion DESC";
+    $sql .= " ORDER BY v.fecha_visita DESC";
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute($params);
     $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     if (count($servicios) > 0):
-  ?>
-
-  <table class="min-w-full divide-y divide-gray-200 mt-6 bg-white rounded-xl shadow overflow-hidden">
-    <thead class="bg-gray-50 text-xs font-semibold text-gray-600">
-  <tr>
-    <th class="px-4 py-2 text-left">Ticket</th>
-    <th class="px-4 py-2 text-left">Técnico</th>
-    <th class="px-4 py-2 text-left">Servicio</th>
-    <th class="px-4 py-2 text-left">Resultado</th>
-    <th class="px-4 py-2 text-left">SLA</th>
-    <th class="px-4 py-2 text-left">Fecha</th>
-    <th class="px-4 py-2 text-left">Pago</th>
-    <th class="px-4 py-2 text-left">Estado</th>
-    <th class="px-4 py-2 text-left">Visitas</th>
-    <th class="px-4 py-2 text-left">Fecha de Visita</th>
-  </tr>
-</thead>
-
-    <tbody class="divide-y divide-gray-100 text-sm">
-      <?php
-$agrupado = [];
-
-foreach ($servicios as $serv) {
-  $ticket = $serv['ticket'];
-  $idc = $serv['idc'];
-
-  // Obtener visitas previas de ese técnico (sin contar Éxito)
-  $visitas_stmt = $pdo->prepare("
-      SELECT fecha_visita FROM visitas_servicios 
-      WHERE ticket = ? AND idc = ? AND resultado != 'Exito'
-      ORDER BY fecha_visita ASC
-  ");
-  $visitas_stmt->execute([$ticket, $idc]);
-  $fechas_visita = $visitas_stmt->fetchAll(PDO::FETCH_COLUMN);
-
-  // Armar clave única por técnico + ticket
-  $key = $ticket . '|' . $idc;
-
-  if (!isset($agrupado[$key])) {
-    $agrupado[$key] = [
-      'ticket' => $ticket,
-      'idc' => $idc,
-      'servicio' => $serv['servicio'],
-      'resultado' => $serv['resultado'],
-      'sla' => ($serv['fecha_atencion'] && $serv['fecha_limite'] && strtotime($serv['fecha_atencion']) <= strtotime($serv['fecha_limite'])) ? 'DT' : 'FT',
-      'fecha' => $serv['fecha_atencion'],
-      'pago' => 0,
-      'estado_pago' => $serv['pago_generado'] ? 'Pagado' : 'Pendiente',
-      'visitas' => $fechas_visita
-    ];
-  }
-
-  // Pago acumulado (por si más de una visita)
-  $agrupado[$key]['pago'] += calcular_pago($pdo, $serv);
-}
-
-// Mostrar tabla
-foreach ($agrupado as $row):
 ?>
-  <tr>
-    <td class="px-4 py-2 font-mono text-blue-700"><?= htmlspecialchars($row['ticket']) ?></td>
-    <td class="px-4 py-2"><?= htmlspecialchars($row['idc']) ?></td>
-    <td class="px-4 py-2"><?= htmlspecialchars($row['servicio']) ?></td>
-    <td class="px-4 py-2"><?= htmlspecialchars($row['resultado']) ?></td>
-    <td class="px-4 py-2"><?= $row['sla'] ?></td>
-    <td class="px-4 py-2"><?= $row['fecha'] ?></td>
-    <td class="px-4 py-2">$<?= number_format($row['pago'], 2) ?></td>
-    <td class="px-4 py-2">
-      <?php if ($row['estado_pago'] === 'Pagado'): ?>
-        <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Pagado</span>
-      <?php else: ?>
-        <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Pendiente</span>
-      <?php endif; ?>
-    </td>
-    <td class="px-4 py-2 text-center"><?= count($row['visitas']) ?: '' ?></td>
-    <td class="px-4 py-2"><?= implode(', ', $row['visitas']) ?: '' ?></td>
-  </tr>
-<?php endforeach; ?>
 
-    </tbody>
-  </table>
+<table class="min-w-full divide-y divide-gray-200 mt-6 bg-white rounded-xl shadow overflow-hidden">
+  <thead class="bg-gray-50 text-xs font-semibold text-gray-600">
+    <tr>
+      <th class="px-4 py-2 text-left">Ticket</th>
+      <th class="px-4 py-2 text-left">Técnico</th>
+      <th class="px-4 py-2 text-left">Servicio</th>
+      <th class="px-4 py-2 text-left">Resultado</th>
+      <th class="px-4 py-2 text-left">SLA</th>
+      <th class="px-4 py-2 text-left">Fecha</th>
+      <th class="px-4 py-2 text-left">Pago</th>
+      <th class="px-4 py-2 text-left">Estado</th>
+      <th class="px-4 py-2 text-left">Visitas</th>
+      <th class="px-4 py-2 text-left">Fecha de Visita</th>
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-gray-100 text-sm">
+    <?php
+    $agrupado = [];
 
-  <?php else: ?>
-    <div class="bg-yellow-50 text-yellow-800 p-4 rounded mt-4">No se encontraron servicios para ese rango.</div>
-  <?php endif; } ?>
+    foreach ($servicios as $serv) {
+      $ticket = $serv['ticket'];
+      $idc = $serv['idc'];
+      $key = $ticket . '|' . $idc;
+
+      // Excluye la visita final si es Éxito
+      if ($serv['resultado'] === 'Exito') {
+        $es_exito = true;
+        $fecha_final = $serv['fecha_visita'];
+        $resultado_final = 'ÉXITO';
+      } else {
+        $es_exito = false;
+      }
+
+      if (!isset($agrupado[$key])) {
+        $agrupado[$key] = [
+          'ticket' => $ticket,
+          'idc' => $idc,
+          'servicio' => $serv['servicio'],
+          'banco' => $serv['banco'],
+          'resultado' => $es_exito ? 'ÉXITO' : 'RECHAZO',
+          'fecha' => $serv['fecha_visita'],
+          'fecha_limite' => $serv['fecha_limite'],
+          'visitas' => [],
+          'pago' => 0
+        ];
+      }
+
+      if (!$es_exito) {
+        $agrupado[$key]['visitas'][] = date('d/m/Y', strtotime($serv['fecha_visita']));
+      } else {
+        $agrupado[$key]['fecha'] = $serv['fecha_visita'];
+        $agrupado[$key]['resultado'] = 'ÉXITO';
+      }
+
+      $agrupado[$key]['pago'] += calcular_pago($pdo, $serv);
+    }
+
+    foreach ($agrupado as $row):
+      $sla = ($row['fecha'] && $row['fecha_limite'] && strtotime($row['fecha']) <= strtotime($row['fecha_limite'])) ? 'DT' : 'FT';
+    ?>
+    <tr>
+      <td class="px-4 py-2 font-mono text-blue-700"><?= htmlspecialchars($row['ticket']) ?></td>
+      <td class="px-4 py-2"><?= htmlspecialchars($row['idc']) ?></td>
+      <td class="px-4 py-2"><?= htmlspecialchars($row['servicio']) ?></td>
+      <td class="px-4 py-2"><?= $row['resultado'] ?></td>
+      <td class="px-4 py-2"><?= $sla ?></td>
+      <td class="px-4 py-2"><?= $row['fecha'] ?></td>
+      <td class="px-4 py-2">$<?= number_format($row['pago'], 2) ?></td>
+      <td class="px-4 py-2"><span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Pendiente</span></td>
+      <td class="px-4 py-2 text-center"><?= count($row['visitas']) ?: '' ?></td>
+      <td class="px-4 py-2"><?= implode(', ', $row['visitas']) ?: '' ?></td>
+    </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+<?php else: ?>
+  <div class="bg-yellow-50 text-yellow-800 p-4 rounded mt-4">No se encontraron servicios para ese rango.</div>
+<?php endif; } ?>
 </div>
 
 <?php
