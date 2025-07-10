@@ -21,7 +21,7 @@ if ($servicio !== '') {
 }
 
 if ($buscar !== '') {
-    $busquedas = array_map('trim', explode(',', $buscar));
+    $busquedas = array_filter(preg_split('/[\s,]+/', $buscar));
     $filtros = [];
     foreach ($busquedas as $b) {
         $filtros[] = "(ticket LIKE ? OR afiliacion LIKE ? OR comercio LIKE ?)";
