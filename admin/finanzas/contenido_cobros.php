@@ -122,7 +122,7 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 
   <?php
   $rechazos_sql = "SELECT * FROM visitas_servicios 
-                   WHERE resultado = 'Rechazo' 
+                   WHERE resultado = 'Observación' 
                    AND fecha_visita BETWEEN ? AND ?";
   $rechazos_params = [$desde, $hasta];
   if (!empty($tecnico)) {
