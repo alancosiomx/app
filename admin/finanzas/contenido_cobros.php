@@ -91,58 +91,66 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
       </tr>
     </thead>
     <tbody class="divide-y divide-gray-100 text-sm">
-      <?php foreach ($servicios as $serv): 
-          $fecha_atencion = $serv['fecha_atencion'] ?? null;
-          $fecha_limite = $serv['fecha_limite'] ?? null;
-          $sla = ($fecha_atencion && $fecha_limite && strtotime($fecha_atencion) <= strtotime($fecha_limite)) ? 'DT' : 'FT';
-          $pagado = $serv['pago_generado'] ?? 0;
-          $ticket = $serv['ticket'];
+      <?php
+$agrupado = [];
 
-        $rechazo_previo = $pdo->prepare("SELECT fecha_visita, idc FROM visitas_servicios WHERE ticket = ? AND resultado = 'Rechazo' AND idc != ? ORDER BY fecha_visita ASC LIMIT 1");
-$rechazo_previo->execute([$ticket, $serv['idc']]);
-$rechazo_data = $rechazo_previo->fetch(PDO::FETCH_ASSOC);
+foreach ($servicios as $serv) {
+  $ticket = $serv['ticket'];
+  $idc = $serv['idc'];
 
-if ($rechazo_data) {
-    $fecha = date('Y-m-d', strtotime($rechazo_data['fecha_visita']));
-    echo "<div class='text-[10px] text-gray-500 italic mt-1'>Rechazo previo el $fecha por {$rechazo_data['idc']}</div>";
+  // Obtener visitas previas de ese técnico (sin contar Éxito)
+  $visitas_stmt = $pdo->prepare("
+      SELECT fecha_visita FROM visitas_servicios 
+      WHERE ticket = ? AND idc = ? AND resultado != 'Exito'
+      ORDER BY fecha_visita ASC
+  ");
+  $visitas_stmt->execute([$ticket, $idc]);
+  $fechas_visita = $visitas_stmt->fetchAll(PDO::FETCH_COLUMN);
+
+  // Armar clave única por técnico + ticket
+  $key = $ticket . '|' . $idc;
+
+  if (!isset($agrupado[$key])) {
+    $agrupado[$key] = [
+      'ticket' => $ticket,
+      'idc' => $idc,
+      'servicio' => $serv['servicio'],
+      'resultado' => $serv['resultado'],
+      'sla' => ($serv['fecha_atencion'] && $serv['fecha_limite'] && strtotime($serv['fecha_atencion']) <= strtotime($serv['fecha_limite'])) ? 'DT' : 'FT',
+      'fecha' => $serv['fecha_atencion'],
+      'pago' => 0,
+      'estado_pago' => $serv['pago_generado'] ? 'Pagado' : 'Pendiente',
+      'visitas' => $fechas_visita
+    ];
+  }
+
+  // Pago acumulado (por si más de una visita)
+  $agrupado[$key]['pago'] += calcular_pago($pdo, $serv);
 }
 
+// Mostrar tabla
+foreach ($agrupado as $row):
+?>
+  <tr>
+    <td class="px-4 py-2 font-mono text-blue-700"><?= htmlspecialchars($row['ticket']) ?></td>
+    <td class="px-4 py-2"><?= htmlspecialchars($row['idc']) ?></td>
+    <td class="px-4 py-2"><?= htmlspecialchars($row['servicio']) ?></td>
+    <td class="px-4 py-2"><?= htmlspecialchars($row['resultado']) ?></td>
+    <td class="px-4 py-2"><?= $row['sla'] ?></td>
+    <td class="px-4 py-2"><?= $row['fecha'] ?></td>
+    <td class="px-4 py-2">$<?= number_format($row['pago'], 2) ?></td>
+    <td class="px-4 py-2">
+      <?php if ($row['estado_pago'] === 'Pagado'): ?>
+        <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Pagado</span>
+      <?php else: ?>
+        <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Pendiente</span>
+      <?php endif; ?>
+    </td>
+    <td class="px-4 py-2 text-center"><?= count($row['visitas']) ?: '' ?></td>
+    <td class="px-4 py-2"><?= implode(', ', $row['visitas']) ?: '' ?></td>
+  </tr>
+<?php endforeach; ?>
 
-          $cita_info = $pdo->prepare("SELECT fecha_visita FROM visitas_servicios 
-                            WHERE ticket = ? AND tipo_visita = 'Cita' AND idc = ?
-                            ORDER BY fecha_visita DESC LIMIT 1");
-$cita_info->execute([$ticket, $serv['idc']]);
-$cita_fecha = $cita_info->fetchColumn();
-
-      ?>
-      <tr>
-        <td class="px-4 py-2 font-mono text-blue-700"><?= htmlspecialchars($ticket) ?></td>
-        <td class="px-4 py-2"><?= htmlspecialchars($serv['idc']) ?></td>
-        <td class="px-4 py-2"><?= htmlspecialchars($serv['servicio']) ?></td>
-        <td class="px-4 py-2"><?= htmlspecialchars($serv['resultado']) ?></td>
-        <td class="px-4 py-2"><?= $sla ?></td>
-        <td class="px-4 py-2"><?= $serv['fecha_atencion'] ?></td>
-        <td class="px-4 py-2">
-          $<?= number_format(calcular_pago($pdo, $serv), 2) ?>
-        </td>
-        <td class="px-4 py-2">
-          <?php if ($pagado): ?>
-            <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Pagado</span>
-          <?php else: ?>
-            <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Pendiente</span>
-          <?php endif; ?>
-
-          <?php if (isset($rechazo_info) && $rechazo_info): ?>
-  <div class="text-[10px] text-gray-500 italic mt-1">Rechazo previo el <?= date('Y-m-d', strtotime($rechazo_info)) ?></div>
-<?php endif; ?>
-
-
-          <?php if ($cita_fecha): ?>
-            <div class="text-[10px] text-blue-500 italic mt-1">Cita realizada el <?= date('Y-m-d', strtotime($cita_fecha)) ?></div>
-          <?php endif; ?>
-        </td>
-      </tr>
-      <?php endforeach; ?>
     </tbody>
   </table>
 
