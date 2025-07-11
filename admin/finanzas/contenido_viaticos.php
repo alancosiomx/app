@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idc'], $_POST['ticket
     $servicio = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($servicio) {
-      $insert = $pdo->prepare("INSERT INTO viaticos (idc, ticket, monto, afiliacion, poblacion, colonia, ciudad, comentarios, motivo, estado, fecha_solicitud)
+      $insert = $pdo->prepare("INSERT INTO viaticos (idc, ticket, monto, afiliacion, poblacion, colonia, ciudad, comentarios, motivo, estado, fecha_registro)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Pendiente', NOW())");
 
       $insert->execute([
@@ -43,12 +43,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idc'], $_POST['ticket
       echo "<div class='bg-green-100 text-green-800 p-4 mb-4 rounded'>✅ Viático registrado exitosamente para $ticket por \$$monto</div>";
 
       // Verificar si hubo viático anterior
-      $verificar = $pdo->prepare("SELECT monto, fecha_solicitud FROM viaticos WHERE afiliacion = ? AND idc = ? ORDER BY fecha_solicitud DESC LIMIT 1 OFFSET 1");
+      $verificar = $pdo->prepare("SELECT monto, fecha_registro FROM viaticos WHERE afiliacion = ? AND idc = ? ORDER BY fecha_registro DESC LIMIT 1 OFFSET 1");
       $verificar->execute([$servicio['afiliacion'], $idc]);
       $anterior = $verificar->fetch(PDO::FETCH_ASSOC);
 
       if ($anterior) {
-        echo "<div class='bg-yellow-100 text-yellow-800 p-4 mb-4 rounded'>⚠️ Ya se visitó esta afiliación ({$servicio['afiliacion']}) por \${$anterior['monto']} el " . date('d/m/Y', strtotime($anterior['fecha_solicitud'])) . ".</div>";
+        echo "<div class='bg-yellow-100 text-yellow-800 p-4 mb-4 rounded'>⚠️ Ya se visitó esta afiliación ({$servicio['afiliacion']}) por \${$anterior['monto']} el " . date('d/m/Y', strtotime($anterior['fecha_registro'])) . ".</div>";
       }
     } else {
       echo "<div class='bg-red-100 text-red-800 p-4 mb-4 rounded'>❌ Ticket no válido.</div>";
@@ -132,7 +132,7 @@ $tecnicos = $pdo->query("SELECT DISTINCT idc FROM servicios_omnipos WHERE idc IS
         <td class="px-4 py-2"><?= htmlspecialchars($v['colonia']) ?></td>
         <td class="px-4 py-2"><?= htmlspecialchars($v['ciudad']) ?></td>
         <td class="px-4 py-2">$<?= number_format($v['monto'], 2) ?></td>
-        <td class="px-4 py-2"><?= date('d/m/Y', strtotime($v['fecha_solicitud'])) ?></td>
+        <td class="px-4 py-2"><?= date('d/m/Y', strtotime($v['fecha_registro'])) ?></td>
       </tr>
     <?php endforeach; ?>
   </tbody>
