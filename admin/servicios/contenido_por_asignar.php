@@ -182,6 +182,35 @@ function toggleAll(source) {
   document.querySelectorAll('input[name="tickets[]"]').forEach(cb => cb.checked = source.checked);
 }
 
+function cerrarModal() {
+  const modal = document.getElementById('modalDetalleServicio');
+  if (modal) modal.remove();
+}
+
+function verDetalle(ticket) {
+  if (!ticket) {
+    alert("Ticket inválido");
+    return;
+  }
+
+  console.log("Ticket:", ticket);
+
+  fetch('detalle_servicio.php?ticket=' + encodeURIComponent(ticket))
+    .then(r => r.text())
+    .then(html => {
+      const anterior = document.getElementById('modalDetalleServicio');
+      if (anterior) anterior.remove();
+
+      const temp = document.createElement('div');
+      temp.innerHTML = html;
+      document.body.appendChild(temp.firstElementChild);
+    })
+    .catch(err => {
+      console.error('ERROR AJAX:', err);
+      alert('Error al cargar el detalle del servicio.');
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   $('#tabla-servicios').DataTable({
     pageLength: 100,
@@ -199,58 +228,4 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
-    <script>
-document.addEventListener('DOMContentLoaded', function () {
-  $('#tabla-servicios').DataTable({
-    pageLength: 100,
-    order: [[1, 'desc']],
-    language: {
-      search: "Buscar:",
-      lengthMenu: "Mostrar _MENU_ registros",
-      zeroRecords: "No se encontraron coincidencias",
-      info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
-      infoEmpty: "Mostrando 0 a 0 de 0 registros",
-      paginate: {
-        next: "Siguiente",
-        previous: "Anterior"
-      }
-    }
-  });
-<script>
-function cerrarModal() {
-  const modal = document.getElementById('modalDetalleServicio');
-  if (modal) modal.remove();
-}
-
-function verDetalle(ticket) {
-  if (!ticket) {
-    alert("Ticket inválido");
-    return;
-  }
-
-  console.log("Ticket:", ticket);
-
-  fetch('detalle_servicio.php?ticket=' + encodeURIComponent(ticket))
-    .then(r => r.text())
-    .then(html => {
-      // Elimina modal anterior si existe
-      const anterior = document.getElementById('modalDetalleServicio');
-      if (anterior) anterior.remove();
-
-      // Inserta nuevo modal
-      const temp = document.createElement('div');
-      temp.innerHTML = html;
-      document.body.appendChild(temp.firstElementChild);
-    })
-    .catch(err => {
-      console.error('ERROR AJAX:', err);
-      alert('Error al cargar el detalle.');
-    });
-}
 </script>
-
-
-
-</script>
-
-
