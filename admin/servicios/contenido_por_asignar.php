@@ -216,38 +216,39 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   });
-    <script>
+<script>
 function cerrarModal() {
   const modal = document.getElementById('modalDetalleServicio');
   if (modal) modal.remove();
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  document.body.addEventListener('click', function (e) {
-    const link = e.target.closest('.ver-detalle');
-    if (!link) return;
+function verDetalle(ticket) {
+  if (!ticket) {
+    alert("Ticket inválido");
+    return;
+  }
 
-    e.preventDefault();
-    const ticket = (link.dataset.ticket || '').trim();
-    if (!ticket) return alert('Ticket no válido');
+  console.log("Ticket:", ticket);
 
-    fetch('detalle_servicio.php?ticket=' + encodeURIComponent(ticket))
-      .then(res => res.text())
-      .then(html => {
-        const existente = document.getElementById('modalDetalleServicio');
-        if (existente) existente.remove();
+  fetch('detalle_servicio.php?ticket=' + encodeURIComponent(ticket))
+    .then(r => r.text())
+    .then(html => {
+      // Elimina modal anterior si existe
+      const anterior = document.getElementById('modalDetalleServicio');
+      if (anterior) anterior.remove();
 
-        const wrapper = document.createElement('div');
-        wrapper.innerHTML = html;
-        document.body.appendChild(wrapper.firstElementChild);
-      })
-      .catch(err => {
-        console.error('Error AJAX:', err);
-        alert('No se pudo cargar el detalle.');
-      });
-  });
-});
+      // Inserta nuevo modal
+      const temp = document.createElement('div');
+      temp.innerHTML = html;
+      document.body.appendChild(temp.firstElementChild);
+    })
+    .catch(err => {
+      console.error('ERROR AJAX:', err);
+      alert('Error al cargar el detalle.');
+    });
+}
 </script>
+
 
 
 </script>
