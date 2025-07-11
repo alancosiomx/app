@@ -63,6 +63,7 @@ if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
     <tr>
       <th class="px-4 py-2 text-left">Técnico</th>
       <th class="px-4 py-2 text-left">Servicios</th>
+      <th class="px-4 py-2 text-left">Visitas</th>
       <th class="px-4 py-2 text-left">Total</th>
       <th class="px-4 py-2 text-left">Estado</th>
       <th class="px-4 py-2 text-left">Acción</th>
@@ -80,10 +81,24 @@ if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
     $stmt2->execute([$idc, $desde, $hasta]);
     $monto = $stmt2->fetchColumn() ?: 0;
 
+    $stmt3 = $pdo->prepare("SELECT v.*, s.servicio, s.banco FROM visitas_servicios v LEFT JOIN servicios_omnipos s ON v.ticket = s.ticket WHERE LOWER(v.resultado) = 'observación' AND v.idc = ? AND v.fecha_visita BETWEEN ? AND ?");
+    $stmt3->execute([$idc, $desde, $hasta]);
+    $visitas = $stmt3->fetchAll(PDO::FETCH_ASSOC);
+    $total_visitas = count($visitas);
+    $monto_visitas = 0;
+    foreach ($visitas as $v) {
+      $stmt_pago = $pdo->prepare("SELECT monto FROM precios_idc WHERE idc = ? AND servicio = ? AND resultado = 'Rechazo' AND banco = ?");
+      $stmt_pago->execute([$v['idc'], $v['servicio'], $v['banco']]);
+      $monto_visitas += $stmt_pago->fetchColumn() ?: 0;
+    }
+
+    $monto_total = $monto + $monto_visitas;
+
     echo '<tr>';
     echo "<td class='px-4 py-2'>$idc</td>";
     echo "<td class='px-4 py-2'>$total</td>";
-    echo "<td class='px-4 py-2'>\$" . number_format($monto, 2) . "</td>";
+    echo "<td class='px-4 py-2'>$total_visitas</td>";
+    echo "<td class='px-4 py-2'>\$" . number_format($monto_total, 2) . "</td>";
     echo "<td class='px-4 py-2'>" . ($pagados >= $total && $total > 0 ? 'Pagado' : 'Pendiente') . "</td>";
     echo '<td class="px-4 py-2">';
     if ($pagados < $total) {
