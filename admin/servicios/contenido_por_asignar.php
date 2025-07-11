@@ -216,39 +216,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   });
-<script>
-function cerrarModal() {
-  const modal = document.getElementById('modalDetalleServicio');
-  if (modal) modal.remove();
-}
 
-document.addEventListener('click', function (e) {
-  const boton = e.target.closest('.ver-detalle');
-  if (!boton) return;
-
-  e.preventDefault();
-  const ticket = boton.dataset.ticket?.trim();
-
-  if (!ticket) {
-    alert('Ticket no válido');
-    return;
-  }
-
-  fetch('detalle_servicio.php?ticket=' + encodeURIComponent(ticket))
-    .then(r => r.text())
-    .then(html => {
-      const modalExistente = document.getElementById('modalDetalleServicio');
-      if (modalExistente) modalExistente.remove(); // eliminar si ya había
-
-      const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = html;
-      document.body.appendChild(tempDiv.firstElementChild);
-    })
-    .catch(err => {
-      console.error('Error al cargar el modal:', err);
-      alert('Error al cargar el detalle.');
-    });
-});
 </script>
 
 
