@@ -161,7 +161,7 @@ $serviciosUnicos = $pdo->query("SELECT DISTINCT servicio FROM servicios_omnipos 
       <td class="px-4 py-2"><?= htmlspecialchars($s['cantidad_insumos'] ?? '') ?></td>
       <td class="px-4 py-2 text-xs text-gray-500 whitespace-pre-line"><?= nl2br(htmlspecialchars($s['comentarios'] ?? '—')) ?></td>
       <td class="px-4 py-2 text-center">
-<a href="javascript:void(0)" onclick="verDetalle('<?= trim($s['ticket']) ?>')" class="text-blue-500 hover:underline">🔍</a>
+<a href="#" class="ver-detalle text-blue-500 hover:underline" data-ticket="<?= htmlspecialchars($s['ticket'] ?? '') ?>">🔍</a>
       </td>
     </tr>
   <?php endforeach; ?>
