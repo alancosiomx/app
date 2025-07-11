@@ -64,6 +64,7 @@ if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
       <th class="px-4 py-2 text-left">Técnico</th>
       <th class="px-4 py-2 text-left">Servicios</th>
       <th class="px-4 py-2 text-left">Visitas</th>
+      <th class="px-4 py-2 text-left">Viáticos</th>
       <th class="px-4 py-2 text-left">Total</th>
       <th class="px-4 py-2 text-left">Estado</th>
       <th class="px-4 py-2 text-left">Acción</th>
@@ -92,12 +93,17 @@ if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
       $monto_visitas += $stmt_pago->fetchColumn() ?: 0;
     }
 
-    $monto_total = $monto + $monto_visitas;
+    $stmt4 = $pdo->prepare("SELECT SUM(monto) FROM viaticos WHERE idc = ? AND fecha_registro BETWEEN ? AND ?");
+    $stmt4->execute([$idc, $desde, $hasta]);
+    $viaticos = $stmt4->fetchColumn() ?: 0;
+
+    $monto_total = $monto + $monto_visitas + $viaticos;
 
     echo '<tr>';
     echo "<td class='px-4 py-2'>$idc</td>";
     echo "<td class='px-4 py-2'>$total</td>";
     echo "<td class='px-4 py-2'>$total_visitas</td>";
+    echo "<td class='px-4 py-2'>\$" . number_format($viaticos, 2) . "</td>";
     echo "<td class='px-4 py-2'>\$" . number_format($monto_total, 2) . "</td>";
     echo "<td class='px-4 py-2'>" . ($pagados >= $total && $total > 0 ? 'Pagado' : 'Pendiente') . "</td>";
     echo '<td class="px-4 py-2">';
