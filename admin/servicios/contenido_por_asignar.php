@@ -224,7 +224,7 @@ function verDetalle(ticket) {
 
   console.log("Ticket:", ticket);
 
-fetch('detalle_servicio.php?ticket=' + encodeURIComponent(ticket))
+fetch('/admin/servicios/detalle_servicio.php?ticket=' + encodeURIComponent(ticket))
     .then(r => r.text())
     .then(html => {
       const anterior = document.getElementById('modalDetalleServicio');
