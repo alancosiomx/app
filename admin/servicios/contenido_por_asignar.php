@@ -216,6 +216,39 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   });
+    <script>
+function cerrarModal() {
+  const modal = document.getElementById('modalDetalleServicio');
+  if (modal) modal.remove();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  document.body.addEventListener('click', function (e) {
+    const link = e.target.closest('.ver-detalle');
+    if (!link) return;
+
+    e.preventDefault();
+    const ticket = (link.dataset.ticket || '').trim();
+    if (!ticket) return alert('Ticket no válido');
+
+    fetch('detalle_servicio.php?ticket=' + encodeURIComponent(ticket))
+      .then(res => res.text())
+      .then(html => {
+        const existente = document.getElementById('modalDetalleServicio');
+        if (existente) existente.remove();
+
+        const wrapper = document.createElement('div');
+        wrapper.innerHTML = html;
+        document.body.appendChild(wrapper.firstElementChild);
+      })
+      .catch(err => {
+        console.error('Error AJAX:', err);
+        alert('No se pudo cargar el detalle.');
+      });
+  });
+});
+</script>
+
 
 </script>
 
