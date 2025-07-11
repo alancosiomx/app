@@ -122,7 +122,7 @@ $tecnicos = $pdo->query("SELECT DISTINCT idc FROM servicios_omnipos WHERE idc IS
   </thead>
   <tbody class="divide-y divide-gray-100 text-sm">
     <?php
-    $ultimos = $pdo->query("SELECT * FROM viaticos ORDER BY fecha_solicitud DESC LIMIT 20")->fetchAll(PDO::FETCH_ASSOC);
+    $ultimos = $pdo->query("SELECT * FROM viaticos ORDER BY fecha_registro DESC LIMIT 20")->fetchAll(PDO::FETCH_ASSOC);
     foreach ($ultimos as $v): ?>
       <tr>
         <td class="px-4 py-2"><?= htmlspecialchars($v['idc']) ?></td>
