@@ -217,39 +217,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // 🧠 LÓGICA PARA ABRIR MODAL DETALLE 🔍
-  document.querySelectorAll('.ver-detalle').forEach(link => {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      const ticket = this.dataset.ticket.trim();
-
-      if (!ticket) {
-        alert("Ticket no válido");
-        return;
-      }
-
-      // Limpieza previa
-      const modal = document.getElementById('modal-container-detalle');
-      if (modal) modal.remove();
-
-      // Cargar modal por AJAX
-      fetch('detalle_servicio.php?ticket=' + encodeURIComponent(ticket))
-        .then(res => res.text())
-        .then(html => {
-          const contenedor = document.createElement('div');
-          contenedor.id = 'modal-container-detalle';
-          contenedor.innerHTML = html;
-          document.body.appendChild(contenedor);
-        });
-    });
-  });
-});
-
-// Función para cerrar modal
-function cerrarModal() {
-  const modal = document.getElementById('modal-container-detalle');
-  if (modal) modal.remove();
-}
-</script>
+  </script>
 
 
