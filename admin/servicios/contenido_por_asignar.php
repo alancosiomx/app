@@ -165,6 +165,35 @@ $serviciosUnicos = $pdo->query("SELECT DISTINCT servicio FROM servicios_omnipos 
       </td>
     </tr>
   <?php endforeach; ?>
+<script>
+function cerrarModal() {
+  const modal = document.getElementById('modalDetalleServicio');
+  if (modal) modal.remove();
+}
+
+function verDetalle(ticket) {
+  const ruta = 'detalle_servicio.php?ticket=' + encodeURIComponent(ticket);
+  console.log("➡️ FETCH A:", ruta);
+
+  fetch(ruta)
+    .then(r => {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.text();
+    })
+    .then(html => {
+      const anterior = document.getElementById('modalDetalleServicio');
+      if (anterior) anterior.remove();
+      const div = document.createElement('div');
+      div.innerHTML = html;
+      document.body.appendChild(div.firstElementChild);
+    })
+    .catch(err => {
+      console.error("❌ ERROR EN FETCH:", err);
+      alert("Error al cargar el detalle del servicio.");
+    });
+}
+</script>
+
 </tbody>
 
 
