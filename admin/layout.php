@@ -70,25 +70,21 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
   }
 
   <?php if (str_contains($_SERVER['REQUEST_URI'], '/servicios/')): ?>
+<script>
   document.addEventListener('DOMContentLoaded', () => {
     document.body.addEventListener('click', function(e) {
       const btn = e.target.closest('.ver-detalle');
       if (!btn) return;
 
-      e.preventDefault();
       const ticket = btn.dataset.ticket;
 
-      fetch('servicios/detalle_servicio.php?ticket=' + encodeURIComponent(ticket))
+      fetch('/admin/servicios/detalle_servicio.php?ticket=' + encodeURIComponent(ticket)) // ✅ RUTA ABSOLUTA
         .then(res => res.text())
         .then(html => {
           const anterior = document.getElementById('modalDetalleServicio');
           if (anterior) anterior.remove();
 
           document.getElementById('modal-container').innerHTML = html;
-
-          // Mostrar modal estilo Tailwind
-          const modal = document.getElementById('modalDetalleServicio');
-          modal.classList.remove('hidden');
         })
         .catch(err => {
           alert('Error al cargar el detalle del servicio.');
@@ -96,12 +92,9 @@ $usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
         });
     });
   });
+</script>
+<?php endif; ?>
 
-  function cerrarModal() {
-    const modal = document.getElementById('modalDetalleServicio');
-    if (modal) modal.classList.add('hidden');
-  }
-  <?php endif; ?>
 </script>
 
 <?php if (file_exists(__DIR__ . '/includes/foot.php')) require_once __DIR__ . '/includes/foot.php'; ?>
