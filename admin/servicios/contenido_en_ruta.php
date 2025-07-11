@@ -7,7 +7,8 @@ $tecnico = $_GET['idc'] ?? '';
 $ticket = $_GET['ticket'] ?? '';
 
 // Obtener técnicos únicos en ruta
-$tecnicos = $pdo->query("SELECT DISTINCT idc FROM servicios_omnipos WHERE estatus = 'En Ruta' AND idc IS NOT NULL")->fetchAll(PDO::FETCH_COLUMN);
+$tecnicos = $pdo->query("SELECT DISTINCT idc FROM servicios_omnipos WHERE estatus = 'En Ruta' AND idc IS NOT NULL")
+    ->fetchAll(PDO::FETCH_COLUMN);
 
 // Query base + filtros
 $sql = "SELECT * FROM servicios_omnipos WHERE estatus = 'En Ruta'";
@@ -26,22 +27,18 @@ if ($tecnico) {
     $params[] = $tecnico;
 }
 if ($ticket) {
-    // Normaliza separadores: cualquier cantidad de espacios o saltos de línea → espacio simple
     $busquedas = preg_split('/\s+/', trim($ticket));
-    $busquedas = array_filter($busquedas); // Elimina vacíos
-
+    $busquedas = array_filter($busquedas);
     $condiciones = [];
     foreach ($busquedas as $b) {
         $condiciones[] = "(ticket LIKE ? OR afiliacion LIKE ?)";
         $params[] = "%$b%";
         $params[] = "%$b%";
     }
-
     if ($condiciones) {
         $sql .= " AND (" . implode(" OR ", $condiciones) . ")";
     }
 }
-
 
 $sql .= " ORDER BY fecha_inicio DESC";
 $stmt = $pdo->prepare($sql);
@@ -49,50 +46,41 @@ $stmt->execute($params);
 $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 function safe($val) {
-    return htmlspecialchars($val ?? '');
+    return htmlspecialchars($val ?? '', ENT_QUOTES, 'UTF-8');
 }
 ?>
 
 <p class="text-gray-700 text-sm mb-4">Bienvenido, <strong><?= safe($_SESSION['usuario_nombre']) ?: 'Administrador' ?></strong></p>
 <?php include __DIR__ . '/../includes/tabs_servicios.php'; ?>
 
-<h2 class="text-xl font-semibold text-gray-800 mb-4">🛠 Servicios En Ruta</h2>
+<h2 class="text-xl font-semibold text-gray-800 mb-4">🚰 Servicios En Ruta</h2>
 
 <!-- Formulario de filtros -->
 <form method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
   <input type="hidden" name="tab" value="en_ruta">
-
   <div>
     <label class="text-sm font-medium text-gray-700">Fecha inicio</label>
     <input type="date" name="fecha_inicio" value="<?= safe($fecha_inicio) ?>" class="mt-1 w-full rounded border-gray-300 shadow-sm text-sm p-2">
   </div>
-
   <div>
     <label class="text-sm font-medium text-gray-700">Fecha fin</label>
     <input type="date" name="fecha_fin" value="<?= safe($fecha_fin) ?>" class="mt-1 w-full rounded border-gray-300 shadow-sm text-sm p-2">
   </div>
-
   <div>
     <label class="text-sm font-medium text-gray-700">Técnico</label>
     <select name="idc" class="mt-1 w-full rounded border-gray-300 shadow-sm text-sm p-2">
       <option value="">Todos</option>
       <?php foreach ($tecnicos as $nombre): ?>
-        <option value="<?= safe($nombre) ?>" <?= $tecnico === $nombre ? 'selected' : '' ?>>
-          <?= safe($nombre) ?>
-        </option>
+        <option value="<?= safe($nombre) ?>" <?= $tecnico === $nombre ? 'selected' : '' ?>><?= safe($nombre) ?></option>
       <?php endforeach; ?>
     </select>
   </div>
-
   <div>
     <label class="text-sm font-medium text-gray-700">Ticket o Afiliación</label>
     <input type="text" name="ticket" value="<?= safe($ticket) ?>" placeholder="Buscar..." class="mt-1 w-full rounded border-gray-300 shadow-sm text-sm p-2">
   </div>
-
   <div class="md:col-span-4 text-right">
-    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded">
-      Filtrar
-    </button>
+    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded">Filtrar</button>
   </div>
 </form>
 
@@ -109,10 +97,7 @@ function safe($val) {
         <option value="Cancelado">🚫 CANCELADO</option>
       </select>
     </div>
-
-    <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm">
-      Guardar Resultados
-    </button>
+    <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm">Guardar Resultados</button>
   </div>
 
   <div class="overflow-x-auto bg-white shadow rounded-xl">
@@ -144,9 +129,9 @@ function safe($val) {
             <td class="px-4 py-2">
               <?php
                 $vim = strtolower($s['vim'] ?? '');
-                echo stripos($vim, '4 horas') !== false || stripos($vim, '4hrs') !== false ? '⚡' : '';
-                echo stripos($vim, '24 horas') !== false || stripos($vim, '24hrs') !== false ? '⚡' : '';
-                echo stripos($vim, 'premium') !== false ? '💎' : '';
+                echo str_contains($vim, '4 horas') || str_contains($vim, '4hrs') ? '⚡' : '';
+                echo str_contains($vim, '24 horas') || str_contains($vim, '24hrs') ? '⚡' : '';
+                echo str_contains($vim, 'premium') ? '💎' : '';
                 echo !empty($s['fecha_cita']) ? '🗓' : '';
               ?>
             </td>
@@ -167,7 +152,6 @@ function safe($val) {
   </div>
 </form>
 
-<!-- JS DataTable y Validación -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
