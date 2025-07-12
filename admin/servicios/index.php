@@ -1,11 +1,14 @@
+<?php
 require_once __DIR__ . '/../init.php';
 require_once __DIR__ . '/service_functions.php';
 
+// Verificar sesión activa
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: /login.php");
     exit();
 }
 
+// Tabs disponibles
 $tabs = [
     'por_asignar' => 'Por Asignar',
     'en_ruta'     => 'En Ruta',
@@ -13,12 +16,8 @@ $tabs = [
     'citas'       => 'Citas',
 ];
 
+// Tab activo
 $tab = $_GET['tab'] ?? 'por_asignar';
-
-// Mostrar el panel de alertas en todo el módulo de servicios
-ob_start(); // Capturamos la salida HTML
-mostrar_panel_alertas($pdo);
-$panel_alertas_html = ob_get_clean();
 
 $contenido_tab = match($tab) {
     'en_ruta'   => __DIR__ . '/contenido_en_ruta.php',
@@ -27,5 +26,7 @@ $contenido_tab = match($tab) {
     default     => __DIR__ . '/contenido_por_asignar.php',
 };
 
+// Guardamos la ruta a incluir directamente (el layout se encarga del include)
 $contenido = $contenido_tab;
+
 require_once __DIR__ . '/../layout.php';
