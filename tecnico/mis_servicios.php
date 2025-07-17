@@ -5,7 +5,7 @@ if (!isset($pdo)) {
     die("❌ ERROR: Conexión PDO no inicializada");
 }
 
-$idc = $_SESSION['usuario_username'] ?? null;
+$idc = $_SESSION['usuario_nombre'] ?? null;
 echo "<!-- IDC: '$idc' -->";
 
 
