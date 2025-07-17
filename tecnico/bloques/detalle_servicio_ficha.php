@@ -9,7 +9,6 @@
   <p><strong>📞 Teléfono:</strong> <?= htmlspecialchars($servicio['telefono_contacto_1']) ?></p>
   <p><strong>🧾 Afiliación:</strong> <?= htmlspecialchars($servicio['afiliacion']) ?></p>
   <p><strong>🛠 Servicio:</strong> <?= htmlspecialchars($servicio['servicio']) ?></p>
-  <p><strong>📆 Fecha Atención:</strong> <?= htmlspecialchars($servicio['fecha_atencion']) ?></p>
   <p><strong>🕒 Hora Atención:</strong> <?= htmlspecialchars($servicio['hora_atencion']) ?></p>
   <p><strong>💬 Comentarios:</strong> <?= nl2br(htmlspecialchars($servicio['comentarios'])) ?></p>
 
