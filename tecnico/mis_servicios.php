@@ -2,7 +2,6 @@
 require_once __DIR__ . '/../config.php';
 session_start();
 
-// Verifica sesión activa
 if (!isset($_SESSION['usuario_username'])) {
   header("Location: ../login.php");
   exit;
@@ -10,7 +9,7 @@ if (!isset($_SESSION['usuario_username'])) {
 
 $idc = $_SESSION['usuario_username'];
 
-// Consulta de servicios asignados al técnico en estado En Ruta
+// Consulta de servicios activos
 $stmt = $pdo->prepare("
   SELECT ticket, afiliacion, comercio, ciudad, fecha_atencion 
   FROM servicios_omnipos 
@@ -20,6 +19,6 @@ $stmt = $pdo->prepare("
 $stmt->execute([$idc]);
 $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Carga la vista como tarjeta
+// Renderiza con layout
 $contenido = __DIR__ . '/bloques/mis_servicios_lista.php';
 include __DIR__ . '/layout_tecnico.php';
