@@ -17,7 +17,7 @@ if (!$idc) {
 $contenido = __DIR__ . '/bloques/mis_servicios_lista.php';
 
 $stmt = $pdo->prepare("
-    SELECT ticket, afiliacion, comercio, ciudad
+SELECT ticket, afiliacion, comercio, ciudad, telefono_contacto_1, servicio, vim, fecha_cita
     FROM servicios_omnipos
     WHERE idc = ? AND estatus = 'En Ruta'
     ORDER BY id DESC
