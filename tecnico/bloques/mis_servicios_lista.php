@@ -1,6 +1,6 @@
 <?php if (empty($servicios)): ?>
   <div class="text-gray-500 text-center mt-8">
-    No tienes servicios asignados por el momento.
+    No tienes servicios en ruta asignados.
   </div>
 <?php else: ?>
   <div class="space-y-4">
@@ -10,8 +10,7 @@
         <div class="text-sm text-gray-500">
           Ticket: <strong><?= $serv['ticket'] ?></strong><br>
           Afiliación: <?= $serv['afiliacion'] ?><br>
-          Ciudad: <?= $serv['ciudad'] ?><br>
-          Fecha atención: <?= $serv['fecha_atencion'] ?>
+          Ciudad: <?= $serv['ciudad'] ?>
         </div>
         <div class="mt-2">
           <a href="detalle_servicio.php?ticket=<?= urlencode($serv['ticket']) ?>" class="text-blue-600 text-sm hover:underline">🔍 Ver detalle</a>
