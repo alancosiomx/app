@@ -5,13 +5,38 @@
 <?php else: ?>
   <div class="space-y-4">
     <?php foreach ($servicios as $serv): ?>
-      <div class="bg-white shadow rounded-xl p-4">
-        <div class="font-semibold text-lg"><?= htmlspecialchars($serv['comercio']) ?></div>
-        <div class="text-sm text-gray-500">
-          Ticket: <strong><?= $serv['ticket'] ?></strong><br>
-          Afiliación: <?= $serv['afiliacion'] ?><br>
-          Ciudad: <?= $serv['ciudad'] ?>
+      <?php
+        $es_vim = !empty($serv['vim']);
+        $es_premium = stripos($serv['servicio'] ?? '', 'premium') !== false;
+        $tiene_cita = !empty($serv['fecha_cita']);
+
+        $etiquetas = [];
+        if ($es_vim) $etiquetas[] = '<span class="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded-full font-medium">🟣 VIM</span>';
+        if ($es_premium) $etiquetas[] = '<span class="bg-yellow-100 text-yellow-700 text-xs px-2 py-1 rounded-full font-medium">💎 Premium</span>';
+        if ($tiene_cita) {
+          $fecha_formateada = date('d M Y', strtotime($serv['fecha_cita']));
+          $etiquetas[] = "<span class='bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full font-medium'>📅 $fecha_formateada</span>";
+        }
+      ?>
+      <div class="bg-white shadow rounded-xl p-4 space-y-2">
+        <div class="flex justify-between items-center">
+          <div class="font-semibold text-lg"><?= htmlspecialchars($serv['comercio']) ?></div>
         </div>
+
+        <?php if (!empty($etiquetas)): ?>
+          <div class="flex flex-wrap gap-2">
+            <?= implode(' ', $etiquetas) ?>
+          </div>
+        <?php endif; ?>
+
+        <div class="text-sm text-gray-600 space-y-1 mt-2">
+          <div>🧾 Ticket: <strong><?= $serv['ticket'] ?></strong></div>
+          <div>🔢 Afiliación: <?= $serv['afiliacion'] ?></div>
+          <div>🏙️ Ciudad: <?= $serv['ciudad'] ?></div>
+          <div>🔧 Tipo: <?= $serv['servicio'] ?? '<span class="text-gray-400 italic">No definido</span>' ?></div>
+          <div>📞 Tel: <?= $serv['telefono_contacto_1'] ?? '<span class="text-gray-400 italic">Sin número</span>' ?></div>
+        </div>
+
         <div class="mt-2">
           <a href="detalle_servicio.php?ticket=<?= urlencode($serv['ticket']) ?>" class="text-blue-600 text-sm hover:underline">🔍 Ver detalle</a>
         </div>
