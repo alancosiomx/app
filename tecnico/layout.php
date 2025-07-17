@@ -1,3 +1,8 @@
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+echo "<!-- ✅ Layout cargado -->";
 <?php
 $nombre = $_SESSION['usuario_nombre'] ?? 'Técnico';
 $contenido = $contenido ?? null;
