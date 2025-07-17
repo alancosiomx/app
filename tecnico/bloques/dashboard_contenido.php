@@ -17,20 +17,17 @@ $servicios_premium = 1;
 
 <!-- Grid Accesos -->
 <div class="grid grid-cols-2 gap-4 mb-6">
-  <a href="mis_servicios.php" class="bg-white rounded-xl shadow text-center p-4 text-sm hover:bg-gray-100">
-    <div class="text-blue-600 text-2xl mb-1">🧾</div>
-    Servicios
-  </a>
-  <a href="inventario.php" class="bg-white rounded-xl shadow text-center p-4 text-sm hover:bg-gray-100">
-    <div class="text-green-600 text-2xl mb-1">📦</div>
-    Inventario
-  </a>
-  <a href="viaticos.php" class="bg-white rounded-xl shadow text-center p-4 text-sm hover:bg-gray-100">
-    <div class="text-yellow-500 text-2xl mb-1">💰</div>
-    Viáticos
-  </a>
-  <a href="generar_hs.php" class="bg-white rounded-xl shadow text-center p-4 text-sm hover:bg-gray-100">
-    <div class="text-purple-500 text-2xl mb-1">📄</div>
-    Hoja de Servicio
-  </a>
+  <a href="mis_servicios.php" class="...">🧾 Servicios</a>
+  <a href="inventario.php" class="...">📦 Inventario</a>
+
+  <?php if ($_SESSION['puede_viaticos'] ?? false): ?>
+    <a href="viaticos.php" class="bg-white rounded-xl shadow text-center p-4 text-sm hover:bg-gray-100">
+      <div class="text-yellow-500 text-2xl mb-1">💰</div>
+      Viáticos
+    </a>
+  <?php endif; ?>
+
+  <a href="generar_hs.php" class="...">📄 Hoja de Servicio</a>
+</div>
+
 </div>
