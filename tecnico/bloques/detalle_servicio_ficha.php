@@ -10,5 +10,24 @@
   <p><strong>🧾 Afiliación:</strong> <?= htmlspecialchars($servicio['afiliacion']) ?></p>
   <p><strong>🛠 Servicio:</strong> <?= htmlspecialchars($servicio['servicio']) ?></p>
   <p><strong>💬 Comentarios:</strong> <?= nl2br(htmlspecialchars($servicio['comentarios'])) ?></p>
+  <hr class="my-6 border-t">
+
+<h2 class="text-lg font-semibold mb-2">🕘 Historial de servicios anteriores</h2>
+
+<?php if (empty($historial)): ?>
+  <p class="text-sm text-gray-500">No hay servicios concluidos para esta afiliación.</p>
+<?php else: ?>
+  <div class="space-y-3">
+    <?php foreach ($historial as $h): ?>
+      <div class="bg-gray-50 p-3 rounded-xl shadow-sm text-sm text-gray-700">
+        <p>📅 Fecha: <strong><?= date("d M Y", strtotime($h['fecha_atencion'])) ?></strong></p>
+        <p>📞 Teléfono: <?= $h['telefono_contacto_1'] ?: '<span class="italic text-gray-400">Sin número</span>' ?></p>
+        <p>🕒 Horario: <?= $h['horario'] ?: '<span class="italic text-gray-400">Sin horario</span>' ?></p>
+        <p>💬 Comentarios: <?= nl2br(htmlspecialchars($h['comentarios'] ?? '')) ?></p>
+      </div>
+    <?php endforeach; ?>
+  </div>
+<?php endif; ?>
+
 
 </div>
