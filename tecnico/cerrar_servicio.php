@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/init.php';
+ob_start(); // <- esto previene errores por headers enviados
 
-header('Content-Type: text/html; charset=UTF-8');
+require_once __DIR__ . '/init.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
@@ -10,10 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $ticket = $_POST['ticket'] ?? null;
 $usuario = $_SESSION['usuario_nombre'] ?? null;
-echo "<!-- Usuario actual: $usuario -->";
-echo "<!-- Ticket recibido: $ticket -->";
-
-
 
 if (!$ticket || !$usuario) {
     http_response_code(400);
