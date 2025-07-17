@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Login - OMNIPOS</title>
+    <title>Login - OPERAVISE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="card shadow-sm p-4" style="max-width: 400px; width: 100%;">
         <div class="card-body">
-            <h3 class="text-center mb-4">Iniciar sesión en <strong>OMNIPOS</strong></h3>
+            <h3 class="text-center mb-4">Iniciar sesión en <strong>OPERAVISE</strong></h3>
 
             <?php if (!empty($error)): ?>
                 <div class="alert alert-danger" role="alert">
