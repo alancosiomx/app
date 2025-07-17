@@ -19,4 +19,4 @@ if (!$servicio) {
 }
 
 $contenido = __DIR__ . '/bloques/detalle_servicio_ficha.php';
-include __DIR__ . '/layout_tecnico.php';
+include __DIR__ . '/layout.php';
