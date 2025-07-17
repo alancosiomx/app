@@ -35,6 +35,7 @@
           <div>🧾 Ticket: <strong><?= $serv['ticket'] ?></strong></div>
           <div>🔢 Afiliación: <?= $serv['afiliacion'] ?></div>
           <div>🏙️ Ciudad: <?= $serv['ciudad'] ?></div>
+          <div>🏦 Banco: <?= $serv['banco'] ?? '<span class="text-gray-400 italic">No especificado</span>' ?></div>
           <div>🔧 Tipo: <?= $serv['servicio'] ?? '<span class="text-gray-400 italic">No definido</span>' ?></div>
           <div>📞 Tel: <?= $serv['telefono_contacto_1'] ?? '<span class="text-gray-400 italic">Sin número</span>' ?></div>
         </div>
