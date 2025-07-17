@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $ticket = $_POST['ticket'] ?? null;
-$usuario = $_SESSION['usuario_nombre'] ?? null;
+$usuario = $_SESSION['usuario_username'] ?? null;
 echo "<!-- Usuario actual: $usuario -->";
 echo "<!-- Ticket recibido: $ticket -->";
 
