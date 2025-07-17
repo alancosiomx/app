@@ -32,7 +32,7 @@ if (!$servicio) {
 // Actualizar estatus y registrar fecha de atención
 $update = $pdo->prepare("
     UPDATE servicios_omnipos
-    SET estatus = 'Concluido',
+    SET estatus = 'Histórico',
         fecha_atencion = NOW()
     WHERE ticket = ?
 ");
