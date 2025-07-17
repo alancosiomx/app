@@ -40,10 +40,19 @@
           <div>📞 Tel: <?= $serv['telefono_contacto_1'] ?? '<span class="text-gray-400 italic">Sin número</span>' ?></div>
         </div>
 
-        <div class="mt-2">
-          <a href="detalle_servicio.php?ticket=<?= urlencode($serv['ticket']) ?>" class="text-blue-600 text-sm hover:underline">🔍 Ver detalle</a>
-        </div>
-      </div>
-    <?php endforeach; ?>
-  </div>
+        <div class="mt-4 flex gap-3">
+  <a href="detalle_servicio.php?ticket=<?= urlencode($serv['ticket']) ?>"
+     class="flex-1 text-center bg-blue-100 text-blue-700 py-2 px-3 rounded-xl text-sm font-medium hover:bg-blue-200 transition">
+     🔍 Ver detalle
+  </a>
+
+  <form action="cerrar_servicio.php" method="POST" onsubmit="return confirm('¿Seguro que quieres cerrar este servicio?');">
+    <input type="hidden" name="ticket" value="<?= htmlspecialchars($serv['ticket']) ?>">
+    <button type="submit"
+      class="flex-1 text-center bg-green-100 text-green-700 py-2 px-3 rounded-xl text-sm font-medium hover:bg-green-200 transition">
+      ✅ Cerrar
+    </button>
+  </form>
+</div>
+
 <?php endif; ?>
