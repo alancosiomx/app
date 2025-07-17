@@ -1,4 +1,8 @@
 require_once __DIR__ . '/../init.php';
+if (!isset($pdo)) {
+  die("❌ ERROR: Conexión PDO no inicializada");
+}
+
 
 $idc = $_SESSION['usuario_username'] ?? null;
 $contenido = __DIR__ . '/bloques/mis_servicios_lista.php';
