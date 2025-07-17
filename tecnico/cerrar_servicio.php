@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/init.php';
 
-$ticket = $_GET['ticket'] ?? null;
+$ticket = $_POST['ticket'] ?? $_GET['ticket'] ?? null;
 
 if (!$ticket) {
     die("❌ Ticket no proporcionado.");
