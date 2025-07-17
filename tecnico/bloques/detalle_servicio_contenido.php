@@ -13,12 +13,29 @@
       <p>📍 Dirección: <?= $servicio['domicilio'] ?? 'N/D' ?></p>
       <p>📅 Fecha límite: <?= $servicio['fecha_limite'] ?? 'N/D' ?></p>
     </div>
+
+    <a href="?ticket=<?= urlencode($servicio['ticket']) ?>&ver_historial=1"
+       class="inline-block mt-4 text-sm text-blue-600 hover:underline">
+       🕘 Ver historial de esta afiliación
+    </a>
   </div>
 
-  <!-- Historial -->
-  <div>
+  <!-- Historial si se solicita -->
+  <?php if (!empty($_GET['ver_historial'])): ?>
+    <hr class="my-6 border-t">
     <h3 class="text-base font-semibold mb-2">🕘 Historial de servicios concluidos</h3>
-    
+
+    <?php
+      $stmt_hist = $pdo->prepare("
+          SELECT fecha_atencion, telefono_contacto_1, comentarios, horario
+          FROM servicios_omnipos
+          WHERE afiliacion = ? AND estatus = 'Concluido' AND ticket != ?
+          ORDER BY fecha_atencion DESC
+      ");
+      $stmt_hist->execute([$servicio['afiliacion'], $servicio['ticket']]);
+      $historial = $stmt_hist->fetchAll(PDO::FETCH_ASSOC);
+    ?>
+
     <?php if (empty($historial)): ?>
       <p class="text-sm text-gray-500">No hay servicios concluidos para esta afiliación.</p>
     <?php else: ?>
@@ -33,6 +50,6 @@
         <?php endforeach; ?>
       </div>
     <?php endif; ?>
-  </div>
+  <?php endif; ?>
 
 </div>
