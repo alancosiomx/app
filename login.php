@@ -40,20 +40,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($pass, $user['password'])) {
-            // Sesión segura
-            $_SESSION['usuario_id'] = $user['id'];
-            $_SESSION['usuario_nombre'] = $user['nombre'];
-            $_SESSION['usuario_username'] = $user['username'];
-            $_SESSION['usuario_email'] = $user['email'];
-            $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
-            $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
-            $_SESSION['initiated'] = true;
+    // Sesión segura
+    $_SESSION['usuario_id'] = $user['id'];
+    $_SESSION['usuario_nombre'] = $user['nombre'];
+    $_SESSION['usuario_username'] = $user['username'];
+    $_SESSION['usuario_email'] = $user['email'];
+    $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
+    $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
+    $_SESSION['initiated'] = true;
 
-            // Obtener roles
-            $rol_stmt = $pdo->prepare("SELECT rol FROM usuarios_roles WHERE usuario_id = ?");
-            $rol_stmt->execute([$user['id']]);
-            $roles = $rol_stmt->fetchAll(PDO::FETCH_COLUMN);
-            $_SESSION['usuario_roles'] = $roles;
+    // Permiso especial
+    $_SESSION['puede_viaticos'] = (int) ($user['puede_viaticos'] ?? 0);
+
+    // Obtener roles
+    $rol_stmt = $pdo->prepare("SELECT rol FROM usuarios_roles WHERE usuario_id = ?");
+    $rol_stmt->execute([$user['id']]);
+    $roles = $rol_stmt->fetchAll(PDO::FETCH_COLUMN);
+    $_SESSION['usuario_roles'] = $roles;
 
             // Redirección según rol
             if (in_array('admin', $roles)) {
