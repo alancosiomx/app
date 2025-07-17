@@ -1,13 +1,7 @@
 <?php
-require_once __DIR__ . '/../config.php';
-session_start();
+require_once __DIR__ . '/init.php';
 
-if (!isset($_SESSION['usuario_username'])) {
-  header("Location: ../login.php");
-  exit;
-}
-
-$idc = $_SESSION['usuario_username'];
+$usuario = $_SESSION['usuario_nombre'] ?? 'Técnico';
 
 // Consulta de servicios activos
 $stmt = $pdo->prepare("
@@ -16,9 +10,9 @@ $stmt = $pdo->prepare("
   WHERE idc = ? AND estatus = 'En Ruta' 
   ORDER BY fecha_atencion DESC
 ");
-$stmt->execute([$idc]);
+$stmt->execute([$_SESSION['usuario_username']]);
 $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Renderiza con layout
 $contenido = __DIR__ . '/bloques/mis_servicios_lista.php';
-include __DIR__ . '/layout_tecnico.php';
+
+require_once __DIR__ . '/layout_tecnico.php';
