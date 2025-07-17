@@ -1,43 +1,53 @@
 <?php
-ob_start(); // <- esto previene errores por headers enviados
-
 require_once __DIR__ . '/init.php';
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    exit('❌ Método no permitido.');
+$ticket = $_GET['ticket'] ?? null;
+
+if (!$ticket) {
+    die("❌ Ticket no proporcionado.");
 }
 
-$ticket = $_POST['ticket'] ?? null;
-$usuario = $_SESSION['usuario_nombre'] ?? null;
-
-if (!$ticket || !$usuario) {
-    http_response_code(400);
-    exit('❌ Faltan datos.');
-}
-
-// Verificar que el ticket esté asignado al técnico y siga en ruta
-$stmt = $pdo->prepare("
-    SELECT * FROM servicios_omnipos
-    WHERE ticket = ? AND idc = ? AND estatus = 'En Ruta'
-");
-$stmt->execute([$ticket, $usuario]);
+$stmt = $pdo->prepare("SELECT * FROM servicios_omnipos WHERE ticket = ?");
+$stmt->execute([$ticket]);
 $servicio = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$servicio) {
-    http_response_code(403);
-    exit('❌ No tienes permiso para cerrar este servicio, o ya fue concluido.');
+if (!$servicio || $servicio['estatus'] !== 'En Ruta') {
+    die("❌ Este servicio no está disponible para cierre.");
 }
+?>
 
-// Actualizar estatus y registrar fecha de atención
-$update = $pdo->prepare("
-    UPDATE servicios_omnipos
-    SET estatus = 'Histórico',
-        fecha_atencion = NOW()
-    WHERE ticket = ?
-");
-$update->execute([$ticket]);
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cerrar servicio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-4 max-w-md mx-auto">
+  <h1 class="text-xl font-bold mb-4">✅ Cerrar servicio</h1>
+  <p class="mb-2 text-sm text-gray-700">Ticket: <strong><?= htmlspecialchars($ticket) ?></strong></p>
 
-// Redirigir de vuelta con mensaje opcional (flash)
-header("Location: mis_servicios.php?cerrado=1");
-exit;
+  <form method="POST" action="procesar_cierre.php" class="space-y-4">
+    <input type="hidden" name="ticket" value="<?= htmlspecialchars($ticket) ?>">
+
+    <label class="block text-sm font-medium text-gray-700">
+      Nombre de quien atiende (comercio):
+      <input type="text" name="atiende" required class="mt-1 block w-full rounded border-gray-300 shadow-sm text-sm" placeholder="Ej. Luis Ramírez">
+    </label>
+
+    <label class="block text-sm font-medium text-gray-700">
+      Resultado del servicio:
+      <select name="resultado" required class="mt-1 block w-full rounded border-gray-300 shadow-sm text-sm">
+        <option value="">-- Seleccionar --</option>
+        <option value="Éxito">✅ Éxito</option>
+        <option value="Rechazo">❌ Rechazo</option>
+      </select>
+    </label>
+
+    <button type="submit"
+            class="bg-green-600 text-white w-full py-2 rounded font-semibold hover:bg-green-700">
+      Guardar y cerrar servicio
+    </button>
+  </form>
+</body>
+</html>
