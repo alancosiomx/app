@@ -21,5 +21,4 @@ $stmt = $pdo->prepare("
 $stmt->execute([$idc]);
 $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-echo "<!-- 🟢 Llega antes de layout -->";
 require_once __DIR__ . '/layout.php';
