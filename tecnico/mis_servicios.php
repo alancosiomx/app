@@ -6,6 +6,8 @@ if (!isset($pdo)) {
 }
 
 $idc = $_SESSION['usuario_username'] ?? null;
+echo "<!-- IDC: '$idc' -->";
+
 
 if (!$idc) {
     header("Location: /login.php");
