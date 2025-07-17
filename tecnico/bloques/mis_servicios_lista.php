@@ -6,8 +6,10 @@
   <div class="space-y-4">
     <?php foreach ($servicios as $serv): ?>
       <?php
-        $es_vim = !empty($serv['vim']);
-        $es_premium = stripos($serv['servicio'] ?? '', 'premium') !== false;
+        $texto_vim = strtolower($serv['vim'] ?? '');
+
+        $es_vim = str_contains($texto_vim, '24 horas') || str_contains($texto_vim, '4 horas');
+        $es_premium = str_contains($texto_vim, 'premium');
         $tiene_cita = !empty($serv['fecha_cita']);
 
         $etiquetas = [];
