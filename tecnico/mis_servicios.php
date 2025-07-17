@@ -1,8 +1,3 @@
-<?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 require_once __DIR__ . '/../init.php';
 
 $idc = $_SESSION['usuario_username'] ?? null;
@@ -13,7 +8,6 @@ if (!$idc) {
   exit;
 }
 
-// Traer servicios asignados al técnico
 $stmt = $pdo->prepare("
   SELECT ticket, afiliacion, comercio, ciudad, fecha_atencion 
   FROM servicios_omnipos 
@@ -24,4 +18,3 @@ $stmt->execute([$idc]);
 $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 require_once __DIR__ . '/layout.php';
-  
