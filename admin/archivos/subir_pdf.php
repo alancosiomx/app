@@ -7,7 +7,7 @@ $tecnicos = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
 <h2 class="text-2xl font-bold mb-4">📤 Subir archivos PDF a técnicos</h2>
 
-<form action="guardar_pdf.php" method="POST" enctype="multipart/form-data" class="space-y-4">
+<form action="guardar_pdf.php" method="POST" enctype="multipart/form-data">
   <div>
     <label class="block text-sm font-medium mb-1">Selecciona Técnico:</label>
     <select name="idc" required class="w-full border p-2 rounded">
