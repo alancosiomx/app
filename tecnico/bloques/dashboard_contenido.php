@@ -34,7 +34,7 @@ $servicios_premium = 1;
     </a>
   <?php endif; ?>
 
-  <a href="generar_hs.php" class="bg-white rounded-xl shadow text-center p-4 text-sm hover:bg-gray-100">
+  <a href="descargar_hs.php" class="bg-white rounded-xl shadow text-center p-4 text-sm hover:bg-gray-100">
     <div class="text-purple-500 text-2xl mb-1">📄</div>
     Hoja de Servicio
   </a>
