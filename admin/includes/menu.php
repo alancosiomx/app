@@ -6,6 +6,7 @@
     <a href="/admin/servicios" class="block py-2 px-3 rounded hover:bg-gray-100">📋 Gestión de Servicios</a>
     <a href="/admin/servicios/uploader" class="block py-2 px-3 rounded hover:bg-gray-100">📂 Cargar Archivos</a>
     <a href="/admin/archivos/subir_pdf.php" class="block py-2 px-3 rounded hover:bg-gray-100">📤 Subir Archivos PDF</a>
+    <a href="/admin/archivos/ver_archivos.php" class="block py-2 px-3 rounded hover:bg-gray-100">📄 Ver Archivos</a>
     <a href="/admin/inventario/" class="block py-2 px-3 rounded hover:bg-gray-100">📦 Inventario</a>
     <a href="/admin/sims/" class="block py-2 px-3 rounded hover:bg-gray-100">💾 Sims</a>
     <a href="/admin/ajustes/" class="block py-2 px-3 rounded hover:bg-gray-100">⚙️ Ajustes</a>
