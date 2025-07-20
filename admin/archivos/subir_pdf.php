@@ -22,6 +22,7 @@ $tecnicos = $stmt->fetchAll(PDO::FETCH_COLUMN);
     <label class="block text-sm font-medium mb-1">Selecciona PDF(s):</label>
     <input type="file" name="archivos[]" accept="application/pdf" multiple required class="w-full">
   </div>
+<input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
 
   <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
     Subir Archivos
