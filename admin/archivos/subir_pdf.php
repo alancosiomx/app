@@ -26,4 +26,8 @@ $tecnicos = $stmt->fetchAll(PDO::FETCH_COLUMN);
   <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
     Subir Archivos
   </button>
+  <?php if (isset($_GET['ok'])): ?>
+  <div class="bg-green-100 text-green-700 p-3 rounded mb-4">✅ Archivos subidos correctamente.</div>
+<?php endif; ?>
+
 </form>
