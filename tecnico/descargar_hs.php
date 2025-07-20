@@ -25,4 +25,4 @@ if (is_dir($carpeta)) {
 }
 
 $contenido = __DIR__ . '/bloques/descargar_hs_lista.php';
-include __DIR__ . '/layout_tecnico.php';
+include __DIR__ . '/layout.php';
