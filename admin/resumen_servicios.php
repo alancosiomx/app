@@ -1,9 +1,24 @@
 <?php
 require_once __DIR__ . '/../config.php';
 
+$quick = $_GET['quick'] ?? '';
 $fecha_inicio = $_GET['fecha_inicio'] ?? '';
 $fecha_fin = $_GET['fecha_fin'] ?? '';
 $tecnico = $_GET['tecnico'] ?? '';
+
+// Si se usa filtro rápido, se sobrescriben las fechas
+if ($quick === 'hoy') {
+    $fecha_inicio = $fecha_fin = date('Y-m-d');
+} elseif ($quick === '7') {
+    $fecha_inicio = date('Y-m-d', strtotime('-6 days'));
+    $fecha_fin = date('Y-m-d');
+} elseif ($quick === '15') {
+    $fecha_inicio = date('Y-m-d', strtotime('-14 days'));
+    $fecha_fin = date('Y-m-d');
+} elseif ($quick === 'mes') {
+    $fecha_inicio = date('Y-m-01');
+    $fecha_fin = date('Y-m-d');
+}
 
 $where = 'WHERE 1=1';
 $params = [];
@@ -52,6 +67,14 @@ $stmt = $pdo->prepare($graficaTecnicoQuery);
 $stmt->execute($params);
 $grafica_tecnicos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
+<!-- Botones rápidos de filtro -->
+<div class="flex gap-2 mb-4">
+    <a href="?quick=hoy<?= $tecnico ? '&tecnico=' . urlencode($tecnico) : '' ?>" class="px-3 py-2 bg-blue-100 hover:bg-blue-200 rounded text-sm text-blue-700">📆 Hoy</a>
+    <a href="?quick=7<?= $tecnico ? '&tecnico=' . urlencode($tecnico) : '' ?>" class="px-3 py-2 bg-blue-100 hover:bg-blue-200 rounded text-sm text-blue-700">📅 Últimos 7 días</a>
+    <a href="?quick=15<?= $tecnico ? '&tecnico=' . urlencode($tecnico) : '' ?>" class="px-3 py-2 bg-blue-100 hover:bg-blue-200 rounded text-sm text-blue-700">📆 Últimos 15 días</a>
+    <a href="?quick=mes<?= $tecnico ? '&tecnico=' . urlencode($tecnico) : '' ?>" class="px-3 py-2 bg-blue-100 hover:bg-blue-200 rounded text-sm text-blue-700">🗓️ Este mes</a>
+</div>
 
 <!-- Filtros -->
 <form method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
