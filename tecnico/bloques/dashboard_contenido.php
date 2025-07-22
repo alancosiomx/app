@@ -1,9 +1,25 @@
 <?php
-// Simulación de datos (luego se conectará a la BD)
-$citas_hoy = 3;
-$servicios_vim = 2;
-$servicios_premium = 1;
+require_once __DIR__ . '/init.php';
+
+$idc = $_SESSION['usuario_nombre'] ?? ''; // o ajusta si usas ID
+$hoy = date('Y-m-d');
+
+// Citas HOY
+$stmt = $pdo->prepare("SELECT COUNT(*) FROM servicios_omnipos WHERE fecha_cita = ? AND idc = ? AND estatus = 'En Ruta'");
+$stmt->execute([$hoy, $idc]);
+$citas_hoy = $stmt->fetchColumn();
+
+// VIM pendientes
+$stmt = $pdo->prepare("SELECT COUNT(*) FROM servicios_omnipos WHERE tipo_servicio LIKE '%VIM%' AND idc = ? AND estatus != 'Histórico'");
+$stmt->execute([$idc]);
+$servicios_vim = $stmt->fetchColumn();
+
+// Premium
+$stmt = $pdo->prepare("SELECT COUNT(*) FROM servicios_omnipos WHERE servicio LIKE '%Premium%' AND idc = ? AND estatus != 'Histórico'");
+$stmt->execute([$idc]);
+$servicios_premium = $stmt->fetchColumn();
 ?>
+
 
 <!-- Tarjeta Morada -->
 <div class="bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-2xl p-5 mb-6 shadow">
