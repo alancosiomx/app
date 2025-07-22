@@ -2,47 +2,73 @@
 require_once __DIR__ . '/../init.php';
 session_start();
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    die("❌ Método no permitido.");
+$ticket = $_GET['ticket'] ?? null;
+
+if (!$ticket) {
+    echo "<div class='text-red-600 font-bold p-4'>❌ Ticket no proporcionado.</div>";
+    exit;
 }
 
-$ticket = $_POST['ticket'] ?? null;
-$atiende = $_POST['atiende'] ?? null;
-$resultado = $_POST['resultado'] ?? null;
-$serie_instalada = $_POST['serie_instalada'] ?? null;
-$serie_retirada = $_POST['serie_retirada'] ?? null;
-$observaciones = $_POST['observaciones'] ?? null;
-$cerrado_por = $_SESSION['usuario_nombre'] ?? 'sistema';
+// Verifica que el ticket esté en ruta
+$stmt = $pdo->prepare("SELECT * FROM servicios_omnipos WHERE ticket = ?");
+$stmt->execute([$ticket]);
+$servicio = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$ticket || !$atiende || !$resultado) {
-    die("❌ Faltan datos obligatorios.");
+if (!$servicio || $servicio['estatus'] !== 'En Ruta') {
+    echo "<div class='text-red-600 font-bold p-4'>❌ Este servicio no está disponible para cierre.</div>";
+    exit;
 }
+?>
 
-// Evita cierres duplicados
-$check = $pdo->prepare("SELECT id FROM cierres_servicio WHERE ticket = ?");
-$check->execute([$ticket]);
-if ($check->fetch()) {
-    die("⚠️ Este servicio ya fue cerrado previamente.");
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cerrar servicio <?= htmlspecialchars($ticket) ?></title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-4">
+  <div class="max-w-lg mx-auto bg-white rounded shadow p-6">
+    <h1 class="text-2xl font-bold mb-4">✅ Cerrar servicio</h1>
+    <p class="mb-4 text-sm text-gray-600">Ticket: <strong><?= htmlspecialchars($ticket) ?></strong></p>
 
-// Guardar cierre
-$stmt = $pdo->prepare("
-    INSERT INTO cierres_servicio 
-    (ticket, atiende, resultado, serie_instalada, serie_retirada, observaciones, cerrado_por) 
-    VALUES (?, ?, ?, ?, ?, ?, ?)
-");
-$stmt->execute([
-    $ticket,
-    $atiende,
-    $resultado,
-    $serie_instalada,
-    $serie_retirada,
-    $observaciones,
-    $cerrado_por
-]);
+    <form method="POST" action="procesar_cierre.php" class="space-y-4">
+      <input type="hidden" name="ticket" value="<?= htmlspecialchars($ticket) ?>">
 
-// (Opcional) Marcar como Histórico en servicios_omnipos
-$pdo->prepare("UPDATE servicios_omnipos SET estatus = 'Histórico' WHERE ticket = ?")->execute([$ticket]);
+      <label class="block text-sm font-medium text-gray-700">
+        Nombre de quien atiende (comercio):
+        <input type="text" name="atiende" required class="mt-1 w-full border rounded p-2 text-sm" placeholder="Ej. Luis Ramírez">
+      </label>
 
-header("Location: /app/tecnico/?cierre=ok");
-exit;
+      <label class="block text-sm font-medium text-gray-700">
+        Resultado del servicio:
+        <select name="resultado" required class="mt-1 w-full border rounded p-2 text-sm">
+          <option value="">-- Seleccionar --</option>
+          <option value="Éxito">✅ Éxito</option>
+          <option value="Rechazo">❌ Rechazo</option>
+        </select>
+      </label>
+
+      <label class="block text-sm font-medium text-gray-700">
+        Serie instalada:
+        <input type="text" name="serie_instalada" class="mt-1 w-full border rounded p-2 text-sm" placeholder="Ej. 1234567890">
+      </label>
+
+      <label class="block text-sm font-medium text-gray-700">
+        Serie retirada:
+        <input type="text" name="serie_retirada" class="mt-1 w-full border rounded p-2 text-sm" placeholder="Ej. 0987654321">
+      </label>
+
+      <label class="block text-sm font-medium text-gray-700">
+        Comentarios del técnico:
+        <textarea name="observaciones" rows="3" class="mt-1 w-full border rounded p-2 text-sm" placeholder="Notas adicionales..."></textarea>
+      </label>
+
+      <button type="submit" class="w-full bg-green-600 text-white py-2 rounded font-semibold hover:bg-green-700">
+        Guardar y cerrar servicio
+      </button>
+    </form>
+  </div>
+</body>
+</html>
