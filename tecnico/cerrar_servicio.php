@@ -1,8 +1,9 @@
 <?php
-require_once __DIR__ . '/init.php';
+require_once __DIR__ . '/../init.php';
 if (session_status() === PHP_SESSION_NONE) session_start();
 
 $ticket = $_GET['ticket'] ?? null;
+$idc = $_SESSION['usuario_nombre'] ?? null;
 
 if (!$ticket) {
     echo "<div class='bg-red-100 text-red-700 p-4 rounded border border-red-300 font-semibold'>
@@ -11,15 +12,22 @@ if (!$ticket) {
     exit;
 }
 
+if (!$idc) {
+    echo "<div class='bg-red-100 text-red-700 p-4 rounded border border-red-300 font-semibold'>
+        ⚠️ No hay técnico en sesión. Por favor vuelve a iniciar sesión.
+    </div>";
+    exit;
+}
 
-
-// Verifica que el ticket esté en ruta
-$stmt = $pdo->prepare("SELECT * FROM servicios_omnipos WHERE ticket = ?");
-$stmt->execute([$ticket]);
+// Verifica que el ticket esté en ruta y asignado al técnico actual
+$stmt = $pdo->prepare("SELECT * FROM servicios_omnipos WHERE ticket = ? AND estatus = 'En Ruta' AND idc = ?");
+$stmt->execute([$ticket, $idc]);
 $servicio = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$servicio || $servicio['estatus'] !== 'En Ruta') {
-    echo "<div class='text-red-600 font-bold p-4'>❌ Este servicio no está disponible para cierre.</div>";
+if (!$servicio) {
+    echo "<div class='bg-yellow-100 text-yellow-800 p-4 rounded border border-yellow-300 font-semibold'>
+        ❌ Este servicio no está asignado a ti o no está En Ruta.
+    </div>";
     exit;
 }
 ?>
@@ -27,7 +35,7 @@ if (!$servicio || $servicio['estatus'] !== 'En Ruta') {
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cerrar servicio <?= htmlspecialchars($ticket) ?></title>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -56,12 +64,12 @@ if (!$servicio || $servicio['estatus'] !== 'En Ruta') {
 
       <label class="block text-sm font-medium text-gray-700">
         Serie instalada:
-        <input type="text" name="serie_instalada" class="mt-1 w-full border rounded p-2 text-sm" placeholder="Ej. 1234567890">
+        <input type="text" name="serie_instalada" class="mt-1 w-full border rounded p-2 text-sm" placeholder="Ej. 123456">
       </label>
 
       <label class="block text-sm font-medium text-gray-700">
         Serie retirada:
-        <input type="text" name="serie_retirada" class="mt-1 w-full border rounded p-2 text-sm" placeholder="Ej. 0987654321">
+        <input type="text" name="serie_retirada" class="mt-1 w-full border rounded p-2 text-sm" placeholder="Ej. 654321">
       </label>
 
       <label class="block text-sm font-medium text-gray-700">
