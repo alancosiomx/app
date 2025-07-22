@@ -1,43 +1,61 @@
 <?php
-require_once __DIR__ . '/../../../config.php';
-session_start();
+require_once __DIR__ . '/../../init.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $ticket = $_POST['ticket'] ?? '';
-    $resultado = $_POST['resultado'] ?? '';
-    $serie_instalada = $_POST['serie_instalada'] ?? null;
-    $serie_retiro = $_POST['serie_retiro'] ?? null;
-    $observaciones = $_POST['comentarios'] ?? null;
-    $atiende = $_POST['recibio_cliente'] ?? '';
-    $cerrado_por = $_SESSION['usuario_nombre'] ?? '';
-    $reprogramado = 0; // o lógica para determinar si fue reprogramado
+$ticket = $_POST['ticket'] ?? $_GET['ticket'] ?? null;
 
-    // Evita duplicados
-    $verifica = $pdo->prepare("SELECT id FROM cierres_servicio WHERE ticket = ?");
-    $verifica->execute([$ticket]);
-    if ($verifica->fetch()) {
-        echo "❌ Este servicio ya fue cerrado.";
-        exit;
-    }
+if (!$ticket) {
+    echo "<div class='text-red-600 font-bold'>❌ Ticket no proporcionado.</div>";
+    return;
+}
 
-    // Guardar cierre
-    $stmt = $pdo->prepare("INSERT INTO cierres_servicio 
-        (ticket, atiende, resultado, serie_instalada, serie_retirada, reprogramado, observaciones, cerrado_por) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    
-    $stmt->execute([
-        $ticket,
-        $atiende,
-        $resultado,
-        $serie_instalada,
-        $serie_retiro,
-        $reprogramado,
-        $observaciones,
-        $cerrado_por
-    ]);
+$stmt = $pdo->prepare("SELECT * FROM servicios_omnipos WHERE ticket = ?");
+$stmt->execute([$ticket]);
+$servicio = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    echo "✅ Servicio cerrado correctamente.";
-    header("Location: /tecnico/");
-    exit;
+if (!$servicio || $servicio['estatus'] !== 'En Ruta') {
+    echo "<div class='text-red-600 font-bold'>❌ Servicio no disponible para cierre.</div>";
+    return;
 }
 ?>
+
+<div class="bg-white shadow p-4 rounded max-w-lg mx-auto mt-4">
+  <h2 class="text-xl font-bold mb-4">✅ Cerrar servicio</h2>
+  <p class="text-sm text-gray-700 mb-4">Ticket: <strong><?= htmlspecialchars($ticket) ?></strong></p>
+
+  <form method="POST" action="/app/tecnico/procesar_cierre.php" class="space-y-4">
+    <input type="hidden" name="ticket" value="<?= htmlspecialchars($ticket) ?>">
+
+    <div>
+      <label class="block text-sm font-medium">Nombre de quien atiende (comercio):</label>
+      <input type="text" name="atiende" required class="w-full mt-1 p-2 border rounded" placeholder="Ej. Luis Ramírez">
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium">Resultado del servicio:</label>
+      <select name="resultado" required class="w-full mt-1 p-2 border rounded">
+        <option value="">-- Seleccionar --</option>
+        <option value="Éxito">✅ Éxito</option>
+        <option value="Rechazo">❌ Rechazo</option>
+      </select>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium">Serie instalada:</label>
+      <input type="text" name="serie_instalada" class="w-full mt-1 p-2 border rounded" placeholder="Ej. 123456">
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium">Serie retirada:</label>
+      <input type="text" name="serie_retirada" class="w-full mt-1 p-2 border rounded" placeholder="Ej. 654321">
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium">Comentarios:</label>
+      <textarea name="observaciones" class="w-full mt-1 p-2 border rounded" rows="3" placeholder="Comentarios del servicio..."></textarea>
+    </div>
+
+    <button type="submit" class="w-full bg-green-600 text-white py-2 rounded font-semibold hover:bg-green-700">
+      Guardar y cerrar servicio
+    </button>
+  </form>
+</div>
