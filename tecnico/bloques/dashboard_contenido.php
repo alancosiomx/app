@@ -1,24 +1,41 @@
 <?php
 require_once __DIR__ . '/../init.php';
 
-$idc = $_SESSION['usuario_nombre'] ?? ''; // o ajusta si usas ID
+$idc = $_SESSION['usuario_nombre'] ?? ''; // Ajusta si usas otro identificador
 $hoy = date('Y-m-d');
 
-// Citas HOY
-$stmt = $pdo->prepare("SELECT COUNT(*) FROM servicios_omnipos WHERE fecha_cita = ? AND idc = ? AND estatus = 'En Ruta'");
+// 📅 Citas HOY (solo si están en ruta)
+$stmt = $pdo->prepare("
+  SELECT COUNT(*) FROM servicios_omnipos
+  WHERE fecha_cita = ? AND idc = ? AND estatus = 'En Ruta'
+");
 $stmt->execute([$hoy, $idc]);
 $citas_hoy = $stmt->fetchColumn();
 
-// VIM pendientes
-$stmt = $pdo->prepare("SELECT COUNT(*) FROM servicios_omnipos WHERE tipo_servicio LIKE '%VIM%' AND idc = ? AND estatus != 'Histórico'");
+// ⚡ VIM pendientes (en ruta y con texto VIM válido)
+$stmt = $pdo->prepare("
+  SELECT COUNT(*) FROM servicios_omnipos
+  WHERE idc = ?
+    AND estatus = 'En Ruta'
+    AND (
+      vim LIKE '%4 horas%' OR
+      vim LIKE '%24 horas%'
+    )
+");
 $stmt->execute([$idc]);
 $servicios_vim = $stmt->fetchColumn();
 
-// Premium
-$stmt = $pdo->prepare("SELECT COUNT(*) FROM servicios_omnipos WHERE servicio LIKE '%Premium%' AND idc = ? AND estatus != 'Histórico'");
+// 💎 Premium (en ruta con palabra premium en vim)
+$stmt = $pdo->prepare("
+  SELECT COUNT(*) FROM servicios_omnipos
+  WHERE idc = ?
+    AND estatus = 'En Ruta'
+    AND vim LIKE '%premium%'
+");
 $stmt->execute([$idc]);
 $servicios_premium = $stmt->fetchColumn();
 ?>
+
 
 
 <!-- Tarjeta Morada -->
