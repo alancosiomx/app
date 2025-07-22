@@ -1,12 +1,17 @@
 <?php
 require_once __DIR__ . '/init.php';
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $ticket = $_GET['ticket'] ?? null;
 
 if (!$ticket) {
     echo "<div class='text-red-600 font-bold p-4'>❌ Ticket no proporcionado.</div>";
     exit;
 }
+
 
 // Verifica que el ticket esté en ruta
 $stmt = $pdo->prepare("SELECT * FROM servicios_omnipos WHERE ticket = ?");
