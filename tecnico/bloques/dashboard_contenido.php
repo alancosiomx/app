@@ -1,23 +1,8 @@
 <?php
-require_once __DIR__ . '/init.php'; // Ya incluye conexión y sesión
-
-$idc = $_SESSION['usuario_nombre'] ?? ''; // O ajusta si usas ID, por ejemplo: $_SESSION['usuario_id']
-$hoy = date('Y-m-d');
-
-// Citas para HOY
-$stmt = $pdo->prepare("SELECT COUNT(*) FROM servicios_omnipos WHERE fecha_cita = ? AND idc = ? AND estatus = 'En Ruta'");
-$stmt->execute([$hoy, $idc]);
-$citas_hoy = $stmt->fetchColumn();
-
-// VIM pendientes
-$stmt = $pdo->prepare("SELECT COUNT(*) FROM servicios_omnipos WHERE tipo_servicio LIKE '%VIM%' AND idc = ? AND estatus != 'Histórico'");
-$stmt->execute([$idc]);
-$servicios_vim = $stmt->fetchColumn();
-
-// Servicios Premium (ajusta el criterio si usas otro término)
-$stmt = $pdo->prepare("SELECT COUNT(*) FROM servicios_omnipos WHERE servicio LIKE '%Premium%' AND idc = ? AND estatus != 'Histórico'");
-$stmt->execute([$idc]);
-$servicios_premium = $stmt->fetchColumn();
+// Simulación de datos (luego se conectará a la BD)
+$citas_hoy = 3;
+$servicios_vim = 2;
+$servicios_premium = 1;
 ?>
 
 <!-- Tarjeta Morada -->
