@@ -1,16 +1,16 @@
 <?php
 require_once __DIR__ . '/init.php';
-
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+if (session_status() === PHP_SESSION_NONE) session_start();
 
 $ticket = $_GET['ticket'] ?? null;
 
 if (!$ticket) {
-    echo "<div class='text-red-600 font-bold p-4'>❌ Ticket no proporcionado.</div>";
+    echo "<div class='bg-red-100 text-red-700 p-4 rounded border border-red-300 font-semibold'>
+        ❌ Ticket no proporcionado. Agrega ?ticket=XXXXXXXX en la URL.
+    </div>";
     exit;
 }
+
 
 
 // Verifica que el ticket esté en ruta
