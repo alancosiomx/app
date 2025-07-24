@@ -5,18 +5,12 @@ if (empty($_SESSION['csrf_token'])) {
 
 $tipo = $_GET['tipo'] ?? 'tpv';
 if (!in_array($tipo, ['tpv', 'sim'])) {
-    die("❌ Tipo inválido.");
+    echo "<p class='text-red-600'>❌ Tipo inválido.</p>";
+    return;
 }
 
-// Técnicos disponibles
-$tecnicos = $pdo->query("
-    SELECT u.nombre FROM usuarios u
-    JOIN usuarios_roles r ON r.usuario_id = u.id
-    WHERE r.rol IN ('idc', 'tecnico')
-    ORDER BY u.nombre
-")->fetchAll(PDO::FETCH_COLUMN);
+$tecnicos = $pdo->query("SELECT u.nombre FROM usuarios u JOIN usuarios_roles r ON r.usuario_id = u.id WHERE r.rol IN ('idc','tecnico') ORDER BY u.nombre")->fetchAll(PDO::FETCH_COLUMN);
 
-// Series disponibles
 $query = $tipo === 'tpv'
     ? "SELECT serie FROM inventario_tpv WHERE estado = 'Disponible' ORDER BY id DESC"
     : "SELECT serie_sim AS serie FROM inventario_sims WHERE estado = 'Disponible' ORDER BY id DESC";
