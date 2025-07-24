@@ -21,8 +21,8 @@ $campo_serie = $tipo === 'tpv' ? 'serie' : 'serie_sim';
 $log_tabla = $tipo === 'tpv' ? 'log_inventario' : 'log_inventario_sims';
 
 // Preparar queries
-$stmt = $pdo->prepare("UPDATE $tabla SET estado = 'Asignado', tecnico_actual = ? WHERE $campo_serie = ? AND estado = 'Disponible'");
-$log = $pdo->prepare("INSERT INTO $log_tabla ($campo_serie, tipo_movimiento, usuario, observaciones) VALUES (?, 'Asignación', ?, ?)");
+$stmt = $pdo->prepare("UPDATE $tabla SET estado = 'Asignado', tecnico_actual = ?, fecha_ultimo_movimiento = NOW() WHERE $campo_serie = ? AND estado = 'Disponible'");
+$log = $pdo->prepare("INSERT INTO $log_tabla ($campo_serie, tipo_movimiento, usuario, fecha, observaciones) VALUES (?, 'Asignación', ?, NOW(), ?)");
 
 // Ejecutar asignación
 $asignados = 0;
