@@ -58,7 +58,10 @@
             ✅ Cerrar
           </a>
         </div>
-      </div>
-    <?php endforeach; ?>
+  </div>
+  <?php endforeach; ?>
   </div>
 <?php endif; ?>
+<div class="text-center mt-6">
+  <a href="cerrar_servicio_manual.php" class="text-blue-600 underline text-sm">Cerrar servicio manualmente</a>
+</div>
