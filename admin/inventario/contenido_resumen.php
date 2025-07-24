@@ -1,4 +1,20 @@
 <?php
+// Navegación por tabs
+$tabs = [
+    'resumen' => 'Resumen',
+    'asignar' => 'Asignar',
+    'editar' => 'Editar',
+    'devolver' => 'Devoluciones',
+    'recibir_danado' => 'Dañados'
+];
+
+echo "<div class='flex gap-2 mb-6'>";
+foreach (\$tabs as \$clave => \$label) {
+    \$active = \$tab === \$clave ? 'bg-gray-900 text-white' : 'bg-gray-200 text-gray-800 hover:bg-gray-300';
+    echo "<a href='?tab=\$clave&type=\$tipo' class='px-3 py-1.5 rounded \$active'>\$label</a>";
+}
+echo "</div>";
+
 require_once __DIR__ . '/../init.php';
 
 // Obtener técnicos del sistema
