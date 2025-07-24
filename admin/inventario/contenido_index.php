@@ -3,7 +3,7 @@ require_once __DIR__ . '/../init.php';
 
 // Obtener técnicos del sistema
 $stmt = $pdo->query("SELECT nombre FROM usuarios WHERE roles LIKE '%tecnico%' ORDER BY nombre");
-tecnicos = $stmt->fetchAll(PDO::FETCH_COLUMN);
+$tecnicos = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
 // Inicializar arrays para resumen
 $resumen_tpv = [];
