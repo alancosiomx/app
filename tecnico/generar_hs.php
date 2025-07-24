@@ -40,6 +40,7 @@ $placeholders = [
   '{{vim}}' => $servicio['vim'] ?? '',
   '{{serie_instalada}}' => $servicio['serie_instalada'] ?? '',
   '{{serie_retiro}}' => $servicio['serie_retiro'] ?? '',
+  '{{serie_retirada}}' => $servicio['serie_retiro'] ?? '',
   '{{cantidad_insumos}}' => $servicio['cantidad_insumos'] ?? '',
   '{{idc}}' => $servicio['idc'] ?? '',
   '{{servicio}}' => $servicio['servicio'] ?? '',

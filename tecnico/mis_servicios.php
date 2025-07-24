@@ -15,6 +15,10 @@ if (!$idc) {
 }
 
 $contenido = __DIR__ . '/bloques/mis_servicios_lista.php';
+$mensaje = null;
+if (isset($_GET['cerrado'])) {
+    $mensaje = '✅ Servicio cerrado correctamente.';
+}
 
 $stmt = $pdo->prepare("
 SELECT ticket, afiliacion, comercio, ciudad, telefono_contacto_1, servicio, vim, fecha_cita, banco
