@@ -1,3 +1,9 @@
+<?php if (!empty($mensaje)): ?>
+  <div class="bg-green-100 text-green-800 p-3 rounded mb-4 text-sm text-center">
+    <?= htmlspecialchars($mensaje) ?>
+  </div>
+<?php endif; ?>
+
 <?php if (empty($servicios)): ?>
   <div class="text-gray-500 text-center mt-8">
     No tienes servicios en ruta asignados.
@@ -46,13 +52,11 @@
              🔍 Ver detalle
           </a>
 
-          <form action="cerrar_servicio.php" method="POST" onsubmit="return confirm('¿Seguro que quieres cerrar este servicio?');">
-            <input type="hidden" name="ticket" value="<?= htmlspecialchars($serv['ticket']) ?>">
-            <button type="submit"
-              class="flex-1 text-center bg-green-100 text-green-700 py-2 px-3 rounded-xl text-sm font-medium hover:bg-green-200 transition">
-              ✅ Cerrar
-            </button>
-          </form>
+          <a href="cerrar_servicio.php?ticket=<?= urlencode($serv['ticket']) ?>"
+             class="flex-1 text-center bg-green-100 text-green-700 py-2 px-3 rounded-xl text-sm font-medium hover:bg-green-200 transition"
+             onclick="return confirm('¿Seguro que quieres cerrar este servicio?');">
+            ✅ Cerrar
+          </a>
         </div>
       </div>
     <?php endforeach; ?>
