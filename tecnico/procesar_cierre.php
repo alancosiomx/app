@@ -19,11 +19,8 @@ if (!$ticket || !$atiende || !$usuario || !in_array($resultado, ['Éxito', 'Rech
     die("❌ Datos incompletos o inválidos.");
 }
 
-// Validación: servicio existe, en ruta, y asignado al técnico
-$stmt = $pdo->prepare("
-    SELECT * FROM servicios_omnipos
-    WHERE ticket = ? AND idc = ? AND estatus = 'En Ruta'
-");
+// Validación: el servicio debe estar en ruta y asignado al técnico
+$stmt = $pdo->prepare("SELECT * FROM servicios_omnipos WHERE ticket = ? AND idc = ? AND estatus = 'En Ruta'");
 $stmt->execute([$ticket, $usuario]);
 $servicio = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -31,13 +28,10 @@ if (!$servicio) {
     die("❌ No autorizado o servicio ya cerrado.");
 }
 
-// Validación de serie si es éxito
+// Validar serie instalada si el resultado es Éxito
 if ($resultado === 'Éxito') {
     if ($serie_instalada) {
-        $val = $pdo->prepare("
-            SELECT id FROM inventario_tpv 
-            WHERE serie = ? AND estado = 'Asignado' AND tecnico_actual = ?
-        ");
+        $val = $pdo->prepare("SELECT id FROM inventario_tpv WHERE serie = ? AND estado = 'Asignado' AND tecnico_actual = ?");
         $val->execute([$serie_instalada, $usuario]);
         if (!$val->fetch()) {
             die("⚠️ Esta serie no está disponible en tu inventario.");
@@ -46,13 +40,14 @@ if ($resultado === 'Éxito') {
         die("❌ Debes capturar la serie instalada.");
     }
 } else {
+    // Si es rechazo, limpiar datos que no aplican
     $serie_instalada = null;
     $serie_retiro = null;
     $solucion = null;
     $solucion_especifica = null;
 }
 
-// Insertar en tabla cierres
+// Insertar en cierres_servicio
 $insert = $pdo->prepare("
     INSERT INTO cierres_servicio 
     (ticket, atiende, resultado, serie_instalada, serie_retirada, solucion, solucion_especifica, motivo_rechazo, observaciones, cerrado_por, fecha_cierre, latitud, longitud)
@@ -73,7 +68,7 @@ $insert->execute([
     $longitud
 ]);
 
-// Log temporal del cierre
+// Log para auditoría
 $pdo->prepare("
     INSERT INTO log_cierre_interactivo (ticket, idc, evento, valor, timestamp)
     VALUES (?, ?, 'cierre_completo', ?, NOW())
@@ -83,7 +78,7 @@ $pdo->prepare("
     json_encode($_POST)
 ]);
 
-// Actualizar estado en servicios_omnipos
+// Actualizar servicios_omnipos
 $update = $pdo->prepare("
     UPDATE servicios_omnipos SET
         estatus = 'Histórico',
@@ -94,7 +89,7 @@ $update = $pdo->prepare("
         solucion = ?,
         solucion_especifica = ?,
         motivo_rechazo = ?,
-        comentarios = ?,
+        observaciones = ?,
         fecha_atencion = NOW(),
         fecha_cierre = NOW()
     WHERE ticket = ? AND idc = ?
