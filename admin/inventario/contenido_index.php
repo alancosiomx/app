@@ -1,56 +1,102 @@
 <?php
-$terminales = $pdo->query("
-    SELECT t.id, t.serie, t.estado, t.banco, t.fecha_entrada, t.observaciones,
-           m.nombre AS modelo, f.nombre AS fabricante
-    FROM inventario_tpv t
-    JOIN modelos m ON t.modelo_id = m.id
-    JOIN fabricantes f ON m.fabricante_id = f.id
-    ORDER BY t.id DESC
-")->fetchAll(PDO::FETCH_ASSOC);
+require_once __DIR__ . '/../init.php';
+
+// Obtener técnicos del sistema
+$stmt = $pdo->query("SELECT nombre FROM usuarios WHERE roles LIKE '%tecnico%' ORDER BY nombre");
+tecnicos = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+// Inicializar arrays para resumen
+$resumen_tpv = [];
+$resumen_sims = [];
+
+foreach ($tecnicos as $tecnico) {
+    // --- TPVs por banco ---
+    $stmt = $pdo->prepare("SELECT banco, estado, COUNT(*) as total FROM inventario_tpv WHERE tecnico_actual = ? GROUP BY banco, estado");
+    $stmt->execute([$tecnico]);
+    $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($res as $r) {
+        $banco = $r['banco'] ?: 'Sin Banco';
+        $estado = $r['estado'];
+        $resumen_tpv[$tecnico][$banco]['Asignados'] = ($resumen_tpv[$tecnico][$banco]['Asignados'] ?? 0) + $r['total'];
+        if ($estado === 'Disponible') {
+            $resumen_tpv[$tecnico][$banco]['Disponibles'] = ($resumen_tpv[$tecnico][$banco]['Disponibles'] ?? 0) + $r['total'];
+        }
+        if ($estado === 'Dañado') {
+            $resumen_tpv[$tecnico][$banco]['Dañados'] = ($resumen_tpv[$tecnico][$banco]['Dañados'] ?? 0) + $r['total'];
+        }
+    }
+
+    // --- SIMs por banco ---
+    $stmt = $pdo->prepare("SELECT banco, estado, COUNT(*) as total FROM inventario_sims WHERE tecnico_actual = ? GROUP BY banco, estado");
+    $stmt->execute([$tecnico]);
+    $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($res as $r) {
+        $banco = $r['banco'] ?: 'Sin Banco';
+        $estado = $r['estado'];
+        $resumen_sims[$tecnico][$banco]['Asignados'] = ($resumen_sims[$tecnico][$banco]['Asignados'] ?? 0) + $r['total'];
+        if ($estado === 'Disponible') {
+            $resumen_sims[$tecnico][$banco]['Disponibles'] = ($resumen_sims[$tecnico][$banco]['Disponibles'] ?? 0) + $r['total'];
+        }
+        if ($estado === 'Dañada') {
+            $resumen_sims[$tecnico][$banco]['Dañados'] = ($resumen_sims[$tecnico][$banco]['Dañados'] ?? 0) + $r['total'];
+        }
+    }
+}
+
 ?>
 
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <h4>📦 Inventario de Terminales</h4>
-    <div>
-        <a href="nuevo.php" class="btn btn-success me-2">+ Nueva Terminal</a>
-        <a href="asignar.php" class="btn btn-outline-primary me-2">Asignar a Técnico</a>
-        <a href="recibir_danado.php" class="btn btn-outline-danger me-2">Recibir como Dañada</a>
-        <a href="preparar_envio.php" class="btn btn-outline-dark me-2">Enviar a CEDIS</a>
-        <a href="movimientos.php" class="btn btn-outline-secondary">📄 Movimientos</a>
-    </div>
-</div>
-
-<div class="card">
-    <div class="card-body table-responsive">
-        <table class="table table-sm table-bordered align-middle">
-            <thead class="table-light">
-                <tr>
-                    <th>#</th>
-                    <th>Serie</th>
-                    <th>Modelo</th>
-                    <th>Fabricante</th>
-                    <th>Banco</th>
-                    <th>Estado</th>
-                    <th>Fecha ingreso</th>
-                    <th>Acciones</th>
+<h2 class="text-xl font-bold mb-4">Resumen de TPVs por Técnico y Banco</h2>
+<?php foreach ($resumen_tpv as $tecnico => $bancos): ?>
+    <div class="mb-4 border rounded p-4 bg-white shadow">
+        <h3 class="text-lg font-semibold mb-2">👷‍♂️ <?= htmlspecialchars($tecnico) ?></h3>
+        <table class="w-full table-auto border">
+            <thead>
+                <tr class="bg-gray-100">
+                    <th class="px-3 py-2 text-left">Banco</th>
+                    <th class="px-3 py-2 text-left">Asignados</th>
+                    <th class="px-3 py-2 text-left">Disponibles</th>
+                    <th class="px-3 py-2 text-left">Dañados</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($terminales as $t): ?>
+                <?php foreach ($bancos as $banco => $data): ?>
                     <tr>
-                        <td><?= $t['id'] ?></td>
-                        <td><?= htmlspecialchars($t['serie']) ?></td>
-                        <td><?= htmlspecialchars($t['modelo']) ?></td>
-                        <td><?= htmlspecialchars($t['fabricante']) ?></td>
-                        <td><?= htmlspecialchars($t['banco']) ?></td>
-                        <td><?= htmlspecialchars($t['estado']) ?></td>
-                        <td><?= $t['fecha_entrada'] ?></td>
-                        <td>
-                            <a href="editar.php?id=<?= $t['id'] ?>" class="btn btn-sm btn-primary">Editar</a>
-                        </td>
+                        <td class="px-3 py-1 border-t"><?= htmlspecialchars($banco) ?></td>
+                        <td class="px-3 py-1 border-t"><?= $data['Asignados'] ?? 0 ?></td>
+                        <td class="px-3 py-1 border-t"><?= $data['Disponibles'] ?? 0 ?></td>
+                        <td class="px-3 py-1 border-t"><?= $data['Dañados'] ?? 0 ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </div>
-</div>
+<?php endforeach; ?>
+
+<h2 class="text-xl font-bold mt-10 mb-4">Resumen de SIMs por Técnico y Banco</h2>
+<?php foreach ($resumen_sims as $tecnico => $bancos): ?>
+    <div class="mb-4 border rounded p-4 bg-white shadow">
+        <h3 class="text-lg font-semibold mb-2">📱 <?= htmlspecialchars($tecnico) ?></h3>
+        <table class="w-full table-auto border">
+            <thead>
+                <tr class="bg-gray-100">
+                    <th class="px-3 py-2 text-left">Banco</th>
+                    <th class="px-3 py-2 text-left">Asignados</th>
+                    <th class="px-3 py-2 text-left">Disponibles</th>
+                    <th class="px-3 py-2 text-left">Dañados</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($bancos as $banco => $data): ?>
+                    <tr>
+                        <td class="px-3 py-1 border-t"><?= htmlspecialchars($banco) ?></td>
+                        <td class="px-3 py-1 border-t"><?= $data['Asignados'] ?? 0 ?></td>
+                        <td class="px-3 py-1 border-t"><?= $data['Disponibles'] ?? 0 ?></td>
+                        <td class="px-3 py-1 border-t"><?= $data['Dañados'] ?? 0 ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+<?php endforeach; ?>
