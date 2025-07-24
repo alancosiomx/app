@@ -47,18 +47,18 @@ foreach ($tecnicos as $tecnico) {
 
 ?>
 
-<div class="flex flex-wrap gap-3 mb-6">
-    <a href="nuevo_movimiento.php?tipo=tpv" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">➕ Nuevo TPV</a>
-    <a href="asignar.php?tipo=tpv" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">📦 Asignar TPV</a>
-    <a href="devolver.php?tipo=tpv" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">🔁 Devolver TPV</a>
-    <a href="preparar_envio.php?tipo=tpv" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">📬 Preparar envío TPV</a>
-    <a href="recibir_danado.php?tipo=tpv" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">⚠️ Recibir TPV dañado</a>
+<div class="flex flex-wrap gap-2 mb-6">
+    <a href="nuevo_movimiento.php?tipo=tpv" class="bg-gray-800 text-white px-3 py-1.5 rounded hover:bg-gray-900">➕ Nuevo TPV</a>
+    <a href="asignar.php?tipo=tpv" class="bg-gray-700 text-white px-3 py-1.5 rounded hover:bg-gray-800">📦 Asignar TPV</a>
+    <a href="devolver.php?tipo=tpv" class="bg-gray-600 text-white px-3 py-1.5 rounded hover:bg-gray-700">🔁 Devolver TPV</a>
+    <a href="preparar_envio.php?tipo=tpv" class="bg-gray-500 text-white px-3 py-1.5 rounded hover:bg-gray-600">📬 Preparar envío TPV</a>
+    <a href="recibir_danado.php?tipo=tpv" class="bg-red-700 text-white px-3 py-1.5 rounded hover:bg-red-800">⚠️ Recibir TPV dañado</a>
     <span class="mx-2 border-l"></span>
-    <a href="nuevo_movimiento.php?tipo=sim" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">➕ Nuevo SIM</a>
-    <a href="asignar.php?tipo=sim" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">📦 Asignar SIM</a>
-    <a href="devolver.php?tipo=sim" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">🔁 Devolver SIM</a>
-    <a href="preparar_envio.php?tipo=sim" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">📬 Preparar envío SIM</a>
-    <a href="recibir_danado.php?tipo=sim" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">⚠️ Recibir SIM dañado</a>
+    <a href="nuevo_movimiento.php?tipo=sim" class="bg-gray-800 text-white px-3 py-1.5 rounded hover:bg-gray-900">➕ Nuevo SIM</a>
+    <a href="asignar.php?tipo=sim" class="bg-gray-700 text-white px-3 py-1.5 rounded hover:bg-gray-800">📦 Asignar SIM</a>
+    <a href="devolver.php?tipo=sim" class="bg-gray-600 text-white px-3 py-1.5 rounded hover:bg-gray-700">🔁 Devolver SIM</a>
+    <a href="preparar_envio.php?tipo=sim" class="bg-gray-500 text-white px-3 py-1.5 rounded hover:bg-gray-600">📬 Preparar envío SIM</a>
+    <a href="recibir_danado.php?tipo=sim" class="bg-red-700 text-white px-3 py-1.5 rounded hover:bg-red-800">⚠️ Recibir SIM dañado</a>
 </div>
 
 <h2 class="text-xl font-bold mb-4">Resumen de TPVs por Técnico y Banco</h2>
