@@ -1,116 +1,54 @@
 <?php
-require_once __DIR__ . '/../init.php';
-
-// Obtener técnicos del sistema
-$stmt = $pdo->query("SELECT nombre FROM usuarios WHERE roles LIKE '%tecnico%' ORDER BY nombre");
-$tecnicos = $stmt->fetchAll(PDO::FETCH_COLUMN);
-
-// Inicializar arrays para resumen
-$resumen_tpv = [];
-$resumen_sims = [];
-
-foreach ($tecnicos as $tecnico) {
-    // --- TPVs por banco ---
-    $stmt = $pdo->prepare("SELECT banco, estado, COUNT(*) as total FROM inventario_tpv WHERE tecnico_actual = ? GROUP BY banco, estado");
-    $stmt->execute([$tecnico]);
-    $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    foreach ($res as $r) {
-        $banco = $r['banco'] ?: 'Sin Banco';
-        $estado = $r['estado'];
-        $resumen_tpv[$tecnico][$banco]['Asignados'] = ($resumen_tpv[$tecnico][$banco]['Asignados'] ?? 0) + $r['total'];
-        if ($estado === 'Disponible') {
-            $resumen_tpv[$tecnico][$banco]['Disponibles'] = ($resumen_tpv[$tecnico][$banco]['Disponibles'] ?? 0) + $r['total'];
-        }
-        if ($estado === 'Dañado') {
-            $resumen_tpv[$tecnico][$banco]['Dañados'] = ($resumen_tpv[$tecnico][$banco]['Dañados'] ?? 0) + $r['total'];
-        }
-    }
-
-    // --- SIMs por banco ---
-    $stmt = $pdo->prepare("SELECT banco, estado, COUNT(*) as total FROM inventario_sims WHERE tecnico_actual = ? GROUP BY banco, estado");
-    $stmt->execute([$tecnico]);
-    $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    foreach ($res as $r) {
-        $banco = $r['banco'] ?: 'Sin Banco';
-        $estado = $r['estado'];
-        $resumen_sims[$tecnico][$banco]['Asignados'] = ($resumen_sims[$tecnico][$banco]['Asignados'] ?? 0) + $r['total'];
-        if ($estado === 'Disponible') {
-            $resumen_sims[$tecnico][$banco]['Disponibles'] = ($resumen_sims[$tecnico][$banco]['Disponibles'] ?? 0) + $r['total'];
-        }
-        if ($estado === 'Dañada') {
-            $resumen_sims[$tecnico][$banco]['Dañados'] = ($resumen_sims[$tecnico][$banco]['Dañados'] ?? 0) + $r['total'];
-        }
-    }
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
+$tipo = $_GET['tipo'] ?? 'tpv';
+if (!in_array($tipo, ['tpv', 'sim'])) {
+    echo "<p class='text-red-600'>❌ Tipo inválido.</p>";
+    return;
+}
+
+$tecnicos = $pdo->query("SELECT u.nombre FROM usuarios u JOIN usuarios_roles r ON r.usuario_id = u.id WHERE r.rol IN ('idc','tecnico') ORDER BY u.nombre")->fetchAll(PDO::FETCH_COLUMN);
+
+$query = $tipo === 'tpv'
+    ? "SELECT serie FROM inventario_tpv WHERE estado = 'Disponible' ORDER BY id DESC"
+    : "SELECT serie_sim AS serie FROM inventario_sims WHERE estado = 'Disponible' ORDER BY id DESC";
+
+$disponibles = $pdo->query($query)->fetchAll(PDO::FETCH_COLUMN);
 ?>
 
-<div class="flex flex-wrap gap-2 mb-6">
-    <a href="nuevo_movimiento.php?tipo=tpv" class="bg-gray-800 text-white px-3 py-1.5 rounded hover:bg-gray-900">➕ Nuevo TPV</a>
-    <a href="asignar.php?tipo=tpv" class="bg-gray-700 text-white px-3 py-1.5 rounded hover:bg-gray-800">📦 Asignar TPV</a>
-    <a href="devolver.php?tipo=tpv" class="bg-gray-600 text-white px-3 py-1.5 rounded hover:bg-gray-700">🔁 Devolver TPV</a>
-    <a href="preparar_envio.php?tipo=tpv" class="bg-gray-500 text-white px-3 py-1.5 rounded hover:bg-gray-600">📬 Preparar envío TPV</a>
-    <a href="recibir_danado.php?tipo=tpv" class="bg-red-700 text-white px-3 py-1.5 rounded hover:bg-red-800">⚠️ Recibir TPV dañado</a>
-    <span class="mx-2 border-l"></span>
-    <a href="nuevo_movimiento.php?tipo=sim" class="bg-gray-800 text-white px-3 py-1.5 rounded hover:bg-gray-900">➕ Nuevo SIM</a>
-    <a href="asignar.php?tipo=sim" class="bg-gray-700 text-white px-3 py-1.5 rounded hover:bg-gray-800">📦 Asignar SIM</a>
-    <a href="devolver.php?tipo=sim" class="bg-gray-600 text-white px-3 py-1.5 rounded hover:bg-gray-700">🔁 Devolver SIM</a>
-    <a href="preparar_envio.php?tipo=sim" class="bg-gray-500 text-white px-3 py-1.5 rounded hover:bg-gray-600">📬 Preparar envío SIM</a>
-    <a href="recibir_danado.php?tipo=sim" class="bg-red-700 text-white px-3 py-1.5 rounded hover:bg-red-800">⚠️ Recibir SIM dañado</a>
-</div>
+<h4>📦 Asignar <?= strtoupper($tipo) ?> a Técnico</h4>
 
-<h2 class="text-xl font-bold mb-4">Resumen de TPVs por Técnico y Banco</h2>
-<?php foreach ($resumen_tpv as $tecnico => $bancos): ?>
-    <div class="mb-4 border rounded p-4 bg-white shadow">
-        <h3 class="text-lg font-semibold mb-2">👷‍♂️ <?= htmlspecialchars($tecnico) ?></h3>
-        <table class="w-full table-auto border">
-            <thead>
-                <tr class="bg-gray-100">
-                    <th class="px-3 py-2 text-left">Banco</th>
-                    <th class="px-3 py-2 text-left">Asignados</th>
-                    <th class="px-3 py-2 text-left">Disponibles</th>
-                    <th class="px-3 py-2 text-left">Dañados</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($bancos as $banco => $data): ?>
-                    <tr>
-                        <td class="px-3 py-1 border-t"><?= htmlspecialchars($banco) ?></td>
-                        <td class="px-3 py-1 border-t"><?= $data['Asignados'] ?? 0 ?></td>
-                        <td class="px-3 py-1 border-t"><?= $data['Disponibles'] ?? 0 ?></td>
-                        <td class="px-3 py-1 border-t"><?= $data['Dañados'] ?? 0 ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-<?php endforeach; ?>
+<form method="post" action="asignar.php" class="mt-4">
+    <input type="hidden" name="accion" value="asignar">
+    <input type="hidden" name="tipo" value="<?= htmlspecialchars($tipo) ?>">
+    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
 
-<h2 class="text-xl font-bold mt-10 mb-4">Resumen de SIMs por Técnico y Banco</h2>
-<?php foreach ($resumen_sims as $tecnico => $bancos): ?>
-    <div class="mb-4 border rounded p-4 bg-white shadow">
-        <h3 class="text-lg font-semibold mb-2">📱 <?= htmlspecialchars($tecnico) ?></h3>
-        <table class="w-full table-auto border">
-            <thead>
-                <tr class="bg-gray-100">
-                    <th class="px-3 py-2 text-left">Banco</th>
-                    <th class="px-3 py-2 text-left">Asignados</th>
-                    <th class="px-3 py-2 text-left">Disponibles</th>
-                    <th class="px-3 py-2 text-left">Dañados</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($bancos as $banco => $data): ?>
-                    <tr>
-                        <td class="px-3 py-1 border-t"><?= htmlspecialchars($banco) ?></td>
-                        <td class="px-3 py-1 border-t"><?= $data['Asignados'] ?? 0 ?></td>
-                        <td class="px-3 py-1 border-t"><?= $data['Disponibles'] ?? 0 ?></td>
-                        <td class="px-3 py-1 border-t"><?= $data['Dañados'] ?? 0 ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+    <div class="mb-3">
+        <label for="tecnico" class="form-label">Técnico *</label>
+        <select name="tecnico" id="tecnico" class="form-select" required>
+            <option value="">-- Selecciona técnico --</option>
+            <?php foreach ($tecnicos as $t): ?>
+                <option value="<?= htmlspecialchars($t) ?>"><?= htmlspecialchars($t) ?></option>
+            <?php endforeach; ?>
+        </select>
     </div>
-<?php endforeach; ?>
+
+    <div class="mb-3">
+        <label for="series" class="form-label">Series a Asignar *</label>
+        <textarea name="series" id="series" class="form-control" rows="6" placeholder="Una serie por línea" required></textarea>
+        <small class="text-muted">Disponibles: <?= count($disponibles) ?></small>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Asignar</button>
+    <a href="index.php" class="btn btn-secondary">Cancelar</a>
+</form>
+
+<hr class="my-6">
+
+<h4 class="mt-8 font-semibold text-lg">📑 Bitácora de Movimientos</h4>
+<ul class="list-disc pl-5 mt-2 text-sm text-gray-700">
+    <li><a href="log.php?tipo=tpv" class="text-blue-700 hover:underline">Ver log de TPVs</a></li>
+    <li><a href="log.php?tipo=sim" class="text-blue-700 hover:underline">Ver log de SIMs</a></li>
+</ul>
