@@ -79,19 +79,16 @@ function cargar_a_staging($archivoTmp, $extension, $banco, $pdo)
     return "✅ Se cargaron correctamente $insertados registros. ⚠️ Duplicados ignorados: $errores.";
 }
 
-function normalizar_fecha($valor)
-{
-    $valor = trim($valor);
-    if ($valor === '') return null;
+function normalizar_fecha($fecha) {
+    $fecha = trim($fecha);
+    if (!$fecha) return null;
 
-    $formatos = ['d/m/Y', 'd-m-Y', 'Y-m-d', 'Y/m/d'];
+    $timestamp = strtotime(str_replace('/', '-', $fecha));
+    if (!$timestamp || $timestamp === false) return null;
 
-    foreach ($formatos as $formato) {
-        $fecha = DateTime::createFromFormat($formato, $valor);
-        if ($fecha && $fecha->format($formato) === $valor) {
-            return $fecha->format('Y-m-d');
-        }
-    }
+    return date('Y-m-d', $timestamp);
+}
+
 
     return null;
 }
