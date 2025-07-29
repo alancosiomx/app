@@ -79,15 +79,22 @@ function cargar_a_staging($archivoTmp, $extension, $banco, $pdo)
     return "✅ Se cargaron correctamente $insertados registros. ⚠️ Duplicados ignorados: $errores.";
 }
 
-function normalizar_fecha($fecha) {
-    $fecha = trim($fecha);
-    if (!$fecha) return null;
+function normalizar_fecha($valor)
+{
+    $valor = trim($valor);
+    if ($valor === '') return null;
 
-    $timestamp = strtotime(str_replace('/', '-', $fecha));
-    if (!$timestamp || $timestamp === false) return null;
+    // Quitar la hora si viene en formato "31/07/2025 13:00"
+    $soloFecha = preg_split('/\s+/', $valor)[0]; // toma solo la parte "31/07/2025"
 
-    return date('Y-m-d', $timestamp);
+    try {
+        $fecha = new DateTime(str_replace('/', '-', $soloFecha));
+        return $fecha->format('Y-m-d');
+    } catch (Exception $e) {
+        return null;
+    }
 }
+
 
 
 function ticket_duplicado($valor, $pdo, $tabla)
