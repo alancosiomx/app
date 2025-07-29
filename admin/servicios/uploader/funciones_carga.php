@@ -24,16 +24,18 @@ function cargar_a_staging($archivoTmp, $extension, $banco, $pdo)
                     $fila = [];
 
                     foreach ($columnasDestino as $index => $columnaBD) {
-                        if (isset($data[$index])) {
-                            $valor = trim($data[$index]);
+    if (isset($data[$index])) {
+        $valor = trim($data[$index]);
 
-                            if (in_array($columnaBD, ['fecha_inicio', 'fecha_limite', 'fecha_atencion'])) {
-                                $valor = normalizar_fecha($valor);
-                            }
+        if (in_array($columnaBD, ['fecha_inicio', 'fecha_limite', 'fecha_atencion'])) {
+            error_log("📅 $columnaBD cruda: $valor");
+            $valor = normalizar_fecha($valor);
+        }
 
-                            $fila[$columnaBD] = $valor !== '' ? $valor : null;
-                        }
-                    }
+        $fila[$columnaBD] = $valor !== '' ? $valor : null;
+    }
+}
+
 
                     insertar_fila_directa($pdo, $tabla, $fila);
                     $insertados++;
