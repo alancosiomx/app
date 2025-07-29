@@ -90,9 +90,6 @@ function normalizar_fecha($fecha) {
 }
 
 
-    return null;
-}
-
 function ticket_duplicado($valor, $pdo, $tabla)
 {
     $columna = ($tabla === 'servicios_banregio') ? 'folio_cliente' : 'ticket';
