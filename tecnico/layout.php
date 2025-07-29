@@ -41,7 +41,7 @@ $contenido = $contenido ?? null;
     <a href="index.php" class="text-purple-600">🏠</a>
     <a href="mis_servicios.php">🧾</a>
     <a href="inventario.php">📦</a>
-    <a href="viaticos.php">💰</a>
+    <a href="alertas.php">🔔</a>
   </footer>
 
 </body>
