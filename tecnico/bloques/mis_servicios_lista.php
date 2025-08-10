@@ -12,20 +12,29 @@
   <div class="space-y-4">
     <?php foreach ($servicios as $serv): ?>
       <?php
-        $texto_vim = strtolower($serv['vim'] ?? '');
+  $texto_vim = strtolower($serv['vim'] ?? '');
 
-        $es_vim = str_contains($texto_vim, '24 horas') || str_contains($texto_vim, '4 horas');
-        $es_premium = str_contains($texto_vim, 'premium');
-        $tiene_cita = !empty($serv['fecha_cita']);
+  $es_vim = str_contains($texto_vim, '24 horas') || str_contains($texto_vim, '4 horas');
+  $es_premium = str_contains($texto_vim, 'premium');
+  $tiene_cita = !empty($serv['fecha_cita']);
+  $afiliacion_teclado = $serv['afiliacion'] === '4092409'; // Afiliación específica
 
-        $etiquetas = [];
-        if ($es_vim) $etiquetas[] = '<span class="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded-full font-medium">⚡ VIM</span>';
-        if ($es_premium) $etiquetas[] = '<span class="bg-yellow-100 text-yellow-700 text-xs px-2 py-1 rounded-full font-medium">💎 Premium</span>';
-        if ($tiene_cita) {
-          $fecha_formateada = date('d M Y', strtotime($serv['fecha_cita']));
-          $etiquetas[] = "<span class='bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full font-medium'>📅 $fecha_formateada</span>";
-        }
-      ?>
+  $etiquetas = [];
+  if ($es_vim) {
+    $etiquetas[] = '<span class="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded-full font-medium">⚡ VIM</span>';
+  }
+  if ($es_premium) {
+    $etiquetas[] = '<span class="bg-yellow-100 text-yellow-700 text-xs px-2 py-1 rounded-full font-medium">💎 Premium</span>';
+  }
+  if ($tiene_cita) {
+    $fecha_formateada = date('d M Y', strtotime($serv['fecha_cita']));
+    $etiquetas[] = "<span class='bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full font-medium'>📅 $fecha_formateada</span>";
+  }
+  if ($afiliacion_teclado) {
+    $etiquetas[] = '<span class="bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full font-medium">⌨️ Teclado Liberado</span>';
+  }
+?>
+
       <div class="bg-white shadow rounded-xl p-4 space-y-2">
         <div class="flex justify-between items-center">
           <div class="font-semibold text-lg"><?= htmlspecialchars($serv['comercio']) ?></div>
