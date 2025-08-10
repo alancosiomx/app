@@ -1,111 +1,33 @@
-<?php
-ob_start();
-require_once __DIR__ . '/init.php';
+-- cierres_servicio
+CREATE TABLE IF NOT EXISTS cierres_servicio (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  ticket VARCHAR(50) NOT NULL,
+  atiende VARCHAR(150) NOT NULL,
+  resultado ENUM('Éxito','Rechazo') NOT NULL,
+  serie_instalada VARCHAR(100) NULL,
+  serie_retirada VARCHAR(100) NULL,
+  solucion VARCHAR(255) NULL,
+  solucion_especifica VARCHAR(255) NULL,
+  motivo_rechazo VARCHAR(255) NULL,
+  observaciones TEXT NULL,
+  cerrado_por VARCHAR(100) NOT NULL,
+  fecha_cierre DATETIME NOT NULL,
+  latitud DECIMAL(10,6) NULL,
+  longitud DECIMAL(10,6) NULL,
+  foto_fachada VARCHAR(255) NULL,
+  foto_hs VARCHAR(255) NULL,
+  foto_serie_inst VARCHAR(255) NULL,
+  foto_serie_ret VARCHAR(255) NULL,
+  foto_rechazo VARCHAR(255) NULL,
+  UNIQUE KEY u_ticket (ticket)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-$ticket = $_POST['ticket'] ?? null;
-$atiende = trim($_POST['atiende'] ?? '');
-$resultado = $_POST['resultado'] ?? '';
-$serie_instalada = trim($_POST['serie_instalada'] ?? '');
-$serie_retiro = trim($_POST['serie_retirada'] ?? '');
-$solucion = trim($_POST['solucion'] ?? '');
-$solucion_especifica = trim($_POST['solucion_especifica'] ?? '');
-$motivo_rechazo = trim($_POST['motivo_rechazo'] ?? '');
-$observaciones = trim($_POST['observaciones'] ?? '');
-$latitud = $_POST['latitud'] ?? null;
-$longitud = $_POST['longitud'] ?? null;
-$usuario = $_SESSION['usuario_nombre'] ?? null;
-
-if (!$ticket || !$atiende || !$usuario || !in_array($resultado, ['Éxito', 'Rechazo'])) {
-    die("❌ Datos incompletos o inválidos.");
-}
-
-// Validación: el servicio debe estar en ruta y asignado al técnico
-$stmt = $pdo->prepare("SELECT * FROM servicios_omnipos WHERE ticket = ? AND idc = ? AND estatus = 'En Ruta'");
-$stmt->execute([$ticket, $usuario]);
-$servicio = $stmt->fetch(PDO::FETCH_ASSOC);
-
-if (!$servicio) {
-    die("❌ No autorizado o servicio ya cerrado.");
-}
-
-// Validar serie instalada si el resultado es Éxito
-if ($resultado === 'Éxito') {
-    if ($serie_instalada) {
-        $val = $pdo->prepare("SELECT id FROM inventario_tpv WHERE serie = ? AND estado = 'Asignado' AND tecnico_actual = ?");
-        $val->execute([$serie_instalada, $usuario]);
-        if (!$val->fetch()) {
-            die("⚠️ Esta serie no está disponible en tu inventario.");
-        }
-    } else {
-        die("❌ Debes capturar la serie instalada.");
-    }
-} else {
-    // Si es rechazo, limpiar datos que no aplican
-    $serie_instalada = null;
-    $serie_retiro = null;
-    $solucion = null;
-    $solucion_especifica = null;
-}
-
-// Insertar en cierres_servicio
-$insert = $pdo->prepare("
-    INSERT INTO cierres_servicio 
-    (ticket, atiende, resultado, serie_instalada, serie_retirada, solucion, solucion_especifica, motivo_rechazo, observaciones, cerrado_por, fecha_cierre, latitud, longitud)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?)
-");
-$insert->execute([
-    $ticket,
-    $atiende,
-    $resultado,
-    $serie_instalada ?: null,
-    $serie_retiro ?: null,
-    $solucion ?: null,
-    $solucion_especifica ?: null,
-    $motivo_rechazo ?: null,
-    $observaciones,
-    $usuario,
-    $latitud,
-    $longitud
-]);
-
-// Log para auditoría
-$pdo->prepare("
-    INSERT INTO log_cierre_interactivo (ticket, idc, evento, valor, timestamp)
-    VALUES (?, ?, 'cierre_completo', ?, NOW())
-")->execute([
-    $ticket,
-    $usuario,
-    json_encode($_POST)
-]);
-
-// Actualizar servicios_omnipos
-$update = $pdo->prepare("
-    UPDATE servicios_omnipos SET
-        estatus = 'Histórico',
-        resultado = ?,
-        atiende = ?,
-        serie_instalada = ?,
-        serie_retiro = ?,
-        solucion = ?,
-        solucion_especifica = ?,
-        motivo_rechazo = ?,
-        observaciones = ?,
-        fecha_atencion = NOW(),
-        fecha_cierre = NOW()
-    WHERE ticket = ? AND idc = ?
-");
-$update->execute([
-    $resultado,
-    $atiende,
-    $serie_instalada,
-    $serie_retiro,
-    $solucion ?: null,
-    $solucion_especifica ?: null,
-    $motivo_rechazo ?: null,
-    $observaciones,
-    $ticket,
-    $usuario
-]);
-
-header("Location: mis_servicios.php?cerrado=1");
-exit;
+-- (opcional) log de acciones durante el llenado, por si quieres auditar pasos
+CREATE TABLE IF NOT EXISTS log_cierre_interactivo (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  ticket VARCHAR(50) NOT NULL,
+  idc VARCHAR(100) NOT NULL,
+  evento VARCHAR(100) NOT NULL,
+  valor TEXT NULL,
+  ts DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
