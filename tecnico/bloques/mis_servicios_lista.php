@@ -27,14 +27,14 @@
 
   $etiquetas = [];
   if ($es_vim) {
-    $etiquetas[] = '<span class="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded-full font-medium">VIM</span>';
+    $etiquetas[] = '<span class="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded-full font-medium">⚡VIM</span>';
   }
   if ($es_premium) {
-    $etiquetas[] = '<span class="bg-yellow-100 text-yellow-700 text-xs px-2 py-1 rounded-full font-medium">Premium</span>';
+    $etiquetas[] = '<span class="bg-yellow-100 text-yellow-700 text-xs px-2 py-1 rounded-full font-medium">💎Premium</span>';
   }
   if ($tiene_cita) {
     $fecha_formateada = date('d M Y', strtotime($serv['fecha_cita']));
-    $etiquetas[] = "<span class='bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full font-medium'>Cita $fecha_formateada</span>";
+    $etiquetas[] = "<span class='bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full font-medium'>📅Cita $fecha_formateada</span>";
   }
 
   // Agregar etiquetas por afiliación
