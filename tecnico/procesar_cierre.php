@@ -7,7 +7,7 @@ header('Content-Type: application/json');
 // -----------------------------------------------------------------------------
 // CONFIG / HELPERS
 // -----------------------------------------------------------------------------
-require_once __DIR__ . '/../config/';   // Debe crear $pdo (PDO, UTF8, ERRMODE_EXCEPTION)
+require_once __DIR__ . '/../config.php/';   // Debe crear $pdo (PDO, UTF8, ERRMODE_EXCEPTION)
 date_default_timezone_set('America/Mexico_City');
 
 if (!isset($_SESSION['user_id'])) {
